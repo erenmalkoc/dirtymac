@@ -9,14 +9,11 @@ struct dirtymacApp: App {
             MenuBarPopoverView()
                 .environmentObject(blocker)
         } label: {
-            Label {
-                Text("dirtymac")
-            } icon: {
-                Image(systemName: blocker.isActive
-                      ? "keyboard.badge.eye.fill"
-                      : "keyboard")
-                    .symbolRenderingMode(.hierarchical)
-            }
+            Image(systemName: "keyboard.fill")
+                .symbolRenderingMode(.hierarchical)
+                .foregroundStyle(blocker.isActive ? Color.red : Color.primary)
+                .symbolEffect(.pulse, options: .repeating, isActive: blocker.isActive)
+                .accessibilityLabel(blocker.isActive ? "dirtymac — keyboard locked" : "dirtymac")
         }
         .menuBarExtraStyle(.window)
     }

@@ -32,7 +32,7 @@ struct MenuBarPopoverView: View {
                 Text("dirtymac")
                     .font(.headline)
                     .lineLimit(1)
-                Text("Keyboard cleaner")
+                Text("Keyboard utility")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
