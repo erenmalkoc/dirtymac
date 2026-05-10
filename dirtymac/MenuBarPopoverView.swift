@@ -7,9 +7,7 @@ struct MenuBarPopoverView: View {
     var body: some View {
         VStack(spacing: 0) {
             header
-
             Divider()
-
             content
                 .padding(.vertical, 22)
                 .padding(.horizontal, 18)
@@ -64,11 +62,11 @@ struct MenuBarPopoverView: View {
             }
 
             VStack(spacing: 3) {
-                Text(blocker.isActive ? "Cleaning Mode Active" : "Tap to Lock Keyboard")
+                Text(blocker.isActive ? "Cleaning Mode Active" : "Click to Lock Keyboard")
                     .font(.headline)
 
                 Text(blocker.isActive
-                     ? "Tap the button to release."
+                     ? "Click the button to release."
                      : "Mouse and trackpad stay enabled.")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)

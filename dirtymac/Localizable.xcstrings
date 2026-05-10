@@ -1,0 +1,231 @@
+{
+  "sourceLanguage" : "en",
+  "version" : "1.0",
+  "strings" : {
+    "dirtymac" : {
+      "comment" : "App brand name — do not translate.",
+      "shouldTranslate" : false
+    },
+    "Keyboard utility" : {
+      "comment" : "Subtitle shown under the app name in the popover header.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Tastatur-Dienstprogramm" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Keyboard utility" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Utilidad de teclado" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Utilitaire de clavier" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Utility per tastiera" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "キーボードユーティリティ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "키보드 유틸리티" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Utilitário de teclado" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Утилита клавиатуры" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Klavye yardımcısı" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "键盘实用工具" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "鍵盤工具程式" } }
+      }
+    },
+    "Click to Lock Keyboard" : {
+      "comment" : "Headline above the power button when the keyboard is unlocked.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Klicken zum Sperren der Tastatur" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Click to Lock Keyboard" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Haz clic para bloquear el teclado" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Cliquer pour verrouiller le clavier" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Fai clic per bloccare la tastiera" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "クリックしてキーボードをロック" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "키보드를 잠그려면 클릭" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Clique para bloquear o teclado" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Нажмите, чтобы заблокировать клавиатуру" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Klavyeyi Kilitlemek için Tıklayın" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "点按以锁定键盘" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "點一下以鎖定鍵盤" } }
+      }
+    },
+    "Cleaning Mode Active" : {
+      "comment" : "Headline above the power button when the keyboard is locked.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Reinigungsmodus aktiv" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Cleaning Mode Active" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Modo de limpieza activo" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Mode nettoyage activé" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Modalità pulizia attiva" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "クリーニングモード有効" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "청소 모드 활성화됨" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Modo de limpeza ativo" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Режим очистки активен" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Temizleme Modu Aktif" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "清洁模式已启用" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "清潔模式已啟用" } }
+      }
+    },
+    "Mouse and trackpad stay enabled." : {
+      "comment" : "Caption below the headline when keyboard is unlocked.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Maus und Trackpad bleiben aktiv." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Mouse and trackpad stay enabled." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "El ratón y el trackpad siguen activos." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "La souris et le trackpad restent actifs." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Mouse e trackpad rimangono attivi." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "マウスとトラックパッドは有効のままです。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "마우스와 트랙패드는 계속 사용할 수 있습니다." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "O mouse e o trackpad continuam ativos." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Мышь и трекпад остаются активными." } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Fare ve trackpad çalışmaya devam eder." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "鼠标和触控板保持启用。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "滑鼠與觸控板維持啟用。" } }
+      }
+    },
+    "Click the button to release." : {
+      "comment" : "Caption below the headline when keyboard is locked.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Zum Entsperren auf die Taste klicken." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Click the button to release." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Haz clic en el botón para liberar." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Cliquer sur le bouton pour déverrouiller." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Fai clic sul pulsante per sbloccare." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ボタンをクリックして解除します。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "잠금을 해제하려면 버튼을 클릭하세요." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Clique no botão para liberar." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Нажмите кнопку, чтобы разблокировать." } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Bırakmak için butona tıklayın." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "点按按钮以解锁。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "點一下按鈕以解鎖。" } }
+      }
+    },
+    "Accessibility Access Required" : {
+      "comment" : "Title shown when the user has not granted Accessibility permission.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Bedienungshilfen-Zugriff erforderlich" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Accessibility Access Required" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Se requiere acceso a Accesibilidad" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Accès à l’Accessibilité requis" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Accesso all’Accessibilità richiesto" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "アクセシビリティ権限が必要です" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "손쉬운 사용 권한 필요" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Acesso à Acessibilidade necessário" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Требуется доступ к Универсальному доступу" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Erişilebilirlik İzni Gerekli" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "需要辅助功能权限" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "需要輔助使用權限" } }
+      }
+    },
+    "dirtymac needs permission to intercept keyboard events while you clean." : {
+      "comment" : "Body text on the permission prompt explaining why Accessibility access is needed.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac benötigt die Berechtigung, Tastaturereignisse während der Reinigung abzufangen." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac needs permission to intercept keyboard events while you clean." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac necesita permiso para interceptar eventos del teclado mientras limpias." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac a besoin de l’autorisation d’intercepter les événements clavier pendant le nettoyage." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac richiede il permesso di intercettare gli eventi della tastiera durante la pulizia." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac はクリーニング中にキーボード入力を遮断するための権限が必要です。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac이(가) 청소하는 동안 키보드 입력을 차단하려면 권한이 필요합니다." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "O dirtymac precisa de permissão para interceptar eventos do teclado enquanto você limpa." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac требуется разрешение для перехвата событий клавиатуры во время очистки." } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac, sen temizlerken klavye olaylarını engelleyebilmek için izne ihtiyaç duyar." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac 需要权限以在清洁时拦截键盘事件。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac 需要權限以在清潔時攔截鍵盤事件。" } }
+      }
+    },
+    "Grant Access" : {
+      "comment" : "Primary button on the permission prompt.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Zugriff erlauben" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Grant Access" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Conceder acceso" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Autoriser l’accès" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Concedi accesso" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "アクセスを許可" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "권한 허용" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Conceder acesso" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Разрешить доступ" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "İzin Ver" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "授予权限" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "授權存取" } }
+      }
+    },
+    "Open Settings" : {
+      "comment" : "Secondary button that opens System Settings → Privacy & Security → Accessibility.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Einstellungen öffnen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Open Settings" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Abrir Ajustes" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Ouvrir les Réglages" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Apri Impostazioni" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "設定を開く" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "설정 열기" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Abrir Ajustes" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Открыть Настройки" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Ayarları Aç" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "打开“设置”" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "打開「設定」" } }
+      }
+    },
+    "Quit" : {
+      "comment" : "Footer button that terminates the app.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Beenden" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Quit" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Salir" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Quitter" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Esci" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "終了" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "종료" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Encerrar" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Завершить" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Çık" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "退出" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "結束" } }
+      }
+    },
+    "Locked" : {
+      "comment" : "Status pill text when the keyboard is locked.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Gesperrt" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Locked" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Bloqueado" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Verrouillé" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Bloccata" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ロック中" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "잠김" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Bloqueado" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Заблокирован" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Kilitli" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已锁定" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "已鎖定" } }
+      }
+    },
+    "Ready" : {
+      "comment" : "Status pill text when the keyboard is unlocked and the app is idle.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Bereit" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Ready" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Listo" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Prêt" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Pronto" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "待機中" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "준비됨" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Pronto" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Готов" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Hazır" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "就绪" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "待命" } }
+      }
+    },
+    "dirtymac — keyboard locked" : {
+      "comment" : "VoiceOver label for the menu bar icon when the keyboard is locked. Keep the brand name 'dirtymac' untranslated.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — Tastatur gesperrt" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — keyboard locked" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — teclado bloqueado" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — clavier verrouillé" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — tastiera bloccata" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — キーボードロック中" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — 키보드 잠김" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — teclado bloqueado" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — клавиатура заблокирована" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — klavye kilitli" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — 键盘已锁定" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — 鍵盤已鎖定" } }
+      }
+    }
+  }
+}
