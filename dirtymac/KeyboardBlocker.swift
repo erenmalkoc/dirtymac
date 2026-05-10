@@ -4,6 +4,17 @@ import CoreGraphics
 import ApplicationServices
 import AppKit
 
+// macOS routes media / brightness / volume / function-key controls
+// through a separate event channel: `kCGEventSystemDefined` (raw 14)
+// with the aux-buttons subtype (NX_SUBTYPE_AUX_CONTROL_BUTTONS = 8).
+// They do NOT arrive as keyDown / keyUp, so a plain keyboard tap
+// lets them through. We add the system-defined type to the mask and
+// then filter by subtype inside the callback so other system events
+// (e.g. power button, subtype 1) keep working — leaving the user a
+// hardware emergency exit if anything goes wrong.
+private let kCGEventSystemDefined: UInt32 = 14
+private let kAuxControlButtonsSubtype: Int16 = 8
+
 @MainActor
 final class KeyboardBlocker: ObservableObject {
     @Published private(set) var isActive: Bool = false
@@ -54,6 +65,7 @@ final class KeyboardBlocker: ObservableObject {
         let mask = (1 << CGEventType.keyDown.rawValue)
                  | (1 << CGEventType.keyUp.rawValue)
                  | (1 << CGEventType.flagsChanged.rawValue)
+                 | (1 << kCGEventSystemDefined)
 
         let refcon = Unmanaged.passUnretained(self).toOpaque()
 
@@ -70,7 +82,19 @@ final class KeyboardBlocker: ObservableObject {
                     }
                     return Unmanaged.passUnretained(event)
                 }
-                // Swallow keyboard events entirely.
+
+                // System-defined events: only swallow the aux-button
+                // subtype (brightness, volume, media, F-key controls).
+                // Pass everything else through so things like the power
+                // button still reach the system.
+                if type.rawValue == kCGEventSystemDefined {
+                    let isAuxControl = MainActor.assumeIsolated {
+                        NSEvent(cgEvent: event)?.subtype.rawValue == kAuxControlButtonsSubtype
+                    }
+                    return isAuxControl ? nil : Unmanaged.passUnretained(event)
+                }
+
+                // Regular keyboard events — swallow.
                 return nil
             },
             userInfo: refcon
