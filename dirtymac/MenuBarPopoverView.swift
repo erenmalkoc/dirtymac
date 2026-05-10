@@ -31,9 +31,11 @@ struct MenuBarPopoverView: View {
             VStack(alignment: .leading, spacing: 1) {
                 Text("dirtymac")
                     .font(.headline)
-                Text("Keyboard cleaning utility")
+                    .lineLimit(1)
+                Text("Keyboard cleaner")
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                    .lineLimit(1)
             }
 
             Spacer()

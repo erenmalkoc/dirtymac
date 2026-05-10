@@ -68,5 +68,8 @@ struct StatusPill: View {
         .padding(.horizontal, 9)
         .padding(.vertical, 4)
         .glassEffect(in: .capsule)
+        // Lock to intrinsic size so the pill never compresses when the
+        // adjacent header text expands (e.g. "Locked" → "Locked 00:12").
+        .fixedSize()
     }
 }
