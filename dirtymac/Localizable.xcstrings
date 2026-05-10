@@ -210,6 +210,125 @@
         "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "待命" } }
       }
     },
+    "Settings" : {
+      "comment" : "Title of the settings page; also the accessibility label for the gear button in the main popover footer.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Einstellungen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Settings" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ajustes" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Réglages" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Impostazioni" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "設定" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "설정" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Ajustes" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Настройки" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Ayarlar" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "设置" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "設定" } }
+      }
+    },
+    "Appearance" : {
+      "comment" : "Section title in Settings — controls light/dark mode.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Erscheinungsbild" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Appearance" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Aspecto" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Apparence" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Aspetto" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "外観" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "모양" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Aparência" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Внешний вид" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Görünüm" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "外观" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "外觀" } }
+      }
+    },
+    "Language" : {
+      "comment" : "Section title in Settings — controls UI language.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Sprache" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Language" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Idioma" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Langue" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Lingua" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "言語" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "언어" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Idioma" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Язык" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Dil" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "语言" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "語言" } }
+      }
+    },
+    "System" : {
+      "comment" : "Picker option meaning 'follow the macOS-wide setting' for both Appearance and Language.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "System" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "System" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Sistema" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Système" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Sistema" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "システム" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "시스템" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Sistema" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Система" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Sistem" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "系统" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "系統" } }
+      }
+    },
+    "Light" : {
+      "comment" : "Appearance picker option — light mode.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Hell" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Light" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Claro" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Clair" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Chiaro" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ライト" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "밝게" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Claro" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Светлая" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Açık" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "浅色" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "淺色" } }
+      }
+    },
+    "Dark" : {
+      "comment" : "Appearance picker option — dark mode.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Dunkel" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Dark" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Oscuro" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Sombre" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Scuro" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ダーク" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "어둡게" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Escuro" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Тёмная" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Koyu" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "深色" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "深色" } }
+      }
+    },
+    "Back" : {
+      "comment" : "VoiceOver label for the back button in the settings header.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Zurück" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Back" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Atrás" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Retour" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Indietro" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "戻る" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "뒤로" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Voltar" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Назад" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Geri" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "返回" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "返回" } }
+      }
+    },
     "dirtymac — keyboard locked" : {
       "comment" : "VoiceOver label for the menu bar icon when the keyboard is locked. Keep the brand name 'dirtymac' untranslated.",
       "localizations" : {
