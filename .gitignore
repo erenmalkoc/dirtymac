@@ -1,0 +1,41 @@
+# macOS
+.DS_Store
+._*
+
+# Xcode — user-specific state
+**/xcuserdata/
+*.xcuserstate
+
+# Xcode — build outputs
+build/
+DerivedData/
+*.hmap
+*.ipa
+*.dSYM
+*.dSYM.zip
+*.moved-aside
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# CocoaPods (if added later)
+Pods/
+
+# Carthage (if added later)
+Carthage/Build/
+
+# fastlane (if added later)
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+
+
+# Editors
+.vscode/
+.idea/
+.claude/
+*.swp
+*~
