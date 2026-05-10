@@ -5,91 +5,106 @@ struct MenuBarPopoverView: View {
     @EnvironmentObject private var blocker: KeyboardBlocker
 
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 0) {
             header
 
-            if blocker.hasPermission {
-                mainControl
-            } else {
-                permissionPrompt
-            }
+            Divider()
+
+            content
+                .padding(.vertical, 22)
+                .padding(.horizontal, 18)
+
+            Divider()
 
             footer
         }
-        .padding(18)
-        .frame(width: 290)
+        .frame(width: 300)
         .onAppear { blocker.refreshPermission() }
     }
 
     // MARK: Header
 
     private var header: some View {
-        HStack {
-            Label("dirtymac", systemImage: "sparkles")
-                .font(.headline)
-                .labelStyle(.titleAndIcon)
+        HStack(spacing: 10) {
+            AppIconView(size: 36)
+
+            VStack(alignment: .leading, spacing: 1) {
+                Text("dirtymac")
+                    .font(.headline)
+                Text("Keyboard cleaning utility")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
 
             Spacer()
 
             StatusPill(isActive: blocker.isActive, elapsed: blocker.elapsedDisplay)
         }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
     }
 
-    // MARK: Main control
+    // MARK: Content
+
+    @ViewBuilder
+    private var content: some View {
+        if blocker.hasPermission {
+            mainControl
+        } else {
+            permissionPrompt
+        }
+    }
 
     private var mainControl: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 16) {
             GlassPowerButton(isActive: blocker.isActive) {
                 blocker.toggle()
             }
-            .padding(.top, 14)
 
-            VStack(spacing: 2) {
-                Text(blocker.isActive ? "Cleaning Mode" : "Tap to Lock Keyboard")
+            VStack(spacing: 3) {
+                Text(blocker.isActive ? "Cleaning Mode Active" : "Tap to Lock Keyboard")
                     .font(.headline)
 
                 Text(blocker.isActive
-                     ? "Wipe away — your trackpad still works."
+                     ? "Tap the button to release."
                      : "Mouse and trackpad stay enabled.")
-                    .font(.caption)
+                    .font(.subheadline)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
             }
-            .padding(.bottom, 6)
         }
         .frame(maxWidth: .infinity)
     }
 
-    // MARK: Permission prompt
-
     private var permissionPrompt: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 14) {
             Image(systemName: "lock.shield")
-                .font(.system(size: 28))
-                .foregroundStyle(.orange)
-                .padding(.top, 10)
-
-            Text("Accessibility Required")
-                .font(.headline)
-
-            Text("dirtymac needs Accessibility access to intercept keyboard events.")
-                .font(.caption)
+                .font(.system(size: 32))
                 .foregroundStyle(.secondary)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal, 8)
+
+            VStack(spacing: 4) {
+                Text("Accessibility Access Required")
+                    .font(.headline)
+
+                Text("dirtymac needs permission to intercept keyboard events while you clean.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
 
             HStack(spacing: 8) {
-                Button("Grant Access", systemImage: "checkmark.shield") {
+                Button("Grant Access") {
                     blocker.requestPermission()
                 }
                 .buttonStyle(.glassProminent)
 
-                Button("Open Settings", systemImage: "gear") {
+                Button("Open Settings") {
                     blocker.openAccessibilitySettings()
                 }
                 .buttonStyle(.glass)
             }
-            .padding(.bottom, 6)
+            .padding(.top, 2)
         }
         .frame(maxWidth: .infinity)
     }
@@ -98,19 +113,28 @@ struct MenuBarPopoverView: View {
 
     private var footer: some View {
         HStack {
-            Button("Refresh", systemImage: "arrow.clockwise") {
-                blocker.refreshPermission()
-            }
-            .buttonStyle(.glass)
+            Text(versionString)
+                .font(.caption)
+                .foregroundStyle(.tertiary)
+                .monospacedDigit()
 
             Spacer()
 
-            Button("Quit", systemImage: "power", role: .destructive) {
+            Button("Quit", role: .destructive) {
                 blocker.stop()
                 NSApp.terminate(nil)
             }
             .buttonStyle(.glass)
+            .controlSize(.small)
         }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+    }
+
+    private var versionString: String {
+        let info = Bundle.main.infoDictionary
+        let short = info?["CFBundleShortVersionString"] as? String ?? "1.0"
+        return "v\(short)"
     }
 }
 

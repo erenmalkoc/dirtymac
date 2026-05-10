@@ -1,4 +1,19 @@
 import SwiftUI
+import AppKit
+
+/// Renders the app's bundle icon at an arbitrary size. Used in the
+/// popover header as the brand mark.
+struct AppIconView: View {
+    var size: CGFloat
+
+    var body: some View {
+        Image(nsImage: NSWorkspace.shared.icon(forFile: Bundle.main.bundlePath))
+            .resizable()
+            .interpolation(.high)
+            .aspectRatio(contentMode: .fit)
+            .frame(width: size, height: size)
+    }
+}
 
 /// Large circular power control. Uses the native interactive Liquid
 /// Glass effect — tint shifts to red while the keyboard is locked.
@@ -25,8 +40,9 @@ struct GlassPowerButton: View {
     }
 }
 
-/// Compact status indicator placed inline in the header. Uses native
-/// glass; the dot color is the only signal of state.
+/// Compact status indicator placed inline in the header. The dot color
+/// is the only signal of state; the elapsed timer is shown only when
+/// the keyboard is locked.
 struct StatusPill: View {
     var isActive: Bool
     var elapsed: String
@@ -37,20 +53,20 @@ struct StatusPill: View {
                 .fill(isActive ? Color.red : Color.green)
                 .frame(width: 7, height: 7)
 
-            Text(isActive ? "Locked" : "Active")
-                .font(.callout)
+            Text(isActive ? "Locked" : "Ready")
+                .font(.caption)
                 .foregroundStyle(.primary)
 
             if isActive {
                 Text(elapsed)
-                    .font(.callout)
+                    .font(.caption)
                     .monospacedDigit()
                     .foregroundStyle(.secondary)
                     .contentTransition(.numericText())
             }
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 5)
+        .padding(.horizontal, 9)
+        .padding(.vertical, 4)
         .glassEffect(in: .capsule)
     }
 }
