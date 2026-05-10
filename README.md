@@ -2,7 +2,6 @@
 
 A native macOS menu bar utility that temporarily locks your keyboard so you can clean it without triggering keys. Mouse and trackpad stay fully responsive — they're your escape hatch.
 
-Built with SwiftUI and the native Liquid Glass APIs introduced in macOS 26.
 
 ## Why
 
@@ -14,7 +13,6 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 - Mouse and trackpad never blocked — click the menu bar icon to release
 - Live elapsed-time display while locked
 - Auto re-enables the event tap if macOS times it out
-- Native macOS 26 Liquid Glass UI — no custom material stacks
 - No Dock icon (`LSUIElement`)
 - No network access, no analytics, no background daemons
 
@@ -75,4 +73,4 @@ Issues and pull requests welcome. Please keep changes scoped — the goal is to 
 
 ## License
 
-[MIT](LICENSE) © 2026 Eren Malkoç
+[MIT](LICENSE) © 2026 erenium.tech
