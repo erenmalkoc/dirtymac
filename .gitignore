@@ -33,6 +33,13 @@ fastlane/test_output
 
 
 
+# Signing & notarization secrets — NEVER commit these
+*.p8
+*.p12
+*.cer
+*.provisionprofile
+ExportOptions.plist
+
 # Editors
 .vscode/
 .idea/
