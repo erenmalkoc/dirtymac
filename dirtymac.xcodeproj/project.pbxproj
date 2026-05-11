@@ -6,27 +6,8 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXContainerItemProxy section */
-		AC5F541E2FB0C9EA00F50241 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AC5F54082FB0C9E900F50241 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AC5F540F2FB0C9E900F50241;
-			remoteInfo = dirtymac;
-		};
-		AC5F54282FB0C9EA00F50241 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = AC5F54082FB0C9E900F50241 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = AC5F540F2FB0C9E900F50241;
-			remoteInfo = dirtymac;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		AC5F54102FB0C9E900F50241 /* dirtymac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dirtymac.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		AC5F541D2FB0C9EA00F50241 /* dirtymacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dirtymacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		AC5F54272FB0C9EA00F50241 /* dirtymacUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dirtymacUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -35,34 +16,10 @@
 			path = dirtymac;
 			sourceTree = "<group>";
 		};
-		AC5F54202FB0C9EA00F50241 /* dirtymacTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = dirtymacTests;
-			sourceTree = "<group>";
-		};
-		AC5F542A2FB0C9EA00F50241 /* dirtymacUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = dirtymacUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		AC5F540D2FB0C9E900F50241 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AC5F541A2FB0C9EA00F50241 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AC5F54242FB0C9EA00F50241 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -76,8 +33,6 @@
 			isa = PBXGroup;
 			children = (
 				AC5F54122FB0C9E900F50241 /* dirtymac */,
-				AC5F54202FB0C9EA00F50241 /* dirtymacTests */,
-				AC5F542A2FB0C9EA00F50241 /* dirtymacUITests */,
 				AC5F54112FB0C9E900F50241 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,8 +41,6 @@
 			isa = PBXGroup;
 			children = (
 				AC5F54102FB0C9E900F50241 /* dirtymac.app */,
-				AC5F541D2FB0C9EA00F50241 /* dirtymacTests.xctest */,
-				AC5F54272FB0C9EA00F50241 /* dirtymacUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -117,52 +70,6 @@
 			productReference = AC5F54102FB0C9E900F50241 /* dirtymac.app */;
 			productType = "com.apple.product-type.application";
 		};
-		AC5F541C2FB0C9EA00F50241 /* dirtymacTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AC5F54342FB0C9EA00F50241 /* Build configuration list for PBXNativeTarget "dirtymacTests" */;
-			buildPhases = (
-				AC5F54192FB0C9EA00F50241 /* Sources */,
-				AC5F541A2FB0C9EA00F50241 /* Frameworks */,
-				AC5F541B2FB0C9EA00F50241 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AC5F541F2FB0C9EA00F50241 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				AC5F54202FB0C9EA00F50241 /* dirtymacTests */,
-			);
-			name = dirtymacTests;
-			packageProductDependencies = (
-			);
-			productName = dirtymacTests;
-			productReference = AC5F541D2FB0C9EA00F50241 /* dirtymacTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		AC5F54262FB0C9EA00F50241 /* dirtymacUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = AC5F54372FB0C9EA00F50241 /* Build configuration list for PBXNativeTarget "dirtymacUITests" */;
-			buildPhases = (
-				AC5F54232FB0C9EA00F50241 /* Sources */,
-				AC5F54242FB0C9EA00F50241 /* Frameworks */,
-				AC5F54252FB0C9EA00F50241 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				AC5F54292FB0C9EA00F50241 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				AC5F542A2FB0C9EA00F50241 /* dirtymacUITests */,
-			);
-			name = dirtymacUITests;
-			packageProductDependencies = (
-			);
-			productName = dirtymacUITests;
-			productReference = AC5F54272FB0C9EA00F50241 /* dirtymacUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -175,14 +82,6 @@
 				TargetAttributes = {
 					AC5F540F2FB0C9E900F50241 = {
 						CreatedOnToolsVersion = 26.4.1;
-					};
-					AC5F541C2FB0C9EA00F50241 = {
-						CreatedOnToolsVersion = 26.4.1;
-						TestTargetID = AC5F540F2FB0C9E900F50241;
-					};
-					AC5F54262FB0C9EA00F50241 = {
-						CreatedOnToolsVersion = 26.4.1;
-						TestTargetID = AC5F540F2FB0C9E900F50241;
 					};
 				};
 			};
@@ -212,28 +111,12 @@
 			projectRoot = "";
 			targets = (
 				AC5F540F2FB0C9E900F50241 /* dirtymac */,
-				AC5F541C2FB0C9EA00F50241 /* dirtymacTests */,
-				AC5F54262FB0C9EA00F50241 /* dirtymacUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AC5F540E2FB0C9E900F50241 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AC5F541B2FB0C9EA00F50241 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AC5F54252FB0C9EA00F50241 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -250,34 +133,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AC5F54192FB0C9EA00F50241 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AC5F54232FB0C9EA00F50241 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		AC5F541F2FB0C9EA00F50241 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AC5F540F2FB0C9E900F50241 /* dirtymac */;
-			targetProxy = AC5F541E2FB0C9EA00F50241 /* PBXContainerItemProxy */;
-		};
-		AC5F54292FB0C9EA00F50241 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = AC5F540F2FB0C9E900F50241 /* dirtymac */;
-			targetProxy = AC5F54282FB0C9EA00F50241 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		AC5F542F2FB0C9EA00F50241 /* Debug */ = {
@@ -332,12 +188,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -389,11 +245,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -412,13 +268,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 erenium.tech. MIT License.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.erenium.dirtymac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -448,13 +304,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 erenium.tech. MIT License.";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.erenium.dirtymac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -468,98 +324,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		AC5F54352FB0C9EA00F50241 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.erenium.dirtymacTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 2;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dirtymac.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dirtymac";
-			};
-			name = Debug;
-		};
-		AC5F54362FB0C9EA00F50241 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.erenium.dirtymacTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 2;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dirtymac.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/dirtymac";
-			};
-			name = Release;
-		};
-		AC5F54382FB0C9EA00F50241 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.erenium.dirtymacUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = dirtymac;
-			};
-			name = Debug;
-		};
-		AC5F54392FB0C9EA00F50241 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.erenium.dirtymacUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = NO;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = YES;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = dirtymac;
 			};
 			name = Release;
 		};
@@ -580,24 +344,6 @@
 			buildConfigurations = (
 				AC5F54322FB0C9EA00F50241 /* Debug */,
 				AC5F54332FB0C9EA00F50241 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AC5F54342FB0C9EA00F50241 /* Build configuration list for PBXNativeTarget "dirtymacTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AC5F54352FB0C9EA00F50241 /* Debug */,
-				AC5F54362FB0C9EA00F50241 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		AC5F54372FB0C9EA00F50241 /* Build configuration list for PBXNativeTarget "dirtymacUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				AC5F54382FB0C9EA00F50241 /* Debug */,
-				AC5F54392FB0C9EA00F50241 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
