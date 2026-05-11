@@ -24,12 +24,12 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 ### Homebrew (recommended)
 
 ```bash
-brew install --cask <OWNER>/tap/dirtymac
+brew install --cask erenmalkoc/tap/dirtymac
 ```
 
 ### Manual download
 
-Grab the latest signed & notarized DMG from [Releases](https://github.com/<OWNER>/dirtymac/releases/latest), then drag `dirtymac.app` to `/Applications`.
+Grab the latest signed & notarized DMG from [Releases](https://github.com/erenmalkoc/dirtymac/releases/latest), then drag `dirtymac.app` to `/Applications`.
 
 ## Requirements
 
@@ -39,7 +39,7 @@ Grab the latest signed & notarized DMG from [Releases](https://github.com/<OWNER
 ## Build from source
 
 ```bash
-git clone https://github.com/<OWNER>/dirtymac.git
+git clone https://github.com/erenmalkoc/dirtymac.git
 cd dirtymac
 open dirtymac.xcodeproj
 ```
