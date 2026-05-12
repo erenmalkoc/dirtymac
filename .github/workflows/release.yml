@@ -52,6 +52,7 @@ jobs:
           DEVELOPER_ID_P12_BASE64: ${{ secrets.DEVELOPER_ID_P12_BASE64 }}
           DEVELOPER_ID_P12_PASSWORD: ${{ secrets.DEVELOPER_ID_P12_PASSWORD }}
         run: |
+          set -euo pipefail
           KEYCHAIN_PATH="$RUNNER_TEMP/build.keychain-db"
           KEYCHAIN_PASSWORD=$(openssl rand -base64 32)
           P12_PATH="$RUNNER_TEMP/cert.p12"
@@ -61,17 +62,43 @@ jobs:
           security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
           security set-keychain-settings -lut 21600 "$KEYCHAIN_PATH"
           security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+
+          # Explicit -T flags grant codesign/etc unattended access without
+          # password prompts, which `-A` doesn't reliably do for keys.
           security import "$P12_PATH" \
               -P "$DEVELOPER_ID_P12_PASSWORD" \
-              -A -t cert -f pkcs12 \
-              -k "$KEYCHAIN_PATH"
-          security list-keychain -d user -s "$KEYCHAIN_PATH" $(security list-keychain -d user | tr -d '"')
+              -k "$KEYCHAIN_PATH" \
+              -T /usr/bin/codesign \
+              -T /usr/bin/security \
+              -T /usr/bin/productbuild \
+              -T /usr/bin/productsign
+
+          # Make the build keychain the first in the search path so xcodebuild
+          # finds the imported identity, while preserving the default keychains.
+          DEFAULTS=$(security list-keychain -d user | sed -E 's/^[[:space:]]+//; s/"//g')
+          security list-keychain -d user -s "$KEYCHAIN_PATH" $DEFAULTS
+
           security set-key-partition-list \
               -S apple-tool:,apple:,codesign: \
               -k "$KEYCHAIN_PASSWORD" \
-              "$KEYCHAIN_PATH"
+              "$KEYCHAIN_PATH" >/dev/null
 
           rm -f "$P12_PATH"
+
+          echo "::group::Codesigning identities in build keychain"
+          security find-identity -v -p codesigning "$KEYCHAIN_PATH"
+          echo "::endgroup::"
+
+          if ! security find-identity -v -p codesigning "$KEYCHAIN_PATH" \
+             | grep -q 'Developer ID Application'; then
+            echo "::error::No 'Developer ID Application' identity in the imported .p12."
+            echo "Re-export from Keychain Access:"
+            echo "  1. Select the 'Developer ID Application: ... (SHZP975U3T)' cert"
+            echo "  2. Expand it — the private key MUST be visible underneath"
+            echo "  3. Right-click → Export → Personal Information Exchange (.p12)"
+            echo "  4. base64 -i devid.p12 | pbcopy, then update the secret"
+            exit 1
+          fi
 
       - name: Write notarization key
         env:
