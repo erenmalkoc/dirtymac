@@ -22,5 +22,5 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/<OWNER>/dirtymac/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/<OWNER>/dirtymac/releases/tag/v1.0.0
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.0.0

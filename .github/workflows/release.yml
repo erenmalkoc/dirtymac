@@ -134,7 +134,7 @@ jobs:
             ## Install via Homebrew
 
             ```bash
-            brew install --cask <OWNER>/tap/dirtymac
+            brew install --cask erenmalkoc/tap/dirtymac
             ```
 
             ## SHA256
