@@ -56,6 +56,10 @@ rm -rf "$BUILD_DIR"
 mkdir -p "$BUILD_DIR"
 
 # ─── 1. archive ──────────────────────────────────────────────────────
+# Force MANUAL signing with the Developer ID cert directly. Automatic
+# signing would ask Xcode to fetch a "Mac Development" profile from
+# Apple, which fails on CI (no signed-in Apple ID) and is unnecessary
+# for Developer ID distribution.
 echo "▸ archiving $APP_NAME $VERSION"
 xcodebuild archive \
     -project "$PROJECT" \
@@ -66,6 +70,8 @@ xcodebuild archive \
     MARKETING_VERSION="$VERSION" \
     CURRENT_PROJECT_VERSION="$(date +%Y%m%d%H%M)" \
     DEVELOPMENT_TEAM="$APPLE_TEAM_ID" \
+    CODE_SIGN_STYLE=Manual \
+    CODE_SIGN_IDENTITY="Developer ID Application" \
     -quiet
 
 # ─── 2. export signed app ────────────────────────────────────────────
@@ -80,7 +86,7 @@ cat > "$EXPORT_OPTIONS" <<EOF
     <key>teamID</key>
     <string>$APPLE_TEAM_ID</string>
     <key>signingStyle</key>
-    <string>automatic</string>
+    <string>manual</string>
     <key>destination</key>
     <string>export</string>
 </dict>
