@@ -27,7 +27,18 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_26.app/Contents/Developer
+        # GitHub's macos-26 runner names Xcode by exact version (e.g.
+        # Xcode_26.0.1.app), so we glob and pick the latest 26.x.
+        run: |
+          XCODE=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
+          if [ -z "$XCODE" ]; then
+            echo "::error::No Xcode 26.x found. Available Xcodes:"
+            ls /Applications/ | grep -i '^Xcode' || true
+            exit 1
+          fi
+          echo "Using $XCODE"
+          sudo xcode-select -s "$XCODE/Contents/Developer"
+          xcodebuild -version
 
       - name: Resolve version from tag
         id: version
