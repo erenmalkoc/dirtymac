@@ -70,10 +70,16 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             return
         }
 
+        // The onboarding window is AppKit-hosted, outside the popover's
+        // SwiftUI scene, so it must be given the same locale + color
+        // scheme the popover applies — otherwise it ignores the in-app
+        // Language / Appearance settings and falls back to system.
         let root = OnboardingView(onFinish: { [weak self] in
             self?.finishOnboarding()
         })
         .environmentObject(blocker)
+        .environment(\.locale, LanguagePreference.current.locale ?? Locale.current)
+        .preferredColorScheme(AppearancePreference.current.colorScheme)
 
         let hosting = NSHostingController(rootView: root)
         let window = NSWindow(contentViewController: hosting)

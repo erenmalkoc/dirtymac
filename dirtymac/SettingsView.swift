@@ -37,13 +37,17 @@ enum AppearancePreference: String, CaseIterable, Identifiable {
         }
     }
 
-    /// Apply this preference app-wide. Reads UserDefaults under the
-    /// "appearance" key and pushes the matching NSAppearance to NSApp,
-    /// which propagates to the menu bar popover and any future windows.
+    /// The saved preference (defaults to `.system`).
+    static var current: AppearancePreference {
+        AppearancePreference(rawValue: UserDefaults.standard.string(forKey: "appearance") ?? "")
+            ?? .system
+    }
+
+    /// Apply this preference app-wide: pushes the matching NSAppearance
+    /// to NSApp, which propagates to the menu bar popover and any
+    /// AppKit-hosted windows (e.g. onboarding).
     static func applyCurrent() {
-        let raw = UserDefaults.standard.string(forKey: "appearance") ?? ""
-        let pref = AppearancePreference(rawValue: raw) ?? .system
-        NSApp?.appearance = pref.nsAppearance
+        NSApp?.appearance = current.nsAppearance
     }
 }
 
@@ -80,6 +84,12 @@ enum LanguagePreference: String, CaseIterable, Identifiable {
 
     var locale: Locale? {
         rawValue.isEmpty ? nil : Locale(identifier: rawValue)
+    }
+
+    /// The saved preference (defaults to `.system`).
+    static var current: LanguagePreference {
+        LanguagePreference(rawValue: UserDefaults.standard.string(forKey: "language") ?? "")
+            ?? .system
     }
 
     @ViewBuilder
