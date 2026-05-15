@@ -11,11 +11,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - First-launch guided onboarding: a 3-step welcome window (intro → Accessibility permission with live status → how-to), re-openable from Settings → Help.
 - Basic / Advanced lock modes. Advanced lets you toggle modifier keys, media/brightness keys, and full mouse & trackpad lockdown, plus an auto-unlock timer.
 - Universal hold-Esc emergency exit (3 seconds) — works in every mode, essential when the mouse is part of the lockdown.
-- Auto-unlock countdown in the popover; mandatory minimum timer when mouse lockdown is enabled; confirmation dialog before full lockdown.
+- Auto-unlock countdown in the popover; mandatory minimum timer when mouse lockdown is enabled; confirmation before full lockdown.
+- Status item interactions: single-click opens the popover, double-click quits, right-click shows an Open / Quit menu.
 
 ### Changed
 - Menu bar icon redesigned for consistency: same `keyboard` glyph in both states (filled + red while locked) instead of swapping to an unrelated lock symbol. Calmer `.breathe` animation replaces the pulsing throb.
 - `KeyboardBlocker` event mask is now built from the active configuration instead of being hardcoded.
+- Replaced SwiftUI `MenuBarExtra` with a hand-managed `NSStatusItem` + `NSPopover` to enable the click interactions above.
+
+### Fixed
+- Full-lockdown confirmation no longer silently fails. It used a system `.confirmationDialog`, which made the menu bar popover resign key and close before the action ran; the confirmation is now inline within the popover.
+- Onboarding window now honours the in-app Language and Appearance settings instead of falling back to the system locale.
 
 ## [1.0.0] - 2026-05-11
 

@@ -1,56 +1,42 @@
 import SwiftUI
 import AppKit
+import Combine
+import QuartzCore
 
 @main
 struct dirtymacApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
+    // The UI is a hand-managed NSStatusItem + NSPopover (see AppDelegate)
+    // so we can support single-click (popover), double-click (quit), and
+    // right-click (menu) — none of which MenuBarExtra exposes. The App
+    // still needs one Scene; this empty Settings scene is a no-op.
     var body: some Scene {
-        MenuBarExtra {
-            MenuBarPopoverView()
-                .environmentObject(appDelegate.blocker)
-        } label: {
-            MenuBarLabel(blocker: appDelegate.blocker)
-        }
-        .menuBarExtraStyle(.window)
-    }
-}
-
-/// The menu bar status item. A dedicated view so it observes the
-/// blocker and re-renders the icon on lock/unlock.
-struct MenuBarLabel: View {
-    @ObservedObject var blocker: KeyboardBlocker
-
-    var body: some View {
-        // Same glyph family in both states (keyboard → keyboard.fill).
-        // State is carried by fill + color, not a jarring symbol swap,
-        // so the icon always reads as "dirtymac". Red is macOS's
-        // established "active capture" signal; .breathe is a calm,
-        // ambient pulse — far less distracting than .pulse in a menu bar.
-        Image(systemName: blocker.isActive ? "keyboard.fill" : "keyboard")
-            .symbolRenderingMode(.monochrome)
-            .foregroundStyle(blocker.isActive ? Color.red : Color.primary)
-            .symbolEffect(.breathe, options: .repeating, isActive: blocker.isActive)
-            .contentTransition(.symbolEffect(.replace))
-            .accessibilityLabel(blocker.isActive ? "dirtymac — keyboard locked" : "dirtymac")
+        Settings { EmptyView() }
     }
 }
 
 // MARK: - App Delegate
 
-/// Owns the shared KeyboardBlocker and the first-launch onboarding
-/// window. A MenuBarExtra-only app has no Scene whose lifecycle we can
-/// hang first-run logic on, so this is managed in AppKit.
+/// Owns the shared KeyboardBlocker, the status item + popover, and the
+/// first-launch onboarding window.
 final class AppDelegate: NSObject, NSApplicationDelegate {
     let blocker = KeyboardBlocker()
+
+    private var statusItem: NSStatusItem!
+    private let popover = NSPopover()
+    private var lockObserver: AnyCancellable?
+    private var pendingSingleClick: DispatchWorkItem?
 
     private var onboardingWindow: NSWindow?
     private static let onboardedKey = "hasOnboarded"
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         AppearancePreference.applyCurrent()
+        setupPopover()
+        setupStatusItem()
+        observeLockState()
 
-        // Re-show on demand (Settings → "Show Welcome Screen").
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(showOnboarding),
@@ -62,6 +48,154 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             showOnboarding()
         }
     }
+
+    func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool { true }
+
+    // MARK: Status item
+
+    private func setupStatusItem() {
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+        guard let button = statusItem.button else { return }
+        button.wantsLayer = true
+        button.target = self
+        button.action = #selector(statusButtonClicked(_:))
+        button.sendAction(on: [.leftMouseUp, .rightMouseUp])
+        updateIcon(active: blocker.isActive)
+    }
+
+    @objc private func statusButtonClicked(_ sender: NSStatusBarButton) {
+        guard let event = NSApp.currentEvent else { togglePopover(); return }
+
+        if event.type == .rightMouseUp {
+            showContextMenu(from: sender)
+            return
+        }
+
+        // Double-click → quit.
+        if event.clickCount >= 2 {
+            pendingSingleClick?.cancel()
+            pendingSingleClick = nil
+            NSApp.terminate(nil)
+            return
+        }
+
+        // Single-click → open popover, but defer by the system double-
+        // click interval so the first click of a double-click can be
+        // cancelled instead of flashing the popover open.
+        pendingSingleClick?.cancel()
+        let work = DispatchWorkItem { [weak self] in
+            self?.pendingSingleClick = nil
+            self?.togglePopover()
+        }
+        pendingSingleClick = work
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + NSEvent.doubleClickInterval,
+            execute: work
+        )
+    }
+
+    private func showContextMenu(from button: NSStatusBarButton) {
+        let menu = NSMenu()
+
+        let openItem = NSMenuItem(
+            title: String(localized: "Open dirtymac"),
+            action: #selector(openFromMenu),
+            keyEquivalent: ""
+        )
+        openItem.target = self
+        menu.addItem(openItem)
+
+        menu.addItem(.separator())
+
+        let quitItem = NSMenuItem(
+            title: String(localized: "Quit dirtymac"),
+            action: #selector(quitFromMenu),
+            keyEquivalent: "q"
+        )
+        quitItem.target = self
+        menu.addItem(quitItem)
+
+        menu.popUp(
+            positioning: nil,
+            at: NSPoint(x: 0, y: button.bounds.height + 5),
+            in: button
+        )
+    }
+
+    @objc private func openFromMenu() { showPopover() }
+    @objc private func quitFromMenu() { NSApp.terminate(nil) }
+
+    // MARK: Popover
+
+    private func setupPopover() {
+        let hosting = NSHostingController(
+            rootView: MenuBarPopoverView().environmentObject(blocker)
+        )
+        hosting.sizingOptions = .preferredContentSize
+        popover.behavior = .transient
+        popover.animates = true
+        popover.contentViewController = hosting
+    }
+
+    private func togglePopover() {
+        if popover.isShown {
+            popover.performClose(nil)
+        } else {
+            showPopover()
+        }
+    }
+
+    private func showPopover() {
+        guard let button = statusItem?.button else { return }
+        popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    // MARK: Icon state
+
+    private func observeLockState() {
+        lockObserver = blocker.$isActive
+            .removeDuplicates()
+            .receive(on: RunLoop.main)
+            .sink { [weak self] active in self?.updateIcon(active: active) }
+    }
+
+    /// NSStatusItem can't host SwiftUI symbol effects, so the lock state
+    /// is conveyed with a glyph swap, a red tint, and a gentle opacity
+    /// "breathe" — the closest AppKit approximation of the SwiftUI icon.
+    private func updateIcon(active: Bool) {
+        guard let button = statusItem?.button else { return }
+
+        let label = active
+            ? String(localized: "dirtymac — keyboard locked")
+            : "dirtymac"
+        let image = NSImage(
+            systemSymbolName: active ? "keyboard.fill" : "keyboard",
+            accessibilityDescription: label
+        )
+        // Template adapts to the menu bar; the locked state needs a real
+        // red so it must opt out of template tinting.
+        image?.isTemplate = !active
+        button.image = image
+        button.contentTintColor = active ? .systemRed : nil
+        button.toolTip = label
+
+        if active {
+            let breathe = CABasicAnimation(keyPath: "opacity")
+            breathe.fromValue = 1.0
+            breathe.toValue = 0.5
+            breathe.duration = 1.4
+            breathe.autoreverses = true
+            breathe.repeatCount = .infinity
+            breathe.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            button.layer?.add(breathe, forKey: "breathe")
+        } else {
+            button.layer?.removeAnimation(forKey: "breathe")
+            button.alphaValue = 1.0
+        }
+    }
+
+    // MARK: Onboarding
 
     @objc func showOnboarding() {
         if let window = onboardingWindow {
