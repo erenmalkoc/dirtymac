@@ -7,6 +7,7 @@ import AppKit
 struct MainView: View {
     @EnvironmentObject private var blocker: KeyboardBlocker
     @Binding var showingSettings: Bool
+    @State private var confirmLockdown = false
 
     var body: some View {
         VStack(spacing: 0) {
@@ -63,22 +64,61 @@ struct MainView: View {
     private var mainControl: some View {
         VStack(spacing: 16) {
             GlassPowerButton(isActive: blocker.isActive) {
-                blocker.toggle()
+                handlePowerTap()
             }
 
-            VStack(spacing: 3) {
+            VStack(spacing: 5) {
                 Text(blocker.isActive ? "Cleaning Mode Active" : "Click to Lock Keyboard")
                     .font(.headline)
 
-                Text(blocker.isActive
-                     ? "Click the button to release."
-                     : "Mouse and trackpad stay enabled.")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-                    .multilineTextAlignment(.center)
+                if blocker.isActive {
+                    if blocker.hasAutoUnlock {
+                        Label("Unlocks in \(blocker.autoUnlockRemainingDisplay)",
+                              systemImage: "timer")
+                            .font(.subheadline)
+                            .monospacedDigit()
+                            .foregroundStyle(.secondary)
+                            .contentTransition(.numericText())
+                    }
+                    Text("Hold Esc for 3 seconds to unlock.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                } else {
+                    Text(idleCaption)
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                }
             }
         }
         .frame(maxWidth: .infinity)
+        .confirmationDialog(
+            "Full Lockdown",
+            isPresented: $confirmLockdown,
+            titleVisibility: .visible
+        ) {
+            Button("Lock Keyboard", role: .destructive) { blocker.start() }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Your mouse and trackpad will be frozen too. To unlock: hold Esc for 3 seconds, or wait for the auto-unlock timer.")
+        }
+    }
+
+    private var idleCaption: LocalizedStringKey {
+        LockConfiguration.current.blockMouseAndTrackpad
+            ? "Mouse and trackpad will be frozen too."
+            : "Mouse and trackpad stay enabled."
+    }
+
+    private func handlePowerTap() {
+        if blocker.isActive {
+            blocker.stop()
+        } else if LockConfiguration.current.blockMouseAndTrackpad {
+            confirmLockdown = true
+        } else {
+            blocker.start()
+        }
     }
 
     private var permissionPrompt: some View {
