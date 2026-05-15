@@ -156,6 +156,15 @@ struct SettingsView: View {
                 .pickerStyle(.menu)
                 .labelsHidden()
             }
+
+            section("Help") {
+                Button("Show Welcome Screen") {
+                    isPresented = false
+                    NotificationCenter.default.post(name: .showOnboarding, object: nil)
+                }
+                .buttonStyle(.glass)
+                .controlSize(.small)
+            }
         }
         .padding(18)
     }
