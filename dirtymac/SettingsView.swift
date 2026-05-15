@@ -92,11 +92,75 @@ enum LanguagePreference: String, CaseIterable, Identifiable {
     }
 }
 
+// MARK: - Lock Configuration
+
+enum LockMode: String, CaseIterable, Identifiable {
+    case basic, advanced
+    var id: Self { self }
+    var label: LocalizedStringKey { self == .basic ? "Basic" : "Advanced" }
+}
+
+/// What the keyboard blocker should suppress, plus the auto-unlock
+/// timer. `current` reads UserDefaults; `effective` applies the safety
+/// rules (Basic is a fixed safe preset; full mouse lockdown forces a
+/// minimum auto-unlock so the user is never permanently trapped).
+struct LockConfiguration: Equatable {
+    var mode: LockMode = .basic
+    var blockModifierKeys = true
+    var blockMediaKeys = true
+    var blockMouseAndTrackpad = false
+    var autoUnlockSeconds = 0          // 0 = off
+
+    /// Auto-unlock is mandatory (and at least this long) once the mouse
+    /// is part of the lockdown — the menu bar can no longer be clicked.
+    static let minMouseLockSeconds = 30
+
+    /// Selectable auto-unlock durations, in seconds. 0 = off.
+    static let unlockChoices = [0, 30, 60, 120, 300]
+
+    var effective: LockConfiguration {
+        guard mode == .advanced else {
+            return LockConfiguration(
+                mode: .basic,
+                blockModifierKeys: true,
+                blockMediaKeys: true,
+                blockMouseAndTrackpad: false,
+                autoUnlockSeconds: 0
+            )
+        }
+        var c = self
+        if c.blockMouseAndTrackpad, c.autoUnlockSeconds < Self.minMouseLockSeconds {
+            c.autoUnlockSeconds = Self.minMouseLockSeconds
+        }
+        return c
+    }
+
+    static var current: LockConfiguration {
+        let d = UserDefaults.standard
+        func boolOr(_ key: String, _ fallback: Bool) -> Bool {
+            d.object(forKey: key) == nil ? fallback : d.bool(forKey: key)
+        }
+        let cfg = LockConfiguration(
+            mode: LockMode(rawValue: d.string(forKey: "lockMode") ?? "") ?? .basic,
+            blockModifierKeys: boolOr("blockModifierKeys", true),
+            blockMediaKeys: boolOr("blockMediaKeys", true),
+            blockMouseAndTrackpad: boolOr("blockMouseAndTrackpad", false),
+            autoUnlockSeconds: d.integer(forKey: "autoUnlockSeconds")
+        )
+        return cfg.effective
+    }
+}
+
 // MARK: - Settings View
 
 struct SettingsView: View {
     @AppStorage("appearance") private var appearance: AppearancePreference = .system
     @AppStorage("language") private var language: LanguagePreference = .system
+    @AppStorage("lockMode") private var lockMode: LockMode = .basic
+    @AppStorage("blockModifierKeys") private var blockModifierKeys = true
+    @AppStorage("blockMediaKeys") private var blockMediaKeys = true
+    @AppStorage("blockMouseAndTrackpad") private var blockMouseAndTrackpad = false
+    @AppStorage("autoUnlockSeconds") private var autoUnlockSeconds = 0
     @Binding var isPresented: Bool
 
     var body: some View {
@@ -137,6 +201,22 @@ struct SettingsView: View {
 
     private var content: some View {
         VStack(alignment: .leading, spacing: 18) {
+            section("Mode") {
+                Picker("Mode", selection: $lockMode) {
+                    ForEach(LockMode.allCases) { m in
+                        Text(m.label).tag(m)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .labelsHidden()
+
+                if lockMode == .advanced {
+                    advancedControls
+                        .padding(.top, 4)
+                        .transition(.opacity.combined(with: .move(edge: .top)))
+                }
+            }
+
             section("Appearance") {
                 Picker("Appearance", selection: $appearance) {
                     ForEach(AppearancePreference.allCases) { pref in
@@ -167,6 +247,62 @@ struct SettingsView: View {
             }
         }
         .padding(18)
+        .animation(.easeInOut(duration: 0.2), value: lockMode)
+        .animation(.easeInOut(duration: 0.2), value: blockMouseAndTrackpad)
+    }
+
+    private var advancedControls: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Toggle("Block modifier keys", isOn: $blockModifierKeys)
+            Toggle("Block media & brightness keys", isOn: $blockMediaKeys)
+            Toggle("Block mouse & trackpad", isOn: $blockMouseAndTrackpad)
+                .onChange(of: blockMouseAndTrackpad) { _, on in
+                    // Mouse lockdown removes the click-to-unlock exit, so
+                    // force a minimum auto-unlock timer.
+                    if on, autoUnlockSeconds < LockConfiguration.minMouseLockSeconds {
+                        autoUnlockSeconds = LockConfiguration.minMouseLockSeconds
+                    }
+                }
+
+            HStack {
+                Text("Auto-unlock")
+                    .font(.callout)
+                Spacer()
+                Picker("Auto-unlock", selection: $autoUnlockSeconds) {
+                    ForEach(LockConfiguration.unlockChoices, id: \.self) { s in
+                        autoUnlockLabel(s)
+                            .tag(s)
+                    }
+                }
+                .pickerStyle(.menu)
+                .labelsHidden()
+                .fixedSize()
+                .disabled(false)
+            }
+
+            if blockMouseAndTrackpad {
+                Label("Mouse will be frozen. Hold Esc for 3s to force unlock.",
+                      systemImage: "exclamationmark.triangle.fill")
+                    .font(.caption)
+                    .foregroundStyle(.orange)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .font(.callout)
+        .toggleStyle(.switch)
+        .controlSize(.small)
+    }
+
+    @ViewBuilder
+    private func autoUnlockLabel(_ seconds: Int) -> some View {
+        if seconds == 0 {
+            Text("Off")
+        } else {
+            Text(
+                Duration.seconds(seconds)
+                    .formatted(.units(allowed: [.minutes, .seconds], width: .abbreviated))
+            )
+        }
     }
 
     @ViewBuilder
