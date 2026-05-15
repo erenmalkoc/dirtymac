@@ -345,6 +345,295 @@
         "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — 键盘已锁定" } },
         "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac — 鍵盤已鎖定" } }
       }
+    },
+    "Welcome to dirtymac" : {
+      "comment" : "Onboarding step 1 title. Keep 'dirtymac' untranslated.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Willkommen bei dirtymac" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Welcome to dirtymac" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Te damos la bienvenida a dirtymac" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Bienvenue dans dirtymac" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Benvenuto in dirtymac" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac へようこそ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac에 오신 것을 환영합니다" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Boas-vindas ao dirtymac" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Добро пожаловать в dirtymac" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac'e hoş geldiniz" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "欢迎使用 dirtymac" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "歡迎使用 dirtymac" } }
+      }
+    },
+    "A menu bar utility that locks your keyboard so you can clean it — without typing nonsense or launching apps." : {
+      "comment" : "Onboarding step 1 body.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Ein Menüleisten-Tool, das deine Tastatur sperrt, damit du sie reinigen kannst – ohne Unsinn zu tippen oder Apps zu starten." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "A menu bar utility that locks your keyboard so you can clean it — without typing nonsense or launching apps." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Una utilidad de la barra de menús que bloquea el teclado para que puedas limpiarlo, sin escribir tonterías ni abrir apps." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Un utilitaire de la barre des menus qui verrouille votre clavier pour que vous puissiez le nettoyer, sans taper n'importe quoi ni lancer d'apps." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Un'utility nella barra dei menu che blocca la tastiera così puoi pulirla, senza digitare cose a caso o avviare app." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "メニューバーからキーボードをロックし、無駄な入力やアプリの起動なしに掃除できるユーティリティです。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "메뉴 막대에서 키보드를 잠가, 엉뚱한 입력이나 앱 실행 없이 청소할 수 있게 해 주는 유틸리티입니다." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Um utilitário da barra de menus que bloqueia o teclado para você limpá-lo — sem digitar bobagens nem abrir apps." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Утилита в строке меню, которая блокирует клавиатуру, чтобы вы могли её почистить — без случайного ввода и запуска приложений." } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Klavyenizi kilitleyip, saçma tuşlara basmadan veya uygulama açmadan temizlemenizi sağlayan bir menü çubuğu aracı." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "一个菜单栏小工具，锁定键盘以便清洁，不会输入乱码或误开应用。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "一個選單列小工具，鎖定鍵盤以便清潔，不會輸入亂碼或誤開 App。" } }
+      }
+    },
+    "dirtymac lives in your menu bar, up here." : {
+      "comment" : "Onboarding step 1 hint pointing at the menu bar. Keep 'dirtymac' untranslated.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac wohnt hier oben in deiner Menüleiste." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac lives in your menu bar, up here." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac vive aquí arriba, en la barra de menús." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac se trouve ici, dans la barre des menus." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac vive qui in alto, nella barra dei menu." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac はここ、メニューバーにあります。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac은 여기 위쪽 메뉴 막대에 있습니다." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "O dirtymac fica aqui em cima, na barra de menus." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac живёт здесь, в строке меню." } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac yukarıda, menü çubuğunuzda yaşıyor." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac 就在上方的菜单栏里。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac 就在上方的選單列裡。" } }
+      }
+    },
+    "Get Started" : {
+      "comment" : "Onboarding step 1 primary button.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Loslegen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Get Started" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Empezar" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Commencer" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Inizia" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "始める" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "시작하기" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Começar" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Начать" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Başla" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "开始" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "開始" } }
+      }
+    },
+    "Grant Accessibility Access" : {
+      "comment" : "Onboarding step 2 title.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Bedienungshilfen-Zugriff erlauben" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Grant Accessibility Access" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Conceder acceso a Accesibilidad" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Autoriser l'accès à l'Accessibilité" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Concedi accesso all'Accessibilità" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "アクセシビリティへのアクセスを許可" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "손쉬운 사용 권한 허용" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Conceder acesso à Acessibilidade" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Разрешить доступ к универсальному доступу" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Erişilebilirlik İzni Ver" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "授予辅助功能权限" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "授予輔助使用權限" } }
+      }
+    },
+    "dirtymac needs Accessibility access to intercept keyboard events while you clean. Nothing is recorded, logged, or sent anywhere." : {
+      "comment" : "Onboarding step 2 body. Keep 'dirtymac' untranslated.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac benötigt Bedienungshilfen-Zugriff, um Tastaturereignisse während der Reinigung abzufangen. Nichts wird aufgezeichnet, protokolliert oder gesendet." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac needs Accessibility access to intercept keyboard events while you clean. Nothing is recorded, logged, or sent anywhere." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac necesita acceso a Accesibilidad para interceptar eventos del teclado mientras limpias. No se graba, registra ni envía nada." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac a besoin de l'accès à l'Accessibilité pour intercepter les événements clavier pendant le nettoyage. Rien n'est enregistré, journalisé ni envoyé." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac richiede l'accesso all'Accessibilità per intercettare gli eventi della tastiera durante la pulizia. Niente viene registrato, salvato o inviato." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac は掃除中にキーボード入力を遮断するためにアクセシビリティ権限が必要です。記録・保存・送信は一切行いません。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac이 청소하는 동안 키보드 입력을 차단하려면 손쉬운 사용 권한이 필요합니다. 어떤 것도 기록·저장·전송하지 않습니다." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "O dirtymac precisa de acesso à Acessibilidade para interceptar eventos do teclado enquanto você limpa. Nada é gravado, registrado ou enviado." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac нужен доступ к универсальному доступу, чтобы перехватывать события клавиатуры во время очистки. Ничего не записывается, не логируется и не отправляется." } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac, sen temizlerken klavye olaylarını engellemek için Erişilebilirlik iznine ihtiyaç duyar. Hiçbir şey kaydedilmez, loglanmaz veya gönderilmez." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac 需要辅助功能权限以在清洁时拦截键盘事件。不会记录、保存或发送任何内容。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "dirtymac 需要輔助使用權限以在清潔時攔截鍵盤事件。不會記錄、儲存或傳送任何內容。" } }
+      }
+    },
+    "Accessibility access granted" : {
+      "comment" : "Onboarding step 2 live status — granted.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Bedienungshilfen-Zugriff erteilt" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Accessibility access granted" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Acceso a Accesibilidad concedido" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Accès à l'Accessibilité autorisé" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Accesso all'Accessibilità concesso" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "アクセシビリティのアクセスが許可されました" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "손쉬운 사용 권한이 허용됨" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Acesso à Acessibilidade concedido" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Доступ к универсальному доступу предоставлен" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Erişilebilirlik izni verildi" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "已授予辅助功能权限" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "已授予輔助使用權限" } }
+      }
+    },
+    "Accessibility access not granted yet" : {
+      "comment" : "Onboarding step 2 live status — not yet granted.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Bedienungshilfen-Zugriff noch nicht erteilt" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Accessibility access not granted yet" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Acceso a Accesibilidad aún no concedido" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Accès à l'Accessibilité pas encore autorisé" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Accesso all'Accessibilità non ancora concesso" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "アクセシビリティのアクセスはまだ許可されていません" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "손쉬운 사용 권한이 아직 허용되지 않음" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Acesso à Acessibilidade ainda não concedido" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Доступ к универсальному доступу ещё не предоставлен" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Erişilebilirlik izni henüz verilmedi" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "尚未授予辅助功能权限" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "尚未授予輔助使用權限" } }
+      }
+    },
+    "You're all set" : {
+      "comment" : "Onboarding step 3 title.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Alles bereit" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "You're all set" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Todo listo" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Tout est prêt" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Tutto pronto" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "準備完了" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "모든 준비가 끝났습니다" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Tudo pronto" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Всё готово" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Her şey hazır" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "一切就绪" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "一切就緒" } }
+      }
+    },
+    "Click the dirtymac icon in your menu bar." : {
+      "comment" : "Onboarding step 3 tip 1. Keep 'dirtymac' untranslated.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Klicke auf das dirtymac-Symbol in der Menüleiste." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Click the dirtymac icon in your menu bar." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Haz clic en el icono de dirtymac en la barra de menús." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Cliquez sur l'icône dirtymac dans la barre des menus." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Fai clic sull'icona di dirtymac nella barra dei menu." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "メニューバーの dirtymac アイコンをクリックします。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "메뉴 막대의 dirtymac 아이콘을 클릭하세요." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Clique no ícone do dirtymac na barra de menus." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Нажмите на значок dirtymac в строке меню." } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Menü çubuğundaki dirtymac simgesine tıklayın." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "点按菜单栏中的 dirtymac 图标。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "點按選單列中的 dirtymac 圖示。" } }
+      }
+    },
+    "Press the power button to lock the keyboard." : {
+      "comment" : "Onboarding step 3 tip 2.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Drücke den Ein-/Aus-Knopf, um die Tastatur zu sperren." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Press the power button to lock the keyboard." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Pulsa el botón de encendido para bloquear el teclado." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Appuyez sur le bouton d'alimentation pour verrouiller le clavier." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Premi il pulsante di accensione per bloccare la tastiera." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "電源ボタンを押してキーボードをロックします。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "전원 버튼을 눌러 키보드를 잠그세요." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Pressione o botão de força para bloquear o teclado." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Нажмите кнопку питания, чтобы заблокировать клавиатуру." } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Klavyeyi kilitlemek için güç düğmesine basın." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "按下电源按钮以锁定键盘。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "按下電源按鈕以鎖定鍵盤。" } }
+      }
+    },
+    "Mouse and trackpad keep working — click the icon again to unlock." : {
+      "comment" : "Onboarding step 3 tip 3.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Maus und Trackpad funktionieren weiter – klicke erneut auf das Symbol zum Entsperren." } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Mouse and trackpad keep working — click the icon again to unlock." } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "El ratón y el trackpad siguen funcionando: haz clic de nuevo en el icono para desbloquear." } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "La souris et le trackpad continuent de fonctionner — cliquez à nouveau sur l'icône pour déverrouiller." } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Mouse e trackpad continuano a funzionare: fai di nuovo clic sull'icona per sbloccare." } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "マウスとトラックパッドは使えます。アイコンを再度クリックすると解除されます。" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "마우스와 트랙패드는 계속 작동합니다. 아이콘을 다시 클릭하면 잠금이 해제됩니다." } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "O mouse e o trackpad continuam funcionando — clique no ícone novamente para desbloquear." } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Мышь и трекпад продолжают работать — нажмите значок ещё раз, чтобы разблокировать." } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Fare ve trackpad çalışmaya devam eder — kilidi açmak için simgeye tekrar tıklayın." } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "鼠标和触控板仍可使用——再次点按图标即可解锁。" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "滑鼠與觸控板仍可使用——再次點按圖示即可解鎖。" } }
+      }
+    },
+    "Continue" : {
+      "comment" : "Onboarding step 2 primary button when permission is granted.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Weiter" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Continue" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Continuar" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Continuer" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Continua" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "続ける" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "계속" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Continuar" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Продолжить" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Devam Et" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "继续" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "繼續" } }
+      }
+    },
+    "Skip for Now" : {
+      "comment" : "Onboarding step 2 primary button when permission is not yet granted.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Vorerst überspringen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Skip for Now" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Omitir por ahora" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Ignorer pour l'instant" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Salta per ora" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "後で設定する" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "나중에 하기" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Pular por enquanto" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Пропустить пока" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Şimdilik Atla" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "暂时跳过" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "暫時略過" } }
+      }
+    },
+    "Done" : {
+      "comment" : "Onboarding step 3 primary button — finishes onboarding.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Fertig" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Done" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Listo" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Terminé" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Fine" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "完了" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "완료" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Concluir" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Готово" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Bitti" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "完成" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "完成" } }
+      }
+    },
+    "Help" : {
+      "comment" : "Settings section title for help/onboarding actions.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Hilfe" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Help" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Ayuda" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Aide" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Aiuto" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ヘルプ" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "도움말" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Ajuda" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Помощь" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Yardım" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "帮助" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "說明" } }
+      }
+    },
+    "Show Welcome Screen" : {
+      "comment" : "Settings button that re-opens the onboarding window.",
+      "localizations" : {
+        "de" : { "stringUnit" : { "state" : "translated", "value" : "Willkommensbildschirm anzeigen" } },
+        "en" : { "stringUnit" : { "state" : "translated", "value" : "Show Welcome Screen" } },
+        "es" : { "stringUnit" : { "state" : "translated", "value" : "Mostrar pantalla de bienvenida" } },
+        "fr" : { "stringUnit" : { "state" : "translated", "value" : "Afficher l'écran d'accueil" } },
+        "it" : { "stringUnit" : { "state" : "translated", "value" : "Mostra schermata di benvenuto" } },
+        "ja" : { "stringUnit" : { "state" : "translated", "value" : "ようこそ画面を表示" } },
+        "ko" : { "stringUnit" : { "state" : "translated", "value" : "시작 화면 표시" } },
+        "pt-BR" : { "stringUnit" : { "state" : "translated", "value" : "Mostrar tela de boas-vindas" } },
+        "ru" : { "stringUnit" : { "state" : "translated", "value" : "Показать экран приветствия" } },
+        "tr" : { "stringUnit" : { "state" : "translated", "value" : "Karşılama Ekranını Göster" } },
+        "zh-Hans" : { "stringUnit" : { "state" : "translated", "value" : "显示欢迎屏幕" } },
+        "zh-Hant" : { "stringUnit" : { "state" : "translated", "value" : "顯示歡迎畫面" } }
+      }
     }
   }
 }
