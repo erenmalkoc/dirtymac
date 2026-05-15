@@ -9,12 +9,16 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 
 ## Features
 
-- One-click keyboard lock and unlock from the menu bar
+- One-click keyboard lock from the menu bar
 - Blocks every keyboard input: regular keys, modifiers, **and** brightness / volume / media / F-key controls
-- Mouse and trackpad never blocked — click the menu bar icon to release
-- Live elapsed-time display while locked
+- **Basic mode**: mouse and trackpad stay live — click the menu bar icon to release
+- **Advanced mode**: optionally freeze the mouse & trackpad too, choose which key classes to block, and set an auto-unlock timer
+- Universal hold-Esc emergency exit (3 seconds) — works even in full lockdown
+- Guided first-launch onboarding with live Accessibility-permission status
+- Status item: single-click opens, double-click quits, right-click menu
+- Live elapsed-time display and auto-unlock countdown while locked
 - Auto re-enables the event tap if macOS times it out
-- Settings page with light / dark override and 12-language UI (runtime switching, no relaunch)
+- Settings with light / dark override and 12-language UI (runtime switching, no relaunch)
 - Native macOS 26 Liquid Glass UI
 - No Dock icon (`LSUIElement`)
 - No network access, no analytics, no background daemons

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-05-15
+
 ### Added
 - First-launch guided onboarding: a 3-step welcome window (intro → Accessibility permission with live status → how-to), re-openable from Settings → Help.
 - Basic / Advanced lock modes. Advanced lets you toggle modifier keys, media/brightness keys, and full mouse & trackpad lockdown, plus an auto-unlock timer.
@@ -38,5 +40,6 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.1.0
 [1.0.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.0.0
