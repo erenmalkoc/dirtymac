@@ -22,10 +22,15 @@ struct MenuBarLabel: View {
     @ObservedObject var blocker: KeyboardBlocker
 
     var body: some View {
-        Image(systemName: blocker.isActive ? "lock.fill" : "keyboard")
-            .symbolRenderingMode(.hierarchical)
+        // Same glyph family in both states (keyboard → keyboard.fill).
+        // State is carried by fill + color, not a jarring symbol swap,
+        // so the icon always reads as "dirtymac". Red is macOS's
+        // established "active capture" signal; .breathe is a calm,
+        // ambient pulse — far less distracting than .pulse in a menu bar.
+        Image(systemName: blocker.isActive ? "keyboard.fill" : "keyboard")
+            .symbolRenderingMode(.monochrome)
             .foregroundStyle(blocker.isActive ? Color.red : Color.primary)
-            .symbolEffect(.pulse, options: .repeating, isActive: blocker.isActive)
+            .symbolEffect(.breathe, options: .repeating, isActive: blocker.isActive)
             .contentTransition(.symbolEffect(.replace))
             .accessibilityLabel(blocker.isActive ? "dirtymac — keyboard locked" : "dirtymac")
     }

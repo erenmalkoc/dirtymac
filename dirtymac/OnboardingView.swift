@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 
 /// First-launch guided setup. Three steps: welcome, Accessibility
 /// permission (with live status), and a short how-to. Hosted in an
