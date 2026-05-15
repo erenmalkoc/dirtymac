@@ -18,6 +18,7 @@ struct MainView: View {
             content
                 .padding(.vertical, 22)
                 .padding(.horizontal, 18)
+                .animation(.easeInOut(duration: 0.2), value: confirmLockdown)
 
             Divider()
 
@@ -61,7 +62,16 @@ struct MainView: View {
         }
     }
 
+    @ViewBuilder
     private var mainControl: some View {
+        if confirmLockdown {
+            lockdownConfirm
+        } else {
+            lockControl
+        }
+    }
+
+    private var lockControl: some View {
         VStack(spacing: 16) {
             GlassPowerButton(isActive: blocker.isActive) {
                 handlePowerTap()
@@ -93,16 +103,42 @@ struct MainView: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .confirmationDialog(
-            "Full Lockdown",
-            isPresented: $confirmLockdown,
-            titleVisibility: .visible
-        ) {
-            Button("Lock Keyboard", role: .destructive) { blocker.start() }
-            Button("Cancel", role: .cancel) {}
-        } message: {
-            Text("Your mouse and trackpad will be frozen too. To unlock: hold Esc for 3 seconds, or wait for the auto-unlock timer.")
+    }
+
+    // Inline confirmation. A system .confirmationDialog can't be used
+    // here: presenting it makes the MenuBarExtra popover resign key and
+    // close, tearing the dialog down before its action runs. Keeping the
+    // confirmation inside the popover avoids the focus loss entirely.
+    private var lockdownConfirm: some View {
+        VStack(spacing: 14) {
+            Image(systemName: "exclamationmark.triangle.fill")
+                .font(.system(size: 36))
+                .foregroundStyle(.orange)
+
+            VStack(spacing: 6) {
+                Text("Full Lockdown")
+                    .font(.headline)
+                Text("Your mouse and trackpad will be frozen too. To unlock: hold Esc for 3 seconds, or wait for the auto-unlock timer.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            HStack(spacing: 8) {
+                Button("Cancel") { confirmLockdown = false }
+                    .buttonStyle(.glass)
+
+                Button("Lock Keyboard", role: .destructive) {
+                    confirmLockdown = false
+                    blocker.start()
+                }
+                .buttonStyle(.glassProminent)
+            }
+            .padding(.top, 2)
         }
+        .frame(maxWidth: .infinity)
+        .transition(.opacity)
     }
 
     private var idleCaption: LocalizedStringKey {
