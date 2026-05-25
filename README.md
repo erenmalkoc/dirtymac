@@ -19,7 +19,6 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 - Live elapsed-time display and auto-unlock countdown while locked
 - Auto re-enables the event tap if macOS times it out
 - Settings with light / dark override and 12-language UI (runtime switching, no relaunch)
-- Native macOS 26 Liquid Glass UI
 - No Dock icon (`LSUIElement`)
 - No network access, no analytics, no background daemons
 
@@ -37,8 +36,8 @@ Grab the latest signed & notarized DMG from [Releases](https://github.com/erenma
 
 ## Requirements
 
-- macOS 26 or later
-- Xcode 26 or later (to build from source)
+- macOS 14 (Sonoma) or later
+- Xcode 15 or later (to build from source)
 
 ## Build from source
 

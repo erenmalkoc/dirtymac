@@ -42,7 +42,13 @@ private struct PowerButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(width: 132, height: 132)
-            .background(activeBackground, in: .circle)
+            .background {
+                if isActive {
+                    Circle().fill(Color.red.gradient)
+                } else {
+                    Circle().fill(.regularMaterial)
+                }
+            }
             .overlay(
                 Circle().strokeBorder(
                     isActive ? Color.red.opacity(0.6) : Color.primary.opacity(0.08),
@@ -57,15 +63,6 @@ private struct PowerButtonStyle: ButtonStyle {
             .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
             .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
             .contentShape(.circle)
-    }
-
-    @ViewBuilder
-    private var activeBackground: some View {
-        if isActive {
-            Color.red.gradient
-        } else {
-            Rectangle().fill(.regularMaterial)
-        }
     }
 }
 
