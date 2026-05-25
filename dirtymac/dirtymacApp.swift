@@ -220,6 +220,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         .preferredColorScheme(AppearancePreference.current.colorScheme)
 
         let hosting = NSHostingController(rootView: root)
+        // Without this, the window is constructed before SwiftUI has
+        // produced a layout, so window.center() ends up centering a
+        // tiny default-sized window; when the content then grows to
+        // 460x560 the window expands from its bottom-left anchor and
+        // visibly drifts off-center.
+        hosting.sizingOptions = .preferredContentSize
+
         let window = NSWindow(contentViewController: hosting)
         window.styleMask = [.titled, .closable, .fullSizeContentView]
         window.titlebarAppearsTransparent = true
@@ -227,6 +234,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         window.isMovableByWindowBackground = true
         window.backgroundColor = .windowBackgroundColor
         window.isReleasedWhenClosed = false
+        window.setContentSize(NSSize(width: 460, height: 560))
         window.center()
         window.delegate = self
 
