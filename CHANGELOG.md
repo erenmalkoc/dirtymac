@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.1] - 2026-05-25
+
+### Changed
+- Minimum macOS is now **macOS 14 (Sonoma)**, down from macOS 26. The UI moved from Liquid Glass (`.glassEffect`, `.buttonStyle(.glass)` / `.glassProminent`) to standard SwiftUI `Material` surfaces with `.bordered` / `.borderedProminent` buttons. The locked-state power orb keeps its red-tinted, pressable feel via a custom `ButtonStyle`. Same app, much wider audience.
+
+### Fixed
+- Menu bar popover now opens instantly. The double-click-to-quit shortcut imposed a ~250–500 ms `NSEvent.doubleClickInterval` wait on every single click; quit moved to the right-click menu so the single-click path has zero delay.
+- Onboarding window now opens centered on first launch. `NSHostingController` was missing `sizingOptions = .preferredContentSize`, so `window.center()` ran against a default-sized window and the content's later 460×560 layout pushed the frame off-center.
+- Bundle icon is cached at app launch and reused across popover opens, instead of being looked up via `NSWorkspace` on every open.
+- The Accessibility permission re-check no longer blocks the popover's first frame; it's deferred by one run-loop tick.
+
 ## [1.1.0] - 2026-05-15
 
 ### Added
