@@ -26,7 +26,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     private let popover = NSPopover()
     private var lockObserver: AnyCancellable?
-    private var pendingSingleClick: DispatchWorkItem?
 
     private var onboardingWindow: NSWindow?
     private static let onboardedKey = "hasOnboarded"
@@ -69,33 +68,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func statusButtonClicked(_ sender: NSStatusBarButton) {
         guard let event = NSApp.currentEvent else { togglePopover(); return }
-
         if event.type == .rightMouseUp {
             showContextMenu(from: sender)
             return
         }
-
-        // Double-click → quit.
-        if event.clickCount >= 2 {
-            pendingSingleClick?.cancel()
-            pendingSingleClick = nil
-            NSApp.terminate(nil)
-            return
-        }
-
-        // Single-click → open popover, but defer by the system double-
-        // click interval so the first click of a double-click can be
-        // cancelled instead of flashing the popover open.
-        pendingSingleClick?.cancel()
-        let work = DispatchWorkItem { [weak self] in
-            self?.pendingSingleClick = nil
-            self?.togglePopover()
-        }
-        pendingSingleClick = work
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + NSEvent.doubleClickInterval,
-            execute: work
-        )
+        togglePopover()
     }
 
     private func showContextMenu(from button: NSStatusBarButton) {
