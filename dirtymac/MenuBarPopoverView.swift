@@ -24,9 +24,10 @@ struct MenuBarPopoverView: View {
         .preferredColorScheme(appearance.colorScheme)
         .environment(\.locale, language.locale ?? .current)
         .animation(.easeInOut(duration: 0.22), value: showingSettings)
-        // AppKit-level override — this is what actually flips the
-        // popover's vibrancy backdrop and Liquid Glass materials.
-        .onAppear { NSApp.appearance = appearance.nsAppearance }
+        // AppKit-level override — applied once at launch (see
+        // AppDelegate.applicationDidFinishLaunching) and on user change.
+        // Re-applying on every popover open triggers a global NSApp
+        // redraw for no reason.
         .onChange(of: appearance) { _, new in
             NSApp.appearance = new.nsAppearance
         }

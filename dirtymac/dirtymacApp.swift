@@ -33,6 +33,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         AppearancePreference.applyCurrent()
+        // Force the bundle-icon Launch Services lookup to happen now
+        // (during app launch, off the popover-open hot path) instead of
+        // the first time the user clicks the menu bar.
+        _ = AppIconView.bundleIcon
         setupPopover()
         setupStatusItem()
         observeLockState()

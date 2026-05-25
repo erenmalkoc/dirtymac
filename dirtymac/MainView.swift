@@ -24,7 +24,12 @@ struct MainView: View {
 
             footer
         }
-        .onAppear { blocker.refreshPermission() }
+        // Defer the AX check so it doesn't block the popover's first
+        // frame. The cached value from init renders immediately; if it
+        // turns out stale, the view updates a tick later.
+        .onAppear {
+            DispatchQueue.main.async { blocker.refreshPermission() }
+        }
     }
 
     // MARK: Header

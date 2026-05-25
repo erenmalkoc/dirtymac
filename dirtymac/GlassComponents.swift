@@ -6,8 +6,12 @@ import AppKit
 struct AppIconView: View {
     var size: CGFloat
 
+    // Launch Services lookup is synchronous and traverses the bundle.
+    // Cache once so every popover open doesn't pay that cost.
+    static let bundleIcon: NSImage = NSWorkspace.shared.icon(forFile: Bundle.main.bundlePath)
+
     var body: some View {
-        Image(nsImage: NSWorkspace.shared.icon(forFile: Bundle.main.bundlePath))
+        Image(nsImage: Self.bundleIcon)
             .resizable()
             .interpolation(.high)
             .aspectRatio(contentMode: .fit)
