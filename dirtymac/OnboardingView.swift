@@ -71,7 +71,8 @@ struct OnboardingView: View {
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 14)
                 .padding(.vertical, 9)
-                .glassEffect(in: .capsule)
+                .background(.regularMaterial, in: .capsule)
+                .overlay(Capsule().strokeBorder(.separator.opacity(0.4), lineWidth: 0.5))
                 .padding(.top, 4)
         }
         .frame(maxWidth: .infinity)
@@ -99,10 +100,10 @@ struct OnboardingView: View {
 
             HStack(spacing: 10) {
                 Button("Grant Access") { blocker.requestPermission() }
-                    .buttonStyle(.glassProminent)
+                    .buttonStyle(.borderedProminent)
 
                 Button("Open Settings") { blocker.openAccessibilitySettings() }
-                    .buttonStyle(.glass)
+                    .buttonStyle(.bordered)
             }
             .padding(.top, 2)
         }
@@ -123,7 +124,8 @@ struct OnboardingView: View {
         }
         .padding(.horizontal, 14)
         .padding(.vertical, 9)
-        .glassEffect(in: .capsule)
+        .background(.regularMaterial, in: .capsule)
+        .overlay(Capsule().strokeBorder(.separator.opacity(0.4), lineWidth: 0.5))
         .animation(.easeInOut(duration: 0.25), value: blocker.hasPermission)
     }
 
@@ -143,7 +145,11 @@ struct OnboardingView: View {
             }
             .padding(16)
             .frame(maxWidth: .infinity, alignment: .leading)
-            .glassEffect(in: .rect(cornerRadius: 16))
+            .background(.regularMaterial, in: .rect(cornerRadius: 16))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .strokeBorder(.separator.opacity(0.4), lineWidth: 0.5)
+            )
             .padding(.top, 4)
         }
         .frame(maxWidth: .infinity)
@@ -189,7 +195,7 @@ struct OnboardingView: View {
             Spacer()
 
             Button(primaryTitle) { advance() }
-                .buttonStyle(.glassProminent)
+                .buttonStyle(.borderedProminent)
                 .keyboardShortcut(.defaultAction)
         }
     }

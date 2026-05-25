@@ -19,8 +19,8 @@ struct AppIconView: View {
     }
 }
 
-/// Large circular power control. Uses the native interactive Liquid
-/// Glass effect — tint shifts to red while the keyboard is locked.
+/// Large circular power control. Tinted red while the keyboard is
+/// locked, with a subtle press-down scale for tactile feedback.
 struct GlassPowerButton: View {
     var isActive: Bool
     var action: () -> Void
@@ -30,17 +30,42 @@ struct GlassPowerButton: View {
             Image(systemName: "power")
                 .font(.system(size: 44, weight: .semibold, design: .rounded))
                 .foregroundStyle(isActive ? .white : .primary)
-                .frame(width: 132, height: 132)
-                .contentShape(.circle)
         }
-        .buttonStyle(.plain)
-        .glassEffect(
-            .regular
-                .tint(isActive ? .red : nil)
-                .interactive(),
-            in: .circle
-        )
+        .buttonStyle(PowerButtonStyle(isActive: isActive))
         .animation(.easeInOut(duration: 0.25), value: isActive)
+    }
+}
+
+private struct PowerButtonStyle: ButtonStyle {
+    let isActive: Bool
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: 132, height: 132)
+            .background(activeBackground, in: .circle)
+            .overlay(
+                Circle().strokeBorder(
+                    isActive ? Color.red.opacity(0.6) : Color.primary.opacity(0.08),
+                    lineWidth: 0.5
+                )
+            )
+            .shadow(
+                color: isActive ? Color.red.opacity(0.35) : .black.opacity(0.06),
+                radius: isActive ? 14 : 6,
+                y: isActive ? 4 : 2
+            )
+            .scaleEffect(configuration.isPressed ? 0.96 : 1.0)
+            .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
+            .contentShape(.circle)
+    }
+
+    @ViewBuilder
+    private var activeBackground: some View {
+        if isActive {
+            Color.red.gradient
+        } else {
+            Rectangle().fill(.regularMaterial)
+        }
     }
 }
 
@@ -71,7 +96,8 @@ struct StatusPill: View {
         }
         .padding(.horizontal, 9)
         .padding(.vertical, 4)
-        .glassEffect(in: .capsule)
+        .background(.regularMaterial, in: .capsule)
+        .overlay(Capsule().strokeBorder(.separator.opacity(0.4), lineWidth: 0.5))
         // Lock to intrinsic size so the pill never compresses when the
         // adjacent header text expands (e.g. "Locked" → "Locked 00:12").
         .fixedSize()

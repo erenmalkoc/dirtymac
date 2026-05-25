@@ -19,8 +19,8 @@ enum AppearancePreference: String, CaseIterable, Identifiable {
     }
 
     /// AppKit-level appearance — required to make `NSPopover`'s
-    /// vibrancy backdrop and `.glassEffect()` materials switch modes.
-    /// Without this, only text color responds to `colorScheme`.
+    /// vibrancy backdrop and `Material` views switch modes. Without
+    /// this, only text color responds to `colorScheme`.
     var nsAppearance: NSAppearance? {
         switch self {
         case .system: nil
@@ -252,7 +252,7 @@ struct SettingsView: View {
                     isPresented = false
                     NotificationCenter.default.post(name: .showOnboarding, object: nil)
                 }
-                .buttonStyle(.glass)
+                .buttonStyle(.bordered)
                 .controlSize(.small)
             }
         }

@@ -132,13 +132,13 @@ struct MainView: View {
 
             HStack(spacing: 8) {
                 Button("Cancel") { confirmLockdown = false }
-                    .buttonStyle(.glass)
+                    .buttonStyle(.bordered)
 
                 Button("Lock Keyboard", role: .destructive) {
                     confirmLockdown = false
                     blocker.start()
                 }
-                .buttonStyle(.glassProminent)
+                .buttonStyle(.borderedProminent)
             }
             .padding(.top, 2)
         }
@@ -183,12 +183,12 @@ struct MainView: View {
                 Button("Grant Access") {
                     blocker.requestPermission()
                 }
-                .buttonStyle(.glassProminent)
+                .buttonStyle(.borderedProminent)
 
                 Button("Open Settings") {
                     blocker.openAccessibilitySettings()
                 }
-                .buttonStyle(.glass)
+                .buttonStyle(.bordered)
             }
             .padding(.top, 2)
         }
@@ -205,7 +205,7 @@ struct MainView: View {
                 Image(systemName: "gearshape")
                     .font(.body)
             }
-            .buttonStyle(.glass)
+            .buttonStyle(.bordered)
             .controlSize(.small)
             .accessibilityLabel("Settings")
 
@@ -220,7 +220,7 @@ struct MainView: View {
                 blocker.stop()
                 NSApp.terminate(nil)
             }
-            .buttonStyle(.glass)
+            .buttonStyle(.bordered)
             .controlSize(.small)
         }
         .padding(.horizontal, 14)
