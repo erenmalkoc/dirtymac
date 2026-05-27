@@ -1,7 +1,10 @@
 # dirtymac
 
-A native macOS menu bar utility that temporarily locks your keyboard so you can clean it without triggering keys. Mouse and trackpad stay fully responsive — they're your escape hatch.
+A native macOS menu bar utility that temporarily locks your keyboard so you can clean it without triggering keys. Mouse and trackpad stay fully responsive.
 
+<p align="center">
+  <img src="assets/demo.gif" alt="dirtymac demo" width="420">
+</p>
 
 ## Why
 
@@ -15,7 +18,7 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 - **Advanced mode**: optionally freeze the mouse & trackpad too, choose which key classes to block, and set an auto-unlock timer
 - Universal hold-Esc emergency exit (3 seconds) — works even in full lockdown
 - Guided first-launch onboarding with live Accessibility-permission status
-- Status item: single-click opens, double-click quits, right-click menu
+- Status item: single-click opens the popover, right-click shows an Open / Quit menu
 - Live elapsed-time display and auto-unlock countdown while locked
 - Auto re-enables the event tap if macOS times it out
 - Settings with light / dark override and 12-language UI (runtime switching, no relaunch)
@@ -61,7 +64,7 @@ The accessibility tap only swallows events; nothing is recorded, logged, or forw
 
 ## How it works
 
-dirtymac creates a `CGEventTap` at the session level (`.cgSessionEventTap`) listening for `keyDown`, `keyUp`, `flagsChanged`, and `kCGEventSystemDefined` (subtype 8 — the aux-control channel that brightness, volume, and media keys use). The callback returns `nil` for those events, which removes them from the system input queue. Mouse, trackpad, and other input devices are never in the event mask, so they continue to function — including the click that opens the menu and disables the lock. The power button (`systemDefined` subtype 1) is deliberately allowed through so the user keeps a hardware emergency exit.
+dirtymac creates a `CGEventTap` at the session level (`.cgSessionEventTap`). The mask is built from the active lock configuration: `keyDown` and `keyUp` are always present; `flagsChanged`, `kCGEventSystemDefined` (subtype 8 — the aux-control channel that brightness, volume, and media keys use), and the mouse / trackpad / scroll types are added when the matching Advanced toggles are on. The callback returns `nil` for events that are meant to be blocked, removing them from the system input queue. By default (Basic mode) mouse and trackpad are not in the mask, so they keep working — including the click that opens the menu and disables the lock. Advanced full lockdown adds them; the universal hold-Esc (3 s) emergency exit and a mandatory auto-unlock timer guarantee the lock can always be released. The power button (`systemDefined` subtype 1) is deliberately allowed through so the user keeps a hardware emergency exit.
 
 If macOS disables the tap (timeout or excessive callback latency), dirtymac re-enables it automatically.
 
@@ -69,12 +72,13 @@ If macOS disables the tap (timeout or excessive callback latency), dirtymac re-e
 
 ```
 dirtymac/
-├── dirtymacApp.swift          # @main, MenuBarExtra
-├── KeyboardBlocker.swift      # CGEventTap + AX permission
-├── MenuBarPopoverView.swift   # root container, navigation & preferences
-├── MainView.swift             # keyboard lock control
-├── SettingsView.swift         # appearance + language
-├── GlassComponents.swift      # GlassPowerButton, StatusPill, AppIconView
+├── dirtymacApp.swift          # @main + AppDelegate: NSStatusItem, popover, onboarding window
+├── KeyboardBlocker.swift      # CGEventTap, hold-Esc, auto-unlock, AX permission
+├── MenuBarPopoverView.swift   # popover root: navigation, preferences, appearance + locale
+├── MainView.swift             # keyboard lock control + inline full-lockdown confirmation
+├── SettingsView.swift         # preference models + settings UI (mode, appearance, language)
+├── OnboardingView.swift       # 3-step first-launch guided setup
+├── GlassComponents.swift      # PowerButton, StatusPill, AppIconView
 └── Localizable.xcstrings      # 12-language string catalog
 ```
 
