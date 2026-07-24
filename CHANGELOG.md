@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] - 2026-07-24
+
+Packaging fix only — no changes to the app itself.
+
 ### Fixed
 - Gatekeeper no longer refuses the app after `brew install --cask`. Only the DMG was stapled, and Homebrew copies `dirtymac.app` out of the DMG into `/Applications` — leaving the ticket behind. The app then had to be verified against Apple over the network on first launch, so anyone offline or behind a proxy that blocks Apple's notary endpoints was told it couldn't be checked for malware. The release script now notarizes and staples the `.app` itself before the DMG is built, so the installed copy validates with no network.
 - The DMG is now signed with the Developer ID certificate as well, so a direct download from the Releases page has a signature for Gatekeeper to evaluate.
@@ -56,7 +60,8 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.1.1...HEAD
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.1.2...HEAD
+[1.1.2]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.1.2
 [1.1.1]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.1.1
 [1.1.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.1.0
 [1.0.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.0.0
