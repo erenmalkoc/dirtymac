@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- Gatekeeper no longer refuses the app after `brew install --cask`. Only the DMG was stapled, and Homebrew copies `dirtymac.app` out of the DMG into `/Applications` — leaving the ticket behind. The app then had to be verified against Apple over the network on first launch, so anyone offline or behind a proxy that blocks Apple's notary endpoints was told it couldn't be checked for malware. The release script now notarizes and staples the `.app` itself before the DMG is built, so the installed copy validates with no network.
+- The DMG is now signed with the Developer ID certificate as well, so a direct download from the Releases page has a signature for Gatekeeper to evaluate.
+- Release builds now fail loudly when Apple rejects a notarization. `notarytool submit --wait` exits 0 for a completed-but-rejected submission, so the final status is read back explicitly and the notary log is printed on failure.
+
 ## [1.1.1] - 2026-05-25
 
 ### Changed

@@ -37,6 +37,20 @@ brew install --cask erenmalkoc/tap/dirtymac
 
 Grab the latest signed & notarized DMG from [Releases](https://github.com/erenmalkoc/dirtymac/releases/latest), then drag `dirtymac.app` to `/Applications`.
 
+### "macOS cannot verify that this app is free from malware"
+
+Affects **1.1.1 and earlier only**. Those builds stapled the notarization ticket to the DMG but not to the app inside it, and `brew install --cask` copies the app out of the DMG — so macOS had to check with Apple over the network at first launch and refused the app whenever that check couldn't complete (offline, VPN, or a proxy that blocks Apple's notary endpoints). Upgrade:
+
+```bash
+brew upgrade --cask erenmalkoc/tap/dirtymac
+```
+
+If you're stuck on an affected build, clear the download flag once and it will open:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/dirtymac.app
+```
+
 ## Requirements
 
 - macOS 14 (Sonoma) or later
@@ -84,7 +98,7 @@ dirtymac/
 
 ## Releasing
 
-Tag-driven. The `release` workflow builds, signs, notarizes, and publishes a stapled DMG on every `v*.*.*` tag push:
+Tag-driven. The `release` workflow builds and signs the app, notarizes and staples **both the `.app` and the DMG**, and publishes on every `v*.*.*` tag push. The app's own ticket is the one that matters — Homebrew copies the bundle out of the DMG, so a ticket that only lives on the DMG never reaches `/Applications`.
 
 ```bash
 git tag v1.2.3 && git push origin v1.2.3

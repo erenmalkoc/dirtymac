@@ -20,7 +20,8 @@ jobs:
   release:
     name: Build, notarize, publish
     runs-on: macos-26
-    timeout-minutes: 30
+    # Two notary round-trips now (the .app, then the DMG).
+    timeout-minutes: 45
 
     steps:
       - name: Checkout
