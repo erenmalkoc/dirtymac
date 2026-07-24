@@ -138,6 +138,10 @@ jobs:
             brew install --cask erenmalkoc/tap/dirtymac
             ```
 
+            Homebrew 6.0+ requires third-party taps to be trusted. If the install
+            stops with `Refusing to load cask … from untrusted tap`, run
+            `brew trust erenmalkoc/tap` once and try again.
+
             ## SHA256
 
             ```

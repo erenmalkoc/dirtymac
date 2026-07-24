@@ -33,19 +33,33 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 brew install --cask erenmalkoc/tap/dirtymac
 ```
 
+Homebrew 6.0 and later require third-party taps to be trusted before anything can be installed from them. If the command above stops with `Refusing to load cask … from untrusted tap`, trust the tap once and retry:
+
+```bash
+brew trust erenmalkoc/tap
+```
+
 ### Manual download
 
 Grab the latest signed & notarized DMG from [Releases](https://github.com/erenmalkoc/dirtymac/releases/latest), then drag `dirtymac.app` to `/Applications`.
 
-### "macOS cannot verify that this app is free from malware"
+### Troubleshooting
 
-Affects **1.1.1 and earlier only**. Those builds stapled the notarization ticket to the DMG but not to the app inside it, and `brew install --cask` copies the app out of the DMG — so macOS had to check with Apple over the network at first launch and refused the app whenever that check couldn't complete (offline, VPN, or a proxy that blocks Apple's notary endpoints). Upgrade:
+**`Refusing to load cask … from untrusted tap`** — Homebrew 6.0's trust check, not a problem with the app. Run `brew trust erenmalkoc/tap` and install again.
+
+**"macOS cannot verify that this app is free from malware"** — affects **1.1.1 and earlier only**. Those builds stapled the notarization ticket to the DMG but not to the app inside it, and `brew install --cask` copies the app out of the DMG — so macOS had to reach Apple over the network at first launch and refused the app whenever that check couldn't complete (offline, VPN, or a proxy that blocks Apple's notary endpoints). Upgrading is the fix:
 
 ```bash
 brew upgrade --cask erenmalkoc/tap/dirtymac
 ```
 
-If you're stuck on an affected build, clear the download flag once and it will open:
+From 1.1.2 on, both the app and the DMG carry their own stapled ticket, so the installed copy verifies with no network at all. To confirm your copy is a good one:
+
+```bash
+xcrun stapler validate /Applications/dirtymac.app   # → The validate action worked!
+```
+
+If you're stuck on an affected build and can't upgrade, clearing the download flag lets it open:
 
 ```bash
 xattr -dr com.apple.quarantine /Applications/dirtymac.app
