@@ -1,0 +1,44 @@
+name: CI
+
+# Compile the app on every push and pull request so a broken build is
+# caught before a release tag is cut. Signing is disabled — this job
+# only proves the Swift sources still build on the Xcode the Release
+# workflow uses.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    name: Build (unsigned)
+    runs-on: macos-26
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Select Xcode
+        run: |
+          XCODE=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
+          if [ -z "$XCODE" ]; then
+            echo "::error::No Xcode 26.x found. Available Xcodes:"
+            ls /Applications/ | grep -i '^Xcode' || true
+            exit 1
+          fi
+          echo "Using $XCODE"
+          sudo xcode-select -s "$XCODE/Contents/Developer"
+          xcodebuild -version
+
+      - name: Build
+        run: |
+          xcodebuild build \
+            -project dirtymac.xcodeproj \
+            -scheme dirtymac \
+            -configuration Debug \
+            -destination 'generic/platform=macOS' \
+            -derivedDataPath build/ci \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY="" \
+            -quiet
