@@ -279,7 +279,7 @@ struct SettingsView: View {
                     .font(.callout)
                 Spacer()
                 Picker("Auto-unlock", selection: $autoUnlockSeconds) {
-                    ForEach(LockConfiguration.unlockChoices, id: \.self) { s in
+                    ForEach(offeredUnlockChoices, id: \.self) { s in
                         autoUnlockLabel(s)
                             .tag(s)
                     }
@@ -287,7 +287,14 @@ struct SettingsView: View {
                 .pickerStyle(.menu)
                 .labelsHidden()
                 .fixedSize()
-                .disabled(false)
+                .onChange(of: autoUnlockSeconds) { _, seconds in
+                    // LockConfiguration.effective clamps this anyway, so
+                    // without the clamp here the picker would keep showing
+                    // a duration the lock is not going to use.
+                    if blockMouseAndTrackpad, seconds < LockConfiguration.minMouseLockSeconds {
+                        autoUnlockSeconds = LockConfiguration.minMouseLockSeconds
+                    }
+                }
             }
 
             if blockMouseAndTrackpad {
@@ -301,6 +308,16 @@ struct SettingsView: View {
         .font(.callout)
         .toggleStyle(.switch)
         .controlSize(.small)
+    }
+
+    /// Once the mouse is part of the lockdown the menu bar can no longer
+    /// be clicked, so "Off" and anything under the minimum are not
+    /// offered — the lock would silently override them anyway.
+    private var offeredUnlockChoices: [Int] {
+        guard blockMouseAndTrackpad else { return LockConfiguration.unlockChoices }
+        return LockConfiguration.unlockChoices.filter {
+            $0 >= LockConfiguration.minMouseLockSeconds
+        }
     }
 
     @ViewBuilder
