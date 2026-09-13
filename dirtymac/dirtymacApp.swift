@@ -8,9 +8,9 @@ struct dirtymacApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) private var appDelegate
 
     // The UI is a hand-managed NSStatusItem + NSPopover (see AppDelegate)
-    // so we can support single-click (popover), double-click (quit), and
-    // right-click (menu) — none of which MenuBarExtra exposes. The App
-    // still needs one Scene; this empty Settings scene is a no-op.
+    // so we can support single-click (popover) and right-click (menu) —
+    // neither of which MenuBarExtra exposes. The App still needs one
+    // Scene; this empty Settings scene is a no-op.
     var body: some Scene {
         Settings { EmptyView() }
     }
@@ -104,7 +104,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func openFromMenu() { showPopover() }
-    @objc private func quitFromMenu() { NSApp.terminate(nil) }
+    // Release the keyboard before terminating, exactly like the popover's
+    // Quit button. The tap dies with the process either way, but not
+    // relying on that keeps both quit paths identical.
+    @objc private func quitFromMenu() {
+        blocker.stop()
+        NSApp.terminate(nil)
+    }
 
     // MARK: Popover
 
