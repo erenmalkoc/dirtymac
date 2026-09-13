@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- The Auto-unlock picker no longer offers "Off" (or anything below 30 seconds) while **Block mouse & trackpad** is on. `LockConfiguration.effective` already forced a 30-second minimum in that mode, so the picker could display a setting the lock would not actually use — Settings said "Off" while the session was really running a 30-second timer.
+- Quitting from the status item's right-click menu now releases the keyboard first, like the popover's Quit button does. The event tap was torn down by the process exit either way, so nothing was ever left locked, but the two quit paths now do the same thing.
+
 ## [1.1.2] - 2026-07-24
 
 Packaging fix only — no changes to the app itself.
