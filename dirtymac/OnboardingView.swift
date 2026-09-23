@@ -146,7 +146,9 @@ struct OnboardingView: View {
                 tip("1", "menubar.rectangle", "Click the dirtymac icon in your menu bar.")
                 tip("2", "power", "Press the power button to lock the keyboard.")
                 tip("3", "cursorarrow.rays", "Mouse and trackpad keep working — click the icon again to unlock.")
-                tip("4", "command", "Press ⌃⌥⌘K in any app to open dirtymac.")
+                if HotKeyPreset.current != .off {
+                    tip("4", "command", "Press \(HotKeyPreset.current.symbols) in any app to open dirtymac.")
+                }
             }
             .padding(16)
             .frame(maxWidth: .infinity, alignment: .leading)
