@@ -12,6 +12,10 @@ struct OnboardingView: View {
     var onFinish: () -> Void
 
     @State private var step: Step = .welcome
+    /// Offered on by default — a cleaning tool is only handy if it's
+    /// already running when the crumbs land. Applied on Done only; when
+    /// the screen is reopened from Settings it shows the real state.
+    @State private var launchAtLogin = LaunchAtLogin.wasOffered ? LaunchAtLogin.isEnabled : true
 
     enum Step: Int, CaseIterable {
         case welcome, permission, ready
@@ -142,6 +146,7 @@ struct OnboardingView: View {
                 tip("1", "menubar.rectangle", "Click the dirtymac icon in your menu bar.")
                 tip("2", "power", "Press the power button to lock the keyboard.")
                 tip("3", "cursorarrow.rays", "Mouse and trackpad keep working — click the icon again to unlock.")
+                tip("4", "command", "Press ⌃⌥⌘K in any app to open dirtymac.")
             }
             .padding(16)
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -151,6 +156,10 @@ struct OnboardingView: View {
                     .strokeBorder(.separator.opacity(0.4), lineWidth: 0.5)
             )
             .padding(.top, 4)
+
+            Toggle("Open dirtymac at login", isOn: $launchAtLogin)
+                .toggleStyle(.checkbox)
+                .font(.callout)
         }
         .frame(maxWidth: .infinity)
     }
@@ -215,6 +224,8 @@ struct OnboardingView: View {
         case .permission:
             withAnimation(.easeInOut(duration: 0.2)) { step = .ready }
         case .ready:
+            LaunchAtLogin.set(launchAtLogin)
+            LaunchAtLogin.markOffered()
             onFinish()
         }
     }
