@@ -259,9 +259,18 @@ struct SettingsView: View {
             }
 
             section("Help") {
-                Button("Show Welcome Screen") {
-                    isPresented = false
-                    NotificationCenter.default.post(name: .showOnboarding, object: nil)
+                HStack(spacing: 8) {
+                    Button("Show Welcome Screen") {
+                        isPresented = false
+                        NotificationCenter.default.post(name: .showOnboarding, object: nil)
+                    }
+
+                    if !WhatsNew.allNotes(current: WhatsNew.currentVersion).isEmpty {
+                        Button("What's New") {
+                            isPresented = false
+                            NotificationCenter.default.post(name: .showWhatsNew, object: nil)
+                        }
+                    }
                 }
                 .buttonStyle(.bordered)
                 .controlSize(.small)

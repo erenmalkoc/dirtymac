@@ -38,6 +38,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private var onboardingWindow: NSWindow?
     private static let onboardedKey = "hasOnboarded"
+    private var whatsNewWindow: NSWindow?
 
     private var hotKey: GlobalHotKey?
     private var registeredHotKey: HotKeyPreset?
@@ -70,11 +71,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             name: .showOnboarding,
             object: nil
         )
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(showAllReleaseNotes),
+            name: .showWhatsNew,
+            object: nil
+        )
 
         setupHotKey()
 
         if !UserDefaults.standard.bool(forKey: Self.onboardedKey) {
             showOnboarding()
+        } else if presentWhatsNewIfNeeded() {
+            // The window is the launch's visible response.
         } else if isUserInitiatedLaunch(notification) {
             // Let the status item get its window before anchoring to it.
             DispatchQueue.main.async { [weak self] in self?.showPopover() }
@@ -85,7 +94,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// the Dock's recents) lands here. Without this, nothing visible
     /// happens and the app looks broken.
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        if onboardingWindow == nil { showPopover() }
+        if let window = onboardingWindow ?? whatsNewWindow {
+            window.makeKeyAndOrderFront(nil)
+            NSApp.activate(ignoringOtherApps: true)
+        } else {
+            showPopover()
+        }
         return false
     }
 
@@ -287,25 +301,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         .environment(\.locale, LanguagePreference.current.locale ?? Locale.current)
         .preferredColorScheme(AppearancePreference.current.colorScheme)
 
-        let hosting = NSHostingController(rootView: root)
-        // Without this, the window is constructed before SwiftUI has
-        // produced a layout, so window.center() ends up centering a
-        // tiny default-sized window; when the content then grows to
-        // 460x560 the window expands from its bottom-left anchor and
-        // visibly drifts off-center.
-        hosting.sizingOptions = .preferredContentSize
-
-        let window = NSWindow(contentViewController: hosting)
-        window.styleMask = [.titled, .closable, .fullSizeContentView]
-        window.titlebarAppearsTransparent = true
-        window.titleVisibility = .hidden
-        window.isMovableByWindowBackground = true
-        window.backgroundColor = .windowBackgroundColor
-        window.isReleasedWhenClosed = false
-        window.setContentSize(NSSize(width: 460, height: 560))
-        window.center()
-        window.delegate = self
-
+        let window = makeWindow(root: root, size: NSSize(width: 460, height: 560))
         onboardingWindow = window
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
@@ -315,18 +311,108 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         UserDefaults.standard.set(true, forKey: Self.onboardedKey)
         onboardingWindow?.close()
     }
+
+    /// Shared chrome for the AppKit-hosted SwiftUI windows (onboarding,
+    /// What's New): transparent title bar, draggable background.
+    private func makeWindow<Root: View>(root: Root, size: NSSize) -> NSWindow {
+        let hosting = NSHostingController(rootView: root)
+        // Without this, the window is constructed before SwiftUI has
+        // produced a layout, so window.center() ends up centering a
+        // tiny default-sized window; when the content then grows the
+        // window expands from its bottom-left anchor and visibly drifts
+        // off-center.
+        hosting.sizingOptions = .preferredContentSize
+
+        let window = NSWindow(contentViewController: hosting)
+        window.styleMask = [.titled, .closable, .fullSizeContentView]
+        window.titlebarAppearsTransparent = true
+        window.titleVisibility = .hidden
+        window.isMovableByWindowBackground = true
+        window.backgroundColor = .windowBackgroundColor
+        window.isReleasedWhenClosed = false
+        window.setContentSize(size)
+        window.center()
+        window.delegate = self
+        return window
+    }
+
+    // MARK: What's New
+
+    /// Shows the release notes the user hasn't seen yet, once per update.
+    /// Returns false (and records the version as seen) when there is
+    /// nothing new, so a later release is measured from this one.
+    private func presentWhatsNewIfNeeded() -> Bool {
+        let notes = WhatsNew.notesToShow(
+            current: WhatsNew.currentVersion,
+            lastSeen: WhatsNew.lastSeenVersion
+        )
+        guard !notes.isEmpty else {
+            WhatsNew.markCurrentSeen()
+            return false
+        }
+        let offer = !LaunchAtLogin.wasOffered && !LaunchAtLogin.isEnabled
+        showWhatsNew(notes: notes, offerLaunchAtLogin: offer)
+        return true
+    }
+
+    @objc private func showAllReleaseNotes() {
+        let notes = WhatsNew.allNotes(current: WhatsNew.currentVersion)
+        guard !notes.isEmpty else { return }
+        showWhatsNew(notes: notes, offerLaunchAtLogin: false)
+    }
+
+    private func showWhatsNew(notes: [ReleaseNote], offerLaunchAtLogin: Bool) {
+        if let window = whatsNewWindow {
+            window.makeKeyAndOrderFront(nil)
+            NSApp.activate(ignoringOtherApps: true)
+            return
+        }
+
+        let root = WhatsNewView(
+            notes: notes,
+            offerLaunchAtLogin: offerLaunchAtLogin,
+            onFinish: { [weak self] launchAtLogin in
+                if offerLaunchAtLogin {
+                    LaunchAtLogin.set(launchAtLogin)
+                    LaunchAtLogin.markOffered()
+                }
+                self?.whatsNewWindow?.close()
+            }
+        )
+        .environment(\.locale, LanguagePreference.current.locale ?? Locale.current)
+        .preferredColorScheme(AppearancePreference.current.colorScheme)
+
+        let window = makeWindow(root: root, size: NSSize(width: 460, height: 520))
+        whatsNewWindow = window
+        window.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
 }
 
 extension AppDelegate: NSWindowDelegate {
     func windowWillClose(_ notification: Notification) {
-        // Closing by any means (Done button or red traffic light)
-        // counts as onboarded so we don't nag on every launch. The
-        // permission prompt still lives in the popover as a fallback.
-        UserDefaults.standard.set(true, forKey: Self.onboardedKey)
-        onboardingWindow = nil
+        guard let window = notification.object as? NSWindow else { return }
+        if window === onboardingWindow {
+            // Closing by any means (Done button or red traffic light)
+            // counts as onboarded so we don't nag on every launch. The
+            // permission prompt still lives in the popover as a fallback.
+            UserDefaults.standard.set(true, forKey: Self.onboardedKey)
+            // A new user has just been shown everything; the release
+            // notes of the version they installed would repeat it.
+            WhatsNew.markCurrentSeen()
+            onboardingWindow = nil
+        } else if window === whatsNewWindow {
+            // Seen once, by button or traffic light — never again for
+            // this version. Closing without choosing leaves login items
+            // alone but still ends the offer.
+            WhatsNew.markCurrentSeen()
+            LaunchAtLogin.markOffered()
+            whatsNewWindow = nil
+        }
     }
 }
 
 extension Notification.Name {
     static let showOnboarding = Notification.Name("dirtymac.showOnboarding")
+    static let showWhatsNew = Notification.Name("dirtymac.showWhatsNew")
 }
