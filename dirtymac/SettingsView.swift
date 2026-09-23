@@ -173,6 +173,11 @@ struct SettingsView: View {
     @AppStorage("autoUnlockSeconds") private var autoUnlockSeconds = 0
     @Binding var isPresented: Bool
 
+    // Mirrors SMAppService, which the user can also change from System
+    // Settings — re-read on appear instead of persisting it ourselves.
+    @State private var launchAtLogin = LaunchAtLogin.isEnabled
+    @State private var loginItemNeedsApproval = LaunchAtLogin.requiresApproval
+
     var body: some View {
         VStack(spacing: 0) {
             header
@@ -247,6 +252,10 @@ struct SettingsView: View {
                 .labelsHidden()
             }
 
+            section("Startup") {
+                startupControls
+            }
+
             section("Help") {
                 Button("Show Welcome Screen") {
                     isPresented = false
@@ -308,6 +317,35 @@ struct SettingsView: View {
         .font(.callout)
         .toggleStyle(.switch)
         .controlSize(.small)
+    }
+
+    private var startupControls: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Toggle("Open at login", isOn: $launchAtLogin)
+                .onChange(of: launchAtLogin) { _, on in
+                    guard on != LaunchAtLogin.isEnabled else { return }
+                    LaunchAtLogin.set(on)
+                    LaunchAtLogin.markOffered()
+                    refreshLoginItemState()
+                }
+
+            if loginItemNeedsApproval {
+                Button("Allow in Login Items…") {
+                    LaunchAtLogin.openLoginItemsSettings()
+                }
+                .buttonStyle(.link)
+                .font(.caption)
+            }
+        }
+        .font(.callout)
+        .toggleStyle(.switch)
+        .controlSize(.small)
+        .onAppear(perform: refreshLoginItemState)
+    }
+
+    private func refreshLoginItemState() {
+        launchAtLogin = LaunchAtLogin.isEnabled
+        loginItemNeedsApproval = LaunchAtLogin.requiresApproval
     }
 
     /// Once the mouse is part of the lockdown the menu bar can no longer
