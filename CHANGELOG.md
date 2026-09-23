@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-09-23
+
 ### Added
 - **Global shortcut** (⌃⌥⌘K by default) opens the menu bar panel from any app. Settings → Quick Access offers two other combinations or Off, and warns when another app already owns the chosen one. Uses Carbon's `RegisterEventHotKey`, so it needs no extra permission.
 - **Spotlight and Shortcuts actions** — *Lock Keyboard for Cleaning* and *Open dirtymac* are App Intents, so they work even when dirtymac isn't running: macOS launches the app and runs the action. A Shortcut built from them can be given its own keyboard shortcut in the Shortcuts app. Full lockdown (mouse included) and a missing Accessibility permission still go through the panel's confirmation instead of locking blind.
@@ -72,7 +74,8 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.1.2...HEAD
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.2.0
 [1.1.2]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.1.2
 [1.1.1]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.1.1
 [1.1.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.1.0
