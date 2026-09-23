@@ -175,6 +175,8 @@ struct SettingsView: View {
 
     // Mirrors SMAppService, which the user can also change from System
     // Settings — re-read on appear instead of persisting it ourselves.
+    @AppStorage(HotKeyPreset.defaultsKey) private var hotKey: HotKeyPreset = HotKeyPreset.defaultValue
+    @AppStorage(AppDelegate.hotKeyConflictKey) private var hotKeyConflict = false
     @State private var launchAtLogin = LaunchAtLogin.isEnabled
     @State private var loginItemNeedsApproval = LaunchAtLogin.requiresApproval
 
@@ -252,7 +254,7 @@ struct SettingsView: View {
                 .labelsHidden()
             }
 
-            section("Startup") {
+            section("Quick Access") {
                 startupControls
             }
 
@@ -321,6 +323,27 @@ struct SettingsView: View {
 
     private var startupControls: some View {
         VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                Text("Global shortcut")
+                Spacer()
+                Picker("Global shortcut", selection: $hotKey) {
+                    ForEach(HotKeyPreset.allCases) { preset in
+                        preset.label.tag(preset)
+                    }
+                }
+                .pickerStyle(.menu)
+                .labelsHidden()
+                .fixedSize()
+            }
+
+            if hotKey != .off && hotKeyConflict {
+                Label("Another app is using this shortcut. Pick a different one.",
+                      systemImage: "exclamationmark.triangle.fill")
+                    .font(.caption)
+                    .foregroundStyle(.orange)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
             Toggle("Open at login", isOn: $launchAtLogin)
                 .onChange(of: launchAtLogin) { _, on in
                     guard on != LaunchAtLogin.isEnabled else { return }

@@ -30,6 +30,21 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var onboardingWindow: NSWindow?
     private static let onboardedKey = "hasOnboarded"
 
+    private var hotKey: GlobalHotKey?
+    private var registeredHotKey: HotKeyPreset?
+    private var defaultsObserver: NSObjectProtocol?
+    private var launchedAsLoginItem = false
+
+    func applicationWillFinishLaunching(_ notification: Notification) {
+        // The launch Apple event is only available this early. A login
+        // item launch must stay silent; a launch the user asked for
+        // (Spotlight, Finder, Launchpad) should show the app right away.
+        let event = NSAppleEventManager.shared().currentAppleEvent
+        launchedAsLoginItem = event?.eventID == AEEventID(kAEOpenApplication)
+            && event?.paramDescriptor(forKeyword: AEKeyword(keyAEPropData))?.enumCodeValue
+                == OSType(keyAELaunchedAsLogInItem)
+    }
+
     func applicationDidFinishLaunching(_ notification: Notification) {
         AppearancePreference.applyCurrent()
         // Force the bundle-icon Launch Services lookup to happen now
@@ -47,9 +62,53 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             object: nil
         )
 
+        setupHotKey()
+
         if !UserDefaults.standard.bool(forKey: Self.onboardedKey) {
             showOnboarding()
+        } else if isUserInitiatedLaunch(notification) {
+            // Let the status item get its window before anchoring to it.
+            DispatchQueue.main.async { [weak self] in self?.showPopover() }
         }
+    }
+
+    /// Launching an already-running menu bar app again (Spotlight, Finder,
+    /// the Dock's recents) lands here. Without this, nothing visible
+    /// happens and the app looks broken.
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        if onboardingWindow == nil { showPopover() }
+        return false
+    }
+
+    private func isUserInitiatedLaunch(_ notification: Notification) -> Bool {
+        guard !launchedAsLoginItem else { return false }
+        // False when macOS launched the app to open a URL or run an
+        // intent — those paths decide for themselves what to show.
+        return notification.userInfo?[NSApplication.launchIsDefaultUserInfoKey] as? Bool ?? true
+    }
+
+    // MARK: Global shortcut
+
+    static let hotKeyConflictKey = "globalHotKeyConflict"
+
+    private func setupHotKey() {
+        hotKey = GlobalHotKey { [weak self] in self?.togglePopover() }
+        applyHotKeyPreference()
+        // Settings writes the preset through @AppStorage; follow it
+        // without a relaunch.
+        defaultsObserver = NotificationCenter.default.addObserver(
+            forName: UserDefaults.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in self?.applyHotKeyPreference() }
+    }
+
+    private func applyHotKeyPreference() {
+        let preset = HotKeyPreset.current
+        guard preset != registeredHotKey else { return }
+        registeredHotKey = preset
+        let ok = hotKey?.register(preset) ?? false
+        UserDefaults.standard.set(!ok, forKey: Self.hotKeyConflictKey)
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool { true }
@@ -132,8 +191,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
-    private func showPopover() {
+    func showPopover() {
         guard let button = statusItem?.button else { return }
+        guard !popover.isShown else {
+            NSApp.activate(ignoringOtherApps: true)
+            return
+        }
         popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         NSApp.activate(ignoringOtherApps: true)
     }
