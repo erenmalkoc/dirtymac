@@ -1,9 +1,9 @@
 name: CI
 
-# Compile the app on every push and pull request so a broken build is
-# caught before a release tag is cut. Signing is disabled — this job
-# only proves the Swift sources still build on the Xcode the Release
-# workflow uses.
+# Compile and unit-test the app on every push and pull request so a
+# broken build is caught before a release tag is cut. Signing is
+# disabled — this job only proves the Swift sources still build and the
+# unit tests pass on the Xcode the Release workflow uses.
 
 on:
   push:
@@ -38,6 +38,17 @@ jobs:
             -scheme dirtymac \
             -configuration Debug \
             -destination 'generic/platform=macOS' \
+            -derivedDataPath build/ci \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY="" \
+            -quiet
+
+      - name: Test
+        run: |
+          xcodebuild test \
+            -project dirtymac.xcodeproj \
+            -scheme dirtymac \
+            -destination 'platform=macOS' \
             -derivedDataPath build/ci \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGN_IDENTITY="" \

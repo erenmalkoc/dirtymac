@@ -6,13 +6,37 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4C6809FA99C36F8BEC255BAB /* WhatsNewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AA59FDCBAA1368EFAF5927 /* WhatsNewTests.swift */; };
+		5383823DA28E97D9AE4B8DE1 /* GlobalHotKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719131781432085581B427DD /* GlobalHotKeyTests.swift */; };
+		926C021BA33472901FE3200A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A20DE243EEB20D37757470F2 /* Cocoa.framework */; };
+		9A75C3294273F596728778E8 /* LockConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E17096E62B05B7C473F42ED /* LockConfigurationTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F795225FDB68C7C271994649 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC5F54082FB0C9E900F50241 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC5F540F2FB0C9E900F50241;
+			remoteInfo = dirtymac;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		01AA59FDCBAA1368EFAF5927 /* WhatsNewTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WhatsNewTests.swift; sourceTree = "<group>"; };
+		3B8D0E4AF4D48864721AF4BD /* dirtymacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dirtymacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E17096E62B05B7C473F42ED /* LockConfigurationTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LockConfigurationTests.swift; sourceTree = "<group>"; };
+		719131781432085581B427DD /* GlobalHotKeyTests.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = GlobalHotKeyTests.swift; sourceTree = "<group>"; };
+		A20DE243EEB20D37757470F2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.0.sdk/System/Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
 		AC5F54102FB0C9E900F50241 /* dirtymac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dirtymac.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		AC5F54122FB0C9E900F50241 /* dirtymac */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+			);
 			path = dirtymac;
 			sourceTree = "<group>";
 		};
@@ -26,14 +50,51 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E5BC96419C66A345201FC141 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				926C021BA33472901FE3200A /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05A41E68AC19FD31D8126DD7 /* dirtymacTests */ = {
+			isa = PBXGroup;
+			children = (
+				719131781432085581B427DD /* GlobalHotKeyTests.swift */,
+				3E17096E62B05B7C473F42ED /* LockConfigurationTests.swift */,
+				01AA59FDCBAA1368EFAF5927 /* WhatsNewTests.swift */,
+			);
+			name = dirtymacTests;
+			path = dirtymacTests;
+			sourceTree = "<group>";
+		};
+		52456E036D6D709B8AD267FC /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				A20DE243EEB20D37757470F2 /* Cocoa.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		600E63EDD59771A300B63630 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				52456E036D6D709B8AD267FC /* OS X */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		AC5F54072FB0C9E900F50241 = {
 			isa = PBXGroup;
 			children = (
 				AC5F54122FB0C9E900F50241 /* dirtymac */,
 				AC5F54112FB0C9E900F50241 /* Products */,
+				600E63EDD59771A300B63630 /* Frameworks */,
+				05A41E68AC19FD31D8126DD7 /* dirtymacTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -41,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				AC5F54102FB0C9E900F50241 /* dirtymac.app */,
+				3B8D0E4AF4D48864721AF4BD /* dirtymacTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -64,11 +126,27 @@
 				AC5F54122FB0C9E900F50241 /* dirtymac */,
 			);
 			name = dirtymac;
-			packageProductDependencies = (
-			);
 			productName = dirtymac;
 			productReference = AC5F54102FB0C9E900F50241 /* dirtymac.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C48A02C869E896DB8B4EA437 /* dirtymacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 58931A36121FEA85E8DBD8E5 /* Build configuration list for PBXNativeTarget "dirtymacTests" */;
+			buildPhases = (
+				E59D617F167C44BAFB731711 /* Sources */,
+				E5BC96419C66A345201FC141 /* Frameworks */,
+				8CAF7E7ED99DC7E4ED34F5B3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2E415D2DB1CFD9CFE0150637 /* PBXTargetDependency */,
+			);
+			name = dirtymacTests;
+			productName = dirtymacTests;
+			productReference = 3B8D0E4AF4D48864721AF4BD /* dirtymacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -82,6 +160,10 @@
 				TargetAttributes = {
 					AC5F540F2FB0C9E900F50241 = {
 						CreatedOnToolsVersion = 26.4.1;
+					};
+					C48A02C869E896DB8B4EA437 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = AC5F540F2FB0C9E900F50241;
 					};
 				};
 			};
@@ -111,11 +193,19 @@
 			projectRoot = "";
 			targets = (
 				AC5F540F2FB0C9E900F50241 /* dirtymac */,
+				C48A02C869E896DB8B4EA437 /* dirtymacTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8CAF7E7ED99DC7E4ED34F5B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AC5F540E2FB0C9E900F50241 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -133,9 +223,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E59D617F167C44BAFB731711 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5383823DA28E97D9AE4B8DE1 /* GlobalHotKeyTests.swift in Sources */,
+				9A75C3294273F596728778E8 /* LockConfigurationTests.swift in Sources */,
+				4C6809FA99C36F8BEC255BAB /* WhatsNewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		2E415D2DB1CFD9CFE0150637 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = dirtymac;
+			target = AC5F540F2FB0C9E900F50241 /* dirtymac */;
+			targetProxy = F795225FDB68C7C271994649 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		6B8A34D97D8C0675832DC4A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SHZP975U3T;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.erenium.dirtymacTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dirtymac.app/Contents/MacOS/dirtymac";
+			};
+			name = Debug;
+		};
 		AC5F542F2FB0C9EA00F50241 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -329,9 +458,38 @@
 			};
 			name = Release;
 		};
+		FF47D7B472C24E8C25A409B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = SHZP975U3T;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.erenium.dirtymacTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dirtymac.app/Contents/MacOS/dirtymac";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		58931A36121FEA85E8DBD8E5 /* Build configuration list for PBXNativeTarget "dirtymacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF47D7B472C24E8C25A409B6 /* Release */,
+				6B8A34D97D8C0675832DC4A2 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		AC5F540B2FB0C9E900F50241 /* Build configuration list for PBXProject "dirtymac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

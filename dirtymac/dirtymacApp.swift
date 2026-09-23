@@ -56,6 +56,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // As the unit-test host the app must stay inert: no status item,
+        // no global shortcut, no windows and no writes to the user's
+        // defaults (onboarding / What's New bookkeeping).
+        guard ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil else { return }
+
         AppearancePreference.applyCurrent()
         // Force the bundle-icon Launch Services lookup to happen now
         // (during app launch, off the popover-open hot path) instead of
