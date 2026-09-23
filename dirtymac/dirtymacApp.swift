@@ -21,7 +21,16 @@ struct dirtymacApp: App {
 /// Owns the shared KeyboardBlocker, the status item + popover, and the
 /// first-launch onboarding window.
 final class AppDelegate: NSObject, NSApplicationDelegate {
+    /// `NSApp.delegate` is SwiftUI's adaptor proxy, not this object, so
+    /// App Intents reach the running delegate through this reference.
+    private(set) static weak var shared: AppDelegate?
+
     let blocker = KeyboardBlocker()
+
+    override init() {
+        super.init()
+        Self.shared = self
+    }
 
     private var statusItem: NSStatusItem!
     private let popover = NSPopover()
@@ -188,6 +197,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             popover.performClose(nil)
         } else {
             showPopover()
+        }
+    }
+
+    /// For callers that may run while the app is still launching (App
+    /// Intents): the status item exists only after didFinishLaunching.
+    func showPopoverWhenReady() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self, self.onboardingWindow == nil else {
+                self?.onboardingWindow?.makeKeyAndOrderFront(nil)
+                NSApp.activate(ignoringOtherApps: true)
+                return
+            }
+            self.showPopover()
         }
     }
 
