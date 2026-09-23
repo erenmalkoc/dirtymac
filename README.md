@@ -17,6 +17,10 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 - **Basic mode**: mouse and trackpad stay live — click the menu bar icon to release
 - **Advanced mode**: optionally freeze the mouse & trackpad too, choose which key classes to block, and set an auto-unlock timer
 - Universal hold-Esc emergency exit (3 seconds) — works even in full lockdown
+- Global shortcut (⌃⌥⌘K by default, configurable) opens the panel from any app
+- Spotlight and Shortcuts actions — lock the keyboard or open the panel even when dirtymac isn't running
+- Optional open at login, offered during onboarding
+- One-time What's New window after each update
 - Guided first-launch onboarding with live Accessibility-permission status
 - Status item: single-click opens the popover, right-click shows an Open / Quit menu
 - Live elapsed-time display and auto-unlock countdown while locked

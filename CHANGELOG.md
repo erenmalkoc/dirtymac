@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Global shortcut** (⌃⌥⌘K by default) opens the menu bar panel from any app. Settings → Quick Access offers two other combinations or Off, and warns when another app already owns the chosen one. Uses Carbon's `RegisterEventHotKey`, so it needs no extra permission.
+- **Spotlight and Shortcuts actions** — *Lock Keyboard for Cleaning* and *Open dirtymac* are App Intents, so they work even when dirtymac isn't running: macOS launches the app and runs the action. A Shortcut built from them can be given its own keyboard shortcut in the Shortcuts app. Full lockdown (mouse included) and a missing Accessibility permission still go through the panel's confirmation instead of locking blind.
+- **Open at login** via `SMAppService`. New users get the choice (on by default) on the last onboarding step; existing users are offered it once in the What's New window; it can be changed any time in Settings → Quick Access, with a link to System Settings when macOS is holding the login item for approval.
+- **What's New window**, shown once after an update that has release notes. It collects every release the user skipped, is not shown to brand-new users (onboarding already covers it), and can be reopened from Settings → Help.
+- Launching dirtymac by hand (Spotlight, Finder, Launchpad) now opens the panel right away — both on a cold start and when it is already running. Login-item launches stay silent.
+- Unit test target (What's New version logic, global shortcut registration and conflicts, lock rules), run by CI on every push.
+
 ### Fixed
 - The Auto-unlock picker no longer offers "Off" (or anything below 30 seconds) while **Block mouse & trackpad** is on. `LockConfiguration.effective` already forced a 30-second minimum in that mode, so the picker could display a setting the lock would not actually use — Settings said "Off" while the session was really running a 30-second timer.
 - Quitting from the status item's right-click menu now releases the keyboard first, like the popover's Quit button does. The event tap was torn down by the process exit either way, so nothing was ever left locked, but the two quit paths now do the same thing.
