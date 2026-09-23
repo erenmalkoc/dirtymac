@@ -386,6 +386,160 @@
         }
       }
     },
+    "Allow in Login Items…": {
+      "comment": "Link shown when the login item is registered but switched off in System Settings.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In Anmeldeobjekten erlauben …"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Allow in Login Items…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir en Ítems de inicio…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Autoriser dans les éléments d'ouverture…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Consenti negli elementi login…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログイン項目で許可…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인 항목에서 허용…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Permitir em Itens de Início…"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Разрешить в объектах входа…"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giriş Öğeleri’nde izin ver…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在登录项中允许…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在登入項目中允許⋯"
+          }
+        }
+      }
+    },
+    "Another app is using this shortcut. Pick a different one.": {
+      "comment": "Warning when macOS refuses to register the chosen global shortcut.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine andere App verwendet diesen Kurzbefehl. Wähle einen anderen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Another app is using this shortcut. Pick a different one."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otra app usa este atajo. Elige otro."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une autre app utilise ce raccourci. Choisissez-en un autre."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un'altra app usa questa scorciatoia. Scegline un'altra."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このショートカットは別のアプリで使用されています。別のものを選択してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 앱이 이 단축키를 사용 중입니다. 다른 단축키를 선택하세요."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outro app está usando este atalho. Escolha outro."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Это сочетание уже занято другим приложением. Выберите другое."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu kısayolu başka bir uygulama kullanıyor. Farklı bir kısayol seçin."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "另一个 App 正在使用此快捷键。请选择其他快捷键。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "另一個 App 正在使用此快速鍵。請選擇其他快速鍵。"
+          }
+        }
+      }
+    },
     "Appearance": {
       "comment": "Section title in Settings — controls light/dark mode.",
       "localizations": {
@@ -1469,6 +1623,83 @@
       "comment": "App brand name — do not translate.",
       "shouldTranslate": false
     },
+    "dirtymac can start with your Mac, so it's always one shortcut away.": {
+      "comment": "What's New 1.2.0 item detail.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac kann mit deinem Mac starten und ist so immer nur einen Kurzbefehl entfernt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac can start with your Mac, so it's always one shortcut away."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac puede abrirse al encender tu Mac, así siempre está a un atajo de distancia."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac peut démarrer avec votre Mac pour être toujours à un raccourci près."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac può avviarsi con il Mac, così è sempre a portata di scorciatoia."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac を Mac と一緒に起動できるので、いつでもショートカットひとつで使えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac을 Mac과 함께 시작하면 언제든 단축키 하나로 쓸 수 있습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O dirtymac pode iniciar com o Mac, ficando sempre a um atalho de distância."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac может запускаться вместе с Mac и всегда будет под рукой."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac, Mac'inizle birlikte başlayabilir; böylece her zaman bir kısayol uzağınızda olur."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac 可以随 Mac 一起启动，随时一键可用。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac 可以隨 Mac 一起啟動，隨時一鍵可用。"
+          }
+        }
+      }
+    },
     "dirtymac — keyboard locked": {
       "comment": "VoiceOver label for the menu bar icon when the keyboard is locked. Keep the brand name 'dirtymac' untranslated.",
       "localizations": {
@@ -2004,6 +2235,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "開始"
+          }
+        }
+      }
+    },
+    "Global shortcut": {
+      "comment": "Label for the system-wide keyboard shortcut picker; also a What's New item title.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Globaler Kurzbefehl"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Global shortcut"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atajo global"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Raccourci global"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scorciatoia globale"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "グローバルショートカット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "전역 단축키"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atalho global"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Глобальное сочетание клавиш"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Genel kısayol"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全局快捷键"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全域快速鍵"
           }
         }
       }
@@ -2624,6 +2932,83 @@
         }
       }
     },
+    "Lock Keyboard for Cleaning": {
+      "comment": "App Intent title shown in Spotlight and Shortcuts.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tastatur zum Reinigen sperren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lock Keyboard for Cleaning"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloquear el teclado para limpiarlo"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verrouiller le clavier pour le nettoyer"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocca la tastiera per pulirla"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "掃除のためにキーボードをロック"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "청소를 위해 키보드 잠그기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloquear o teclado para limpeza"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Заблокировать клавиатуру для чистки"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temizlik için Klavyeyi Kilitle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "锁定键盘以便清洁"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鎖定鍵盤以便清潔"
+          }
+        }
+      }
+    },
     "Locked": {
       "comment": "Status pill text when the keyboard is locked.",
       "localizations": {
@@ -2697,6 +3082,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "已鎖定"
+          }
+        }
+      }
+    },
+    "Locks the keyboard so you can clean it. Hold Esc for 3 seconds to unlock.": {
+      "comment": "App Intent description.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sperrt die Tastatur, damit du sie reinigen kannst. Halte Esc 3 Sekunden gedrückt, um zu entsperren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locks the keyboard so you can clean it. Hold Esc for 3 seconds to unlock."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloquea el teclado para que puedas limpiarlo. Mantén Esc 3 segundos para desbloquear."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verrouille le clavier pour que vous puissiez le nettoyer. Maintenez Échap 3 secondes pour déverrouiller."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocca la tastiera così puoi pulirla. Tieni premuto Esc per 3 secondi per sbloccare."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "掃除できるようにキーボードをロックします。Esc を3秒間長押しで解除します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "청소할 수 있도록 키보드를 잠급니다. 잠금을 해제하려면 Esc를 3초간 누르세요."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloqueia o teclado para você limpá-lo. Segure Esc por 3 segundos para desbloquear."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блокирует клавиатуру, чтобы её можно было почистить. Удерживайте Esc 3 секунды, чтобы разблокировать."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Temizleyebilmeniz için klavyeyi kilitler. Kilidi açmak için Esc'i 3 saniye basılı tutun."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "锁定键盘以便清洁。长按 Esc 3 秒解锁。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鎖定鍵盤以便清潔。長按 Esc 3 秒解鎖。"
           }
         }
       }
@@ -3163,6 +3625,237 @@
         }
       }
     },
+    "Open at login": {
+      "comment": "Settings toggle that registers dirtymac as a login item; also a What's New item title.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei der Anmeldung öffnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open at login"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir al iniciar sesión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir à l'ouverture de session"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri all'accesso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログイン時に開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인 시 열기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir ao iniciar sessão"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Открывать при входе"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oturum açıldığında başlat"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录时打开"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登入時打開"
+          }
+        }
+      }
+    },
+    "Open dirtymac at login": {
+      "comment": "Checkbox in onboarding and the What's New window.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac bei der Anmeldung öffnen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open dirtymac at login"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir dirtymac al iniciar sesión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrir dirtymac à l'ouverture de session"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri dirtymac all'accesso"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ログイン時に dirtymac を開く"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "로그인 시 dirtymac 열기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abrir o dirtymac ao iniciar sessão"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Открывать dirtymac при входе"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oturum açıldığında dirtymac'i başlat"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登录时打开 dirtymac"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "登入時打開 dirtymac"
+          }
+        }
+      }
+    },
+    "Open dirtymac from any app with ⌃⌥⌘K. Pick another combination or turn it off in Settings.": {
+      "comment": "What's New 1.2.0 item detail.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffne dirtymac aus jeder App mit ⌃⌥⌘K. In den Einstellungen kannst du eine andere Kombination wählen oder ihn ausschalten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open dirtymac from any app with ⌃⌥⌘K. Pick another combination or turn it off in Settings."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre dirtymac desde cualquier app con ⌃⌥⌘K. Elige otra combinación o desactívalo en Ajustes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvrez dirtymac depuis n'importe quelle app avec ⌃⌥⌘K. Choisissez une autre combinaison ou désactivez-le dans les Réglages."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apri dirtymac da qualsiasi app con ⌃⌥⌘K. Scegli un'altra combinazione o disattivala nelle Impostazioni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どのアプリからでも ⌃⌥⌘K で dirtymac を開けます。別の組み合わせの選択やオフへの切り替えは設定で行えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어떤 앱에서든 ⌃⌥⌘K로 dirtymac을 열 수 있습니다. 설정에서 다른 조합을 고르거나 끌 수 있습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abra o dirtymac de qualquer app com ⌃⌥⌘K. Escolha outra combinação ou desative-o nos Ajustes."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Открывайте dirtymac из любого приложения сочетанием ⌃⌥⌘K. Другое сочетание можно выбрать или отключить его в настройках."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac'i herhangi bir uygulamadan ⌃⌥⌘K ile açın. Ayarlar'dan başka bir kombinasyon seçebilir veya kapatabilirsiniz."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在任意 App 中按 ⌃⌥⌘K 即可打开 dirtymac。可在“设置”中选择其他组合键或将其关闭。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在任何 App 中按 ⌃⌥⌘K 即可打開 dirtymac。可在「設定」中選擇其他組合鍵或將其關閉。"
+          }
+        }
+      }
+    },
     "Open Settings": {
       "comment": "Secondary button that opens System Settings → Privacy & Security → Accessibility.",
       "localizations": {
@@ -3240,6 +3933,160 @@
         }
       }
     },
+    "Opens the dirtymac menu bar panel.": {
+      "comment": "App Intent description.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Öffnet das dirtymac-Fenster in der Menüleiste."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opens the dirtymac menu bar panel."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre el panel de dirtymac en la barra de menús."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouvre le panneau dirtymac dans la barre des menus."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Apre il pannello di dirtymac nella barra dei menu."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メニューバーの dirtymac パネルを開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "메뉴 막대의 dirtymac 패널을 엽니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abre o painel do dirtymac na barra de menus."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Открывает панель dirtymac в строке меню."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menü çubuğundaki dirtymac panelini açar."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打开菜单栏中的 dirtymac 面板。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "打開選單列中的 dirtymac 面板。"
+          }
+        }
+      }
+    },
+    "Press %@ in any app to open dirtymac.": {
+      "comment": "Onboarding tip. %@ is the shortcut glyphs, e.g. ⌃⌥⌘K.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Drücke %@ in einer beliebigen App, um dirtymac zu öffnen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Press %@ in any app to open dirtymac."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pulsa %@ en cualquier app para abrir dirtymac."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Appuyez sur %@ dans n'importe quelle app pour ouvrir dirtymac."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Premi %@ in qualsiasi app per aprire dirtymac."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "どのアプリからでも %@ を押すと dirtymac が開きます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "어떤 앱에서든 %@ 키를 누르면 dirtymac이 열립니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pressione %@ em qualquer app para abrir o dirtymac."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нажмите %@ в любом приложении, чтобы открыть dirtymac."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac'i açmak için herhangi bir uygulamada %@ tuşlarına basın."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在任意 App 中按下 %@ 即可打开 dirtymac。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在任何 App 中按下 %@ 即可打開 dirtymac。"
+          }
+        }
+      }
+    },
     "Press the power button to lock the keyboard.": {
       "comment": "Onboarding step 3 tip 2.",
       "localizations": {
@@ -3313,6 +4160,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "按下電源按鈕以鎖定鍵盤。"
+          }
+        }
+      }
+    },
+    "Quick Access": {
+      "comment": "Settings section holding the global shortcut and open-at-login controls.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Schnellzugriff"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quick Access"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acceso rápido"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accès rapide"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Accesso rapido"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クイックアクセス"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "빠른 접근"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Acesso rápido"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Быстрый доступ"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hızlı Erişim"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快速访问"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "快速取用"
           }
         }
       }
@@ -3467,6 +4391,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "待命"
+          }
+        }
+      }
+    },
+    "Search for “Lock keyboard” in Spotlight or add it to a shortcut. It works even when dirtymac isn't running.": {
+      "comment": "What's New 1.2.0 item detail. Keep “Lock keyboard” in English: it matches the Spotlight action name.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suche in Spotlight nach „Lock keyboard“ oder füge es einem Kurzbefehl hinzu. Das funktioniert auch, wenn dirtymac nicht läuft."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Search for “Lock keyboard” in Spotlight or add it to a shortcut. It works even when dirtymac isn't running."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Busca «Lock keyboard» en Spotlight o añádelo a un atajo. Funciona incluso si dirtymac no está abierto."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recherchez « Lock keyboard » dans Spotlight ou ajoutez-le à un raccourci. Cela fonctionne même si dirtymac n'est pas ouvert."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca “Lock keyboard” in Spotlight o aggiungilo a un comando rapido. Funziona anche quando dirtymac non è aperto."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight で「Lock keyboard」を検索するか、ショートカットに追加できます。dirtymac が起動していなくても使えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight에서 “Lock keyboard”를 검색하거나 단축어에 추가하세요. dirtymac이 실행 중이 아니어도 작동합니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Procure “Lock keyboard” no Spotlight ou adicione a um atalho. Funciona mesmo com o dirtymac fechado."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Найдите «Lock keyboard» в Spotlight или добавьте в быструю команду. Работает, даже если dirtymac не запущен."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight'ta “Lock keyboard” diye arayın veya bir kestirmeye ekleyin. dirtymac çalışmıyorken bile çalışır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在聚焦中搜索“Lock keyboard”，或将其添加到快捷指令。即使 dirtymac 未运行也能使用。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "在 Spotlight 中搜尋「Lock keyboard」，或將其加入捷徑。即使 dirtymac 未執行也能使用。"
           }
         }
       }
@@ -3702,6 +4703,83 @@
         }
       }
     },
+    "Spotlight and Shortcuts": {
+      "comment": "What's New 1.2.0 item title.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight und Kurzbefehle"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight and Shortcuts"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight y Atajos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight et Raccourcis"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight e Comandi rapidi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight とショートカット"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight 및 단축어"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight e Atalhos"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight и Быстрые команды"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight ve Kestirmeler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "聚焦和快捷指令"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight 和捷徑"
+          }
+        }
+      }
+    },
     "System": {
       "comment": "Picker option meaning 'follow the macOS-wide setting' for both Appearance and Language.",
       "localizations": {
@@ -3775,6 +4853,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "系統"
+          }
+        }
+      }
+    },
+    "This window appears once after each update so you never miss a change.": {
+      "comment": "What's New 1.2.0 item detail.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dieses Fenster erscheint nach jedem Update einmal, damit dir keine Änderung entgeht."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "This window appears once after each update so you never miss a change."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta ventana aparece una vez tras cada actualización para que no te pierdas ningún cambio."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cette fenêtre s'affiche une fois après chaque mise à jour pour que vous ne manquiez aucun changement."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Questa finestra appare una volta dopo ogni aggiornamento, così non ti perdi nessuna novità."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このウインドウはアップデートのたびに一度だけ表示されるので、変更を見逃しません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 창은 업데이트할 때마다 한 번 표시되어 변경 사항을 놓치지 않게 해 줍니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esta janela aparece uma vez após cada atualização para você não perder nenhuma mudança."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Это окно появляется один раз после каждого обновления, чтобы вы ничего не пропустили."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu pencere her güncellemeden sonra bir kez açılır; böylece hiçbir değişikliği kaçırmazsınız."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此窗口会在每次更新后显示一次，让你不错过任何变化。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "此視窗會在每次更新後顯示一次，讓你不錯過任何變化。"
           }
         }
       }
@@ -3856,6 +5011,83 @@
         }
       }
     },
+    "Version %@": {
+      "comment": "Release notes section header. %@ is the version number, e.g. 1.2.0.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versión %@"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Version %@"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versione %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョン %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "버전 %@"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versão %@"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версия %@"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm %@"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "版本 %@"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "版本 %@"
+          }
+        }
+      }
+    },
     "Welcome to dirtymac": {
       "comment": "Onboarding step 1 title. Keep 'dirtymac' untranslated.",
       "localizations": {
@@ -3929,6 +5161,160 @@
           "stringUnit": {
             "state": "translated",
             "value": "歡迎使用 dirtymac"
+          }
+        }
+      }
+    },
+    "What's New": {
+      "comment": "Settings button that reopens the release notes window; also a What's New item title.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neuigkeiten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What's New"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novedades"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveautés"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novità"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新機能"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새로운 기능"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novidades"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Что нового"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yenilikler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新功能"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新功能"
+          }
+        }
+      }
+    },
+    "What's New in dirtymac": {
+      "comment": "Title of the release notes window.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neu in dirtymac"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "What's New in dirtymac"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novedades de dirtymac"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouveautés de dirtymac"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novità di dirtymac"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac の新機能"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac의 새로운 기능"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novidades do dirtymac"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Что нового в dirtymac"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac'teki Yenilikler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac 新功能"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac 新功能"
           }
         }
       }
