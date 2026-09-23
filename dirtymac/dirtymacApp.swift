@@ -387,7 +387,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         .environment(\.locale, LanguagePreference.current.locale ?? Locale.current)
         .preferredColorScheme(AppearancePreference.current.colorScheme)
 
-        let window = makeWindow(root: root, size: NSSize(width: 460, height: 520))
+        let window = makeWindow(root: root, size: NSSize(width: 460, height: 560))
         whatsNewWindow = window
         window.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)

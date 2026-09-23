@@ -132,14 +132,17 @@ struct WhatsNewView: View {
                 .padding(.horizontal, 32)
                 .padding(.vertical, 20)
             }
-            .frame(maxHeight: 360)
-            .fixedSize(horizontal: false, vertical: true)
+            .frame(maxHeight: .infinity)
 
             footer
                 .padding(.horizontal, 28)
                 .padding(.vertical, 20)
         }
-        .frame(width: 460)
+        // A fixed size, like onboarding. Letting the ScrollView size
+        // itself to its content inside a window sized from
+        // preferredContentSize sends AppKit into an endless
+        // constraint-update loop that crashes the app.
+        .frame(width: 460, height: 560)
         .background(.background)
     }
 
