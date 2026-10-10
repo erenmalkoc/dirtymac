@@ -54,8 +54,12 @@ final class WhatsNewTests: XCTestCase {
 
     func testShippedCatalogIsNewestFirstWithoutDuplicates() {
         let shipped = versions(WhatsNew.catalog)
-        XCTAssertEqual(shipped, shipped.sorted { WhatsNew.compare($0, $1) == .orderedDescending })
-        XCTAssertEqual(Set(shipped).count, shipped.count)
+        // Strictly descending also rejects numerically equal spellings
+        // such as "1.3" next to "1.3.0", which a Set would let through.
+        for (newer, older) in zip(shipped, shipped.dropFirst()) {
+            XCTAssertEqual(WhatsNew.compare(newer, older), .orderedDescending,
+                           "\(newer) must be newer than \(older)")
+        }
         XCTAssertFalse(WhatsNew.catalog.contains { $0.items.isEmpty })
     }
 }
