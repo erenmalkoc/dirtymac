@@ -115,6 +115,15 @@ enum LockMode: String, CaseIterable, Identifiable {
 /// rules (Basic is a fixed safe preset; full mouse lockdown forces a
 /// minimum auto-unlock so the user is never permanently trapped).
 struct LockConfiguration: Equatable {
+    /// UserDefaults keys, shared by the Settings toggles and the lock.
+    enum Key {
+        static let mode = "lockMode"
+        static let blockModifierKeys = "blockModifierKeys"
+        static let blockMediaKeys = "blockMediaKeys"
+        static let blockMouseAndTrackpad = "blockMouseAndTrackpad"
+        static let autoUnlockSeconds = "autoUnlockSeconds"
+    }
+
     var mode: LockMode = .basic
     var blockModifierKeys = true
     var blockMediaKeys = true
@@ -128,6 +137,19 @@ struct LockConfiguration: Equatable {
     /// Selectable auto-unlock durations, in seconds. 0 = off.
     static let unlockChoices = [0, 30, 60, 120, 300]
 
+    /// The auto-unlock the lock really uses for a stored value: once the
+    /// mouse is part of the lockdown the menu bar can no longer be
+    /// clicked, so it is never off and never shorter than the minimum.
+    static func clampedSeconds(_ seconds: Int, mouseLocked: Bool) -> Int {
+        mouseLocked ? max(seconds, minMouseLockSeconds) : seconds
+    }
+
+    /// What the Settings picker offers: never a value the lock would
+    /// silently override.
+    static func offeredChoices(mouseLocked: Bool) -> [Int] {
+        unlockChoices.filter { clampedSeconds($0, mouseLocked: mouseLocked) == $0 }
+    }
+
     var effective: LockConfiguration {
         guard mode == .advanced else {
             return LockConfiguration(
@@ -139,26 +161,27 @@ struct LockConfiguration: Equatable {
             )
         }
         var c = self
-        if c.blockMouseAndTrackpad, c.autoUnlockSeconds < Self.minMouseLockSeconds {
-            c.autoUnlockSeconds = Self.minMouseLockSeconds
-        }
+        c.autoUnlockSeconds = Self.clampedSeconds(c.autoUnlockSeconds, mouseLocked: c.blockMouseAndTrackpad)
         return c
     }
 
-    static var current: LockConfiguration {
-        let d = UserDefaults.standard
+    static var current: LockConfiguration { load(from: .standard) }
+
+    /// The stored settings with the safety rules applied.
+    static func load(from d: UserDefaults) -> LockConfiguration {
         func boolOr(_ key: String, _ fallback: Bool) -> Bool {
             d.object(forKey: key) == nil ? fallback : d.bool(forKey: key)
         }
         let cfg = LockConfiguration(
-            mode: LockMode(rawValue: d.string(forKey: "lockMode") ?? "") ?? .basic,
-            blockModifierKeys: boolOr("blockModifierKeys", true),
-            blockMediaKeys: boolOr("blockMediaKeys", true),
-            blockMouseAndTrackpad: boolOr("blockMouseAndTrackpad", false),
-            autoUnlockSeconds: d.integer(forKey: "autoUnlockSeconds")
+            mode: LockMode(rawValue: d.string(forKey: Key.mode) ?? "") ?? .basic,
+            blockModifierKeys: boolOr(Key.blockModifierKeys, true),
+            blockMediaKeys: boolOr(Key.blockMediaKeys, true),
+            blockMouseAndTrackpad: boolOr(Key.blockMouseAndTrackpad, false),
+            autoUnlockSeconds: d.integer(forKey: Key.autoUnlockSeconds)
         )
         return cfg.effective
     }
+
 }
 
 // MARK: - Settings View
@@ -166,11 +189,11 @@ struct LockConfiguration: Equatable {
 struct SettingsView: View {
     @AppStorage("appearance") private var appearance: AppearancePreference = .system
     @AppStorage("language") private var language: LanguagePreference = .system
-    @AppStorage("lockMode") private var lockMode: LockMode = .basic
-    @AppStorage("blockModifierKeys") private var blockModifierKeys = true
-    @AppStorage("blockMediaKeys") private var blockMediaKeys = true
-    @AppStorage("blockMouseAndTrackpad") private var blockMouseAndTrackpad = false
-    @AppStorage("autoUnlockSeconds") private var autoUnlockSeconds = 0
+    @AppStorage(LockConfiguration.Key.mode) private var lockMode: LockMode = .basic
+    @AppStorage(LockConfiguration.Key.blockModifierKeys) private var blockModifierKeys = true
+    @AppStorage(LockConfiguration.Key.blockMediaKeys) private var blockMediaKeys = true
+    @AppStorage(LockConfiguration.Key.blockMouseAndTrackpad) private var blockMouseAndTrackpad = false
+    @AppStorage(LockConfiguration.Key.autoUnlockSeconds) private var autoUnlockSeconds = 0
     @Binding var isPresented: Bool
 
     // Mirrors SMAppService, which the user can also change from System
@@ -289,9 +312,8 @@ struct SettingsView: View {
                 .onChange(of: blockMouseAndTrackpad) { _, on in
                     // Mouse lockdown removes the click-to-unlock exit, so
                     // force a minimum auto-unlock timer.
-                    if on, autoUnlockSeconds < LockConfiguration.minMouseLockSeconds {
-                        autoUnlockSeconds = LockConfiguration.minMouseLockSeconds
-                    }
+                    let clamped = LockConfiguration.clampedSeconds(autoUnlockSeconds, mouseLocked: on)
+                    if clamped != autoUnlockSeconds { autoUnlockSeconds = clamped }
                 }
 
             HStack {
@@ -311,9 +333,8 @@ struct SettingsView: View {
                     // LockConfiguration.effective clamps this anyway, so
                     // without the clamp here the picker would keep showing
                     // a duration the lock is not going to use.
-                    if blockMouseAndTrackpad, seconds < LockConfiguration.minMouseLockSeconds {
-                        autoUnlockSeconds = LockConfiguration.minMouseLockSeconds
-                    }
+                    let clamped = LockConfiguration.clampedSeconds(seconds, mouseLocked: blockMouseAndTrackpad)
+                    if clamped != seconds { autoUnlockSeconds = clamped }
                 }
             }
 
@@ -384,10 +405,7 @@ struct SettingsView: View {
     /// be clicked, so "Off" and anything under the minimum are not
     /// offered — the lock would silently override them anyway.
     private var offeredUnlockChoices: [Int] {
-        guard blockMouseAndTrackpad else { return LockConfiguration.unlockChoices }
-        return LockConfiguration.unlockChoices.filter {
-            $0 >= LockConfiguration.minMouseLockSeconds
-        }
+        LockConfiguration.offeredChoices(mouseLocked: blockMouseAndTrackpad)
     }
 
     @ViewBuilder
