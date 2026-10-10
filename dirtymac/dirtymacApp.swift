@@ -35,6 +35,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
     private let popover = NSPopover()
     private var lockObserver: AnyCancellable?
+    private var secureInputObserver: AnyCancellable?
 
     private var onboardingWindow: NSWindow?
     private static let onboardedKey = "hasOnboarded"
@@ -265,6 +266,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             .removeDuplicates()
             .receive(on: RunLoop.main)
             .sink { [weak self] active in self?.updateIcon(active: active) }
+
+        // When keys start getting past the lock, bring dirtymac forward:
+        // the panel says why, and apps that hold secure input only while
+        // they are frontmost (password fields, Terminal) let go of it.
+        secureInputObserver = blocker.$secureInput
+            .map { $0 != nil }
+            .removeDuplicates()
+            .sink { [weak self] on in
+                guard let self, on, self.blocker.isActive || self.blocker.lastUnlockReason == .secureInput else { return }
+                self.showPopover()
+            }
     }
 
     /// NSStatusItem can't host SwiftUI symbol effects, so the lock state

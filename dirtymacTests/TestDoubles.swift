@@ -43,6 +43,15 @@ final class FakePermission: AccessibilityPermission {
     }
 }
 
+final class FakeSecureInput: SecureInputDetecting {
+    var enabled = false
+    var owner: String? = "Terminal"
+
+    var isEnabled: Bool { enabled }
+
+    func ownerName() -> String? { owner }
+}
+
 /// A clock the test moves by hand; timers fire in order as it passes them.
 final class ManualScheduler: LockScheduling {
     private final class Entry: LockTimer {
@@ -105,5 +114,11 @@ final class BlockerRig {
     let tap = FakeEventTap()
     let permission = FakePermission()
     let clock = ManualScheduler()
-    lazy var blocker = KeyboardBlocker(tap: tap, permission: permission, scheduler: clock)
+    let secureInput = FakeSecureInput()
+    lazy var blocker = KeyboardBlocker(
+        tap: tap,
+        permission: permission,
+        scheduler: clock,
+        secureInput: secureInput
+    )
 }

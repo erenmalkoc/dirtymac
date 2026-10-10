@@ -25,6 +25,8 @@ enum UnlockReason: Equatable {
     case systemSettings
     /// The Accessibility permission was taken away during the lock.
     case permissionRevoked
+    /// Another app turned on secure input during a full lockdown.
+    case secureInput
 }
 
 @MainActor
@@ -37,6 +39,9 @@ final class KeyboardBlocker: ObservableObject {
     /// Why the most recent lock ended; nil while locked and before the
     /// first lock.
     @Published private(set) var lastUnlockReason: UnlockReason?
+    /// Set while another app holds Secure Event Input, so keys get past
+    /// the tap; nil otherwise. See SecureInput.swift.
+    @Published private(set) var secureInput: SecureInputStatus?
 
     /// How long Esc has to be held to force an unlock.
     static let escHoldDuration: TimeInterval = 3.0
@@ -48,6 +53,7 @@ final class KeyboardBlocker: ObservableObject {
     private let tap: EventTapping
     private let permission: AccessibilityPermission
     private let scheduler: LockScheduling
+    private let secureInputDetector: SecureInputDetecting
 
     private var startedAt: TimeInterval?
     private var ticker: LockTimer?
@@ -56,15 +62,21 @@ final class KeyboardBlocker: ObservableObject {
     /// Set once Esc has been held long enough; the unlock finishes when
     /// Esc comes up or when this fires.
     private var escReleaseTimer: LockTimer?
+    /// Whether the running lock includes the mouse and trackpad.
+    private var mouseLocked = false
+    /// Consecutive ticks with secure input on.
+    private var secureInputReadings = 0
 
     init(
         tap: EventTapping = SessionEventTap(),
         permission: AccessibilityPermission = SystemAccessibility(),
-        scheduler: LockScheduling = RunLoopScheduler()
+        scheduler: LockScheduling = RunLoopScheduler(),
+        secureInput: SecureInputDetecting = SystemSecureInput()
     ) {
         self.tap = tap
         self.permission = permission
         self.scheduler = scheduler
+        self.secureInputDetector = secureInput
         refreshPermission()
     }
 
@@ -78,6 +90,14 @@ final class KeyboardBlocker: ObservableObject {
         hasPermission = permission.requestAccess()
     }
 
+    /// Re-reads Secure Event Input. The panel calls this every second
+    /// while it is open and no lock runs; during a lock the ticker does.
+    func refreshSecureInput() {
+        secureInput = secureInputDetector.isEnabled
+            ? SecureInputStatus(ownerName: secureInputDetector.ownerName())
+            : nil
+    }
+
     func openAccessibilitySettings() {
         let url = URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_Accessibility")!
         NSWorkspace.shared.open(url)
@@ -87,7 +107,8 @@ final class KeyboardBlocker: ObservableObject {
 
     /// Locks with `configuration`, the stored settings by default.
     /// Returns false when no lock started: the app has no Accessibility
-    /// permission (the system prompt is shown) or macOS refused the tap.
+    /// permission (the system prompt is shown), a full lockdown was asked
+    /// for while secure input is on, or macOS refused the tap.
     @discardableResult
     func start(_ configuration: LockConfiguration = .current) -> Bool {
         guard !isActive else { return true }
@@ -101,6 +122,12 @@ final class KeyboardBlocker: ObservableObject {
         // Applied here as well, so no caller can skip the safety rules
         // (such as the mandatory timer while the mouse is locked).
         let config = configuration.effective
+        refreshSecureInput()
+        guard SecureInputPolicy.canStart(
+            secureInputOn: secureInput != nil,
+            mouseLocked: config.blockMouseAndTrackpad
+        ) else { return false }
+
         let installed = tap.install(mask: EventMask.build(for: config)) { [weak self] decision in
             self?.handleEsc(decision)
         }
@@ -113,6 +140,9 @@ final class KeyboardBlocker: ObservableObject {
         startedAt = scheduler.now
         elapsed = 0
         autoUnlockTotal = config.autoUnlockSeconds
+        mouseLocked = config.blockMouseAndTrackpad
+        // Already on screen as a warning: no need to wait for a repeat.
+        secureInputReadings = secureInput == nil ? 0 : SecureInputPolicy.readingsToAct
         lastUnlockReason = nil
         isActive = true
 
@@ -144,6 +174,8 @@ final class KeyboardBlocker: ObservableObject {
         startedAt = nil
         elapsed = 0
         autoUnlockTotal = 0
+        mouseLocked = false
+        secureInputReadings = 0
         lastUnlockReason = reason
         isActive = false
     }
@@ -163,6 +195,28 @@ final class KeyboardBlocker: ObservableObject {
         // while the lock keeps running.
         if autoUnlockTotal > 0, elapsed >= TimeInterval(autoUnlockTotal) {
             stop(reason: .autoUnlock)
+            return
+        }
+        checkSecureInput()
+    }
+
+    private func checkSecureInput() {
+        guard secureInputDetector.isEnabled else {
+            secureInputReadings = 0
+            secureInput = nil
+            return
+        }
+        secureInputReadings += 1
+        switch SecureInputPolicy.duringLock(readings: secureInputReadings, mouseLocked: mouseLocked) {
+        case .none:
+            break
+        case .warn:
+            if secureInput == nil {
+                secureInput = SecureInputStatus(ownerName: secureInputDetector.ownerName())
+            }
+        case .release:
+            secureInput = SecureInputStatus(ownerName: secureInputDetector.ownerName())
+            stop(reason: .secureInput)
         }
     }
 

@@ -1,6 +1,83 @@
 {
   "sourceLanguage": "en",
   "strings": {
+    "%@ is using secure input, so macOS won't let dirtymac block keys.": {
+      "comment": "Warning in the panel while another app holds Secure Event Input (a focused password field, Terminal's Secure Keyboard Entry). %@ is that app's name.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ verwendet die sichere Eingabe, daher lässt macOS dirtymac keine Tasten blockieren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ is using secure input, so macOS won't let dirtymac block keys."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ está usando la entrada segura, así que macOS no deja que dirtymac bloquee las teclas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ utilise la saisie sécurisée, donc macOS empêche dirtymac de bloquer les touches."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sta usando l’inserimento sicuro, quindi macOS non permette a dirtymac di bloccare i tasti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ がセキュア入力を使用しているため、macOS は dirtymac によるキーのブロックを許可しません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@에서 보안 입력을 사용 중이므로 macOS가 dirtymac의 키 차단을 허용하지 않습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ está usando a entrada segura, então o macOS não permite que o dirtymac bloqueie as teclas."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ использует защищённый ввод, поэтому macOS не даёт dirtymac блокировать клавиши."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ güvenli girişi kullanıyor; bu yüzden macOS, dirtymac'in tuşları engellemesine izin vermiyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“%@”正在使用安全输入，因此 macOS 不允许 dirtymac 拦截按键。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「%@」正在使用安全輸入，因此 macOS 不允許 dirtymac 攔截按鍵。"
+          }
+        }
+      }
+    },
     "A menu bar utility that locks your keyboard so you can clean it — without typing nonsense or launching apps.": {
       "comment": "Onboarding step 1 body.",
       "localizations": {
@@ -459,6 +536,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "在登入項目中允許⋯"
+          }
+        }
+      }
+    },
+    "Another app is using secure input, so macOS won't let dirtymac block keys.": {
+      "comment": "Warning in the panel while another app holds Secure Event Input and its name is unknown.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Eine andere App verwendet die sichere Eingabe, daher lässt macOS dirtymac keine Tasten blockieren."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Another app is using secure input, so macOS won't let dirtymac block keys."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otra app está usando la entrada segura, así que macOS no deja que dirtymac bloquee las teclas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une autre app utilise la saisie sécurisée, donc macOS empêche dirtymac de bloquer les touches."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un’altra app sta usando l’inserimento sicuro, quindi macOS non permette a dirtymac di bloccare i tasti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "別のアプリがセキュア入力を使用しているため、macOS は dirtymac によるキーのブロックを許可しません。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 앱에서 보안 입력을 사용 중이므로 macOS가 dirtymac의 키 차단을 허용하지 않습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Outro app está usando a entrada segura, então o macOS não permite que o dirtymac bloqueie as teclas."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Другое приложение использует защищённый ввод, поэтому macOS не даёт dirtymac блокировать клавиши."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başka bir uygulama güvenli girişi kullanıyor; bu yüzden macOS, dirtymac'in tuşları engellemesine izin vermiyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "另一个 App 正在使用安全输入，因此 macOS 不允许 dirtymac 拦截按键。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "另一個 App 正在使用安全輸入，因此 macOS 不允許 dirtymac 攔截按鍵。"
           }
         }
       }
@@ -4240,6 +4394,83 @@
         }
       }
     },
+    "Quit that app, or lock and unlock your screen, to clear it.": {
+      "comment": "Second line of the secure input warning: how to make the other app release secure input.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beende diese App oder sperre und entsperre den Bildschirm, um sie aufzuheben."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quit that app, or lock and unlock your screen, to clear it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para quitarla, cierra esa app o bloquea y desbloquea la pantalla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pour la désactiver, quittez cette app ou verrouillez puis déverrouillez l’écran."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per disattivarlo, chiudi quell’app oppure blocca e sblocca lo schermo."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "解除するには、そのアプリを終了するか、画面をロックしてからロックを解除してください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "해제하려면 해당 앱을 종료하거나 화면을 잠갔다가 잠금 해제하세요."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Para desativá-la, encerre esse app ou bloqueie e desbloqueie a tela."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чтобы отключить его, закройте это приложение или заблокируйте и разблокируйте экран."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kapatmak için o uygulamadan çıkın ya da ekranı kilitleyip kilidini açın."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "要解除，请退出该 App，或锁定屏幕后再解锁。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "若要解除，請結束該 App，或鎖定螢幕後再解鎖。"
+          }
+        }
+      }
+    },
     "Ready": {
       "comment": "Status pill text when the keyboard is unlocked and the app is idle.",
       "localizations": {
@@ -4852,6 +5083,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "輔助使用權限已關閉，鍵盤已解鎖。"
+          }
+        }
+      }
+    },
+    "The keyboard unlocked because another app turned on secure input.": {
+      "comment": "Shown in the panel after a full lockdown ended because another app turned on secure input (hold-Esc would not have worked).",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Tastatur wurde entsperrt, weil eine andere App die sichere Eingabe aktiviert hat."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The keyboard unlocked because another app turned on secure input."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El teclado se desbloqueó porque otra app activó la entrada segura."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le clavier a été déverrouillé car une autre app a activé la saisie sécurisée."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tastiera è stata sbloccata perché un’altra app ha attivato l’inserimento sicuro."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "別のアプリがセキュア入力をオンにしたため、キーボードのロックを解除しました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다른 앱에서 보안 입력을 켜서 키보드 잠금이 해제되었습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O teclado foi desbloqueado porque outro app ativou a entrada segura."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавиатура разблокирована, потому что другое приложение включило защищённый ввод."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başka bir uygulama güvenli girişi açtığı için klavyenin kilidi açıldı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "另一个 App 打开了安全输入，键盘已解锁。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "另一個 App 開啟了安全輸入，鍵盤已解鎖。"
           }
         }
       }

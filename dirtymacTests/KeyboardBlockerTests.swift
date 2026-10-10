@@ -268,6 +268,52 @@ final class KeyboardBlockerTests: XCTestCase {
         XCTAssertEqual(rig.tap.uninstallCount, 1)
     }
 
+    // MARK: Secure input
+
+    func testAKeyboardLockWarnsWhenSecureInputStaysOn() {
+        let rig = BlockerRig()
+        rig.blocker.start(basic)
+        rig.secureInput.enabled = true
+        rig.clock.advance(by: 1)
+        XCTAssertNil(rig.blocker.secureInput, "a field focused for a moment is ignored")
+        rig.clock.advance(by: 1)
+        XCTAssertEqual(rig.blocker.secureInput, SecureInputStatus(ownerName: "Terminal"))
+        XCTAssertTrue(rig.blocker.isActive)
+
+        rig.secureInput.enabled = false
+        rig.clock.advance(by: 1)
+        XCTAssertNil(rig.blocker.secureInput)
+        XCTAssertTrue(rig.blocker.isActive)
+    }
+
+    func testFullLockdownLetsGoWhenSecureInputStaysOn() {
+        let rig = BlockerRig()
+        rig.blocker.start(fullLockdown(300))
+        rig.secureInput.enabled = true
+        rig.clock.advance(by: 2)
+        XCTAssertFalse(rig.blocker.isActive)
+        XCTAssertEqual(rig.blocker.lastUnlockReason, .secureInput)
+        XCTAssertNotNil(rig.blocker.secureInput)
+        XCTAssertEqual(rig.tap.uninstallCount, 1)
+    }
+
+    func testFullLockdownDoesNotStartWhileSecureInputIsOn() {
+        let rig = BlockerRig()
+        rig.secureInput.enabled = true
+        XCTAssertFalse(rig.blocker.start(fullLockdown(60)))
+        XCTAssertFalse(rig.blocker.isActive)
+        XCTAssertEqual(rig.tap.installCount, 0)
+        XCTAssertNotNil(rig.blocker.secureInput)
+    }
+
+    func testAKeyboardLockStartsUnderSecureInputWithTheWarningShown() {
+        let rig = BlockerRig()
+        rig.secureInput.enabled = true
+        rig.secureInput.owner = nil
+        XCTAssertTrue(rig.blocker.start(basic))
+        XCTAssertEqual(rig.blocker.secureInput, SecureInputStatus(ownerName: nil))
+    }
+
     func testStoppingDuringTheReleaseGraceCancelsIt() {
         let rig = BlockerRig()
         rig.blocker.start(basic)

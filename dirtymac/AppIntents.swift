@@ -27,17 +27,38 @@ struct LockKeyboardIntent: AppIntent {
         guard let app = AppDelegate.shared else { return .result() }
         let blocker = app.blocker
         blocker.refreshPermission()
-        // Full lockdown freezes the mouse too, so it keeps its explicit
-        // in-popover confirmation; a missing permission needs the popover's
-        // prompt. Both fall back to just opening the panel.
-        if blocker.isActive {
-            return .result()
-        } else if !blocker.hasPermission || LockConfiguration.current.blockMouseAndTrackpad {
+        blocker.refreshSecureInput()
+        switch IntentLockDecision.decide(
+            isActive: blocker.isActive,
+            hasPermission: blocker.hasPermission,
+            mouseLocked: LockConfiguration.current.blockMouseAndTrackpad,
+            secureInputOn: blocker.secureInput != nil
+        ) {
+        case .alreadyLocked:
+            break
+        case .openPanel:
             app.showPopoverWhenReady()
-        } else {
+        case .lock:
             blocker.start()
         }
         return .result()
+    }
+}
+
+/// What "Lock Keyboard for Cleaning" does when run from Spotlight or
+/// Shortcuts, where nobody is looking at the panel yet.
+enum IntentLockDecision: Equatable {
+    case alreadyLocked
+    case openPanel
+    case lock
+
+    /// Locks straight away only when nothing needs the user's eyes: full
+    /// lockdown keeps its confirmation, a missing permission its prompt,
+    /// and secure input its warning (keys would not be blocked).
+    static func decide(isActive: Bool, hasPermission: Bool, mouseLocked: Bool, secureInputOn: Bool) -> IntentLockDecision {
+        if isActive { return .alreadyLocked }
+        if !hasPermission || mouseLocked || secureInputOn { return .openPanel }
+        return .lock
     }
 }
 

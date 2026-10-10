@@ -1,5 +1,6 @@
 import SwiftUI
 import AppKit
+import Combine
 
 /// The default popover content — keyboard lock control. The settings
 /// view replaces this within the same popover when the user opens
@@ -8,6 +9,10 @@ struct MainView: View {
     @EnvironmentObject private var blocker: KeyboardBlocker
     @Binding var showingSettings: Bool
     @State private var confirmLockdown = false
+
+    // Secure input comes and goes with other apps, so re-check it every
+    // second while the panel is open. During a lock the blocker does.
+    private let secureInputPoll = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         VStack(spacing: 0) {
@@ -28,7 +33,13 @@ struct MainView: View {
         // frame. The cached value from init renders immediately; if it
         // turns out stale, the view updates a tick later.
         .onAppear {
-            DispatchQueue.main.async { blocker.refreshPermission() }
+            DispatchQueue.main.async {
+                blocker.refreshPermission()
+                if !blocker.isActive { blocker.refreshSecureInput() }
+            }
+        }
+        .onReceive(secureInputPoll) { _ in
+            if !blocker.isActive { blocker.refreshSecureInput() }
         }
     }
 
@@ -101,15 +112,23 @@ struct MainView: View {
                             .foregroundStyle(.secondary)
                             .contentTransition(.numericText())
                     }
-                    Text("Hold Esc for 3 seconds to unlock.")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
+                    if blocker.secureInput != nil {
+                        // Esc can't reach the tap either; don't promise it.
+                        secureInputWarning
+                    } else {
+                        Text("Hold Esc for 3 seconds to unlock.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                    }
                 } else {
                     Text(idleCaption)
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
+
+                    secureInputWarning
+                        .padding(.top, 4)
 
                     if let explanation = blocker.lastUnlockReason?.explanation {
                         Label(explanation, systemImage: "info.circle")
@@ -145,6 +164,10 @@ struct MainView: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
 
+            // Full lockdown can't start while secure input is on: hold-Esc
+            // would not get through, leaving only the timer as a way out.
+            secureInputWarning
+
             HStack(spacing: 8) {
                 Button("Cancel") { confirmLockdown = false }
                     .buttonStyle(.bordered)
@@ -154,11 +177,35 @@ struct MainView: View {
                     blocker.start()
                 }
                 .buttonStyle(.borderedProminent)
+                .disabled(blocker.secureInput != nil)
             }
             .padding(.top, 2)
         }
         .frame(maxWidth: .infinity)
         .transition(.opacity)
+    }
+
+    /// Keys get past the tap while another app holds secure input.
+    @ViewBuilder
+    private var secureInputWarning: some View {
+        if let status = blocker.secureInput {
+            Label {
+                VStack(alignment: .leading, spacing: 3) {
+                    if let name = status.ownerName {
+                        Text("\(name) is using secure input, so macOS won't let dirtymac block keys.")
+                    } else {
+                        Text("Another app is using secure input, so macOS won't let dirtymac block keys.")
+                    }
+                    Text("Quit that app, or lock and unlock your screen, to clear it.")
+                        .foregroundStyle(.secondary)
+                }
+            } icon: {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .foregroundStyle(.orange)
+            }
+            .font(.caption)
+            .fixedSize(horizontal: false, vertical: true)
+        }
     }
 
     private var idleCaption: LocalizedStringKey {
@@ -262,6 +309,8 @@ extension UnlockReason {
             return "The keyboard unlocked because System Settings opened."
         case .permissionRevoked:
             return "The keyboard unlocked because Accessibility access was turned off."
+        case .secureInput:
+            return "The keyboard unlocked because another app turned on secure input."
         case .clicked, .escHeld, .autoUnlock, .quit:
             return nil
         }
