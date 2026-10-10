@@ -31,6 +31,10 @@ enum EventMask {
         .mouseMoved, .scrollWheel,
     ]
 
+    /// Trackpad gestures (pinch, rotate, smart zoom, swipe) arrive as
+    /// NSEvent type 29, which has no CGEventType case of its own.
+    static let gestureBit = CGEventMask(NSEvent.EventTypeMask.gesture.rawValue)
+
     static func bit(_ type: CGEventType) -> CGEventMask {
         CGEventMask(1) << type.rawValue
     }
@@ -47,6 +51,7 @@ enum EventMask {
         }
         if config.blockMouseAndTrackpad {
             for type in pointerTypes { mask |= bit(type) }
+            mask |= gestureBit
         }
         return mask
     }

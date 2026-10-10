@@ -54,12 +54,24 @@ final class LockCoreTests: XCTestCase {
         XCTAssertEqual(media, keysOnly | systemDefinedBit)
     }
 
-    func testMouseLockdownInterceptsEveryPointerEvent() {
+    func testMouseLockdownInterceptsEveryPointerEventAndGesture() {
         let config = LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true)
         XCTAssertEqual(EventMask.pointerTypes.count, 11)
         for type in EventMask.pointerTypes {
             XCTAssertNotEqual(mask(config) & EventMask.bit(type), 0, "event type \(type.rawValue)")
         }
+        XCTAssertEqual(EventMask.gestureBit, CGEventMask(1) << 29)
+        XCTAssertNotEqual(mask(config) & EventMask.gestureBit, 0)
+    }
+
+    func testGesturesStayLiveWhileThePointerIsFree() {
+        XCTAssertEqual(mask(LockConfiguration()) & EventMask.gestureBit, 0)
+        XCTAssertEqual(mask(LockConfiguration(mode: .advanced)) & EventMask.gestureBit, 0)
+    }
+
+    func testGesturesAreBlockedByTheTapLikeOtherPointerEvents() throws {
+        let gesture = try XCTUnwrap(CGEventType(rawValue: 29))
+        XCTAssertEqual(decide(gesture), .block)
     }
 
     // MARK: Decisions
