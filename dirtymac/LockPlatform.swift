@@ -60,12 +60,21 @@ final class SessionEventTap: EventTapping {
         if let port {
             CGEvent.tapEnable(tap: port, enable: false)
         }
-        if let source {
-            CFRunLoopRemoveSource(CFRunLoopGetMain(), source, .commonModes)
+        if let port, let source {
+            Self.invalidate(port: port, source: source)
         }
         port = nil
         source = nil
         onEsc = nil
+    }
+
+    /// Removes the source from the main run loop and invalidates the
+    /// port, which also tears down the WindowServer tap. Releasing the
+    /// references alone left every past lock's disabled tap alive until
+    /// the app quit.
+    static func invalidate(port: CFMachPort, source: CFRunLoopSource) {
+        CFRunLoopRemoveSource(CFRunLoopGetMain(), source, .commonModes)
+        CFMachPortInvalidate(port)
     }
 
     /// Acts on one decision; returns whether to swallow the event. Esc is
@@ -129,7 +138,9 @@ final class RunLoopScheduler: LockScheduling {
             // Main-run-loop timers fire on the main thread.
             MainActor.assumeIsolated { action() }
         }
-        RunLoop.main.add(timer, forMode: .default)
+        // Common modes, like the tap's own source: in the default mode
+        // alone, hold-Esc and auto-unlock stalled while a menu was open.
+        RunLoop.main.add(timer, forMode: .common)
         return ScheduledTimer(timer)
     }
 }
