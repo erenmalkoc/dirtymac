@@ -257,6 +257,17 @@ final class KeyboardBlockerTests: XCTestCase {
         XCTAssertEqual(rig.blocker.lastUnlockReason, .clicked)
     }
 
+    func testRevokingThePermissionEndsTheLockOnTheNextTick() {
+        let rig = BlockerRig()
+        rig.blocker.start(basic)
+        rig.permission.trusted = false
+        rig.clock.advance(by: 1)
+        XCTAssertFalse(rig.blocker.isActive)
+        XCTAssertFalse(rig.blocker.hasPermission)
+        XCTAssertEqual(rig.blocker.lastUnlockReason, .permissionRevoked)
+        XCTAssertEqual(rig.tap.uninstallCount, 1)
+    }
+
     func testStoppingDuringTheReleaseGraceCancelsIt() {
         let rig = BlockerRig()
         rig.blocker.start(basic)

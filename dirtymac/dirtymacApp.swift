@@ -44,6 +44,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var registeredHotKey: HotKeyPreset?
     private var defaultsObserver: NSObjectProtocol?
     private var launchedAsLoginItem = false
+    private var sessionWatcher: SessionWatcher?
 
     func applicationWillFinishLaunching(_ notification: Notification) {
         // The launch Apple event is only available this early. A login
@@ -85,6 +86,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         )
 
         setupHotKey()
+        watchSession()
 
         if !UserDefaults.standard.bool(forKey: Self.onboardedKey) {
             showOnboarding()
@@ -141,6 +143,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationSupportsSecureRestorableState(_ app: NSApplication) -> Bool { true }
+
+    // MARK: Session
+
+    /// Sleep, a locked screen, a user switch or System Settings coming
+    /// forward end the lock; see SessionWatcher.
+    private func watchSession() {
+        let watcher = SessionWatcher { [weak self] reason in
+            guard let self, self.blocker.isActive else { return }
+            self.blocker.stop(reason: reason)
+        }
+        watcher.start()
+        sessionWatcher = watcher
+    }
 
     // MARK: Status item
 

@@ -4779,6 +4779,314 @@
         }
       }
     },
+    "The keyboard unlocked because Accessibility access was turned off.": {
+      "comment": "Shown in the panel after the lock ended because the Accessibility permission was revoked during the lock.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Tastatur wurde entsperrt, weil der Bedienungshilfen-Zugriff deaktiviert wurde."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The keyboard unlocked because Accessibility access was turned off."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El teclado se desbloqueó porque se desactivó el acceso a Accesibilidad."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le clavier a été déverrouillé car l’accès à l’Accessibilité a été désactivé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tastiera è stata sbloccata perché l’accesso all’Accessibilità è stato disattivato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクセシビリティのアクセスがオフになったため、キーボードのロックを解除しました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "손쉬운 사용 권한이 꺼져 키보드 잠금이 해제되었습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O teclado foi desbloqueado porque o acesso à Acessibilidade foi desativado."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавиатура разблокирована, потому что доступ к Универсальному доступу был отключён."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Erişilebilirlik izni kapatıldığı için klavyenin kilidi açıldı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "辅助功能权限已关闭，键盘已解锁。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "輔助使用權限已關閉，鍵盤已解鎖。"
+          }
+        }
+      }
+    },
+    "The keyboard unlocked because System Settings opened.": {
+      "comment": "Shown in the panel after the lock ended because System Settings came forward (where Accessibility could be switched off).",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Tastatur wurde entsperrt, weil die Systemeinstellungen geöffnet wurden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The keyboard unlocked because System Settings opened."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El teclado se desbloqueó porque se abrió Ajustes del Sistema."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le clavier a été déverrouillé car Réglages Système s’est ouvert."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tastiera è stata sbloccata perché sono state aperte le Impostazioni di Sistema."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム設定が開いたため、キーボードのロックを解除しました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템 설정이 열려 키보드 잠금이 해제되었습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O teclado foi desbloqueado porque os Ajustes do Sistema foram abertos."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавиатура разблокирована, потому что открылись Системные настройки."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem Ayarları açıldığı için klavyenin kilidi açıldı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "“系统设置”已打开，键盘已解锁。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "「系統設定」已打開，鍵盤已解鎖。"
+          }
+        }
+      }
+    },
+    "The keyboard unlocked when your Mac went to sleep.": {
+      "comment": "Shown in the panel after the lock ended because the Mac went to sleep.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Tastatur wurde entsperrt, als dein Mac in den Ruhezustand ging."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The keyboard unlocked when your Mac went to sleep."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El teclado se desbloqueó cuando tu Mac entró en reposo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le clavier a été déverrouillé quand votre Mac s’est mis en veille."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tastiera è stata sbloccata quando il Mac è andato in stop."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac がスリープしたため、キーボードのロックを解除しました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac이 잠자기 상태로 전환되어 키보드 잠금이 해제되었습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O teclado foi desbloqueado quando o Mac entrou em repouso."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавиатура разблокирована, потому что Mac перешёл в режим сна."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'iniz uyku moduna geçtiği için klavyenin kilidi açıldı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac 进入睡眠时，键盘已解锁。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac 進入睡眠時，鍵盤已解鎖。"
+          }
+        }
+      }
+    },
+    "The keyboard unlocked when your screen was locked.": {
+      "comment": "Shown in the panel after the lock ended because the screen was locked or another user switched in.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Tastatur wurde entsperrt, als dein Bildschirm gesperrt wurde."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The keyboard unlocked when your screen was locked."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El teclado se desbloqueó cuando se bloqueó la pantalla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le clavier a été déverrouillé quand l’écran a été verrouillé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "La tastiera è stata sbloccata quando lo schermo è stato bloccato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画面がロックされたため、キーボードのロックを解除しました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "화면이 잠겨 키보드 잠금이 해제되었습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O teclado foi desbloqueado quando a tela foi bloqueada."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавиатура разблокирована, потому что экран был заблокирован."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekranınız kilitlendiği için klavyenin kilidi açıldı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "屏幕锁定时，键盘已解锁。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "螢幕鎖定時，鍵盤已解鎖。"
+          }
+        }
+      }
+    },
     "This window appears once after each update so you never miss a change.": {
       "comment": "What's New 1.2.0 item detail.",
       "localizations": {

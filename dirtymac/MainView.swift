@@ -60,11 +60,17 @@ struct MainView: View {
 
     @ViewBuilder
     private var content: some View {
-        if blocker.hasPermission {
+        if Self.showsLockControl(isActive: blocker.isActive, hasPermission: blocker.hasPermission) {
             mainControl
         } else {
             permissionPrompt
         }
+    }
+
+    /// A running lock always keeps its stop control, even if the
+    /// permission was revoked meanwhile: stopping needs no permission.
+    static func showsLockControl(isActive: Bool, hasPermission: Bool) -> Bool {
+        isActive || hasPermission
     }
 
     @ViewBuilder
@@ -104,6 +110,15 @@ struct MainView: View {
                         .font(.subheadline)
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
+
+                    if let explanation = blocker.lastUnlockReason?.explanation {
+                        Label(explanation, systemImage: "info.circle")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .padding(.top, 4)
+                    }
                 }
             }
         }
@@ -231,5 +246,24 @@ struct MainView: View {
         let info = Bundle.main.infoDictionary
         let short = info?["CFBundleShortVersionString"] as? String ?? "1.0"
         return "v\(short)"
+    }
+}
+
+extension UnlockReason {
+    /// Locks the system ended, rather than the user, are explained in
+    /// the panel until the next lock.
+    var explanation: LocalizedStringKey? {
+        switch self {
+        case .systemSleep:
+            return "The keyboard unlocked when your Mac went to sleep."
+        case .screenLocked, .userSwitched:
+            return "The keyboard unlocked when your screen was locked."
+        case .systemSettings:
+            return "The keyboard unlocked because System Settings opened."
+        case .permissionRevoked:
+            return "The keyboard unlocked because Accessibility access was turned off."
+        case .clicked, .escHeld, .autoUnlock, .quit:
+            return nil
+        }
     }
 }

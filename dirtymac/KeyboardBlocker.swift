@@ -15,6 +15,16 @@ enum UnlockReason: Equatable {
     case autoUnlock
     /// The app is quitting.
     case quit
+    /// The Mac went to sleep.
+    case systemSleep
+    /// The screen was locked.
+    case screenLocked
+    /// Another user took over the screen (fast user switching).
+    case userSwitched
+    /// System Settings came forward during the lock.
+    case systemSettings
+    /// The Accessibility permission was taken away during the lock.
+    case permissionRevoked
 }
 
 @MainActor
@@ -140,6 +150,13 @@ final class KeyboardBlocker: ObservableObject {
 
     private func tick() {
         guard let startedAt else { return }
+        // A tap left running without the permission can hang all input
+        // on some macOS versions; let go as soon as it disappears.
+        guard permission.isTrusted else {
+            hasPermission = false
+            stop(reason: .permissionRevoked)
+            return
+        }
         elapsed = scheduler.now - startedAt
         // The deadline timer can fire late, e.g. right after the Mac
         // wakes. The clock decides, so the countdown can't sit at 00:00
