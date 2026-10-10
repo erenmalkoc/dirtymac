@@ -30,6 +30,10 @@ final class KeyboardBlocker: ObservableObject {
 
     /// How long Esc has to be held to force an unlock.
     static let escHoldDuration: TimeInterval = 3.0
+    /// Once the hold is complete the lock waits for Esc to come up, at
+    /// most this long, so the rest of the press can't auto-repeat into
+    /// the frontmost app (leaving full screen, cancelling a dialog).
+    static let escReleaseGrace: TimeInterval = 1.5
 
     private let tap: EventTapping
     private let permission: AccessibilityPermission
@@ -39,6 +43,9 @@ final class KeyboardBlocker: ObservableObject {
     private var ticker: LockTimer?
     private var autoUnlockTimer: LockTimer?
     private var escHoldTimer: LockTimer?
+    /// Set once Esc has been held long enough; the unlock finishes when
+    /// Esc comes up or when this fires.
+    private var escReleaseTimer: LockTimer?
 
     init(
         tap: EventTapping = SessionEventTap(),
@@ -122,6 +129,8 @@ final class KeyboardBlocker: ObservableObject {
         autoUnlockTimer = nil
         escHoldTimer?.cancel()
         escHoldTimer = nil
+        escReleaseTimer?.cancel()
+        escReleaseTimer = nil
         startedAt = nil
         elapsed = 0
         autoUnlockTotal = 0
@@ -151,14 +160,33 @@ final class KeyboardBlocker: ObservableObject {
     }
 
     private func escHoldBegan() {
-        guard isActive, escHoldTimer == nil else { return } // ignore auto-repeat
+        // Auto-repeat neither restarts a hold nor re-arms a finished one.
+        guard isActive, escHoldTimer == nil, escReleaseTimer == nil else { return }
         escHoldTimer = scheduler.schedule(after: Self.escHoldDuration, repeats: false) { [weak self] in
-            guard let self, self.isActive else { return }
-            self.stop(reason: .escHeld)
+            self?.escHoldCompleted()
+        }
+    }
+
+    private func escHoldCompleted() {
+        escHoldTimer = nil
+        guard isActive else { return }
+        // Keep swallowing Esc until it comes up; never wait longer than
+        // the grace period, so a lost key-up can't keep the lock on.
+        escReleaseTimer = scheduler.schedule(after: Self.escReleaseGrace, repeats: false) { [weak self] in
+            self?.stop(reason: .escHeld)
         }
     }
 
     private func escHoldEnded() {
+        if escReleaseTimer != nil {
+            // This key-up is still inside the tap's callback; tear the
+            // tap down on the next run-loop pass, not from within it.
+            escReleaseTimer?.cancel()
+            escReleaseTimer = scheduler.schedule(after: 0, repeats: false) { [weak self] in
+                self?.stop(reason: .escHeld)
+            }
+            return
+        }
         escHoldTimer?.cancel()
         escHoldTimer = nil
     }

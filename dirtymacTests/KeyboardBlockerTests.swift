@@ -15,6 +15,14 @@ final class KeyboardBlockerTests: XCTestCase {
         LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: seconds)
     }
 
+    /// Holds Esc for the full duration and lets go.
+    private func holdEsc(_ rig: BlockerRig) {
+        rig.tap.send(.escDown)
+        rig.clock.advance(by: KeyboardBlocker.escHoldDuration)
+        rig.tap.send(.escUp)
+        rig.clock.advance(by: 0)
+    }
+
     // MARK: Starting
 
     func testLocksWithTheMaskOfTheConfiguration() {
@@ -53,16 +61,58 @@ final class KeyboardBlockerTests: XCTestCase {
 
     // MARK: Hold Esc
 
-    func testHoldingEscForThreeSecondsUnlocks() {
+    func testHoldingEscForThreeSecondsUnlocksWhenEscComesUp() {
         let rig = BlockerRig()
         rig.blocker.start(basic)
         rig.tap.send(.escDown)
         rig.clock.advance(by: 2.9)
         XCTAssertTrue(rig.blocker.isActive)
         rig.clock.advance(by: 0.1)
+        // Held long enough, but Esc is still down: keep swallowing it so
+        // its auto-repeat never reaches the frontmost app.
+        XCTAssertTrue(rig.blocker.isActive)
+        rig.tap.send(.escUp)
+        rig.clock.advance(by: 0)
         XCTAssertFalse(rig.blocker.isActive)
         XCTAssertEqual(rig.blocker.lastUnlockReason, .escHeld)
         XCTAssertEqual(rig.tap.uninstallCount, 1)
+    }
+
+    func testTheUnlockWaitsForTheTapCallbackToReturn() {
+        let rig = BlockerRig()
+        rig.blocker.start(basic)
+        rig.tap.send(.escDown)
+        rig.clock.advance(by: 3)
+        rig.tap.send(.escUp)
+        // Still inside the callback for that key-up: no teardown yet.
+        XCTAssertTrue(rig.blocker.isActive)
+        XCTAssertEqual(rig.tap.uninstallCount, 0)
+        rig.clock.advance(by: 0)
+        XCTAssertFalse(rig.blocker.isActive)
+    }
+
+    func testAStuckEscStillUnlocksAfterTheGracePeriod() {
+        let rig = BlockerRig()
+        rig.blocker.start(basic)
+        rig.tap.send(.escDown)
+        rig.clock.advance(by: 3)
+        rig.clock.advance(by: KeyboardBlocker.escReleaseGrace - 0.1)
+        XCTAssertTrue(rig.blocker.isActive)
+        rig.clock.advance(by: 0.1)
+        XCTAssertFalse(rig.blocker.isActive)
+        XCTAssertEqual(rig.blocker.lastUnlockReason, .escHeld)
+    }
+
+    func testAutoRepeatAfterTheHoldDoesNotPostponeTheUnlock() {
+        let rig = BlockerRig()
+        rig.blocker.start(basic)
+        rig.tap.send(.escDown)
+        rig.clock.advance(by: 3)
+        rig.tap.send(.escDown)   // auto-repeat
+        rig.clock.advance(by: 1)
+        rig.tap.send(.escDown)   // auto-repeat
+        rig.clock.advance(by: KeyboardBlocker.escReleaseGrace - 1)
+        XCTAssertFalse(rig.blocker.isActive)
     }
 
     func testReleasingEscEarlyKeepsTheLock() {
@@ -84,6 +134,9 @@ final class KeyboardBlockerTests: XCTestCase {
         rig.clock.advance(by: 1)
         rig.tap.send(.escDown)   // auto-repeat
         rig.clock.advance(by: 1)
+        // Complete 3 s after the first press, not after the repeats.
+        rig.tap.send(.escUp)
+        rig.clock.advance(by: 0)
         XCTAssertFalse(rig.blocker.isActive)
         XCTAssertEqual(rig.blocker.lastUnlockReason, .escHeld)
     }
@@ -96,16 +149,18 @@ final class KeyboardBlockerTests: XCTestCase {
         rig.tap.send(.escUp)
         rig.tap.send(.escDown)
         rig.clock.advance(by: 2.9)
+        rig.tap.send(.escUp)
+        rig.clock.advance(by: 0)
         XCTAssertTrue(rig.blocker.isActive)
-        rig.clock.advance(by: 0.1)
+
+        holdEsc(rig)
         XCTAssertFalse(rig.blocker.isActive)
     }
 
     func testHoldingEscUnlocksFullLockdown() {
         let rig = BlockerRig()
         rig.blocker.start(fullLockdown(300))
-        rig.tap.send(.escDown)
-        rig.clock.advance(by: 3)
+        holdEsc(rig)
         XCTAssertFalse(rig.blocker.isActive)
         XCTAssertEqual(rig.blocker.lastUnlockReason, .escHeld)
     }
@@ -200,5 +255,17 @@ final class KeyboardBlockerTests: XCTestCase {
         XCTAssertEqual(rig.blocker.elapsed, 0)
         XCTAssertEqual(rig.blocker.autoUnlockTotal, 0)
         XCTAssertEqual(rig.blocker.lastUnlockReason, .clicked)
+    }
+
+    func testStoppingDuringTheReleaseGraceCancelsIt() {
+        let rig = BlockerRig()
+        rig.blocker.start(basic)
+        rig.tap.send(.escDown)
+        rig.clock.advance(by: 3)
+        rig.blocker.stop(reason: .clicked)
+        rig.clock.advance(by: 5)
+        XCTAssertEqual(rig.blocker.lastUnlockReason, .clicked)
+        XCTAssertEqual(rig.clock.pendingCount, 0)
+        XCTAssertEqual(rig.tap.uninstallCount, 1)
     }
 }
