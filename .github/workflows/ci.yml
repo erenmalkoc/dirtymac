@@ -1,27 +1,38 @@
 name: CI
 
-# Compile and unit-test the app on every push and pull request so a
-# broken build is caught before a release tag is cut. Signing is
-# disabled — this job only proves the Swift sources still build and the
+# Compile and unit-test the app on every push to main and every pull
+# request, so a broken build is caught before a release tag is cut.
+# Signing is disabled — this job only proves the Swift sources build in
+# both configurations, the string catalog matches the code, and the
 # unit tests pass on the Xcode the Release workflow uses.
 
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
     name: Build (unsigned)
     runs-on: macos-26
-    timeout-minutes: 20
+    timeout-minutes: 30
+    defaults:
+      run:
+        shell: bash
 
     steps:
       - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Select Xcode
         run: |
-          XCODE=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1)
+          set -euo pipefail
+          XCODE=$(ls -d /Applications/Xcode_26*.app 2>/dev/null | sort -V | tail -1 || true)
           if [ -z "$XCODE" ]; then
             echo "::error::No Xcode 26.x found. Available Xcodes:"
             ls /Applications/ | grep -i '^Xcode' || true
@@ -43,13 +54,82 @@ jobs:
             CODE_SIGN_IDENTITY="" \
             -quiet
 
+      # Xcode only adds new strings to the catalog when the project is
+      # built in the IDE; this catches a string that would otherwise ship
+      # untranslated, and a catalog key nothing uses any more.
+      - name: Check string catalog
+        run: node scripts/check-strings.mjs build/ci
+
+      # Whole-module optimisation can fail where Debug compiles; find
+      # out on main, not after a release tag is public.
+      - name: Build (Release configuration)
+        run: |
+          xcodebuild build \
+            -project dirtymac.xcodeproj \
+            -scheme dirtymac \
+            -configuration Release \
+            -destination 'generic/platform=macOS' \
+            -derivedDataPath build/ci-release \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGN_IDENTITY="" \
+            -quiet
+
       - name: Test
+        env:
+          # Read by the snapshot tests (xcodebuild strips the prefix).
+          TEST_RUNNER_DIRTYMAC_SNAPSHOT_DIR: ${{ github.workspace }}/build/ci/snapshots
         run: |
           xcodebuild test \
             -project dirtymac.xcodeproj \
             -scheme dirtymac \
             -destination 'platform=macOS' \
             -derivedDataPath build/ci \
+            -resultBundlePath build/ci/Tests.xcresult \
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGN_IDENTITY="" \
             -quiet
+
+      # -quiet prints nothing on success, so prove the tests actually
+      # ran: fail if fewer ran than dirtymacTests/ declares.
+      - name: Test summary
+        if: ${{ !cancelled() && hashFiles('build/ci/Tests.xcresult/Info.plist') != '' }}
+        run: |
+          set -euo pipefail
+          xcrun xcresulttool get test-results summary \
+            --path build/ci/Tests.xcresult > build/ci/test-summary.json
+          node scripts/ci-test-summary.mjs build/ci/test-summary.json
+
+      - name: Collect crash reports
+        if: failure()
+        run: |
+          shopt -s nullglob
+          mkdir -p build/ci/diagnostics
+          for f in ~/Library/Logs/DiagnosticReports/dirtymac*; do
+            echo "::group::$(basename "$f")"
+            cat "$f"
+            echo "::endgroup::"
+            cp "$f" build/ci/diagnostics/
+          done
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v7
+        with:
+          name: test-results
+          path: |
+            build/ci/Tests.xcresult
+            build/ci/test-summary.json
+            build/ci/diagnostics
+          if-no-files-found: ignore
+          retention-days: 7
+
+      # Rendered views in every language, for reviewing layout changes
+      # without a Mac at hand.
+      - name: Upload UI snapshots
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: ui-snapshots
+          path: build/ci/snapshots
+          if-no-files-found: ignore
+          retention-days: 14
