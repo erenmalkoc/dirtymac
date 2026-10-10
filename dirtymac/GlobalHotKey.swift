@@ -45,9 +45,10 @@ enum HotKeyPreset: String, CaseIterable, Identifiable {
         }
     }
 
-    static var current: HotKeyPreset {
-        HotKeyPreset(rawValue: UserDefaults.standard.string(forKey: defaultsKey) ?? "")
-            ?? defaultValue
+    static var current: HotKeyPreset { stored(in: .standard) }
+
+    static func stored(in defaults: UserDefaults) -> HotKeyPreset {
+        HotKeyPreset(rawValue: defaults.string(forKey: defaultsKey) ?? "") ?? defaultValue
     }
 }
 

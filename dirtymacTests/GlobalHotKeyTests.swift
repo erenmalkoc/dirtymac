@@ -27,7 +27,9 @@ final class GlobalHotKeyTests: XCTestCase {
         let first = GlobalHotKey(action: {})
         XCTAssertTrue(first.register(.optShiftCmdK))
 
-        // The same combination can't be taken twice.
+        // The same combination can't be taken twice within one process.
+        // Carbon does let another app register it too, so this does not
+        // prove cross-app conflicts are detected.
         let second = GlobalHotKey(action: {})
         XCTAssertFalse(second.register(.optShiftCmdK))
 
@@ -41,16 +43,14 @@ final class GlobalHotKeyTests: XCTestCase {
         second.unregister()
     }
 
-    func testStoredPresetFallsBackToTheDefault() {
-        let defaults = UserDefaults.standard
-        let saved = defaults.object(forKey: HotKeyPreset.defaultsKey)
-        defer { defaults.set(saved, forKey: HotKeyPreset.defaultsKey) }
+    func testStoredPresetFallsBackToTheDefault() throws {
+        // A throwaway suite, never the installed app's real preferences.
+        let defaults = try TestDefaults.make(self)
 
-        defaults.removeObject(forKey: HotKeyPreset.defaultsKey)
-        XCTAssertEqual(HotKeyPreset.current, HotKeyPreset.defaultValue)
+        XCTAssertEqual(HotKeyPreset.stored(in: defaults), HotKeyPreset.defaultValue)
         defaults.set("garbage", forKey: HotKeyPreset.defaultsKey)
-        XCTAssertEqual(HotKeyPreset.current, HotKeyPreset.defaultValue)
+        XCTAssertEqual(HotKeyPreset.stored(in: defaults), HotKeyPreset.defaultValue)
         defaults.set(HotKeyPreset.off.rawValue, forKey: HotKeyPreset.defaultsKey)
-        XCTAssertEqual(HotKeyPreset.current, .off)
+        XCTAssertEqual(HotKeyPreset.stored(in: defaults), .off)
     }
 }
