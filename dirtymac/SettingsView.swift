@@ -203,6 +203,7 @@ struct SettingsView: View {
     @AppStorage(LockConfiguration.Key.blockMediaKeys) private var blockMediaKeys = true
     @AppStorage(LockConfiguration.Key.blockMouseAndTrackpad) private var blockMouseAndTrackpad = false
     @AppStorage(LockConfiguration.Key.autoUnlockSeconds) private var autoUnlockSeconds = 0
+    @AppStorage(SystemSounds.enabledKey) private var playSounds = true
     @Binding var isPresented: Bool
 
     // Mirrors SMAppService, which the user can also change from System
@@ -264,6 +265,13 @@ struct SettingsView: View {
                         .padding(.top, 4)
                         .transition(.opacity.combined(with: .move(edge: .top)))
                 }
+            }
+
+            section("Sound") {
+                Toggle("Play sounds", isOn: $playSounds)
+                    .font(.callout)
+                    .toggleStyle(.switch)
+                    .controlSize(.small)
             }
 
             section("Appearance") {

@@ -314,6 +314,48 @@ final class KeyboardBlockerTests: XCTestCase {
         XCTAssertEqual(rig.blocker.secureInput, SecureInputStatus(ownerName: nil))
     }
 
+    // MARK: Sounds
+
+    func testATimedLockSoundsLockedThreeTicksAndUnlocked() {
+        let rig = BlockerRig()
+        rig.blocker.start(timed(30))
+        XCTAssertEqual(rig.sounds.played, [.locked])
+        rig.clock.advance(by: 30)
+        XCTAssertEqual(rig.sounds.played, [.locked, .tick, .tick, .tick, .unlocked])
+    }
+
+    func testHoldingEscTicksThenChimesOnce() {
+        let rig = BlockerRig()
+        rig.blocker.start(basic)
+        holdEsc(rig)
+        XCTAssertEqual(rig.sounds.played, [.locked, .tick, .tick, .unlocked])
+    }
+
+    func testReleasingEscEarlySilencesTheRemainingTicks() {
+        let rig = BlockerRig()
+        rig.blocker.start(basic)
+        rig.tap.send(.escDown)
+        rig.clock.advance(by: 1.5)
+        rig.tap.send(.escUp)
+        rig.clock.advance(by: 5)
+        XCTAssertEqual(rig.sounds.played, [.locked, .tick])
+    }
+
+    func testAClickUnlocksQuietly() {
+        let rig = BlockerRig()
+        rig.blocker.start(basic)
+        rig.blocker.stop(reason: .clicked)
+        XCTAssertEqual(rig.sounds.played, [.locked])
+    }
+
+    func testTheSecureInputWarningSoundsOncePerAppearance() {
+        let rig = BlockerRig()
+        rig.blocker.start(basic)
+        rig.secureInput.enabled = true
+        rig.clock.advance(by: 5)
+        XCTAssertEqual(rig.sounds.played, [.locked, .warning])
+    }
+
     func testStoppingDuringTheReleaseGraceCancelsIt() {
         let rig = BlockerRig()
         rig.blocker.start(basic)

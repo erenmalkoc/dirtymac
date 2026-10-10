@@ -54,6 +54,7 @@ final class KeyboardBlocker: ObservableObject {
     private let permission: AccessibilityPermission
     private let scheduler: LockScheduling
     private let secureInputDetector: SecureInputDetecting
+    private let sounds: SoundPlaying
 
     private var startedAt: TimeInterval?
     private var ticker: LockTimer?
@@ -62,6 +63,8 @@ final class KeyboardBlocker: ObservableObject {
     /// Set once Esc has been held long enough; the unlock finishes when
     /// Esc comes up or when this fires.
     private var escReleaseTimer: LockTimer?
+    /// The ticks heard while Esc is held.
+    private var escTickTimers: [LockTimer] = []
     /// Whether the running lock includes the mouse and trackpad.
     private var mouseLocked = false
     /// Consecutive ticks with secure input on.
@@ -71,12 +74,14 @@ final class KeyboardBlocker: ObservableObject {
         tap: EventTapping = SessionEventTap(),
         permission: AccessibilityPermission = SystemAccessibility(),
         scheduler: LockScheduling = RunLoopScheduler(),
-        secureInput: SecureInputDetecting = SystemSecureInput()
+        secureInput: SecureInputDetecting = SystemSecureInput(),
+        sounds: SoundPlaying = SystemSounds()
     ) {
         self.tap = tap
         self.permission = permission
         self.scheduler = scheduler
         self.secureInputDetector = secureInput
+        self.sounds = sounds
         refreshPermission()
     }
 
@@ -145,6 +150,7 @@ final class KeyboardBlocker: ObservableObject {
         secureInputReadings = secureInput == nil ? 0 : SecureInputPolicy.readingsToAct
         lastUnlockReason = nil
         isActive = true
+        sounds.play(.locked)
 
         ticker = scheduler.schedule(after: 1, repeats: true) { [weak self] in
             self?.tick()
@@ -171,6 +177,7 @@ final class KeyboardBlocker: ObservableObject {
         escHoldTimer = nil
         escReleaseTimer?.cancel()
         escReleaseTimer = nil
+        cancelEscTicks()
         startedAt = nil
         elapsed = 0
         autoUnlockTotal = 0
@@ -178,6 +185,7 @@ final class KeyboardBlocker: ObservableObject {
         secureInputReadings = 0
         lastUnlockReason = reason
         isActive = false
+        if let cue = SoundSchedule.cue(for: reason) { sounds.play(cue) }
     }
 
     private func tick() {
@@ -190,6 +198,9 @@ final class KeyboardBlocker: ObservableObject {
             return
         }
         elapsed = scheduler.now - startedAt
+        if SoundSchedule.countdownTicks(remaining: autoUnlockRemaining, total: autoUnlockTotal) {
+            sounds.play(.tick)
+        }
         // The deadline timer can fire late, e.g. right after the Mac
         // wakes. The clock decides, so the countdown can't sit at 00:00
         // while the lock keeps running.
@@ -213,6 +224,7 @@ final class KeyboardBlocker: ObservableObject {
         case .warn:
             if secureInput == nil {
                 secureInput = SecureInputStatus(ownerName: secureInputDetector.ownerName())
+                sounds.play(.warning)
             }
         case .release:
             secureInput = SecureInputStatus(ownerName: secureInputDetector.ownerName())
@@ -236,11 +248,24 @@ final class KeyboardBlocker: ObservableObject {
         escHoldTimer = scheduler.schedule(after: Self.escHoldDuration, repeats: false) { [weak self] in
             self?.escHoldCompleted()
         }
+        escTickTimers = SoundSchedule.escHoldTicks(holdDuration: Self.escHoldDuration).map { delay in
+            scheduler.schedule(after: delay, repeats: false) { [weak self] in
+                self?.sounds.play(.tick)
+            }
+        }
+    }
+
+    private func cancelEscTicks() {
+        escTickTimers.forEach { $0.cancel() }
+        escTickTimers = []
     }
 
     private func escHoldCompleted() {
         escHoldTimer = nil
+        cancelEscTicks()
         guard isActive else { return }
+        // The chime is the cue to let go; the unlock finishes on release.
+        sounds.play(.unlocked)
         // Keep swallowing Esc until it comes up; never wait longer than
         // the grace period, so a lost key-up can't keep the lock on.
         escReleaseTimer = scheduler.schedule(after: Self.escReleaseGrace, repeats: false) { [weak self] in
@@ -260,6 +285,7 @@ final class KeyboardBlocker: ObservableObject {
         }
         escHoldTimer?.cancel()
         escHoldTimer = nil
+        cancelEscTicks()
     }
 
     // MARK: Display helpers

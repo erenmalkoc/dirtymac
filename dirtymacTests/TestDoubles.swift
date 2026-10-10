@@ -52,6 +52,13 @@ final class FakeSecureInput: SecureInputDetecting {
     func ownerName() -> String? { owner }
 }
 
+/// Records the cues instead of playing them.
+final class FakeSounds: SoundPlaying {
+    private(set) var played: [SoundCue] = []
+
+    func play(_ cue: SoundCue) { played.append(cue) }
+}
+
 /// A clock the test moves by hand; timers fire in order as it passes them.
 final class ManualScheduler: LockScheduling {
     private final class Entry: LockTimer {
@@ -115,10 +122,12 @@ final class BlockerRig {
     let permission = FakePermission()
     let clock = ManualScheduler()
     let secureInput = FakeSecureInput()
+    let sounds = FakeSounds()
     lazy var blocker = KeyboardBlocker(
         tap: tap,
         permission: permission,
         scheduler: clock,
-        secureInput: secureInput
+        secureInput: secureInput,
+        sounds: sounds
     )
 }
