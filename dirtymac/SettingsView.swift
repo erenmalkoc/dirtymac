@@ -86,6 +86,17 @@ enum LanguagePreference: String, CaseIterable, Identifiable {
         rawValue.isEmpty ? nil : Locale(identifier: rawValue)
     }
 
+    /// The language's .lproj bundle, for AppKit strings (menus, tooltips,
+    /// window titles) that SwiftUI's \.locale override does not reach.
+    /// System, or a missing .lproj, falls back to the system language.
+    var bundle: Bundle {
+        guard self != .system,
+              let path = Bundle.main.path(forResource: rawValue, ofType: "lproj"),
+              let bundle = Bundle(path: path)
+        else { return .main }
+        return bundle
+    }
+
     /// The saved preference (defaults to `.system`).
     static var current: LanguagePreference {
         LanguagePreference(rawValue: UserDefaults.standard.string(forKey: "language") ?? "")
@@ -142,6 +153,12 @@ struct LockConfiguration: Equatable {
     /// clicked, so it is never off and never shorter than the minimum.
     static func clampedSeconds(_ seconds: Int, mouseLocked: Bool) -> Int {
         mouseLocked ? max(seconds, minMouseLockSeconds) : seconds
+    }
+
+    /// A picker label such as "30 sec" or "2 min", in `locale`.
+    static func unlockChoiceTitle(_ seconds: Int, locale: Locale) -> String {
+        Duration.seconds(seconds)
+            .formatted(.units(allowed: [.minutes, .seconds], width: .abbreviated).locale(locale))
     }
 
     /// What the Settings picker offers: never a value the lock would
@@ -205,6 +222,8 @@ struct SettingsView: View {
     @AppStorage(LockConfiguration.Key.autoUnlockSeconds) private var autoUnlockSeconds = 0
     @AppStorage(SystemSounds.enabledKey) private var playSounds = true
     @Binding var isPresented: Bool
+    /// The in-app language (set by the popover), for the duration labels.
+    @Environment(\.locale) private var locale
 
     // Mirrors SMAppService, which the user can also change from System
     // Settings — re-read on appear instead of persisting it ourselves.
@@ -430,10 +449,7 @@ struct SettingsView: View {
         if seconds == 0 {
             Text("Off")
         } else {
-            Text(
-                Duration.seconds(seconds)
-                    .formatted(.units(allowed: [.minutes, .seconds], width: .abbreviated))
-            )
+            Text(LockConfiguration.unlockChoiceTitle(seconds, locale: locale))
         }
     }
 

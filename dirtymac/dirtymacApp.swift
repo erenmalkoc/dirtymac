@@ -183,7 +183,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         let menu = NSMenu()
 
         let openItem = NSMenuItem(
-            title: String(localized: "Open dirtymac"),
+            title: String(localized: "Open dirtymac", bundle: LanguagePreference.current.bundle),
             action: #selector(openFromMenu),
             keyEquivalent: ""
         )
@@ -193,7 +193,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         menu.addItem(.separator())
 
         let quitItem = NSMenuItem(
-            title: String(localized: "Quit dirtymac"),
+            title: String(localized: "Quit dirtymac", bundle: LanguagePreference.current.bundle),
             action: #selector(quitFromMenu),
             keyEquivalent: "q"
         )
@@ -286,7 +286,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard let button = statusItem?.button else { return }
 
         let label = active
-            ? String(localized: "dirtymac — keyboard locked")
+            ? String(localized: "dirtymac — keyboard locked", bundle: LanguagePreference.current.bundle)
             : "dirtymac"
         let image = NSImage(
             systemSymbolName: active ? "keyboard.fill" : "keyboard",
