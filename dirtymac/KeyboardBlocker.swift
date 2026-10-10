@@ -4,21 +4,7 @@ import CoreGraphics
 import ApplicationServices
 import AppKit
 
-// macOS routes media / brightness / volume / function-key controls
-// through a separate event channel: `kCGEventSystemDefined` (raw 14)
-// with the aux-buttons subtype (NX_SUBTYPE_AUX_CONTROL_BUTTONS = 8).
-// They do NOT arrive as keyDown / keyUp, so a plain keyboard tap
-// lets them through. We add the system-defined type to the mask and
-// then filter by subtype inside the callback so other system events
-// (e.g. power button, subtype 1) keep working — leaving the user a
-// hardware emergency exit if anything goes wrong.
-private let kCGEventSystemDefined: UInt32 = 14
-private let kAuxControlButtonsSubtype: Int16 = 8
-
-// Escape key. Holding it for `escHoldDuration` force-unlocks — the
-// universal emergency exit, available in every mode and essential when
-// the mouse is part of the lockdown (the menu bar is unreachable then).
-private let kEscapeKeyCode: Int64 = 53
+// What the tap blocks and how it treats each event lives in LockCore.swift.
 
 @MainActor
 final class KeyboardBlocker: ObservableObject {
@@ -74,71 +60,22 @@ final class KeyboardBlocker: ObservableObject {
         }
 
         let config = LockConfiguration.current
-
-        var rawMask = (1 << CGEventType.keyDown.rawValue)
-                     | (1 << CGEventType.keyUp.rawValue)
-
-        if config.blockModifierKeys {
-            rawMask |= (1 << CGEventType.flagsChanged.rawValue)
-        }
-        if config.blockMediaKeys {
-            rawMask |= (1 << kCGEventSystemDefined)
-        }
-        if config.blockMouseAndTrackpad {
-            let mouseTypes: [CGEventType] = [
-                .leftMouseDown, .leftMouseUp,
-                .rightMouseDown, .rightMouseUp,
-                .otherMouseDown, .otherMouseUp,
-                .leftMouseDragged, .rightMouseDragged, .otherMouseDragged,
-                .mouseMoved, .scrollWheel
-            ]
-            for t in mouseTypes { rawMask |= (1 << t.rawValue) }
-        }
-
         let refcon = Unmanaged.passUnretained(self).toOpaque()
 
         guard let tap = CGEvent.tapCreate(
             tap: .cgSessionEventTap,
             place: .headInsertEventTap,
             options: .defaultTap,
-            eventsOfInterest: CGEventMask(rawMask),
+            eventsOfInterest: EventMask.build(for: config),
             callback: { _, type, event, refcon in
-                if type == .tapDisabledByTimeout || type == .tapDisabledByUserInput {
-                    if let refcon {
-                        let blocker = Unmanaged<KeyboardBlocker>.fromOpaque(refcon).takeUnretainedValue()
-                        Task { @MainActor in blocker.reEnableTap() }
-                    }
-                    return Unmanaged.passUnretained(event)
+                guard let refcon else { return Unmanaged.passUnretained(event) }
+                let blocker = Unmanaged<KeyboardBlocker>.fromOpaque(refcon).takeUnretainedValue()
+                // The tap's run-loop source is on the main run loop, so
+                // the callback already runs on the main thread.
+                let swallow = MainActor.assumeIsolated {
+                    blocker.handle(TapEventDecision.decide(type: type, event: event))
                 }
-
-                // Hold-Escape emergency exit. We still swallow the Esc
-                // events so they never reach apps; the hold pattern is
-                // only used as our unlock trigger.
-                if type == .keyDown || type == .keyUp {
-                    let keycode = event.getIntegerValueField(.keyboardEventKeycode)
-                    if keycode == kEscapeKeyCode, let refcon {
-                        let blocker = Unmanaged<KeyboardBlocker>.fromOpaque(refcon).takeUnretainedValue()
-                        MainActor.assumeIsolated {
-                            if type == .keyDown { blocker.escHoldBegan() }
-                            else { blocker.escHoldEnded() }
-                        }
-                        return nil
-                    }
-                }
-
-                // System-defined events: only swallow the aux-button
-                // subtype (brightness, volume, media, F-key controls).
-                // Pass everything else through so things like the power
-                // button still reach the system.
-                if type.rawValue == kCGEventSystemDefined {
-                    let isAuxControl = MainActor.assumeIsolated {
-                        NSEvent(cgEvent: event)?.subtype.rawValue == kAuxControlButtonsSubtype
-                    }
-                    return isAuxControl ? nil : Unmanaged.passUnretained(event)
-                }
-
-                // Everything else in the mask is meant to be blocked.
-                return nil
+                return swallow ? nil : Unmanaged.passUnretained(event)
             },
             userInfo: refcon
         ) else {
@@ -199,6 +136,27 @@ final class KeyboardBlocker: ObservableObject {
         elapsed = 0
         autoUnlockTotal = 0
         isActive = false
+    }
+
+    /// Acts on one tap decision; returns whether to swallow the event.
+    /// The Esc events are swallowed too: the hold pattern is only our
+    /// unlock trigger and must never reach apps.
+    fileprivate func handle(_ decision: TapEventDecision) -> Bool {
+        switch decision {
+        case .pass:
+            return false
+        case .block:
+            return true
+        case .escDown:
+            escHoldBegan()
+            return true
+        case .escUp:
+            escHoldEnded()
+            return true
+        case .reEnable:
+            reEnableTap()
+            return false
+        }
     }
 
     fileprivate func reEnableTap() {
