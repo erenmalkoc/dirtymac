@@ -182,6 +182,15 @@ struct LockConfiguration: Equatable {
         return cfg.effective
     }
 
+    /// 1.1.x let "Off" be picked while mouse lockdown was on. 1.2's
+    /// picker no longer offers it and showed a blank selection, so such a
+    /// stored value is raised to what the lock uses. Idempotent.
+    static func normalizeStoredAutoUnlock(in d: UserDefaults) {
+        guard d.bool(forKey: Key.blockMouseAndTrackpad) else { return }
+        let stored = d.integer(forKey: Key.autoUnlockSeconds)
+        let clamped = clampedSeconds(stored, mouseLocked: true)
+        if clamped != stored { d.set(clamped, forKey: Key.autoUnlockSeconds) }
+    }
 }
 
 // MARK: - Settings View

@@ -80,4 +80,32 @@ final class LockConfigurationTests: XCTestCase {
         XCTAssertEqual(c.autoUnlockSeconds, LockConfiguration.minMouseLockSeconds)
     }
 
+    // MARK: Upgrading from 1.1.x
+
+    func testMouseLockdownWithTimerOffIsRaisedToTheMinimum() throws {
+        let defaults = try TestDefaults.make(self)
+        defaults.set(true, forKey: LockConfiguration.Key.blockMouseAndTrackpad)
+        defaults.set(0, forKey: LockConfiguration.Key.autoUnlockSeconds)
+        LockConfiguration.normalizeStoredAutoUnlock(in: defaults)
+        XCTAssertEqual(defaults.integer(forKey: LockConfiguration.Key.autoUnlockSeconds), LockConfiguration.minMouseLockSeconds)
+    }
+
+    func testLongerTimersAndKeyboardOnlyLocksAreLeftAlone() throws {
+        let defaults = try TestDefaults.make(self)
+        defaults.set(true, forKey: LockConfiguration.Key.blockMouseAndTrackpad)
+        defaults.set(120, forKey: LockConfiguration.Key.autoUnlockSeconds)
+        LockConfiguration.normalizeStoredAutoUnlock(in: defaults)
+        XCTAssertEqual(defaults.integer(forKey: LockConfiguration.Key.autoUnlockSeconds), 120)
+
+        defaults.set(false, forKey: LockConfiguration.Key.blockMouseAndTrackpad)
+        defaults.set(0, forKey: LockConfiguration.Key.autoUnlockSeconds)
+        LockConfiguration.normalizeStoredAutoUnlock(in: defaults)
+        XCTAssertEqual(defaults.integer(forKey: LockConfiguration.Key.autoUnlockSeconds), 0)
+    }
+
+    func testNormalizingAnEmptyStoreWritesNothing() throws {
+        let defaults = try TestDefaults.make(self)
+        LockConfiguration.normalizeStoredAutoUnlock(in: defaults)
+        XCTAssertNil(defaults.object(forKey: LockConfiguration.Key.autoUnlockSeconds))
+    }
 }

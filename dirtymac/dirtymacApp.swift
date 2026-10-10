@@ -61,6 +61,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         // defaults (onboarding / What's New bookkeeping).
         guard ProcessInfo.processInfo.environment["XCTestConfigurationFilePath"] == nil else { return }
 
+        LockConfiguration.normalizeStoredAutoUnlock(in: .standard)
         AppearancePreference.applyCurrent()
         // Force the bundle-icon Launch Services lookup to happen now
         // (during app launch, off the popover-open hot path) instead of
