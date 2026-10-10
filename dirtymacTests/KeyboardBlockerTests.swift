@@ -143,6 +143,26 @@ final class KeyboardBlockerTests: XCTestCase {
         XCTAssertEqual(rig.blocker.elapsedDisplay, "60:00")
     }
 
+    func testAnOverdueDeadlineUnlocksOnTheFirstTickAfterWaking() {
+        let rig = BlockerRig()
+        rig.blocker.start(timed(60))
+        rig.clock.advance(by: 10)
+        rig.clock.jump(by: 3600)        // asleep: no timer ran
+        rig.clock.advance(by: 0.5)
+        XCTAssertFalse(rig.blocker.isActive)
+        XCTAssertEqual(rig.blocker.lastUnlockReason, .autoUnlock)
+        XCTAssertEqual(rig.clock.pendingCount, 0)
+    }
+
+    func testElapsedTimeIncludesTimeAsleep() {
+        let rig = BlockerRig()
+        rig.blocker.start(basic)
+        rig.clock.jump(by: 3600)
+        rig.clock.advance(by: 1)
+        XCTAssertTrue(rig.blocker.isActive)
+        XCTAssertEqual(rig.blocker.elapsedDisplay, "60:01")
+    }
+
     func testDisplaysFollowTheClock() {
         let rig = BlockerRig()
         rig.blocker.start(timed(120))

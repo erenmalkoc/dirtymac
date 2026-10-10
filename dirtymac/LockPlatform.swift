@@ -131,7 +131,12 @@ protocol LockScheduling: AnyObject {
 }
 
 final class RunLoopScheduler: LockScheduling {
-    var now: TimeInterval { Date().timeIntervalSinceReferenceDate }
+    /// CLOCK_MONOTONIC keeps counting while the Mac sleeps and never
+    /// jumps with the wall clock, so the countdown, the elapsed time and
+    /// the unlock deadline all measure the same thing.
+    var now: TimeInterval {
+        TimeInterval(clock_gettime_nsec_np(CLOCK_MONOTONIC)) / 1_000_000_000
+    }
 
     func schedule(after delay: TimeInterval, repeats: Bool, _ action: @escaping @MainActor () -> Void) -> LockTimer {
         let timer = Timer(timeInterval: delay, repeats: repeats) { _ in

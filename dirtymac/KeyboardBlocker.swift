@@ -132,6 +132,12 @@ final class KeyboardBlocker: ObservableObject {
     private func tick() {
         guard let startedAt else { return }
         elapsed = scheduler.now - startedAt
+        // The deadline timer can fire late, e.g. right after the Mac
+        // wakes. The clock decides, so the countdown can't sit at 00:00
+        // while the lock keeps running.
+        if autoUnlockTotal > 0, elapsed >= TimeInterval(autoUnlockTotal) {
+            stop(reason: .autoUnlock)
+        }
     }
 
     // MARK: Hold-Escape emergency exit

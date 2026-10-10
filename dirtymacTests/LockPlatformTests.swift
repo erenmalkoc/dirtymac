@@ -28,6 +28,15 @@ final class LockPlatformTests: XCTestCase {
         XCTAssertFalse(fired)
     }
 
+    func testTheClockOnlyMovesForwardInSeconds() {
+        let scheduler = RunLoopScheduler()
+        let start = scheduler.now
+        Thread.sleep(forTimeInterval: 0.1)
+        let delta = scheduler.now - start
+        XCTAssertGreaterThanOrEqual(delta, 0.09)
+        XCTAssertLessThan(delta, 5, "the clock is not in seconds")
+    }
+
     func testInvalidatingTheTapReleasesItsPortAndSource() throws {
         var context = CFMachPortContext(version: 0, info: nil, retain: nil, release: nil, copyDescription: nil)
         let port = try XCTUnwrap(CFMachPortCreate(kCFAllocatorDefault, { _, _, _, _ in }, &context, nil))

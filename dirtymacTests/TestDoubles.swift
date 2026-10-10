@@ -74,6 +74,12 @@ final class ManualScheduler: LockScheduling {
         return entry
     }
 
+    /// Moves the clock without firing anything, like time spent asleep:
+    /// timers that fell due fire late, on the next `advance`.
+    func jump(by seconds: TimeInterval) {
+        now += seconds
+    }
+
     /// Moves the clock forward, firing every timer that falls due on the
     /// way, in order.
     func advance(by seconds: TimeInterval) {
@@ -81,7 +87,7 @@ final class ManualScheduler: LockScheduling {
         while let next = entries
             .filter({ !$0.isCancelled && $0.fireAt <= target + 1e-6 })
             .min(by: { $0.fireAt < $1.fireAt }) {
-            now = next.fireAt
+            now = max(now, next.fireAt)
             if next.repeats {
                 next.fireAt += next.interval
             } else {
