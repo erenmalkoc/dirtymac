@@ -195,7 +195,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     // Quit button. The tap dies with the process either way, but not
     // relying on that keeps both quit paths identical.
     @objc private func quitFromMenu() {
-        blocker.stop()
+        blocker.stop(reason: .quit)
         NSApp.terminate(nil)
     }
 

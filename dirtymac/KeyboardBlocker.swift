@@ -1,10 +1,21 @@
 import Foundation
 import Combine
-import CoreGraphics
-import ApplicationServices
 import AppKit
 
-// What the tap blocks and how it treats each event lives in LockCore.swift.
+// What the tap blocks and how it treats each event lives in LockCore.swift;
+// the tap, the permission check and the timers in LockPlatform.swift.
+
+/// Why a lock ended.
+enum UnlockReason: Equatable {
+    /// The power button in the panel.
+    case clicked
+    /// The hold-Esc emergency exit.
+    case escHeld
+    /// The auto-unlock timer.
+    case autoUnlock
+    /// The app is quitting.
+    case quit
+}
 
 @MainActor
 final class KeyboardBlocker: ObservableObject {
@@ -13,30 +24,41 @@ final class KeyboardBlocker: ObservableObject {
     @Published private(set) var hasPermission: Bool = false
     /// Configured auto-unlock duration for the active session (0 = none).
     @Published private(set) var autoUnlockTotal: Int = 0
+    /// Why the most recent lock ended; nil while locked and before the
+    /// first lock.
+    @Published private(set) var lastUnlockReason: UnlockReason?
 
-    private var eventTap: CFMachPort?
-    private var runLoopSource: CFRunLoopSource?
-    private var ticker: Timer?
-    private var startedAt: Date?
+    /// How long Esc has to be held to force an unlock.
+    static let escHoldDuration: TimeInterval = 3.0
 
-    private var autoUnlockTimer: Timer?
-    private var escHoldTimer: Timer?
-    private let escHoldDuration: TimeInterval = 3.0
+    private let tap: EventTapping
+    private let permission: AccessibilityPermission
+    private let scheduler: LockScheduling
 
-    init() {
+    private var startedAt: TimeInterval?
+    private var ticker: LockTimer?
+    private var autoUnlockTimer: LockTimer?
+    private var escHoldTimer: LockTimer?
+
+    init(
+        tap: EventTapping = SessionEventTap(),
+        permission: AccessibilityPermission = SystemAccessibility(),
+        scheduler: LockScheduling = RunLoopScheduler()
+    ) {
+        self.tap = tap
+        self.permission = permission
+        self.scheduler = scheduler
         refreshPermission()
     }
 
     // MARK: Permission
 
     func refreshPermission() {
-        hasPermission = AXIsProcessTrusted()
+        hasPermission = permission.isTrusted
     }
 
     func requestPermission() {
-        let key = kAXTrustedCheckOptionPrompt.takeRetainedValue() as String
-        let opts = [key: true] as CFDictionary
-        hasPermission = AXIsProcessTrustedWithOptions(opts)
+        hasPermission = permission.requestAccess()
     }
 
     func openAccessibilitySettings() {
@@ -44,143 +66,94 @@ final class KeyboardBlocker: ObservableObject {
         NSWorkspace.shared.open(url)
     }
 
-    // MARK: Toggle
+    // MARK: Lock
 
-    func toggle() {
-        if isActive { stop() } else { start() }
-    }
-
-    func start() {
-        guard !isActive else { return }
+    /// Locks with `configuration`, the stored settings by default.
+    /// Returns false when no lock started: the app has no Accessibility
+    /// permission (the system prompt is shown) or macOS refused the tap.
+    @discardableResult
+    func start(_ configuration: LockConfiguration = .current) -> Bool {
+        guard !isActive else { return true }
 
         refreshPermission()
         guard hasPermission else {
             requestPermission()
-            return
+            return false
         }
 
-        let config = LockConfiguration.current
-        let refcon = Unmanaged.passUnretained(self).toOpaque()
-
-        guard let tap = CGEvent.tapCreate(
-            tap: .cgSessionEventTap,
-            place: .headInsertEventTap,
-            options: .defaultTap,
-            eventsOfInterest: EventMask.build(for: config),
-            callback: { _, type, event, refcon in
-                guard let refcon else { return Unmanaged.passUnretained(event) }
-                let blocker = Unmanaged<KeyboardBlocker>.fromOpaque(refcon).takeUnretainedValue()
-                // The tap's run-loop source is on the main run loop, so
-                // the callback already runs on the main thread.
-                let swallow = MainActor.assumeIsolated {
-                    blocker.handle(TapEventDecision.decide(type: type, event: event))
-                }
-                return swallow ? nil : Unmanaged.passUnretained(event)
-            },
-            userInfo: refcon
-        ) else {
+        // Applied here as well, so no caller can skip the safety rules
+        // (such as the mandatory timer while the mouse is locked).
+        let config = configuration.effective
+        let installed = tap.install(mask: EventMask.build(for: config)) { [weak self] decision in
+            self?.handleEsc(decision)
+        }
+        guard installed else {
             // Tap creation failed — likely permission revoked between checks.
             hasPermission = false
-            return
+            return false
         }
 
-        let source = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, tap, 0)
-        CFRunLoopAddSource(CFRunLoopGetMain(), source, .commonModes)
-        CGEvent.tapEnable(tap: tap, enable: true)
-
-        eventTap = tap
-        runLoopSource = source
-        startedAt = Date()
+        startedAt = scheduler.now
         elapsed = 0
         autoUnlockTotal = config.autoUnlockSeconds
+        lastUnlockReason = nil
         isActive = true
 
-        ticker = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            // Timer is scheduled on the main run loop, so it fires on the
-            // main thread — hop to the MainActor without a Task suspend.
-            MainActor.assumeIsolated {
-                guard let self, let start = self.startedAt else { return }
-                self.elapsed = Date().timeIntervalSince(start)
-            }
+        ticker = scheduler.schedule(after: 1, repeats: true) { [weak self] in
+            self?.tick()
         }
-
         if autoUnlockTotal > 0 {
-            autoUnlockTimer = Timer.scheduledTimer(
-                withTimeInterval: TimeInterval(autoUnlockTotal),
+            autoUnlockTimer = scheduler.schedule(
+                after: TimeInterval(autoUnlockTotal),
                 repeats: false
-            ) { [weak self] _ in
-                MainActor.assumeIsolated {
-                    self?.stop()
-                }
+            ) { [weak self] in
+                self?.stop(reason: .autoUnlock)
             }
         }
+        return true
     }
 
-    func stop() {
+    func stop(reason: UnlockReason) {
         guard isActive else { return }
-        if let tap = eventTap {
-            CGEvent.tapEnable(tap: tap, enable: false)
-        }
-        if let source = runLoopSource {
-            CFRunLoopRemoveSource(CFRunLoopGetMain(), source, .commonModes)
-        }
-        eventTap = nil
-        runLoopSource = nil
-        ticker?.invalidate()
+        tap.uninstall()
+        ticker?.cancel()
         ticker = nil
-        autoUnlockTimer?.invalidate()
+        autoUnlockTimer?.cancel()
         autoUnlockTimer = nil
-        escHoldTimer?.invalidate()
+        escHoldTimer?.cancel()
         escHoldTimer = nil
         startedAt = nil
         elapsed = 0
         autoUnlockTotal = 0
+        lastUnlockReason = reason
         isActive = false
     }
 
-    /// Acts on one tap decision; returns whether to swallow the event.
-    /// The Esc events are swallowed too: the hold pattern is only our
-    /// unlock trigger and must never reach apps.
-    fileprivate func handle(_ decision: TapEventDecision) -> Bool {
-        switch decision {
-        case .pass:
-            return false
-        case .block:
-            return true
-        case .escDown:
-            escHoldBegan()
-            return true
-        case .escUp:
-            escHoldEnded()
-            return true
-        case .reEnable:
-            reEnableTap()
-            return false
-        }
-    }
-
-    fileprivate func reEnableTap() {
-        guard let tap = eventTap else { return }
-        CGEvent.tapEnable(tap: tap, enable: true)
+    private func tick() {
+        guard let startedAt else { return }
+        elapsed = scheduler.now - startedAt
     }
 
     // MARK: Hold-Escape emergency exit
 
-    fileprivate func escHoldBegan() {
-        guard isActive, escHoldTimer == nil else { return } // ignore auto-repeat
-        escHoldTimer = Timer.scheduledTimer(
-            withTimeInterval: escHoldDuration,
-            repeats: false
-        ) { [weak self] _ in
-            MainActor.assumeIsolated {
-                guard let self, self.isActive else { return }
-                self.stop()
-            }
+    private func handleEsc(_ decision: TapEventDecision) {
+        switch decision {
+        case .escDown: escHoldBegan()
+        case .escUp: escHoldEnded()
+        default: break
         }
     }
 
-    fileprivate func escHoldEnded() {
-        escHoldTimer?.invalidate()
+    private func escHoldBegan() {
+        guard isActive, escHoldTimer == nil else { return } // ignore auto-repeat
+        escHoldTimer = scheduler.schedule(after: Self.escHoldDuration, repeats: false) { [weak self] in
+            guard let self, self.isActive else { return }
+            self.stop(reason: .escHeld)
+        }
+    }
+
+    private func escHoldEnded() {
+        escHoldTimer?.cancel()
         escHoldTimer = nil
     }
 

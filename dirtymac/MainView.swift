@@ -154,7 +154,7 @@ struct MainView: View {
 
     private func handlePowerTap() {
         if blocker.isActive {
-            blocker.stop()
+            blocker.stop(reason: .clicked)
         } else if LockConfiguration.current.blockMouseAndTrackpad {
             confirmLockdown = true
         } else {
@@ -217,7 +217,7 @@ struct MainView: View {
             Spacer()
 
             Button("Quit", role: .destructive) {
-                blocker.stop()
+                blocker.stop(reason: .quit)
                 NSApp.terminate(nil)
             }
             .buttonStyle(.bordered)
