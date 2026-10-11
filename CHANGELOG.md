@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.1] - 2026-10-11
+
+### Fixed
+- After an update dirtymac could ask for Accessibility again even though System Settings showed it switched on. Two causes are handled:
+  - A copy left running while an update replaced it on disk (Homebrew did not quit dirtymac before upgrading until the 1.3.0 cask) can no longer pass macOS's signature checks. It now notices and restarts itself into the new version as soon as it is opened or its menu bar icon is clicked.
+  - An Accessibility entry macOS no longer honours (left by another build) still shows as switched on but does nothing, and blocks the system prompt. Grant Access now removes it first, so the prompt and a working switch come back. The permission screens say so.
+
 ## [1.3.0] - 2026-10-11
 
 A "safe exits" release: the lock tells the truth about what it blocks, always lets you out, and every way out is now covered by tests.
@@ -103,7 +110,8 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.3.0...HEAD
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.3.1...HEAD
+[1.3.1]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.3.1
 [1.3.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.3.0
 [1.2.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.2.0
 [1.1.2]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.1.2
