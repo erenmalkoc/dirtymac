@@ -52,6 +52,8 @@ Grab the latest signed & notarized DMG from [Releases](https://github.com/erenma
 
 ### Troubleshooting
 
+**dirtymac asks for Accessibility again after an update, although it's switched on in System Settings** — macOS no longer honours the old entry: it belongs to the copy the update replaced (or to a build run from Xcode). Click **Grant Access** in the panel: from 1.3.1 on it removes the old entry first, so the prompt appears and the switch works again. On older versions, select dirtymac in System Settings → Privacy & Security → Accessibility, remove it with **−**, and grant access again. Since 1.3.1 a copy that was left running while an update replaced it also restarts itself into the new version the next time you open it.
+
 **"… is using secure input, so macOS won't let dirtymac block keys"** — while a password field is focused or Terminal's Secure Keyboard Entry is on, macOS delivers keystrokes past every event tap; no app can block them. Switch away from that app or quit it; locking and unlocking the screen also clears it. Full lockdown won't start while this is on, because hold-Esc could not get through either.
 
 **`Refusing to load cask … from untrusted tap`** — Homebrew 6.0's trust check, not a problem with the app. Run `brew trust erenmalkoc/tap` and install again.
