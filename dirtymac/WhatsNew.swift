@@ -25,7 +25,8 @@ enum WhatsNew {
 
     /// Newest first. Add an entry here in the same commit that bumps
     /// MARKETING_VERSION for a release with user-visible changes; a
-    /// release without an entry simply shows no window.
+    /// release without an entry shows no window to people who saw the
+    /// one before it.
     static let catalog: [ReleaseNote] = [
         ReleaseNote(version: "1.3.0", items: [
             ReleaseNoteItem(
@@ -82,8 +83,10 @@ enum WhatsNew {
     /// release doesn't hide its notes.
     ///
     /// `lastSeen == nil` means the user predates this window. They get the
-    /// running version's entry only; replaying the whole history at them
-    /// would be noise.
+    /// newest entry up to the running version only; replaying the whole
+    /// history at them would be noise. That entry need not be the running
+    /// version's own: a patch release has none, and looking for an exact
+    /// match showed people coming from 1.1.x nothing on 1.3.1.
     static func notesToShow(
         current: String,
         lastSeen: String?,
@@ -91,7 +94,8 @@ enum WhatsNew {
     ) -> [ReleaseNote] {
         let upToCurrent = catalog.filter { compare($0.version, current) != .orderedDescending }
         guard let lastSeen else {
-            return upToCurrent.filter { compare($0.version, current) == .orderedSame }
+            let newest = upToCurrent.max { compare($0.version, $1.version) == .orderedAscending }
+            return newest.map { [$0] } ?? []
         }
         return upToCurrent
             .filter { compare($0.version, lastSeen) == .orderedDescending }

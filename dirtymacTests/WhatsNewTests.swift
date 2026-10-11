@@ -17,12 +17,17 @@ final class WhatsNewTests: XCTestCase {
         XCTAssertEqual(WhatsNew.compare("2.0.0", "1.99.99"), .orderedDescending)
     }
 
-    func testUserWhoPredatesTheWindowSeesOnlyTheRunningVersion() {
+    func testUserWhoPredatesTheWindowSeesOnlyTheNewestEntry() {
         let notes = WhatsNew.notesToShow(current: "1.3.0", lastSeen: nil, catalog: catalog)
         XCTAssertEqual(versions(notes), ["1.3.0"])
     }
 
-    func testUserWhoPredatesTheWindowOnAReleaseWithoutNotesSeesNothing() {
+    func testUserWhoPredatesTheWindowOnAPatchReleaseSeesTheNewestEntryBeforeIt() {
+        let notes = WhatsNew.notesToShow(current: "1.3.1", lastSeen: nil, catalog: catalog)
+        XCTAssertEqual(versions(notes), ["1.3.0"])
+    }
+
+    func testUserWhoPredatesTheWindowBeforeAnyNotesSeesNothing() {
         XCTAssertTrue(WhatsNew.notesToShow(current: "1.1.2", lastSeen: nil, catalog: catalog).isEmpty)
     }
 
