@@ -33,6 +33,9 @@ struct GlassPowerButton: View {
         }
         .buttonStyle(PowerButtonStyle(isActive: isActive))
         .animation(.easeInOut(duration: 0.25), value: isActive)
+        // The glyph alone reads as "power"; say what pressing it does.
+        .accessibilityLabel(isActive ? Text("Unlock Keyboard") : Text("Lock Keyboard"))
+        .accessibilityValue(isActive ? Text("Locked") : Text("Ready"))
     }
 }
 
