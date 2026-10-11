@@ -98,6 +98,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// the Dock's recents) lands here. Without this, nothing visible
     /// happens and the app looks broken.
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        // Opening the app after an update that replaced it on disk lands
+        // here, in the stale copy: start the new version instead.
+        if relaunchIfReplaced() { return false }
         if let window = onboardingWindow ?? whatsNewWindow {
             window.makeKeyAndOrderFront(nil)
             NSApp.activate(ignoringOtherApps: true)
@@ -256,8 +259,39 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    // MARK: Updates
+
+    private var isRelaunching = false
+
+    /// Restarts into the version on disk when an update replaced this
+    /// running copy (see InstalledBuild). Returns whether it did.
+    @discardableResult
+    private func relaunchIfReplaced() -> Bool {
+        guard !isRelaunching else { return true }
+        guard InstalledBuild.currentWasReplaced else { return false }
+        isRelaunching = true
+        blocker.stop(reason: .quit)
+        let configuration = NSWorkspace.OpenConfiguration()
+        configuration.createsNewApplicationInstance = true
+        NSWorkspace.shared.openApplication(at: Bundle.main.bundleURL, configuration: configuration) { _, error in
+            Task { @MainActor in
+                // If the new copy didn't start, keep this one rather than
+                // leaving no dirtymac at all.
+                guard error == nil else {
+                    NSLog("dirtymac: relaunch after update failed: \(error?.localizedDescription ?? "")")
+                    self.isRelaunching = false
+                    return
+                }
+                NSApp.terminate(nil)
+            }
+        }
+        return true
+    }
+
     func showPopover() {
         guard let button = statusItem?.button else { return }
+        // A stale copy would only show a permission prompt it can't satisfy.
+        if relaunchIfReplaced() { return }
         guard !popover.isShown else {
             NSApp.activate(ignoringOtherApps: true)
             return
