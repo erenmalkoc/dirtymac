@@ -44,20 +44,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var hotKey: GlobalHotKey?
     private var registeredHotKey: HotKeyPreset?
     private var defaultsObserver: NSObjectProtocol?
-    private var launchedAsLoginItem = false
     private var sessionWatcher: SessionWatcher?
 
-    func applicationWillFinishLaunching(_ notification: Notification) {
-        // The launch Apple event is only available this early. A login
-        // item launch must stay silent; a launch the user asked for
-        // (Spotlight, Finder, Launchpad) should show the app right away.
-        let event = NSAppleEventManager.shared().currentAppleEvent
-        launchedAsLoginItem = event?.eventID == AEEventID(kAEOpenApplication)
-            && event?.paramDescriptor(forKeyword: AEKeyword(keyAEPropData))?.enumCodeValue
-                == OSType(keyAELaunchedAsLogInItem)
-    }
-
     func applicationDidFinishLaunching(_ notification: Notification) {
+        // AppKit calls this from inside the launch Apple event's handler,
+        // the only moment that event can be read (it is still nil in
+        // applicationWillFinishLaunching, which left every login launch
+        // looking like a manual one and opened the panel at each login).
+        let loginItemLaunch = Self.isLoginItemLaunch(NSAppleEventManager.shared().currentAppleEvent)
+
         // As the unit-test host the app must stay inert: no status item,
         // no global shortcut, no windows and no writes to the user's
         // defaults (onboarding / What's New bookkeeping).
@@ -93,7 +88,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             showOnboarding()
         } else if presentWhatsNewIfNeeded() {
             // The window is the launch's visible response.
-        } else if isUserInitiatedLaunch(notification) {
+        } else if Self.isUserInitiatedLaunch(loginItem: loginItemLaunch, userInfo: notification.userInfo) {
             // Let the status item get its window before anchoring to it.
             DispatchQueue.main.async { [weak self] in self?.showPopover() }
         }
@@ -112,11 +107,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         return false
     }
 
-    private func isUserInitiatedLaunch(_ notification: Notification) -> Bool {
-        guard !launchedAsLoginItem else { return false }
+    /// True for the 'oapp' event macOS sends when it starts a login item.
+    static func isLoginItemLaunch(_ event: NSAppleEventDescriptor?) -> Bool {
+        guard let event,
+              event.eventClass == AEEventClass(kCoreEventClass),
+              event.eventID == AEEventID(kAEOpenApplication)
+        else { return false }
+        return event.paramDescriptor(forKeyword: AEKeyword(keyAEPropData))?.enumCodeValue
+            == OSType(keyAELaunchedAsLogInItem)
+    }
+
+    /// A login item launch stays silent; a launch the user asked for
+    /// (Spotlight, Finder, Launchpad) shows the panel right away.
+    static func isUserInitiatedLaunch(loginItem: Bool, userInfo: [AnyHashable: Any]?) -> Bool {
+        guard !loginItem else { return false }
         // False when macOS launched the app to open a URL or run an
         // intent — those paths decide for themselves what to show.
-        return notification.userInfo?[NSApplication.launchIsDefaultUserInfoKey] as? Bool ?? true
+        return userInfo?[NSApplication.launchIsDefaultUserInfoKey] as? Bool ?? true
     }
 
     // MARK: Global shortcut
