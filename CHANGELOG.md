@@ -7,6 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-10-11
+
+A "safe exits" release: the lock tells the truth about what it blocks, always lets you out, and every way out is now covered by tests.
+
+### Added
+- **Secure Input warning.** While another app holds Secure Event Input (a focused password field, Terminal's Secure Keyboard Entry), macOS sends keystrokes past every event tap, so no app can block them. The panel now says so and names the app when macOS tells which one; dirtymac comes forward so apps that only hold secure input while frontmost let go of it. Full lockdown does not start while secure input is on and ends if it turns on mid-lock, because hold-Esc could not get through either. Spotlight and Shortcuts open the panel instead of locking blind in that case.
+- **The lock ends with the session.** Sleep, a locked screen, a user switch, System Settings coming forward or a revoked Accessibility permission now end the lock, and the panel explains why. Switching Accessibility off under a live tap can hang all input on macOS 15 and 26.
+- **Sound cues.** A short system sound when the keyboard locks, a tick each second while Esc is held, ticks in the last three seconds before an auto-unlock, and a chime on unlock. On by default; Settings → Sound turns them off.
+- **New app icon and menu bar glyph.** A keycap with one clean stripe across a dusty top; the menu bar glyph turns red while locked.
+- VoiceOver label and state on the power button.
+
+### Changed
+- Hold-Esc now finishes the unlock when Esc comes up (at most 1.5 s later), so the rest of the press no longer auto-repeats into the frontmost app.
+- Full lockdown also blocks trackpad gestures (pinch, rotate, smart zoom).
+- The right-click menu, the menu bar tooltip and the Auto-unlock labels follow the in-app language instead of the system language.
+
+### Fixed
+- The panel opened at every login for people with open at login on: the login-item check ran before macOS made the launch event available.
+- The locked menu bar icon was drawn black, not red (`contentTintColor` does not tint a non-template image).
+- Hold-Esc and auto-unlock stalled while a dirtymac menu was open; lock timers now run in every run-loop mode.
+- Every unlock left a disabled event tap alive until the app quit; the tap is now invalidated.
+- After the Mac slept the countdown could sit at 00:00 while the lock kept running; lock time is measured on one monotonic clock that counts sleep.
+- The Auto-unlock picker was blank for people who upgraded from 1.1.x with mouse lockdown and the timer off.
+- The stop control stays in the panel while a lock runs, even if the Accessibility permission was revoked meanwhile.
+
+### Development
+- The test target picks up new files by itself, and CI fails when fewer tests run than are declared, when a string is missing from the catalog or untranslated, or when the Release configuration does not build. The lock core runs against a fake event tap and clock, so every exit is tested on each build without an Accessibility permission.
+- Releases run the test suite first, check that the tag matches the app version and the CHANGELOG, refuse to rebuild a published release, and keep the signing keychain away from third-party actions.
+
 ## [1.2.0] - 2026-09-23
 
 ### Added
@@ -74,7 +103,8 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.3.0
 [1.2.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.2.0
 [1.1.2]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.1.2
 [1.1.1]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.1.1
