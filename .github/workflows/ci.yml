@@ -11,6 +11,8 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  # The Release workflow runs this first, so no tag ships untested.
+  workflow_call:
 
 permissions:
   contents: read

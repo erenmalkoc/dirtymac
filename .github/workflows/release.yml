@@ -16,9 +16,19 @@ on:
 permissions:
   contents: write  # needed to create the GitHub Release
 
+# Two runs for one tag would race to publish the same DMG.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
+  test:
+    name: Test
+    uses: ./.github/workflows/ci.yml
+
   release:
     name: Build, notarize, publish
+    needs: test
     runs-on: macos-26
     # Two notary round-trips now (the .app, then the DMG).
     timeout-minutes: 45
@@ -26,6 +36,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v7
+        with:
+          persist-credentials: false
 
       - name: Select Xcode
         # GitHub's macos-26 runner names Xcode by exact version (e.g.
@@ -47,6 +59,37 @@ jobs:
           VERSION="${GITHUB_REF_NAME#v}"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Building dirtymac v$VERSION"
+
+      # v1.1.2 shipped with the project still saying 1.1.1: the tag, the
+      # app's MARKETING_VERSION and a dated CHANGELOG section must agree.
+      - name: Check version
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          if ! grep -q "MARKETING_VERSION = $VERSION;" dirtymac.xcodeproj/project.pbxproj; then
+            echo "::error::MARKETING_VERSION in project.pbxproj is not $VERSION"
+            exit 1
+          fi
+          if ! grep -qF "## [$VERSION] - " CHANGELOG.md; then
+            echo "::error::CHANGELOG.md has no dated section for $VERSION"
+            exit 1
+          fi
+
+      # Re-running a published release would replace the DMG and break
+      # the Homebrew cask's sha256 for everyone.
+      - name: Refuse to rebuild a published release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          set -euo pipefail
+          ASSETS=$(gh release view "$GITHUB_REF_NAME" -R "$GITHUB_REPOSITORY" --json isDraft,assets \
+            --jq 'select(.isDraft == false) | .assets[].name' 2>/dev/null || true)
+          if printf '%s\n' "$ASSETS" | grep -qxF "dirtymac-$VERSION.dmg"; then
+            echo "::error::$GITHUB_REF_NAME is already published; cut a new patch tag instead"
+            exit 1
+          fi
 
       - name: Import Developer ID certificate
         env:
@@ -115,6 +158,14 @@ jobs:
           NOTARY_ISSUER_ID:  ${{ secrets.NOTARY_ISSUER_ID }}
         run: scripts/release.sh "${{ steps.version.outputs.version }}"
 
+      # Nothing after this needs the signing identity or the notary key,
+      # so take them off the runner before any third-party action runs.
+      - name: Remove signing material
+        if: always()
+        run: |
+          security delete-keychain "$RUNNER_TEMP/build.keychain-db" || true
+          rm -f "$RUNNER_TEMP/notary.p8"
+
       - name: Show artifacts
         run: ls -lh build/release/
 
@@ -125,12 +176,15 @@ jobs:
           echo "sha256=$SHA" >> "$GITHUB_OUTPUT"
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v3
+        # Pinned to the v3.0.3 commit: a moved tag can't run new code here.
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
           tag_name: ${{ github.ref_name }}
           name: dirtymac ${{ steps.version.outputs.version }}
           generate_release_notes: true
-          files: build/release/dirtymac-${{ steps.version.outputs.version }}.dmg
+          files: |
+            build/release/dirtymac-${{ steps.version.outputs.version }}.dmg
+            build/release/dirtymac-${{ steps.version.outputs.version }}.sha256
           body: |
             ## Install via Homebrew
 
