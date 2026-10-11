@@ -34,6 +34,7 @@ final class FakeEventTap: EventTapping {
 final class FakePermission: AccessibilityPermission {
     var trusted = true
     private(set) var requests = 0
+    private(set) var resets = 0
 
     var isTrusted: Bool { trusted }
 
@@ -41,6 +42,8 @@ final class FakePermission: AccessibilityPermission {
         requests += 1
         return trusted
     }
+
+    func resetEntry() { resets += 1 }
 }
 
 final class FakeSecureInput: SecureInputDetecting {

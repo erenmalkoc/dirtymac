@@ -617,6 +617,83 @@
         }
       }
     },
+    "Already switched on in System Settings? Grant Access removes the old entry so you can switch it on again.": {
+      "comment": "Caption under the Accessibility permission buttons. After some updates System Settings still shows dirtymac switched on, but macOS no longer honours that entry; Grant Access removes it so the user can switch it on again.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "In den Systemeinstellungen schon eingeschaltet? „Zugriff erlauben“ entfernt den alten Eintrag, damit du ihn neu einschalten kannst."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Already switched on in System Settings? Grant Access removes the old entry so you can switch it on again."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "¿Ya está activado en Ajustes del Sistema? «Conceder acceso» elimina la entrada antigua para que puedas volver a activarla."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déjà activé dans Réglages Système ? « Autoriser l’accès » supprime l’ancienne entrée pour que vous puissiez la réactiver."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Già attivo in Impostazioni di Sistema? “Concedi accesso” rimuove la vecchia voce così puoi riattivarla."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム設定ですでにオンになっていますか？「アクセスを許可」で古い項目を削除すると、もう一度オンにできます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시스템 설정에서 이미 켜져 있나요? ‘권한 허용’을 누르면 이전 항목이 지워져 다시 켤 수 있습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Já está ativado nos Ajustes do Sistema? “Conceder acesso” remove a entrada antiga para que você possa ativá-la de novo."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Уже включено в Системных настройках? «Разрешить доступ» удалит старую запись, чтобы её можно было включить снова."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem Ayarları’nda zaten açık mı? “İzin Ver” eski kaydı siler, böylece yeniden açabilirsiniz."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已在“系统设置”中开启？点按“授予权限”会移除旧条目，以便你重新开启。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已在「系統設定」中開啟？點按「授權存取」會移除舊項目，讓你重新開啟。"
+          }
+        }
+      }
+    },
     "Another app is using secure input, so macOS won't let dirtymac block keys.": {
       "comment": "Warning in the panel while another app holds Secure Event Input and its name is unknown.",
       "localizations": {

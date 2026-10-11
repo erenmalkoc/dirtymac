@@ -103,6 +103,8 @@ protocol AccessibilityPermission {
     /// Shows the system prompt when the app isn't trusted yet; returns
     /// the current state.
     func requestAccess() -> Bool
+    /// Removes this app's own entry from the Accessibility list.
+    func resetEntry()
 }
 
 struct SystemAccessibility: AccessibilityPermission {
@@ -111,6 +113,27 @@ struct SystemAccessibility: AccessibilityPermission {
     func requestAccess() -> Bool {
         let key = kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String
         return AXIsProcessTrustedWithOptions([key: true] as CFDictionary)
+    }
+
+    /// An entry recorded for another build of the app (one run from
+    /// Xcode, or a copy that was replaced while it ran) still shows as
+    /// switched on in System Settings but no longer applies, and macOS
+    /// then shows no prompt. Removing it lets the prompt and a fresh,
+    /// working switch appear. Best effort: on failure the prompt still
+    /// opens and the panel explains the manual way.
+    func resetEntry() {
+        guard let bundleID = Bundle.main.bundleIdentifier else { return }
+        let tccutil = Process()
+        tccutil.executableURL = URL(fileURLWithPath: "/usr/bin/tccutil")
+        tccutil.arguments = ["reset", "Accessibility", bundleID]
+        tccutil.standardOutput = FileHandle.nullDevice
+        tccutil.standardError = FileHandle.nullDevice
+        do {
+            try tccutil.run()
+            tccutil.waitUntilExit()
+        } catch {
+            NSLog("dirtymac: tccutil reset failed: \(error.localizedDescription)")
+        }
     }
 }
 

@@ -110,6 +110,13 @@ struct OnboardingView: View {
                     .buttonStyle(.bordered)
             }
             .padding(.top, 2)
+
+            Text("Already switched on in System Settings? Grant Access removes the old entry so you can switch it on again.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .padding(.horizontal, 12)
         }
         .frame(maxWidth: .infinity)
     }

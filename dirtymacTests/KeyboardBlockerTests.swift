@@ -43,6 +43,21 @@ final class KeyboardBlockerTests: XCTestCase {
         XCTAssertEqual(rig.tap.installCount, 0)
     }
 
+    func testGrantingClearsAStaleEntryBeforeAsking() {
+        let rig = BlockerRig()
+        rig.permission.trusted = false
+        rig.blocker.requestPermission()
+        XCTAssertEqual(rig.permission.resets, 1)
+        XCTAssertEqual(rig.permission.requests, 1)
+    }
+
+    func testGrantingWhileTrustedLeavesTheEntryAlone() {
+        let rig = BlockerRig()
+        rig.blocker.requestPermission()
+        XCTAssertEqual(rig.permission.resets, 0)
+        XCTAssertTrue(rig.blocker.hasPermission)
+    }
+
     func testARefusedTapLeavesTheKeyboardUnlocked() {
         let rig = BlockerRig()
         rig.tap.refuses = true

@@ -92,6 +92,10 @@ final class KeyboardBlocker: ObservableObject {
     }
 
     func requestPermission() {
+        // Untrusted while System Settings may still show dirtymac switched
+        // on (an entry left by another build): clear it first, or macOS
+        // shows no prompt and the switch does nothing.
+        if !permission.isTrusted { permission.resetEntry() }
         hasPermission = permission.requestAccess()
     }
 
