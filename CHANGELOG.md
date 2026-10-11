@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.2] - 2026-10-11
+
+### Fixed
+- People who updated straight from 1.1.x got no What's New window on 1.3.1, and with it missed the one-time offer to open dirtymac at login. The window looked for notes of exactly the running version, and a patch release has none. It now shows the newest notes up to the running version.
+
+### Documentation
+- README troubleshooting explains why `brew upgrade` can report the latest version as installed for up to a day after a release, and which command checks right away.
+
 ## [1.3.1] - 2026-10-11
 
 ### Fixed
@@ -110,7 +118,8 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.3.1...HEAD
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.3.2...HEAD
+[1.3.2]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.3.2
 [1.3.1]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.3.1
 [1.3.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.3.0
 [1.2.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.2.0
