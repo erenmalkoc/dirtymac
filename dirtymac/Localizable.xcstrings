@@ -78,6 +78,83 @@
         }
       }
     },
+    "A fresh keycap icon, and a menu bar glyph that turns red while the keyboard is locked.": {
+      "comment": "What's New 1.3.0 item detail.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ein neues Tastenkappen-Symbol und ein Menüleistensymbol, das rot wird, solange die Tastatur gesperrt ist."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A fresh keycap icon, and a menu bar glyph that turns red while the keyboard is locked."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Un nuevo icono de tecla y un símbolo en la barra de menús que se vuelve rojo mientras el teclado está bloqueado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Une nouvelle icône en forme de touche, et un symbole dans la barre des menus qui devient rouge quand le clavier est verrouillé."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Una nuova icona a forma di tasto e un simbolo nella barra dei menu che diventa rosso mentre la tastiera è bloccata."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいキーキャップのアイコンと、キーボードのロック中に赤くなるメニューバーのアイコン。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새로운 키캡 아이콘과 키보드가 잠겨 있는 동안 빨간색으로 바뀌는 메뉴 막대 아이콘."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Um novo ícone de tecla e um símbolo na barra de menus que fica vermelho enquanto o teclado está bloqueado."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Новый значок в виде клавиши и значок в строке меню, который краснеет, пока клавиатура заблокирована."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yepyeni bir tuş simgesi ve klavye kilitliyken kırmızıya dönen bir menü çubuğu simgesi."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全新的键帽图标，以及键盘锁定时会变红的菜单栏图标。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "全新的鍵帽圖像，以及鍵盤鎖定時會變紅的選單列圖像。"
+          }
+        }
+      }
+    },
     "A menu bar utility that locks your keyboard so you can clean it — without typing nonsense or launching apps.": {
       "comment": "Onboarding step 1 body.",
       "localizations": {
@@ -2084,6 +2161,83 @@
         }
       }
     },
+    "dirtymac now tells you when a password field or Terminal keeps it from blocking keys.": {
+      "comment": "What's New 1.3.0 item detail.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac sagt dir jetzt, wenn ein Passwortfeld oder das Terminal verhindert, dass Tasten blockiert werden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac now tells you when a password field or Terminal keeps it from blocking keys."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac ahora te avisa cuando un campo de contraseña o Terminal le impide bloquear las teclas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac vous prévient désormais quand un champ de mot de passe ou Terminal l’empêche de bloquer les touches."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac ora ti avvisa quando un campo password o il Terminale gli impedisce di bloccare i tasti."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パスワード欄やターミナルのせいでキーをブロックできないとき、dirtymac がお知らせします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "암호 입력란이나 터미널 때문에 키를 차단할 수 없을 때 dirtymac이 알려 줍니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O dirtymac agora avisa quando um campo de senha ou o Terminal impede o bloqueio das teclas."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Теперь dirtymac сообщает, когда поле пароля или Терминал мешают блокировать клавиши."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac artık bir parola alanı ya da Terminal tuşları engellemesini önlediğinde size haber veriyor."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "当密码栏或“终端”阻止 dirtymac 拦截按键时，它现在会提醒你。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "當密碼欄位或「終端機」讓 dirtymac 無法攔截按鍵時，它現在會提醒你。"
+          }
+        }
+      }
+    },
     "Done": {
       "comment": "Onboarding step 3 primary button — finishes onboarding.",
       "localizations": {
@@ -2542,6 +2696,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "授予輔助使用權限"
+          }
+        }
+      }
+    },
+    "Hear when the keyboard locks, while you hold Esc and before it unlocks. Turn them off in Settings.": {
+      "comment": "What's New 1.3.0 item detail.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hör, wann die Tastatur gesperrt wird, während du Esc hältst und bevor sie entsperrt wird. Du kannst sie in den Einstellungen ausschalten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hear when the keyboard locks, while you hold Esc and before it unlocks. Turn them off in Settings."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Oye cuándo se bloquea el teclado, mientras mantienes Esc y antes de que se desbloquee. Puedes desactivarlas en Ajustes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Entendez quand le clavier se verrouille, pendant que vous maintenez Échap et avant le déverrouillage. Désactivez-les dans les Réglages."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Senti quando la tastiera si blocca, mentre tieni premuto Esc e prima che si sblocchi. Puoi disattivarli in Impostazioni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーボードがロックされたとき、Esc を長押ししている間、ロック解除の直前に音で知らせます。設定でオフにできます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키보드가 잠길 때, Esc를 누르고 있는 동안, 잠금이 해제되기 직전에 소리로 알려 줍니다. 설정에서 끌 수 있습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ouça quando o teclado é bloqueado, enquanto você segura Esc e antes do desbloqueio. Desative em Ajustes."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Звуки сообщают о блокировке клавиатуры, об удержании Esc и о скорой разблокировке. Их можно отключить в настройках."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klavye kilitlendiğinde, Esc'i basılı tutarken ve kilit açılmadan hemen önce sesle haberdar olun. Ayarlar'dan kapatabilirsiniz."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "键盘锁定时、长按 Esc 期间以及解锁之前都会有提示音。可在“设置”中关闭。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鍵盤鎖定時、長按 Esc 期間以及解鎖之前都會有提示音。可在「設定」中關閉。"
           }
         }
       }
@@ -3624,6 +3855,83 @@
         }
       }
     },
+    "New icon": {
+      "comment": "What's New 1.3.0 item title.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Neues Symbol"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "New icon"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuevo icono"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nouvelle icône"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nuova icona"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しいアイコン"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "새로운 아이콘"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Novo ícone"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Новый значок"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yeni simge"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新图标"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新圖像"
+          }
+        }
+      }
+    },
     "Off": {
       "comment": "Auto-unlock picker — no automatic unlock.",
       "localizations": {
@@ -4625,6 +4933,83 @@
         }
       }
     },
+    "Safer unlocking": {
+      "comment": "What's New 1.3.0 item title.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sichereres Entsperren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Safer unlocking"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloqueo más seguro"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Déverrouillage plus sûr"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sblocco più sicuro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "より安全なロック解除"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "더 안전한 잠금 해제"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desbloqueio mais seguro"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Более безопасная разблокировка"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Daha güvenli kilit açma"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更安全的解锁"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更安全的解鎖"
+          }
+        }
+      }
+    },
     "Search for “Lock keyboard” in Spotlight or add it to a shortcut. It works even when dirtymac isn't running.": {
       "comment": "What's New 1.2.0 item detail. Keep “Lock keyboard” in English: it matches the Spotlight action name.",
       "localizations": {
@@ -4698,6 +5083,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "在 Spotlight 中搜尋「Lock keyboard」，或將其加入捷徑。即使 dirtymac 未執行也能使用。"
+          }
+        }
+      }
+    },
+    "Secure input warning": {
+      "comment": "What's New 1.3.0 item title.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Warnung bei sicherer Eingabe"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Secure input warning"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aviso de entrada segura"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Alerte de saisie sécurisée"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avviso di inserimento sicuro"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セキュア入力の警告"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "보안 입력 경고"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aviso de entrada segura"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Предупреждение о защищённом вводе"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güvenli giriş uyarısı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安全输入警告"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "安全輸入警告"
           }
         }
       }
@@ -5006,6 +5468,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "聲音"
+          }
+        }
+      }
+    },
+    "Sound cues": {
+      "comment": "What's New 1.3.0 item title.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tonsignale"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sound cues"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Señales sonoras"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Signaux sonores"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Segnali sonori"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サウンドの合図"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "사운드 알림"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sinais sonoros"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Звуковые сигналы"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sesli işaretler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提示音"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "提示音"
           }
         }
       }
@@ -5545,6 +6084,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "螢幕鎖定時，鍵盤已解鎖。"
+          }
+        }
+      }
+    },
+    "The lock ends when your Mac sleeps or locks, and holding Esc unlocks once you let go.": {
+      "comment": "What's New 1.3.0 item detail.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Sperre endet, wenn dein Mac in den Ruhezustand geht oder gesperrt wird, und das Halten von Esc entsperrt, sobald du loslässt."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "The lock ends when your Mac sleeps or locks, and holding Esc unlocks once you let go."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "El bloqueo termina cuando tu Mac entra en reposo o se bloquea, y mantener Esc desbloquea en cuanto lo sueltas."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Le verrouillage prend fin quand votre Mac se met en veille ou se verrouille, et maintenir Échap déverrouille dès que vous relâchez."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Il blocco termina quando il Mac va in stop o si blocca, e tenendo premuto Esc si sblocca appena lo rilasci."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac がスリープまたはロックされるとロックは終了し、Esc の長押しは指を離した時点で解除されます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac이 잠자기 상태가 되거나 잠기면 잠금이 끝나고, Esc를 길게 누르면 손을 뗄 때 잠금이 해제됩니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O bloqueio termina quando o Mac entra em repouso ou é bloqueado, e segurar Esc desbloqueia assim que você solta."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блокировка снимается, когда Mac засыпает или блокируется, а удержание Esc разблокирует, как только вы отпустите клавишу."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac'iniz uyku moduna geçtiğinde ya da kilitlendiğinde kilit sona erer; Esc'i basılı tuttuğunuzda kilit, bıraktığınız anda açılır."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac 睡眠或锁定时会结束锁定；长按 Esc 时，松开即解锁。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mac 睡眠或鎖定時會結束鎖定；長按 Esc 時，放開即解鎖。"
           }
         }
       }

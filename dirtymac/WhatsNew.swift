@@ -27,6 +27,28 @@ enum WhatsNew {
     /// MARKETING_VERSION for a release with user-visible changes; a
     /// release without an entry simply shows no window.
     static let catalog: [ReleaseNote] = [
+        ReleaseNote(version: "1.3.0", items: [
+            ReleaseNoteItem(
+                systemImage: "exclamationmark.shield",
+                title: "Secure input warning",
+                detail: "dirtymac now tells you when a password field or Terminal keeps it from blocking keys."
+            ),
+            ReleaseNoteItem(
+                systemImage: "lock.open",
+                title: "Safer unlocking",
+                detail: "The lock ends when your Mac sleeps or locks, and holding Esc unlocks once you let go."
+            ),
+            ReleaseNoteItem(
+                systemImage: "speaker.wave.2",
+                title: "Sound cues",
+                detail: "Hear when the keyboard locks, while you hold Esc and before it unlocks. Turn them off in Settings."
+            ),
+            ReleaseNoteItem(
+                systemImage: "sparkles",
+                title: "New icon",
+                detail: "A fresh keycap icon, and a menu bar glyph that turns red while the keyboard is locked."
+            ),
+        ]),
         ReleaseNote(version: "1.2.0", items: [
             ReleaseNoteItem(
                 systemImage: "command",
