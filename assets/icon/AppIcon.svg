@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 120 120">
+  <!-- dirtymac app icon: the source of the AppIcon.appiconset PNGs.
+       macOS grid: 824/1024 body (10..110 here), continuous-corner squircle. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5B97FF"/><stop offset="1" stop-color="#1D4ED8"/></linearGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.24"/><stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient>
+    <linearGradient id="top" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9EEF6"/><stop offset="1" stop-color="#D5DCE8"/></linearGradient>
+    <linearGradient id="skirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C6CEDC"/><stop offset="1" stop-color="#8E9BB3"/></linearGradient>
+    <radialGradient id="dish" cx="0.5" cy="0.3" r="0.75"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0.35"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></radialGradient>
+    <clipPath id="face"><rect x="36" y="32" width="48" height="46" rx="11"/></clipPath>
+    <filter id="body" x="-20%" y="-20%" width="140%" height="150%"><feDropShadow dx="0" dy="2.5" stdDeviation="3" flood-color="#000000" flood-opacity="0.32"/></filter>
+    <filter id="blur" x="-50%" y="-200%" width="200%" height="500%"><feGaussianBlur stdDeviation="3"/></filter>
+  </defs>
+  <g filter="url(#body)">
+    <path d="M40 10 H80 C 102 10 110 18 110 40 V80 C 110 102 102 110 80 110 H40 C 18 110 10 102 10 80 V40 C 10 18 18 10 40 10 Z" fill="url(#bg)"/>
+  </g>
+  <path d="M40 10 H80 C 102 10 110 18 110 40 V80 C 110 102 102 110 80 110 H40 C 18 110 10 102 10 80 V40 C 10 18 18 10 40 10 Z" fill="url(#gloss)"/>
+  <path d="M40 10.5 H80 C 101.5 10.5 109.5 18.5 109.5 40 V80 C 109.5 101.5 101.5 109.5 80 109.5 H40 C 18.5 109.5 10.5 101.5 10.5 80 V40 C 10.5 18.5 18.5 10.5 40 10.5 Z" fill="none" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="0.8"/>
+  <ellipse cx="60" cy="93" rx="27" ry="4.5" fill="#0B2A8A" opacity="0.55" filter="url(#blur)"/>
+  <rect x="30" y="30" width="60" height="62" rx="16" fill="url(#skirt)"/>
+  <path d="M44 30.8 H76" stroke="#FFFFFF" stroke-opacity="0.55" stroke-width="0.8" stroke-linecap="round"/>
+  <rect x="36" y="32" width="48" height="46" rx="11" fill="url(#top)"/>
+  <rect x="36" y="32" width="48" height="46" rx="11" fill="url(#dish)"/>
+  <g clip-path="url(#face)">
+    <circle cx="41" cy="40" r="1.4" fill="#7F8AA0" opacity="0.7"/>
+    <circle cx="46.5" cy="47" r="1" fill="#7F8AA0" opacity="0.5"/>
+    <circle cx="40" cy="55" r="1.3" fill="#7F8AA0" opacity="0.6"/>
+    <circle cx="48" cy="60.5" r="0.9" fill="#7F8AA0" opacity="0.5"/>
+    <circle cx="43" cy="67" r="1.2" fill="#7F8AA0" opacity="0.65"/>
+    <circle cx="50" cy="38.5" r="0.8" fill="#7F8AA0" opacity="0.4"/>
+    <circle cx="39.5" cy="72.5" r="0.9" fill="#7F8AA0" opacity="0.5"/>
+    <circle cx="52.5" cy="52" r="0.7" fill="#7F8AA0" opacity="0.35"/>
+    <path d="M53 80 L75 30 L88 30 L66 80 Z" fill="#FFFFFF"/>
+    <path d="M53 80 L75 30" stroke="#5CCBFF" stroke-width="4" stroke-opacity="0.35"/>
+    <path d="M53 80 L75 30" stroke="#5CCBFF" stroke-width="1.5"/>
+  </g>
+  <path d="M83 20 L84.6 24.6 L89 26.2 L84.6 27.8 L83 32.4 L81.4 27.8 L77 26.2 L81.4 24.6 Z" fill="#FFFFFF" opacity="0.95"/>
+</svg>

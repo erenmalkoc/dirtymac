@@ -282,21 +282,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// NSStatusItem can't host SwiftUI symbol effects, so the lock state
     /// is conveyed with a glyph swap, a red tint, and a gentle opacity
     /// "breathe" — the closest AppKit approximation of the SwiftUI icon.
+    /// The keycap glyph from the asset catalog. Idle it is a template that
+    /// adapts to the menu bar; locked it is drawn in its own red, which a
+    /// template (or contentTintColor on a non-template) could not give.
+    static func statusImage(active: Bool) -> NSImage? {
+        let image = NSImage(named: active ? "MenuBarIconLocked" : "MenuBarIcon")?.copy() as? NSImage
+        image?.isTemplate = !active
+        return image
+    }
+
     private func updateIcon(active: Bool) {
         guard let button = statusItem?.button else { return }
 
         let label = active
             ? String(localized: "dirtymac — keyboard locked", bundle: LanguagePreference.current.bundle)
             : "dirtymac"
-        let image = NSImage(
-            systemSymbolName: active ? "keyboard.fill" : "keyboard",
-            accessibilityDescription: label
-        )
-        // Template adapts to the menu bar; the locked state needs a real
-        // red so it must opt out of template tinting.
-        image?.isTemplate = !active
+        let image = Self.statusImage(active: active)
+        image?.accessibilityDescription = label
         button.image = image
-        button.contentTintColor = active ? .systemRed : nil
+        button.contentTintColor = nil
         button.toolTip = label
 
         if active {
