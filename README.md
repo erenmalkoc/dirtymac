@@ -58,6 +58,14 @@ Grab the latest signed & notarized DMG from [Releases](https://github.com/erenma
 
 **`Refusing to load cask … from untrusted tap`** — Homebrew 6.0's trust check, not a problem with the app. Run `brew trust erenmalkoc/tap` and install again.
 
+**`brew upgrade` says the latest version is already installed, although a newer release is out** — Homebrew looks for new versions in a third-party tap once a day at most, unless the command names the tap. The full name makes it check again (if the last check is more than five minutes old) and then upgrade:
+
+```bash
+brew upgrade --cask erenmalkoc/tap/dirtymac
+```
+
+Running `brew update` first works too.
+
 **"macOS cannot verify that this app is free from malware"** — affects **1.1.1 and earlier only**. Those builds stapled the notarization ticket to the DMG but not to the app inside it, and `brew install --cask` copies the app out of the DMG — so macOS had to reach Apple over the network at first launch and refused the app whenever that check couldn't complete (offline, VPN, or a proxy that blocks Apple's notary endpoints). Upgrading is the fix:
 
 ```bash
