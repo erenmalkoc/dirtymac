@@ -13,10 +13,13 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 ## Features
 
 - One-click keyboard lock from the menu bar
-- Blocks every keyboard input: regular keys, modifiers, **and** brightness / volume / media / F-key controls
+- Blocks every keyboard input: regular keys, modifiers, **and** brightness / volume / media / F-key controls (see [Troubleshooting](#troubleshooting) for the one case macOS does not allow)
 - **Basic mode**: mouse and trackpad stay live — click the menu bar icon to release
 - **Advanced mode**: optionally freeze the mouse & trackpad too, choose which key classes to block, and set an auto-unlock timer
-- Universal hold-Esc emergency exit (3 seconds) — works even in full lockdown
+- Universal hold-Esc emergency exit (3 seconds) — works even in full lockdown, and finishes when you let go so no stray Esc reaches your app
+- Warns when another app holds Secure Input (password fields, Terminal's Secure Keyboard Entry) and keys get past the lock
+- The lock ends by itself when the Mac sleeps, the screen locks or users switch
+- Optional sound cues for lock, the Esc hold, the last seconds before auto-unlock, and unlock
 - Global shortcut (⌃⌥⌘K by default, configurable) opens the panel from any app
 - Spotlight and Shortcuts actions — lock the keyboard or open the panel even when dirtymac isn't running
 - Optional open at login, offered during onboarding
@@ -49,6 +52,8 @@ Grab the latest signed & notarized DMG from [Releases](https://github.com/erenma
 
 ### Troubleshooting
 
+**"… is using secure input, so macOS won't let dirtymac block keys"** — while a password field is focused or Terminal's Secure Keyboard Entry is on, macOS delivers keystrokes past every event tap; no app can block them. Switch away from that app or quit it; locking and unlocking the screen also clears it. Full lockdown won't start while this is on, because hold-Esc could not get through either.
+
 **`Refusing to load cask … from untrusted tap`** — Homebrew 6.0's trust check, not a problem with the app. Run `brew trust erenmalkoc/tap` and install again.
 
 **"macOS cannot verify that this app is free from malware"** — affects **1.1.1 and earlier only**. Those builds stapled the notarization ticket to the DMG but not to the app inside it, and `brew install --cask` copies the app out of the DMG — so macOS had to reach Apple over the network at first launch and refused the app whenever that check couldn't complete (offline, VPN, or a proxy that blocks Apple's notary endpoints). Upgrading is the fix:
@@ -72,7 +77,7 @@ xattr -dr com.apple.quarantine /Applications/dirtymac.app
 ## Requirements
 
 - macOS 14 (Sonoma) or later
-- Xcode 15 or later (to build from source)
+- Xcode 26 or later (to build from source)
 
 ## Build from source
 
@@ -82,7 +87,11 @@ cd dirtymac
 open dirtymac.xcodeproj
 ```
 
-Build and run the `dirtymac` scheme (`⌘R`) targeting *My Mac*.
+Build and run the `dirtymac` scheme (`⌘R`) targeting *My Mac*. Run the unit tests with `⌘U`, or:
+
+```bash
+xcodebuild test -project dirtymac.xcodeproj -scheme dirtymac -destination 'platform=macOS' CODE_SIGNING_ALLOWED=NO
+```
 
 ## Permissions
 
@@ -96,16 +105,27 @@ The accessibility tap only swallows events; nothing is recorded, logged, or forw
 
 ## How it works
 
-dirtymac creates a `CGEventTap` at the session level (`.cgSessionEventTap`). The mask is built from the active lock configuration: `keyDown` and `keyUp` are always present; `flagsChanged`, `kCGEventSystemDefined` (subtype 8 — the aux-control channel that brightness, volume, and media keys use), and the mouse / trackpad / scroll types are added when the matching Advanced toggles are on. The callback returns `nil` for events that are meant to be blocked, removing them from the system input queue. By default (Basic mode) mouse and trackpad are not in the mask, so they keep working — including the click that opens the menu and disables the lock. Advanced full lockdown adds them; the universal hold-Esc (3 s) emergency exit and a mandatory auto-unlock timer guarantee the lock can always be released. The power button (`systemDefined` subtype 1) is deliberately allowed through so the user keeps a hardware emergency exit.
+dirtymac creates a `CGEventTap` at the session level (`.cgSessionEventTap`). The mask is built from the active lock configuration: `keyDown` and `keyUp` are always present; `flagsChanged`, `kCGEventSystemDefined` (subtype 8 — the aux-control channel that brightness, volume, and media keys use), and the mouse / trackpad / scroll types are added when the matching Advanced toggles are on. Full lockdown also adds trackpad gestures (NSEvent type 29). The callback returns `nil` for events that are meant to be blocked, removing them from the system input queue. By default (Basic mode) mouse and trackpad are not in the mask, so they keep working — including the click that opens the menu and disables the lock. Advanced full lockdown adds them; the universal hold-Esc (3 s) emergency exit and a mandatory auto-unlock timer guarantee the lock can always be released. The power button (`systemDefined` subtype 1) is deliberately allowed through so the user keeps a hardware emergency exit.
 
 If macOS disables the tap (timeout or excessive callback latency), dirtymac re-enables it automatically.
+
+While any process holds Secure Event Input, macOS sends keystrokes past every event tap. dirtymac checks `IsSecureEventInputEnabled()` every second and says so in the panel instead of claiming the keys are blocked.
 
 ## Project layout
 
 ```
 dirtymac/
-├── dirtymacApp.swift          # @main + AppDelegate: NSStatusItem, popover, onboarding window
-├── KeyboardBlocker.swift      # CGEventTap, hold-Esc, auto-unlock, AX permission
+├── dirtymacApp.swift          # @main + AppDelegate: NSStatusItem, popover, windows
+├── KeyboardBlocker.swift      # lock lifecycle: hold-Esc, auto-unlock, secure input, sounds
+├── LockCore.swift             # pure rules: event mask, what the tap does with each event
+├── LockPlatform.swift         # the real CGEventTap, Accessibility check, timers
+├── SecureInput.swift          # Secure Event Input detection and policy
+├── SessionWatcher.swift       # ends the lock on sleep, screen lock, user switch
+├── SoundFeedback.swift        # sound cues
+├── GlobalHotKey.swift         # Carbon hot-key presets
+├── LaunchAtLogin.swift        # SMAppService login item
+├── AppIntents.swift           # Spotlight / Shortcuts actions
+├── WhatsNew.swift             # one-time release notes window
 ├── MenuBarPopoverView.swift   # popover root: navigation, preferences, appearance + locale
 ├── MainView.swift             # keyboard lock control + inline full-lockdown confirmation
 ├── SettingsView.swift         # preference models + settings UI (mode, appearance, language)
@@ -121,6 +141,8 @@ Tag-driven. The `release` workflow builds and signs the app, notarizes and stapl
 ```bash
 git tag v1.2.3 && git push origin v1.2.3
 ```
+
+Before tagging: add the version's What's New entry (if it has user-visible changes), move the CHANGELOG's Unreleased notes under a dated `## [x.y.z] - YYYY-MM-DD` heading, set `MARKETING_VERSION`, and wait for CI on main to be green. The workflow runs the tests again and refuses a tag that doesn't match the app version or the CHANGELOG. Afterwards bump `version` and `sha256` in `Casks/dirtymac.rb` of erenmalkoc/homebrew-tap (the sha256 is attached to the release).
 
 Required GitHub Secrets:
 
