@@ -14,6 +14,8 @@ struct MainView: View {
     /// The proof that Esc works, asked for before a long frozen-mouse lock.
     @StateObject private var escCheck = EscCheckModel()
     @Environment(\.locale) private var locale
+    /// The auto-unlock chosen on the panel and in Settings: one setting.
+    @AppStorage(LockConfiguration.Key.autoUnlockSeconds) private var storedAutoUnlock = 0
     private let configurationOverride: LockConfiguration?
 
     /// `confirming` and `configuration` exist so the confirmation can be
@@ -185,6 +187,9 @@ struct MainView: View {
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
 
+            autoUnlockRow
+                .padding(.top, 6)
+
             secureInputWarning
                 .padding(.top, 4)
 
@@ -196,6 +201,38 @@ struct MainView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, 4)
             }
+        }
+    }
+
+    /// How long the lock will last, chosen before locking and shown as
+    /// what the lock will really use: while the mouse is frozen "Off" and
+    /// anything short or long is not offered.
+    private var autoUnlockRow: some View {
+        let mouseLocked = lockConfiguration.effective.blockMouseAndTrackpad
+        let selection = Binding<Int>(
+            get: { lockConfiguration.effective.autoUnlockSeconds },
+            set: { storedAutoUnlock = $0 }
+        )
+        return HStack(spacing: 6) {
+            Label("Auto-unlock", systemImage: "timer")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            Picker("Auto-unlock", selection: selection) {
+                ForEach(LockConfiguration.offeredChoices(mouseLocked: mouseLocked), id: \.self) { seconds in
+                    Group {
+                        if seconds == 0 {
+                            Text("Off")
+                        } else {
+                            Text(LockConfiguration.unlockChoiceTitle(seconds, locale: locale))
+                        }
+                    }
+                    .tag(seconds)
+                }
+            }
+            .pickerStyle(.menu)
+            .labelsHidden()
+            .fixedSize()
+            .controlSize(.small)
         }
     }
 

@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Choose how long the lock lasts right on the panel.** Before locking, the panel shows an **Auto-unlock** menu (off, 30 seconds up to 1 hour) under the power button. Until now the timer lived in Settings and only in Advanced mode, so most people never found it and Basic mode could not lock for a set time at all. It is the same setting as in Settings. Basic mode now keeps the timer you chose (it is safe there because the mouse is free and a click on the icon always ends the lock). While the mouse is frozen the menu offers only what the lock will really use, 30 seconds to 15 minutes.
+
 ## [1.4.2] - 2026-11-24
 
 ### Added

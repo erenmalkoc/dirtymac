@@ -132,8 +132,9 @@ enum LockMode: String, CaseIterable, Identifiable {
 
 /// What the keyboard blocker should suppress, plus the auto-unlock
 /// timer. `current` reads UserDefaults; `effective` applies the safety
-/// rules (Basic is a fixed safe preset; full mouse lockdown forces a
-/// minimum auto-unlock so the user is never permanently trapped).
+/// rules (Basic is a fixed safe preset of keys and mouse, with the timer
+/// the user chose; full mouse lockdown forces a minimum auto-unlock so the
+/// user is never permanently trapped).
 struct LockConfiguration: Equatable {
     /// UserDefaults keys, shared by the Settings toggles and the lock.
     enum Key {
@@ -191,6 +192,12 @@ struct LockConfiguration: Equatable {
     /// Selectable auto-unlock durations, in seconds. 0 = off.
     static let unlockChoices = [0, 30, 60, 120, 300, 600, 900, 1800, 3600]
 
+    /// Basic mode keeps the mouse free, so a timer is always safe there:
+    /// only a value the picker offers counts, anything else means no timer.
+    static func sanitizedAutoUnlock(_ seconds: Int) -> Int {
+        unlockChoices.contains(seconds) ? seconds : 0
+    }
+
     /// The auto-unlock the lock really uses for a stored value: once the
     /// mouse is part of the lockdown the menu bar can no longer be
     /// clicked, so it is never off, never shorter than the minimum and
@@ -224,7 +231,7 @@ struct LockConfiguration: Equatable {
                 blockModifierKeys: true,
                 blockMediaKeys: true,
                 blockMouseAndTrackpad: false,
-                autoUnlockSeconds: 0,
+                autoUnlockSeconds: Self.sanitizedAutoUnlock(autoUnlockSeconds),
                 keepDisplayAwake: keepDisplayAwake,
                 startDelaySeconds: Self.sanitizedStartDelay(startDelaySeconds),
                 guardPointer: guardPointer

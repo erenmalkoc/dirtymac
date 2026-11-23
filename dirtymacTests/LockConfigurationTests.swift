@@ -13,7 +13,29 @@ final class LockConfigurationTests: XCTestCase {
         XCTAssertTrue(c.blockModifierKeys)
         XCTAssertTrue(c.blockMediaKeys)
         XCTAssertFalse(c.blockMouseAndTrackpad)
-        XCTAssertEqual(c.autoUnlockSeconds, 0)
+        // The timer is the user's own choice, not part of the preset.
+        XCTAssertEqual(c.autoUnlockSeconds, 60)
+    }
+
+    func testBasicModeKeepsTheChosenTimerAndDropsOneThePickerDoesNotOffer() {
+        for seconds in LockConfiguration.unlockChoices {
+            XCTAssertEqual(LockConfiguration(mode: .basic, autoUnlockSeconds: seconds).effective.autoUnlockSeconds, seconds)
+        }
+        for odd in [-5, 7, 45, 4000, 999_999] {
+            XCTAssertEqual(LockConfiguration(mode: .basic, autoUnlockSeconds: odd).effective.autoUnlockSeconds, 0, "\(odd) s")
+        }
+        XCTAssertEqual(LockConfiguration.sanitizedAutoUnlock(3600), 3600)
+        XCTAssertEqual(LockConfiguration.sanitizedAutoUnlock(61), 0)
+    }
+
+    func testABasicTimerIsLoadedFromStorageAndNeverNeedsTheEscCheck() throws {
+        let defaults = try TestDefaults.make(self)
+        defaults.set(LockMode.basic.rawValue, forKey: LockConfiguration.Key.mode)
+        defaults.set(3600, forKey: LockConfiguration.Key.autoUnlockSeconds)
+        let c = LockConfiguration.load(from: defaults)
+        XCTAssertEqual(c.autoUnlockSeconds, 3600)
+        XCTAssertFalse(c.blockMouseAndTrackpad)
+        XCTAssertFalse(c.requiresEscCheck, "the mouse is free, clicking the icon always ends it")
     }
 
     func testMouseLockdownForcesTheMinimumAutoUnlock() {
