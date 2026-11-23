@@ -66,11 +66,7 @@ struct LockKeyboardIntent: AppIntent {
         case .openPanel:
             openPanel()
         case .lock(let configuration):
-            if let configuration {
-                blocker.start(configuration)
-            } else {
-                blocker.start(storedConfiguration)
-            }
+            blocker.beginLock(configuration ?? storedConfiguration)
         }
     }
 }

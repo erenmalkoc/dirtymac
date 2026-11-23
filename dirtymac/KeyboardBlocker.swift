@@ -63,6 +63,9 @@ final class KeyboardBlocker: ObservableObject {
     /// The hold-Esc exit as it runs: a countdown the panel and the menu
     /// bar show, so nobody has to count the three seconds themselves.
     @Published private(set) var escHold: EscHoldState = .idle
+    /// Seconds left of the start delay while one is running; nil
+    /// otherwise. Nothing is blocked yet during this wait.
+    @Published private(set) var lockCountdown: Int?
 
     /// How long Esc has to be held to force an unlock.
     static let escHoldDuration: TimeInterval = 3.0
@@ -91,6 +94,7 @@ final class KeyboardBlocker: ObservableObject {
     /// countdown while it runs.
     private var escHoldStartedAt: TimeInterval?
     private var escCountdownTimer: LockTimer?
+    private var pendingLockTimer: LockTimer?
     /// How often the countdown refreshes while Esc is held.
     static let escCountdownInterval: TimeInterval = 0.1
     /// Whether the running lock includes the mouse and trackpad.
@@ -153,24 +157,13 @@ final class KeyboardBlocker: ObservableObject {
     @discardableResult
     func start(_ configuration: LockConfiguration = .current, escVerified: Bool = false) -> Bool {
         guard !isActive else { return true }
-
-        refreshPermission()
-        guard hasPermission else {
-            requestPermission()
-            return false
-        }
+        // A wait that was still counting down is overtaken by this start.
+        cancelPendingLock()
 
         // Applied here as well, so no caller can skip the safety rules
         // (such as the mandatory timer while the mouse is locked).
         let config = configuration.effective
-        refreshSecureInput()
-        guard SecureInputPolicy.canStart(
-            secureInputOn: secureInput != nil,
-            mouseLocked: config.blockMouseAndTrackpad
-        ) else { return false }
-        // Enforced here, not only in the panel, so no other way of starting
-        // a lock (a shortcut, an intent, a future caller) can skip the check.
-        guard !config.requiresEscCheck || escVerified else { return false }
+        guard preflight(config, escVerified: escVerified) else { return false }
 
         let installed = tap.install(mask: EventMask.build(for: config)) { [weak self] decision in
             self?.handleEsc(decision)
@@ -209,7 +202,72 @@ final class KeyboardBlocker: ObservableObject {
         return true
     }
 
+    /// The checks every lock passes before anything is installed: the
+    /// permission (asked for when missing), secure input and, for a long
+    /// frozen-mouse lock, the Esc check. Run again when a delayed lock
+    /// finally starts, and once before the wait begins, so a lock that
+    /// would be refused is refused at the click and not after a countdown.
+    private func preflight(_ config: LockConfiguration, escVerified: Bool) -> Bool {
+        refreshPermission()
+        guard hasPermission else {
+            requestPermission()
+            return false
+        }
+        refreshSecureInput()
+        guard SecureInputPolicy.canStart(
+            secureInputOn: secureInput != nil,
+            mouseLocked: config.blockMouseAndTrackpad
+        ) else { return false }
+        // Enforced here, not only in the panel, so no other way of starting
+        // a lock (a shortcut, an intent, a future caller) can skip the check.
+        return !config.requiresEscCheck || escVerified
+    }
+
+    // MARK: Delayed start
+
+    /// Locks after the configured start delay, or at once without one.
+    /// Every way of starting a lock that a person triggers (the panel, the
+    /// menu, a Shortcut) comes through here. While the wait runs nothing
+    /// is blocked and `lockCountdown` shows the seconds left.
+    func beginLock(_ configuration: LockConfiguration = .current, escVerified: Bool = false) {
+        guard !isActive, pendingLockTimer == nil else { return }
+        let config = configuration.effective
+        guard config.startDelaySeconds > 0 else {
+            start(configuration, escVerified: escVerified)
+            return
+        }
+        guard preflight(config, escVerified: escVerified) else { return }
+
+        lockCountdown = config.startDelaySeconds
+        sounds.play(.tick)
+        pendingLockTimer = scheduler.schedule(after: 1, repeats: true) { [weak self] in
+            self?.pendingLockTick(configuration, escVerified: escVerified)
+        }
+    }
+
+    private func pendingLockTick(_ configuration: LockConfiguration, escVerified: Bool) {
+        guard let remaining = lockCountdown else { return }
+        guard remaining > 1 else {
+            // Cleared first: start() checks everything again and may still
+            // refuse (the permission was taken away meanwhile).
+            cancelPendingLock()
+            start(configuration, escVerified: escVerified)
+            return
+        }
+        lockCountdown = remaining - 1
+        sounds.play(.tick)
+    }
+
+    /// Ends a wait that is running. Safe to call when none is.
+    func cancelPendingLock() {
+        pendingLockTimer?.cancel()
+        pendingLockTimer = nil
+        if lockCountdown != nil { lockCountdown = nil }
+    }
+
     func stop(reason: UnlockReason) {
+        // A quit or a sleep during the wait must not lock afterwards.
+        cancelPendingLock()
         guard isActive else { return }
         tap.uninstall()
         displayWake.release()

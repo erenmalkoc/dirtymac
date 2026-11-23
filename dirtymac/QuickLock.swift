@@ -77,7 +77,7 @@ final class QuickLockController: NSObject {
         case .openPanel:
             openPanel()
         case .lock(let configuration):
-            blocker.start(configuration)
+            blocker.beginLock(configuration)
         }
     }
 

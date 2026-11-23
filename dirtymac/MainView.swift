@@ -257,7 +257,7 @@ struct MainView: View {
                     confirmLockdown = false
                     // Passed along, not assumed: the blocker refuses a long
                     // frozen-mouse lock that was not checked.
-                    blocker.start(escVerified: escCheck.passed)
+                    blocker.beginLock(lockConfiguration, escVerified: escCheck.passed)
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(Self.lockButtonDisabled(
@@ -349,7 +349,7 @@ struct MainView: View {
         } else if lockConfiguration.blockMouseAndTrackpad {
             confirmLockdown = true
         } else {
-            blocker.start()
+            blocker.beginLock(lockConfiguration)
         }
     }
 

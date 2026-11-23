@@ -134,6 +134,7 @@ struct LockConfiguration: Equatable {
         static let blockMouseAndTrackpad = "blockMouseAndTrackpad"
         static let autoUnlockSeconds = "autoUnlockSeconds"
         static let keepDisplayAwake = "keepDisplayAwakeWhileLocked"
+        static let startDelaySeconds = "lockStartDelaySeconds"
     }
 
     var mode: LockMode = .basic
@@ -144,6 +145,19 @@ struct LockConfiguration: Equatable {
     /// Keep the screen from dimming or sleeping while locked. Not part of
     /// the Basic safety preset: it applies to every lock.
     var keepDisplayAwake = true
+    /// Seconds to wait between the click on Lock and the lock, to take
+    /// the hands off the keyboard. 0 = lock at once. Like keepDisplayAwake
+    /// it is no part of the Basic safety preset.
+    var startDelaySeconds = 0
+
+    /// What the Settings picker offers.
+    static let startDelayChoices = [0, 3, 5, 10]
+
+    /// Only a value the picker offers counts; anything else (a stale or
+    /// hand-edited preference) means no delay.
+    static func sanitizedStartDelay(_ seconds: Int) -> Int {
+        startDelayChoices.contains(seconds) ? seconds : 0
+    }
 
     /// Auto-unlock is mandatory (and at least this long) once the mouse
     /// is part of the lockdown — the menu bar can no longer be clicked.
@@ -196,10 +210,12 @@ struct LockConfiguration: Equatable {
                 blockMediaKeys: true,
                 blockMouseAndTrackpad: false,
                 autoUnlockSeconds: 0,
-                keepDisplayAwake: keepDisplayAwake
+                keepDisplayAwake: keepDisplayAwake,
+                startDelaySeconds: Self.sanitizedStartDelay(startDelaySeconds)
             )
         }
         var c = self
+        c.startDelaySeconds = Self.sanitizedStartDelay(c.startDelaySeconds)
         c.autoUnlockSeconds = Self.clampedSeconds(c.autoUnlockSeconds, mouseLocked: c.blockMouseAndTrackpad)
         return c
     }
@@ -217,7 +233,8 @@ struct LockConfiguration: Equatable {
             blockMediaKeys: boolOr(Key.blockMediaKeys, true),
             blockMouseAndTrackpad: boolOr(Key.blockMouseAndTrackpad, false),
             autoUnlockSeconds: d.integer(forKey: Key.autoUnlockSeconds),
-            keepDisplayAwake: boolOr(Key.keepDisplayAwake, true)
+            keepDisplayAwake: boolOr(Key.keepDisplayAwake, true),
+            startDelaySeconds: d.integer(forKey: Key.startDelaySeconds)
         )
         return cfg.effective
     }

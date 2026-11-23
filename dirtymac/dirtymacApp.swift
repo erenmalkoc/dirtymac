@@ -174,7 +174,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// forward end the lock; see SessionWatcher.
     private func watchSession() {
         let watcher = SessionWatcher { [weak self] reason in
-            guard let self, self.blocker.isActive else { return }
+            guard let self else { return }
+            // A start delay still counting down must not lock after the
+            // Mac woke up or the screen was locked.
+            self.blocker.cancelPendingLock()
+            guard self.blocker.isActive else { return }
             self.blocker.stop(reason: reason)
         }
         watcher.start()
