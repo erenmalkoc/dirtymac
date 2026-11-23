@@ -28,6 +28,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     let blocker = KeyboardBlocker()
     let updates = UpdateChecker()
     private var updateObserver: AnyCancellable?
+    private var lockTitleObserver: AnyCancellable?
 
     override init() {
         super.init()
@@ -71,6 +72,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         setupStatusItem()
         observeLockState()
         observeUpdates()
+        observeLockTitle()
         // With update checks off (the default) this only counts days.
         updates.start()
 
@@ -373,6 +375,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         image.isTemplate = !active
         return image
+    }
+
+    /// The countdown beside the icon while locked. Built from the values
+    /// the publishers hand over, not from reading the blocker: a @Published
+    /// property still holds its old value when its subscribers run.
+    private func observeLockTitle() {
+        lockTitleObserver = Publishers.CombineLatest4(
+            blocker.$isActive, blocker.$elapsed, blocker.$escHold, blocker.$autoUnlockTotal
+        )
+        .receive(on: RunLoop.main)
+        .sink { [weak self] active, elapsed, escHold, total in
+            guard let button = self?.statusItem?.button else { return }
+            LockStatusTitle.apply(
+                LockStatusTitle.text(isActive: active, escHold: escHold, autoUnlockTotal: total, elapsed: elapsed),
+                to: button
+            )
+        }
     }
 
     private func observeUpdates() {

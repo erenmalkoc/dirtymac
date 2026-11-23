@@ -140,7 +140,7 @@ struct MainView: View {
                     if blocker.hasAutoUnlock {
                         Label("Unlocks in \(blocker.autoUnlockRemainingDisplay)",
                               systemImage: "timer")
-                            .font(.subheadline)
+                            .font(.title3.weight(.medium))
                             .monospacedDigit()
                             .foregroundStyle(.secondary)
                             .contentTransition(.numericText())
@@ -149,10 +149,7 @@ struct MainView: View {
                         // Esc can't reach the tap either; don't promise it.
                         secureInputWarning
                     } else {
-                        Text("Hold Esc for 3 seconds to unlock.")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .multilineTextAlignment(.center)
+                        escHoldHint
                     }
                 } else {
                     Text(idleCaption)
@@ -175,6 +172,47 @@ struct MainView: View {
             }
         }
         .frame(maxWidth: .infinity)
+    }
+
+    /// The way out, and while Esc is held how long is left. The space is
+    /// the same in every state, so the panel does not jump as the hold runs.
+    private var escHoldHint: some View {
+        VStack(spacing: 6) {
+            ProgressView(value: escHoldProgress)
+                .progressViewStyle(.linear)
+                .opacity(escHoldIsRunning ? 1 : 0)
+                .accessibilityHidden(!escHoldIsRunning)
+            Group {
+                switch blocker.escHold {
+                case .idle:
+                    Text("Hold Esc for 3 seconds to unlock.")
+                case .holding(let remaining, _):
+                    Text("Unlocking in \(remaining)…")
+                        .monospacedDigit()
+                case .letGo:
+                    Text("Let go of Esc.")
+                }
+            }
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .multilineTextAlignment(.center)
+            .fixedSize(horizontal: false, vertical: true)
+            .frame(minHeight: 32, alignment: .top)
+        }
+        .padding(.horizontal, 24)
+    }
+
+    private var escHoldIsRunning: Bool {
+        if case .idle = blocker.escHold { return false }
+        return true
+    }
+
+    private var escHoldProgress: Double {
+        switch blocker.escHold {
+        case .idle: return 0
+        case .holding(_, let progress): return progress
+        case .letGo: return 1
+        }
     }
 
     // Inline confirmation. A system .confirmationDialog can't be used
