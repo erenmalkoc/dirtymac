@@ -112,7 +112,7 @@ enum WhatsNew {
 
     /// Numeric dotted-version comparison: "1.10.0" > "1.9.2", and missing
     /// components count as zero ("1.2" == "1.2.0").
-    static func compare(_ a: String, _ b: String) -> ComparisonResult {
+    nonisolated static func compare(_ a: String, _ b: String) -> ComparisonResult {
         let lhs = a.split(separator: ".").map { Int($0) ?? 0 }
         let rhs = b.split(separator: ".").map { Int($0) ?? 0 }
         for i in 0..<max(lhs.count, rhs.count) {
