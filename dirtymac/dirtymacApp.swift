@@ -34,6 +34,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
     private var updateObserver: AnyCancellable?
     private var lockTitleObserver: AnyCancellable?
+    private var statusAnnouncer: StatusAnnouncer?
+    private var accessibilityObserver: NSObjectProtocol?
 
     override init() {
         super.init()
@@ -78,6 +80,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         observeLockState()
         observeUpdates()
         observeLockTitle()
+        observeAccessibilityOptions()
+        statusAnnouncer = StatusAnnouncer(
+            blocker: blocker,
+            announcer: VoiceOverAnnouncer(),
+            isEnabled: { NSWorkspace.shared.isVoiceOverEnabled },
+            words: { $0.text(bundle: LanguagePreference.current.bundle) }
+        )
         // With update checks off (the default) this only counts days.
         updates.start()
 
@@ -447,7 +456,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         button.contentTintColor = nil
         button.toolTip = label
 
-        if active {
+        Self.setBreathing(
+            MotionPolicy.iconBreathes(isLocked: active, reduceMotion: MotionPolicy.systemReducesMotion),
+            on: button
+        )
+    }
+
+    /// The slow fade of the locked icon. Left out when the user asked for
+    /// less motion, and put back (or taken away) as that setting changes.
+    static func setBreathing(_ on: Bool, on button: NSView) {
+        if on {
+            guard button.layer?.animation(forKey: "breathe") == nil else { return }
             let breathe = CABasicAnimation(keyPath: "opacity")
             breathe.fromValue = 1.0
             breathe.toValue = 0.5
@@ -459,6 +478,19 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         } else {
             button.layer?.removeAnimation(forKey: "breathe")
             button.alphaValue = 1.0
+        }
+    }
+
+    private func observeAccessibilityOptions() {
+        accessibilityObserver = NSWorkspace.shared.notificationCenter.addObserver(
+            forName: NSWorkspace.accessibilityDisplayOptionsDidChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated {
+                guard let self else { return }
+                self.updateIcon(active: self.blocker.isActive)
+            }
         }
     }
 

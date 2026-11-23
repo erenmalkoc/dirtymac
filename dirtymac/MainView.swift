@@ -6,6 +6,7 @@ import Combine
 /// view replaces this within the same popover when the user opens
 /// preferences.
 struct MainView: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @EnvironmentObject private var blocker: KeyboardBlocker
     @EnvironmentObject private var updates: UpdateChecker
     @Binding var showingSettings: Bool
@@ -44,7 +45,7 @@ struct MainView: View {
             content
                 .padding(.vertical, 22)
                 .padding(.horizontal, 18)
-                .animation(.easeInOut(duration: 0.2), value: confirmLockdown)
+                .animation(MotionPolicy.animation(.easeInOut(duration: 0.2), reduceMotion: reduceMotion), value: confirmLockdown)
 
             Divider()
 
@@ -163,7 +164,7 @@ struct MainView: View {
                     .font(.title3.weight(.medium))
                     .monospacedDigit()
                     .foregroundStyle(.secondary)
-                    .contentTransition(.numericText())
+                    .contentTransition(MotionPolicy.numberTransition(reduceMotion: reduceMotion))
             }
             if blocker.secureInput != nil {
                 // Esc can't reach the tap either; don't promise it.
@@ -400,7 +401,7 @@ struct MainView: View {
             Text("Locking in \(seconds)…")
                 .font(.headline)
                 .monospacedDigit()
-                .contentTransition(.numericText())
+                .contentTransition(MotionPolicy.numberTransition(reduceMotion: reduceMotion))
             Button("Cancel") { blocker.cancelPendingLock() }
                 .buttonStyle(.bordered)
                 .controlSize(.mini)

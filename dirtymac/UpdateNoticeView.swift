@@ -56,6 +56,7 @@ struct UpdateNoticeView: View {
                         .font(.system(size: 15, weight: .medium))
                         .foregroundStyle(.tint)
                         .frame(width: 20)
+                        .accessibilityHidden(true)
                     message(for: notice)
                         .font(.callout)
                         .fixedSize(horizontal: false, vertical: true)

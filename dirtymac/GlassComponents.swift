@@ -22,6 +22,7 @@ struct AppIconView: View {
 /// Large circular power control. Tinted red while the keyboard is
 /// locked, with a subtle press-down scale for tactile feedback.
 struct GlassPowerButton: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     var isActive: Bool
     var action: () -> Void
 
@@ -32,7 +33,7 @@ struct GlassPowerButton: View {
                 .foregroundStyle(isActive ? .white : .primary)
         }
         .buttonStyle(PowerButtonStyle(isActive: isActive))
-        .animation(.easeInOut(duration: 0.25), value: isActive)
+        .animation(MotionPolicy.animation(.easeInOut(duration: 0.25), reduceMotion: reduceMotion), value: isActive)
         // The glyph alone reads as "power"; say what pressing it does.
         .accessibilityLabel(isActive ? Text("Unlock Keyboard") : Text("Lock Keyboard"))
         .accessibilityValue(isActive ? Text("Locked") : Text("Ready"))
@@ -73,6 +74,7 @@ private struct PowerButtonStyle: ButtonStyle {
 /// is the only signal of state; the elapsed timer is shown only when
 /// the keyboard is locked.
 struct StatusPill: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     var isActive: Bool
     var elapsed: String
 
@@ -91,7 +93,7 @@ struct StatusPill: View {
                     .font(.caption)
                     .monospacedDigit()
                     .foregroundStyle(.secondary)
-                    .contentTransition(.numericText())
+                    .contentTransition(MotionPolicy.numberTransition(reduceMotion: reduceMotion))
             }
         }
         .padding(.horizontal, 9)

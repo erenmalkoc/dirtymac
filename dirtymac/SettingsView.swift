@@ -253,6 +253,7 @@ struct LockConfiguration: Equatable {
 // MARK: - Settings View
 
 struct SettingsView: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @AppStorage("appearance") private var appearance: AppearancePreference = .system
     @AppStorage("language") private var language: LanguagePreference = .system
     @AppStorage(LockConfiguration.Key.mode) private var lockMode: LockMode = .basic
@@ -350,7 +351,7 @@ struct SettingsView: View {
                 if lockMode == .advanced {
                     advancedControls
                         .padding(.top, 4)
-                        .transition(.opacity.combined(with: .move(edge: .top)))
+                        .transition(reduceMotion ? .opacity : .opacity.combined(with: .move(edge: .top)))
                 }
             }
 
@@ -439,8 +440,8 @@ struct SettingsView: View {
             }
         }
         .padding(18)
-        .animation(.easeInOut(duration: 0.2), value: lockMode)
-        .animation(.easeInOut(duration: 0.2), value: blockMouseAndTrackpad)
+        .animation(MotionPolicy.animation(.easeInOut(duration: 0.2), reduceMotion: reduceMotion), value: lockMode)
+        .animation(MotionPolicy.animation(.easeInOut(duration: 0.2), reduceMotion: reduceMotion), value: blockMouseAndTrackpad)
     }
 
     private var advancedControls: some View {

@@ -5,6 +5,7 @@ import Combine
 /// permission (with live status), and a short how-to. Hosted in an
 /// AppKit-managed window by AppDelegate.
 struct OnboardingView: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @EnvironmentObject private var blocker: KeyboardBlocker
 
     /// Called when the user finishes or skips. AppDelegate persists the
@@ -125,7 +126,7 @@ struct OnboardingView: View {
         HStack(spacing: 8) {
             Image(systemName: blocker.hasPermission ? "checkmark.circle.fill" : "circle.dashed")
                 .foregroundStyle(blocker.hasPermission ? .green : .secondary)
-                .contentTransition(.symbolEffect(.replace))
+                .contentTransition(reduceMotion ? .identity : .symbolEffect(.replace))
 
             Text(blocker.hasPermission
                  ? "Accessibility access granted"
@@ -137,7 +138,7 @@ struct OnboardingView: View {
         .padding(.vertical, 9)
         .background(.regularMaterial, in: .capsule)
         .overlay(Capsule().strokeBorder(.separator.opacity(0.4), lineWidth: 0.5))
-        .animation(.easeInOut(duration: 0.25), value: blocker.hasPermission)
+        .animation(MotionPolicy.animation(.easeInOut(duration: 0.25), reduceMotion: reduceMotion), value: blocker.hasPermission)
     }
 
     private var readyStep: some View {
@@ -193,7 +194,7 @@ struct OnboardingView: View {
         HStack {
             if step != .welcome {
                 Button {
-                    withAnimation(.easeInOut(duration: 0.2)) {
+                    withAnimation(MotionPolicy.animation(.easeInOut(duration: 0.2), reduceMotion: reduceMotion)) {
                         step = Step(rawValue: step.rawValue - 1) ?? .welcome
                     }
                 } label: {
@@ -229,9 +230,9 @@ struct OnboardingView: View {
     private func advance() {
         switch step {
         case .welcome:
-            withAnimation(.easeInOut(duration: 0.2)) { step = .permission }
+            withAnimation(MotionPolicy.animation(.easeInOut(duration: 0.2), reduceMotion: reduceMotion)) { step = .permission }
         case .permission:
-            withAnimation(.easeInOut(duration: 0.2)) { step = .ready }
+            withAnimation(MotionPolicy.animation(.easeInOut(duration: 0.2), reduceMotion: reduceMotion)) { step = .ready }
         case .ready:
             LaunchAtLogin.set(launchAtLogin)
             LaunchAtLogin.markOffered()
@@ -243,6 +244,7 @@ struct OnboardingView: View {
 // MARK: - Progress Dots
 
 private struct ProgressDots: View {
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     var count: Int
     var index: Int
 
@@ -252,7 +254,7 @@ private struct ProgressDots: View {
                 Circle()
                     .fill(i == index ? Color.primary : Color.secondary.opacity(0.3))
                     .frame(width: 6, height: 6)
-                    .animation(.easeInOut(duration: 0.2), value: index)
+                    .animation(MotionPolicy.animation(.easeInOut(duration: 0.2), reduceMotion: reduceMotion), value: index)
             }
         }
     }
