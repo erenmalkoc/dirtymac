@@ -26,7 +26,7 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 - One-time What's New window after each update
 - Guided first-launch onboarding with live Accessibility-permission status
 - Status item: single-click opens the popover, right-click shows an Open / Quit menu
-- Live elapsed-time display and auto-unlock countdown while locked
+- Live elapsed-time display and auto-unlock countdown while locked, in the panel and beside the menu bar icon, and a 3-2-1 countdown while you hold Esc to unlock
 - Auto re-enables the event tap if macOS times it out
 - Settings with light / dark override and 12-language UI (runtime switching, no relaunch)
 - No Dock icon (`LSUIElement`)
