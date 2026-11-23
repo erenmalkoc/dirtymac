@@ -30,7 +30,7 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 - Status item: single-click opens the popover, right-click shows an Open / Lock for (1 min to 1 hour) / Quit menu
 - Live elapsed-time display and auto-unlock countdown while locked, in the panel and beside the menu bar icon, and a 3-2-1 countdown while you hold Esc to unlock
 - Auto re-enables the event tap if macOS times it out
-- Settings with light / dark override and 12-language UI (runtime switching, no relaunch)
+- Settings with light / dark override and 17-language UI (runtime switching, no relaunch)
 - No Dock icon (`LSUIElement`)
 - Optional update checks, **off by default**: turn them on in Settings and dirtymac tells you when a new version is out. If you leave them off, it reminds you every 60 days to look for one yourself
 - No network access unless you turn on update checks, no analytics, no background daemons
@@ -146,7 +146,7 @@ dirtymac/
 ├── SettingsView.swift         # preference models + settings UI (mode, appearance, language)
 ├── OnboardingView.swift       # 3-step first-launch guided setup
 ├── GlassComponents.swift      # PowerButton, StatusPill, AppIconView
-└── Localizable.xcstrings      # 12-language string catalog
+└── Localizable.xcstrings      # 17-language string catalog
 ```
 
 ## Releasing

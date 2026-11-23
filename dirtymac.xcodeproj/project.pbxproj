@@ -152,6 +152,11 @@
 				tr,
 				"zh-Hans",
 				"zh-Hant",
+				pl,
+				nl,
+				uk,
+				id,
+				vi,
 			);
 			mainGroup = AC5F54072FB0C9E900F50241;
 			minimizedProjectReferenceProxies = 1;

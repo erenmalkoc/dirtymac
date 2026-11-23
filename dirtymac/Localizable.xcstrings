@@ -28,6 +28,12 @@
             "value": "%@ utilise la saisie sécurisée, donc macOS empêche dirtymac de bloquer les touches."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ sedang memakai input aman, sehingga macOS tidak mengizinkan dirtymac memblokir tombol."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -46,6 +52,18 @@
             "value": "%@에서 보안 입력을 사용 중이므로 macOS가 dirtymac의 키 차단을 허용하지 않습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ gebruikt beveiligde invoer, dus macOS laat dirtymac geen toetsen blokkeren."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ używa bezpiecznego wprowadzania, więc macOS nie pozwala dirtymac blokować klawiszy."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -62,6 +80,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ güvenli girişi kullanıyor; bu yüzden macOS, dirtymac'in tuşları engellemesine izin vermiyor."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ використовує захищене введення, тому macOS не дозволяє dirtymac блокувати клавіші."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ đang dùng nhập liệu bảo mật nên macOS không cho dirtymac chặn phím."
           }
         },
         "zh-Hans": {
@@ -105,6 +135,12 @@
             "value": "Une nouvelle icône en forme de touche, et un symbole dans la barre des menus qui devient rouge quand le clavier est verrouillé."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikon keycap baru, dan simbol bar menu yang berubah merah saat keyboard terkunci."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -123,6 +159,18 @@
             "value": "새로운 키캡 아이콘과 키보드가 잠겨 있는 동안 빨간색으로 바뀌는 메뉴 막대 아이콘."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Een nieuw toetsicoon en een symbool in de menubalk dat rood wordt zolang het toetsenbord vergrendeld is."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowa ikona w kształcie klawisza oraz symbol na pasku menu, który robi się czerwony, gdy klawiatura jest zablokowana."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -139,6 +187,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yepyeni bir tuş simgesi ve klavye kilitliyken kırmızıya dönen bir menü çubuğu simgesi."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нова піктограма у вигляді клавіші та символ у рядку меню, що червоніє, поки клавіатуру заблоковано."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biểu tượng phím mới, cùng biểu tượng trên thanh menu chuyển sang màu đỏ khi bàn phím bị khóa."
           }
         },
         "zh-Hans": {
@@ -182,6 +242,12 @@
             "value": "Un utilitaire de la barre des menus qui verrouille votre clavier pour que vous puissiez le nettoyer, sans taper n'importe quoi ni lancer d'apps."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilitas bar menu yang mengunci keyboard agar bisa dibersihkan, tanpa mengetik sembarangan atau membuka aplikasi."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -200,6 +266,18 @@
             "value": "메뉴 막대에서 키보드를 잠가, 엉뚱한 입력이나 앱 실행 없이 청소할 수 있게 해 주는 유틸리티입니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Een hulpprogramma in de menubalk dat je toetsenbord vergrendelt zodat je het kunt schoonmaken, zonder onzin te typen of apps te openen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Narzędzie na pasku menu, które blokuje klawiaturę na czas czyszczenia, bez wpisywania bezsensownych znaków i uruchamiania aplikacji."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -216,6 +294,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klavyenizi kilitleyip, saçma tuşlara basmadan veya uygulama açmadan temizlemenizi sağlayan bir menü çubuğu aracı."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Утиліта в рядку меню, яка блокує клавіатуру на час чищення, щоб ви не друкували нісенітниці й не запускали програми."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiện ích trên thanh menu giúp khóa bàn phím để bạn vệ sinh mà không gõ lung tung hay mở nhầm ứng dụng."
           }
         },
         "zh-Hans": {
@@ -259,6 +349,12 @@
             "value": "Accès à l'Accessibilité autorisé"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akses Aksesibilitas diberikan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -277,6 +373,18 @@
             "value": "손쉬운 사용 권한이 허용됨"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toegang via Toegankelijkheid verleend"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uprawnienie Dostępność przyznane"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -293,6 +401,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Erişilebilirlik izni verildi"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступ до спеціальних можливостей надано"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đã cấp quyền Trợ năng"
           }
         },
         "zh-Hans": {
@@ -336,6 +456,12 @@
             "value": "Accès à l'Accessibilité pas encore autorisé"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akses Aksesibilitas belum diberikan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -354,6 +480,18 @@
             "value": "손쉬운 사용 권한이 아직 허용되지 않음"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toegang via Toegankelijkheid nog niet verleend"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uprawnienie Dostępność nie zostało jeszcze przyznane"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -370,6 +508,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Erişilebilirlik izni henüz verilmedi"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступ до спеціальних можливостей ще не надано"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chưa cấp quyền Trợ năng"
           }
         },
         "zh-Hans": {
@@ -413,6 +563,12 @@
             "value": "Accès à l’Accessibilité requis"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akses Aksesibilitas Diperlukan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -431,6 +587,18 @@
             "value": "손쉬운 사용 권한 필요"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toegang via Toegankelijkheid vereist"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wymagane uprawnienie Dostępność"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -447,6 +615,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Erişilebilirlik İzni Gerekli"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Потрібен доступ до спеціальних можливостей"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cần quyền Trợ năng"
           }
         },
         "zh-Hans": {
@@ -490,6 +670,12 @@
             "value": "Avancé"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lanjutan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -508,6 +694,18 @@
             "value": "고급"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geavanceerd"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaawansowany"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -524,6 +722,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Gelişmiş"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Розширений"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nâng cao"
           }
         },
         "zh-Hans": {
@@ -567,6 +777,12 @@
             "value": "Autoriser dans les éléments d'ouverture…"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Izinkan di Item Login…"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -585,6 +801,18 @@
             "value": "로그인 항목에서 허용…"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sta toe in inlogonderdelen…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zezwól w obiektach logowania…"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -601,6 +829,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Giriş Öğeleri’nde izin ver…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Дозволити в елементах входу…"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cho phép trong Mục đăng nhập…"
           }
         },
         "zh-Hans": {
@@ -644,6 +884,12 @@
             "value": "Déjà activé dans Réglages Système ? « Autoriser l’accès » supprime l’ancienne entrée pour que vous puissiez la réactiver."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sudah aktif di Pengaturan Sistem? Beri Akses menghapus entri lama agar Anda bisa mengaktifkannya lagi."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -662,6 +908,18 @@
             "value": "시스템 설정에서 이미 켜져 있나요? ‘권한 허용’을 누르면 이전 항목이 지워져 다시 켤 수 있습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Staat het al aan in Systeeminstellingen? Met Geef toegang verwijder je de oude regel, zodat je het opnieuw kunt inschakelen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Już włączone w Ustawieniach systemowych? Przycisk Przyznaj dostęp usuwa stary wpis, żeby można było włączyć je ponownie."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -678,6 +936,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sistem Ayarları’nda zaten açık mı? “İzin Ver” eski kaydı siler, böylece yeniden açabilirsiniz."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Уже ввімкнено в Системних налаштуваннях? Кнопка «Надати доступ» видаляє старий запис, щоб ви могли ввімкнути його знову."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đã bật trong Cài đặt Hệ thống? Nút Cấp quyền sẽ xóa mục cũ để bạn bật lại."
           }
         },
         "zh-Hans": {
@@ -721,6 +991,12 @@
             "value": "Une autre app utilise la saisie sécurisée, donc macOS empêche dirtymac de bloquer les touches."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aplikasi lain sedang memakai input aman, sehingga macOS tidak mengizinkan dirtymac memblokir tombol."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -739,6 +1015,18 @@
             "value": "다른 앱에서 보안 입력을 사용 중이므로 macOS가 dirtymac의 키 차단을 허용하지 않습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Een andere app gebruikt beveiligde invoer, dus macOS laat dirtymac geen toetsen blokkeren."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Inna aplikacja używa bezpiecznego wprowadzania, więc macOS nie pozwala dirtymac blokować klawiszy."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -755,6 +1043,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Başka bir uygulama güvenli girişi kullanıyor; bu yüzden macOS, dirtymac'in tuşları engellemesine izin vermiyor."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Інша програма використовує захищене введення, тому macOS не дозволяє dirtymac блокувати клавіші."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Một ứng dụng khác đang dùng nhập liệu bảo mật nên macOS không cho dirtymac chặn phím."
           }
         },
         "zh-Hans": {
@@ -798,6 +1098,12 @@
             "value": "Une autre app utilise ce raccourci. Choisissez-en un autre."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan ini sudah dipakai aplikasi lain. Pilih yang berbeda."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -816,6 +1122,18 @@
             "value": "다른 앱이 이 단축키를 사용 중입니다. 다른 단축키를 선택하세요."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Een andere app gebruikt deze sneltoets al. Kies een andere."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ten skrót jest już używany przez inną aplikację. Wybierz inny."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -832,6 +1150,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu kısayolu başka bir uygulama kullanıyor. Farklı bir kısayol seçin."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Цю комбінацію вже використовує інша програма. Виберіть іншу."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Một ứng dụng khác đang dùng phím tắt này. Hãy chọn phím khác."
           }
         },
         "zh-Hans": {
@@ -875,6 +1205,12 @@
             "value": "Apparence"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -893,6 +1229,18 @@
             "value": "모양"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Weergave"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wygląd"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -909,6 +1257,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Görünüm"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вигляд"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giao diện"
           }
         },
         "zh-Hans": {
@@ -952,6 +1312,12 @@
             "value": "Déverrouillage auto"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka kunci otomatis"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -970,6 +1336,18 @@
             "value": "자동 잠금 해제"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatisch ontgrendelen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Automatyczne odblokowanie"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -986,6 +1364,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Otomatik aç"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Автоматичне розблокування"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tự động mở khóa"
           }
         },
         "zh-Hans": {
@@ -1029,6 +1419,12 @@
             "value": "Retour"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kembali"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1047,6 +1443,18 @@
             "value": "뒤로"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terug"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wstecz"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1063,6 +1471,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Geri"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Назад"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quay lại"
           }
         },
         "zh-Hans": {
@@ -1106,6 +1526,12 @@
             "value": "Simple"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dasar"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1124,6 +1550,18 @@
             "value": "기본"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Basis"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Podstawowy"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1140,6 +1578,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Temel"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Базовий"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cơ bản"
           }
         },
         "zh-Hans": {
@@ -1183,6 +1633,12 @@
             "value": "Avant le verrouillage"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sebelum mengunci"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1201,6 +1657,18 @@
             "value": "잠금 전"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voor het vergrendelen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przed blokadą"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1217,6 +1685,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kilitlemeden önce"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перед блокуванням"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trước khi khóa"
           }
         },
         "zh-Hans": {
@@ -1260,6 +1740,12 @@
             "value": "Bloquer les touches multimédia et luminosité"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokir tombol media & kecerahan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1278,6 +1764,18 @@
             "value": "미디어 및 밝기 키 차단"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokkeer media- en helderheidstoetsen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokuj klawisze multimediów i jasności"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1294,6 +1792,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Medya ve parlaklık tuşlarını engelle"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блокувати медіаклавіші та клавіші яскравості"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chặn phím đa phương tiện và độ sáng"
           }
         },
         "zh-Hans": {
@@ -1337,6 +1847,12 @@
             "value": "Bloquer les touches de modification"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokir tombol pengubah"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1355,6 +1871,18 @@
             "value": "보조 키 차단"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokkeer modificatietoetsen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokuj klawisze modyfikujące"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1371,6 +1899,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Değiştirici tuşları engelle"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блокувати клавіші-модифікатори"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chặn phím bổ trợ"
           }
         },
         "zh-Hans": {
@@ -1414,6 +1954,12 @@
             "value": "Bloquer la souris et le trackpad"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokir mouse & trackpad"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1432,6 +1978,18 @@
             "value": "마우스 및 트랙패드 차단"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokkeer muis en trackpad"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokuj mysz i gładzik"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1448,6 +2006,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fare ve trackpad'i engelle"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блокувати мишу та трекпад"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chặn chuột và bàn di chuột"
           }
         },
         "zh-Hans": {
@@ -1491,6 +2061,12 @@
             "value": "Annuler"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Batal"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1509,6 +2085,18 @@
             "value": "취소"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Annuleer"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Anuluj"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1525,6 +2113,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "İptal"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скасувати"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hủy"
           }
         },
         "zh-Hans": {
@@ -1568,6 +2168,12 @@
             "value": "Rechercher des mises à jour"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Periksa pembaruan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1586,6 +2192,18 @@
             "value": "업데이트 확인"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoek naar updates"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdzaj aktualizacje"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1602,6 +2220,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Güncellemeleri denetle"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевіряти оновлення"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiểm tra cập nhật"
           }
         },
         "zh-Hans": {
@@ -1645,6 +2275,12 @@
             "value": "Vérifier maintenant"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Periksa sekarang"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1663,6 +2299,18 @@
             "value": "지금 확인"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nu controleren"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdź teraz"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1679,6 +2327,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Şimdi denetle"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірити зараз"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiểm tra ngay"
           }
         },
         "zh-Hans": {
@@ -1722,6 +2382,12 @@
             "value": "Vérification…"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Memeriksa…"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1740,6 +2406,18 @@
             "value": "확인 중…"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bezig met controleren…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdzanie…"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1756,6 +2434,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Denetleniyor…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірка…"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đang kiểm tra…"
           }
         },
         "zh-Hans": {
@@ -1799,6 +2489,12 @@
             "value": "Mode nettoyage activé"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode Pembersihan Aktif"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1817,6 +2513,18 @@
             "value": "청소 모드 활성화됨"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Reinigingsmodus actief"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tryb czyszczenia aktywny"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1833,6 +2541,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Temizleme Modu Aktif"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Режим чищення активний"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chế độ vệ sinh đang bật"
           }
         },
         "zh-Hans": {
@@ -1876,6 +2596,12 @@
             "value": "Cliquez sur l'icône dirtymac dans la barre des menus."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik ikon dirtymac di bar menu Anda."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1894,6 +2620,18 @@
             "value": "메뉴 막대의 dirtymac 아이콘을 클릭하세요."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik op het dirtymac-symbool in je menubalk."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kliknij ikonę dirtymac na pasku menu."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1910,6 +2648,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Menü çubuğundaki dirtymac simgesine tıklayın."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клацніть піктограму dirtymac у рядку меню."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nhấp vào biểu tượng dirtymac trên thanh menu."
           }
         },
         "zh-Hans": {
@@ -1953,6 +2703,12 @@
             "value": "Cliquer pour verrouiller le clavier"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik untuk Mengunci Keyboard"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -1971,6 +2727,18 @@
             "value": "키보드를 잠그려면 클릭"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klik om het toetsenbord te vergrendelen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kliknij, aby zablokować klawiaturę"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -1987,6 +2755,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klavyeyi Kilitlemek için Tıklayın"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клацніть, щоб заблокувати клавіатуру"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nhấp để khóa bàn phím"
           }
         },
         "zh-Hans": {
@@ -2030,6 +2810,12 @@
             "value": "Continuer"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lanjutkan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2048,6 +2834,18 @@
             "value": "계속"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ga door"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dalej"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2064,6 +2862,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Devam Et"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Продовжити"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiếp tục"
           }
         },
         "zh-Hans": {
@@ -2107,6 +2917,12 @@
             "value": "Copié"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tersalin"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2125,6 +2941,18 @@
             "value": "복사됨"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gekopieerd"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skopiowano"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2141,6 +2969,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kopyalandı"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скопійовано"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đã sao chép"
           }
         },
         "zh-Hans": {
@@ -2184,6 +3024,12 @@
             "value": "Copier la commande brew"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Salin perintah brew"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2202,6 +3048,18 @@
             "value": "brew 명령 복사"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopieer brew-opdracht"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiuj polecenie brew"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2218,6 +3076,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Brew komutunu kopyala"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Копіювати команду brew"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sao chép lệnh brew"
           }
         },
         "zh-Hans": {
@@ -2261,6 +3131,12 @@
             "value": "Impossible de rechercher les mises à jour. Réessayez plus tard."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tidak dapat memeriksa pembaruan. Coba lagi nanti."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2279,6 +3155,18 @@
             "value": "업데이트를 확인하지 못했습니다. 나중에 다시 시도하세요."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kon niet op updates controleren. Probeer het later opnieuw."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie udało się sprawdzić aktualizacji. Spróbuj ponownie później."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2295,6 +3183,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Güncellemeler denetlenemedi. Daha sonra tekrar deneyin."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не вдалося перевірити оновлення. Спробуйте пізніше."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Không thể kiểm tra cập nhật. Hãy thử lại sau."
           }
         },
         "zh-Hans": {
@@ -2338,6 +3238,12 @@
             "value": "Sombre"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gelap"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2356,6 +3262,18 @@
             "value": "어둡게"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Donker"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ciemny"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2372,6 +3290,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Koyu"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Темний"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tối"
           }
         },
         "zh-Hans": {
@@ -2419,6 +3349,12 @@
             "value": "dirtymac %@ est disponible."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ tersedia."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2437,6 +3373,18 @@
             "value": "dirtymac %@ 버전이 나왔습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ is beschikbaar."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dostępna jest wersja dirtymac %@."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2453,6 +3401,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac %@ çıktı."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступна версія dirtymac %@."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ đã có."
           }
         },
         "zh-Hans": {
@@ -2496,6 +3456,12 @@
             "value": "dirtymac peut démarrer avec votre Mac pour être toujours à un raccourci près."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac dapat berjalan bersama Mac Anda, jadi selalu hanya satu pintasan jauhnya."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2514,6 +3480,18 @@
             "value": "dirtymac을 Mac과 함께 시작하면 언제든 단축키 하나로 쓸 수 있습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac kan met je Mac opstarten, zodat het altijd één sneltoets ver weg is."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac może uruchamiać się razem z Maciem, więc zawsze jest pod ręką."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2530,6 +3508,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac, Mac'inizle birlikte başlayabilir; böylece her zaman bir kısayol uzağınızda olur."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac може запускатися разом із Mac, тож завжди під рукою."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac có thể khởi động cùng máy Mac, nên luôn nằm trong tầm tay."
           }
         },
         "zh-Hans": {
@@ -2573,6 +3563,12 @@
             "value": "dirtymac — clavier verrouillé"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac — keyboard terkunci"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2591,6 +3587,18 @@
             "value": "dirtymac — 키보드 잠김"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac — toetsenbord vergrendeld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac — klawiatura zablokowana"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2607,6 +3615,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac — klavye kilitli"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac — клавіатуру заблоковано"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac — bàn phím đã khóa"
           }
         },
         "zh-Hans": {
@@ -2650,6 +3670,12 @@
             "value": "dirtymac est à jour."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac sudah yang terbaru."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2668,6 +3694,18 @@
             "value": "dirtymac이 최신 버전입니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac is up-to-date."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac jest aktualny."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2684,6 +3722,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac güncel."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac оновлено до останньої версії."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac đã là bản mới nhất."
           }
         },
         "zh-Hans": {
@@ -2727,6 +3777,12 @@
             "value": "dirtymac se trouve ici, dans la barre des menus."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac berada di bar menu Anda, di atas sini."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2745,6 +3801,18 @@
             "value": "dirtymac은 여기 위쪽 메뉴 막대에 있습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac woont in je menubalk, hier bovenin."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac mieszka na pasku menu, tutaj u góry."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2761,6 +3829,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac yukarıda, menü çubuğunuzda yaşıyor."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac живе в рядку меню, ось тут угорі."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac nằm trên thanh menu, ngay phía trên này."
           }
         },
         "zh-Hans": {
@@ -2804,6 +3884,12 @@
             "value": "dirtymac a besoin de l'accès à l'Accessibilité pour intercepter les événements clavier pendant le nettoyage. Rien n'est enregistré, journalisé ni envoyé."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac memerlukan akses Aksesibilitas untuk mencegat peristiwa keyboard saat Anda membersihkan. Tidak ada yang direkam, dicatat, atau dikirim ke mana pun."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2822,6 +3908,18 @@
             "value": "dirtymac이 청소하는 동안 키보드 입력을 차단하려면 손쉬운 사용 권한이 필요합니다. 어떤 것도 기록·저장·전송하지 않습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac heeft toegang via Toegankelijkheid nodig om toetsenbordgebeurtenissen te onderscheppen terwijl je schoonmaakt. Er wordt niets opgenomen, vastgelegd of ergens naartoe gestuurd."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac potrzebuje uprawnienia Dostępność, aby przechwytywać zdarzenia klawiatury podczas czyszczenia. Nic nie jest nagrywane, zapisywane ani nigdzie wysyłane."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2838,6 +3936,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac, sen temizlerken klavye olaylarını engellemek için Erişilebilirlik iznine ihtiyaç duyar. Hiçbir şey kaydedilmez, loglanmaz veya gönderilmez."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac потрібен доступ до спеціальних можливостей, щоб перехоплювати події клавіатури під час чищення. Нічого не записується, не журналюється й нікуди не надсилається."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac cần quyền Trợ năng để chặn các sự kiện bàn phím trong lúc bạn vệ sinh. Không có gì bị ghi lại, lưu nhật ký hay gửi đi đâu cả."
           }
         },
         "zh-Hans": {
@@ -2881,6 +3991,12 @@
             "value": "dirtymac a besoin de l’autorisation d’intercepter les événements clavier pendant le nettoyage."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac memerlukan izin untuk mencegat peristiwa keyboard saat Anda membersihkan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2899,6 +4015,18 @@
             "value": "dirtymac이(가) 청소하는 동안 키보드 입력을 차단하려면 권한이 필요합니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac heeft toestemming nodig om toetsenbordgebeurtenissen te onderscheppen terwijl je schoonmaakt."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac potrzebuje uprawnienia, aby przechwytywać zdarzenia klawiatury podczas czyszczenia."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2915,6 +4043,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac, sen temizlerken klavye olaylarını engelleyebilmek için izne ihtiyaç duyar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac потрібен дозвіл перехоплювати події клавіатури під час чищення."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac cần quyền để chặn các sự kiện bàn phím trong lúc bạn vệ sinh."
           }
         },
         "zh-Hans": {
@@ -2958,6 +4098,12 @@
             "value": "dirtymac vous prévient désormais quand un champ de mot de passe ou Terminal l’empêche de bloquer les touches."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac kini memberi tahu saat kolom kata sandi atau Terminal menghalangi pemblokiran tombol."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -2976,6 +4122,18 @@
             "value": "암호 입력란이나 터미널 때문에 키를 차단할 수 없을 때 dirtymac이 알려 줍니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac meldt nu wanneer een wachtwoordveld of Terminal het blokkeren van toetsen verhindert."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac informuje teraz, gdy pole hasła lub Terminal uniemożliwia blokowanie klawiszy."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -2992,6 +4150,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac artık bir parola alanı ya da Terminal tuşları engellemesini önlediğinde size haber veriyor."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Тепер dirtymac повідомляє, коли поле пароля або Термінал заважає блокувати клавіші."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac giờ sẽ báo khi một ô mật khẩu hoặc Terminal khiến nó không chặn được phím."
           }
         },
         "zh-Hans": {
@@ -3035,6 +4205,12 @@
             "value": "dirtymac reste hors ligne tant que vous n'activez pas la recherche de mises à jour dans les Réglages. Il vous prévient alors lorsqu'une nouvelle version est disponible."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac tetap offline kecuali Anda mengaktifkan pemeriksaan pembaruan di Pengaturan. Setelah itu, ia memberi tahu saat versi baru tersedia."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3053,6 +4229,18 @@
             "value": "설정에서 업데이트 확인을 켜지 않으면 dirtymac은 계속 오프라인으로 동작합니다. 켜면 새 버전이 나왔을 때 알려 드립니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac blijft offline tenzij je updatecontrole inschakelt in Instellingen. Daarna laat het weten wanneer er een nieuwe versie is."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac pozostaje offline, dopóki nie włączysz sprawdzania aktualizacji w Ustawieniach. Wtedy powiadomi Cię o nowej wersji."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3069,6 +4257,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ayarlar'dan güncelleme denetimini açmadığınız sürece dirtymac çevrimdışı kalır. Açarsanız yeni bir sürüm çıktığında sizi haberdar eder."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac залишається офлайн, доки ви не ввімкнете перевірку оновлень у Налаштуваннях. Тоді він повідомить про нову версію."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac luôn ngoại tuyến trừ khi bạn bật kiểm tra cập nhật trong Cài đặt. Khi đó nó sẽ báo khi có phiên bản mới."
           }
         },
         "zh-Hans": {
@@ -3112,6 +4312,12 @@
             "value": "dirtymac prend votre vie privée très au sérieux, c'est pourquoi il reste hors ligne par défaut. Si vous le souhaitez, vous pouvez l'autoriser à vérifier une fois par jour si une nouvelle version est disponible. Seul le numéro de la dernière version est demandé à GitHub. Aucune donnée personnelle ni information d'utilisation ne quitte votre Mac. Comme pour toute requête web, GitHub peut voir votre adresse IP."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac sangat menjaga privasi Anda, sehingga secara default tetap offline. Jika mau, Anda dapat mengizinkannya memeriksa sekali sehari apakah ada versi baru. Hanya nomor versi terbaru yang diminta dari GitHub. Tidak ada data pribadi atau informasi penggunaan yang keluar dari Mac Anda. Seperti permintaan web lainnya, GitHub dapat melihat alamat IP Anda."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3130,6 +4336,18 @@
             "value": "dirtymac은 개인정보를 소중히 여기므로 기본적으로 오프라인으로 동작합니다. 원하시면 하루에 한 번 새 버전이 나왔는지 확인하도록 허용할 수 있습니다. GitHub에는 최신 버전 번호만 요청합니다. 개인 정보나 사용 정보는 Mac 밖으로 나가지 않습니다. 모든 웹 요청과 마찬가지로 GitHub에서는 IP 주소를 볼 수 있습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac neemt je privacy serieus en blijft daarom standaard offline. Als je wilt, kun je toestaan dat het één keer per dag controleert of er een nieuwe versie is. Alleen het nummer van de nieuwste versie wordt bij GitHub opgevraagd. Er verlaten geen persoonsgegevens of gebruiksinformatie je Mac. Zoals bij elk webverzoek kan GitHub je IP-adres zien."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac poważnie traktuje Twoją prywatność, dlatego domyślnie działa offline. Jeśli chcesz, możesz pozwolić mu raz dziennie sprawdzać, czy dostępna jest nowa wersja. Z GitHuba pobierany jest tylko numer najnowszej wersji. Żadne dane osobowe ani informacje o użytkowaniu nie opuszczają Twojego Maca. Jak przy każdym zapytaniu sieciowym, GitHub widzi Twój adres IP."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3146,6 +4364,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac gizliliğinize büyük önem verir, bu yüzden varsayılan olarak çevrimdışı çalışır. İsterseniz internet bağlantısına izin verip yeni sürümlerden haberdar olabilirsiniz. Denetim günde en fazla bir kez yapılır. GitHub'dan yalnızca en son sürüm numarası istenir. Mac'inizden hiçbir kişisel veri ya da kullanım bilgisi çıkmaz. Her web isteğinde olduğu gibi GitHub IP adresinizi görebilir."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac серйозно ставиться до вашої приватності, тому за промовчанням працює офлайн. Якщо захочете, можете дозволити йому раз на день перевіряти, чи вийшла нова версія. У GitHub запитується лише номер останньої версії. Жодні особисті дані чи відомості про використання не залишають ваш Mac. Як і за будь-якого вебзапиту, GitHub бачить вашу IP-адресу."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac coi trọng quyền riêng tư của bạn, nên mặc định luôn ngoại tuyến. Nếu muốn, bạn có thể cho phép nó kiểm tra mỗi ngày một lần xem có phiên bản mới không. Chỉ số phiên bản mới nhất được yêu cầu từ GitHub. Không có dữ liệu cá nhân hay thông tin sử dụng nào rời khỏi máy Mac của bạn. Như mọi yêu cầu web khác, GitHub có thể thấy địa chỉ IP của bạn."
           }
         },
         "zh-Hans": {
@@ -3189,6 +4419,12 @@
             "value": "Terminé"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selesai"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3207,6 +4443,18 @@
             "value": "완료"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klaar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gotowe"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3223,6 +4471,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bitti"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Готово"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xong"
           }
         },
         "zh-Hans": {
@@ -3266,6 +4526,12 @@
             "value": "Télécharger"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Unduh"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3284,6 +4550,18 @@
             "value": "다운로드"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pobierz"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3300,6 +4578,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "İndir"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Завантажити"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tải xuống"
           }
         },
         "zh-Hans": {
@@ -3343,6 +4633,12 @@
             "value": "Échap fonctionne. Vous pouvez verrouiller."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esc berfungsi. Sekarang Anda bisa mengunci."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3361,6 +4657,18 @@
             "value": "Esc가 작동합니다. 이제 잠글 수 있습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esc werkt. Je kunt nu vergrendelen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esc działa. Możesz teraz zablokować."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3377,6 +4685,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esc çalışıyor. Artık kilitleyebilirsiniz."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esc працює. Тепер можна блокувати."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Esc hoạt động. Bạn có thể khóa ngay."
           }
         },
         "zh-Hans": {
@@ -3420,6 +4740,12 @@
             "value": "Verrouillage total"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunci Penuh"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3438,6 +4764,18 @@
             "value": "전체 잠금"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Volledige vergrendeling"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pełna blokada"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3454,6 +4792,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Tam Kilit"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Повне блокування"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khóa hoàn toàn"
           }
         },
         "zh-Hans": {
@@ -3497,6 +4847,12 @@
             "value": "Commencer"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mulai"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3515,6 +4871,18 @@
             "value": "시작하기"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aan de slag"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zaczynamy"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3531,6 +4899,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Başla"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Почати"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bắt đầu"
           }
         },
         "zh-Hans": {
@@ -3574,6 +4954,12 @@
             "value": "Raccourci global"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pintasan global"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3592,6 +4978,18 @@
             "value": "전역 단축키"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Globale sneltoets"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Skrót globalny"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3608,6 +5006,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Genel kısayol"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Глобальна комбінація клавіш"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phím tắt toàn cục"
           }
         },
         "zh-Hans": {
@@ -3651,6 +5061,12 @@
             "value": "Autoriser l’accès"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Beri Akses"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3669,6 +5085,18 @@
             "value": "권한 허용"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geef toegang"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przyznaj dostęp"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3685,6 +5113,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "İzin Ver"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Надати доступ"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cấp quyền"
           }
         },
         "zh-Hans": {
@@ -3728,6 +5168,12 @@
             "value": "Autoriser l'accès à l'Accessibilité"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berikan Akses Aksesibilitas"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3746,6 +5192,18 @@
             "value": "손쉬운 사용 권한 허용"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geef toegang via Toegankelijkheid"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przyznaj uprawnienie Dostępność"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3762,6 +5220,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Erişilebilirlik İzni Ver"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Надайте доступ до спеціальних можливостей"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cấp quyền Trợ năng"
           }
         },
         "zh-Hans": {
@@ -3805,6 +5275,12 @@
             "value": "Entendez quand le clavier se verrouille, pendant que vous maintenez Échap et avant le déverrouillage. Désactivez-les dans les Réglages."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dengarkan saat keyboard terkunci, selagi Anda menahan Esc, dan sebelum terbuka. Matikan di Pengaturan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3823,6 +5299,18 @@
             "value": "키보드가 잠길 때, Esc를 누르고 있는 동안, 잠금이 해제되기 직전에 소리로 알려 줍니다. 설정에서 끌 수 있습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoor wanneer het toetsenbord vergrendelt, terwijl je Esc ingedrukt houdt en vlak voordat het ontgrendelt. Je kunt ze uitzetten in Instellingen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usłysz, kiedy klawiatura się blokuje, gdy przytrzymujesz Esc i tuż przed odblokowaniem. Możesz je wyłączyć w Ustawieniach."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3839,6 +5327,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klavye kilitlendiğinde, Esc'i basılı tutarken ve kilit açılmadan hemen önce sesle haberdar olun. Ayarlar'dan kapatabilirsiniz."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Чуйте, коли клавіатура блокується, поки ви тримаєте Esc і перед розблокуванням. Вимкнути звуки можна в Налаштуваннях."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nghe âm báo khi bàn phím khóa, trong lúc bạn giữ Esc và ngay trước khi mở khóa. Có thể tắt trong Cài đặt."
           }
         },
         "zh-Hans": {
@@ -3882,6 +5382,12 @@
             "value": "Aide"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bantuan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3900,6 +5406,18 @@
             "value": "도움말"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Help"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pomoc"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3916,6 +5434,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yardım"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Довідка"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trợ giúp"
           }
         },
         "zh-Hans": {
@@ -3959,6 +5489,12 @@
             "value": "Maintenez Échap 3 secondes pour vérifier que votre issue de secours fonctionne."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tahan Esc selama 3 detik untuk memastikan jalan keluar Anda berfungsi."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -3977,6 +5513,18 @@
             "value": "Esc를 3초간 눌러 잠금 해제 방법이 작동하는지 확인하세요."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Houd Esc 3 seconden ingedrukt om te controleren of je uitweg werkt."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przytrzymaj Esc przez 3 sekundy, aby sprawdzić, czy wyjście awaryjne działa."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -3993,6 +5541,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Çıkış yolunuzun çalıştığını denetlemek için Esc'i 3 saniye basılı tutun."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Утримуйте Esc 3 секунди, щоб перевірити, що вихід працює."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giữ Esc trong 3 giây để kiểm tra lối thoát của bạn có hoạt động."
           }
         },
         "zh-Hans": {
@@ -4036,6 +5596,12 @@
             "value": "Maintenez Échap 3 secondes pour déverrouiller."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tahan Esc selama 3 detik untuk membuka kunci."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4054,6 +5620,18 @@
             "value": "Esc를 3초간 누르면 잠금이 해제됩니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Houd Esc 3 seconden ingedrukt om te ontgrendelen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przytrzymaj Esc przez 3 sekundy, aby odblokować."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4070,6 +5648,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kilidi açmak için Esc'i 3 saniye basılı tutun."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Утримуйте Esc 3 секунди, щоб розблокувати."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giữ Esc trong 3 giây để mở khóa."
           }
         },
         "zh-Hans": {
@@ -4113,6 +5703,12 @@
             "value": "Durée du verrouillage, de 1 à 60. Laissez vide pour utiliser le minuteur des Réglages."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Berapa lama mengunci, dari 1 sampai 60. Biarkan kosong untuk memakai timer dari Pengaturan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4131,6 +5727,18 @@
             "value": "잠글 시간(1~60분)입니다. 비워 두면 설정의 타이머를 사용합니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hoe lang vergrendelen, van 1 tot 60. Laat leeg om de timer uit Instellingen te gebruiken."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Na jak długo zablokować, od 1 do 60. Zostaw puste, aby użyć timera z Ustawień."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4147,6 +5755,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ne kadar süre kilitleneceği, 1 ile 60 arası. Ayarlar'daki zamanlayıcıyı kullanmak için boş bırakın."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "На скільки заблокувати, від 1 до 60. Залиште порожнім, щоб використати таймер із Налаштувань."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khóa trong bao lâu, từ 1 đến 60. Để trống để dùng bộ hẹn giờ trong Cài đặt."
           }
         },
         "zh-Hans": {
@@ -4190,6 +5810,12 @@
             "value": "Cela fait %lld jours que vous avez installé cette version. Une version plus récente est peut-être disponible. Vous pouvez consulter la page des versions ou activer la recherche de mises à jour dans les Réglages."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sudah %lld hari sejak Anda memasang versi ini. Mungkin ada versi yang lebih baru. Anda bisa memeriksa halaman rilis, atau mengaktifkan pemeriksaan pembaruan di Pengaturan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4208,6 +5834,18 @@
             "value": "이 버전을 설치한 지 %lld일이 지났습니다. 더 새로운 버전이 나왔을 수 있습니다. 릴리스 페이지를 확인하거나 설정에서 업데이트 확인을 켤 수 있습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het is %lld dagen geleden dat je deze versie hebt geïnstalleerd. Er is mogelijk een nieuwere beschikbaar. Je kunt de pagina met releases bekijken of updatecontrole inschakelen in Instellingen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minęło %lld dni od zainstalowania tej wersji. Może być dostępna nowsza. Możesz sprawdzić stronę wydań lub włączyć sprawdzanie aktualizacji w Ustawieniach."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4224,6 +5862,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu sürümü kurmanızın üzerinden %lld gün geçti. Daha yeni bir sürüm çıkmış olabilir. Sürümler sayfasına göz atabilir ya da Ayarlar'dan güncelleme denetimini açabilirsiniz."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "З моменту встановлення цієї версії минуло днів: %lld. Можливо, вийшла новіша. Можете переглянути сторінку випусків або ввімкнути перевірку оновлень у Налаштуваннях."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đã %lld ngày kể từ khi bạn cài phiên bản này. Có thể đã có bản mới hơn. Bạn có thể xem trang phát hành hoặc bật kiểm tra cập nhật trong Cài đặt."
           }
         },
         "zh-Hans": {
@@ -4267,6 +5917,12 @@
             "value": "Garder l'écran allumé"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biarkan layar tetap menyala"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4285,6 +5941,18 @@
             "value": "화면 켜 두기"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Houd het scherm aan"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie wygaszaj ekranu"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4301,6 +5969,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ekranı açık tut"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не вимикати екран"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Giữ màn hình luôn sáng"
           }
         },
         "zh-Hans": {
@@ -4344,6 +6024,12 @@
             "value": "Clavier déverrouillé"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyboard terbuka kuncinya"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4362,6 +6048,18 @@
             "value": "키보드 잠금이 해제되었습니다"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toetsenbord ontgrendeld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klawiatura odblokowana"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4378,6 +6076,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klavyenin kilidi açıldı"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавіатуру розблоковано"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đã mở khóa bàn phím"
           }
         },
         "zh-Hans": {
@@ -4421,6 +6131,12 @@
             "value": "Utilitaire de clavier"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Utilitas keyboard"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4439,6 +6155,18 @@
             "value": "키보드 유틸리티"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toetsenbord-tool"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klawiatura"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4455,6 +6183,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klavye yardımcısı"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Утиліта клавіатури"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tiện ích bàn phím"
           }
         },
         "zh-Hans": {
@@ -4498,6 +6238,12 @@
             "value": "Langue"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bahasa"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4516,6 +6262,18 @@
             "value": "언어"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Taal"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Język"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4532,6 +6290,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dil"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Мова"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ngôn ngữ"
           }
         },
         "zh-Hans": {
@@ -4575,6 +6345,12 @@
             "value": "Plus tard"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nanti"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4593,6 +6369,18 @@
             "value": "나중에"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Later"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Później"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4609,6 +6397,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sonra"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пізніше"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Để sau"
           }
         },
         "zh-Hans": {
@@ -4652,6 +6452,12 @@
             "value": "Relâchez Échap."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lepaskan Esc."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4670,6 +6476,18 @@
             "value": "Esc에서 손을 떼세요."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Laat Esc los."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Puść Esc."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4686,6 +6504,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Esc'i bırakın."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відпустіть Esc."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thả Esc ra."
           }
         },
         "zh-Hans": {
@@ -4729,6 +6559,12 @@
             "value": "Clair"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terang"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4747,6 +6583,18 @@
             "value": "밝게"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Licht"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jasny"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4763,6 +6611,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Açık"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Світлий"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sáng"
           }
         },
         "zh-Hans": {
@@ -4806,6 +6666,12 @@
             "value": "Verrouiller pendant"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunci selama"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4824,6 +6690,18 @@
             "value": "잠금 시간"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergrendel voor"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zablokuj na"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4840,6 +6718,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Şu süreyle kilitle"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Заблокувати на"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khóa trong"
           }
         },
         "zh-Hans": {
@@ -4883,6 +6773,12 @@
             "value": "Verrouiller le clavier"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunci Keyboard"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4901,6 +6797,18 @@
             "value": "키보드 잠금"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergrendel toetsenbord"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zablokuj klawiaturę"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4917,6 +6825,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klavyeyi Kilitle"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Заблокувати клавіатуру"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khóa bàn phím"
           }
         },
         "zh-Hans": {
@@ -4960,6 +6880,12 @@
             "value": "Verrouiller le clavier pour le nettoyer"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kunci Keyboard untuk Membersihkan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -4978,6 +6904,18 @@
             "value": "청소를 위해 키보드 잠그기"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergrendel toetsenbord voor het schoonmaken"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zablokuj klawiaturę na czas czyszczenia"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -4994,6 +6932,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Temizlik için Klavyeyi Kilitle"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Заблокувати клавіатуру для чищення"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khóa bàn phím để vệ sinh"
           }
         },
         "zh-Hans": {
@@ -5037,6 +6987,12 @@
             "value": "Verrouillé"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terkunci"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5055,6 +7011,18 @@
             "value": "잠김"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergrendeld"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zablokowano"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5071,6 +7039,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kilitli"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Заблоковано"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Đã khóa"
           }
         },
         "zh-Hans": {
@@ -5114,6 +7094,12 @@
             "value": "Verrouillage dans %lld…"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengunci dalam %lld…"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5132,6 +7118,18 @@
             "value": "%lld초 후 잠금…"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergrendelen over %lld…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokada za %lld…"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5148,6 +7146,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld sn sonra kilitleniyor…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блокування через %lld…"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khóa sau %lld…"
           }
         },
         "zh-Hans": {
@@ -5191,6 +7201,12 @@
             "value": "Verrouille le clavier pour que vous puissiez le nettoyer. Maintenez Échap 3 secondes pour déverrouiller."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mengunci keyboard agar bisa dibersihkan. Tahan Esc selama 3 detik untuk membuka kunci."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5209,6 +7225,18 @@
             "value": "청소할 수 있도록 키보드를 잠급니다. 잠금을 해제하려면 Esc를 3초간 누르세요."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vergrendelt het toetsenbord zodat je het kunt schoonmaken. Houd Esc 3 seconden ingedrukt om te ontgrendelen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokuje klawiaturę na czas czyszczenia. Przytrzymaj Esc przez 3 sekundy, aby odblokować."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5225,6 +7253,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Temizleyebilmeniz için klavyeyi kilitler. Kilidi açmak için Esc'i 3 saniye basılı tutun."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блокує клавіатуру, щоб ви могли її почистити. Утримуйте Esc 3 секунди, щоб розблокувати."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khóa bàn phím để bạn vệ sinh. Giữ Esc trong 3 giây để mở khóa."
           }
         },
         "zh-Hans": {
@@ -5268,6 +7308,12 @@
             "value": "Minutes"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menit"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5286,6 +7332,18 @@
             "value": "분"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minuten"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minuty"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5302,6 +7360,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Dakika"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Хвилини"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phút"
           }
         },
         "zh-Hans": {
@@ -5345,6 +7415,12 @@
             "value": "Mode"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mode"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5363,6 +7439,18 @@
             "value": "모드"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Modus"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tryb"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5379,6 +7467,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mod"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Режим"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chế độ"
           }
         },
         "zh-Hans": {
@@ -5422,6 +7522,12 @@
             "value": "La souris et le trackpad continuent de fonctionner — cliquez à nouveau sur l'icône pour déverrouiller."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mouse dan trackpad tetap berfungsi — klik ikon lagi untuk membuka kunci."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5440,6 +7546,18 @@
             "value": "마우스와 트랙패드는 계속 작동합니다. 아이콘을 다시 클릭하면 잠금이 해제됩니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muis en trackpad blijven werken — klik nogmaals op het symbool om te ontgrendelen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mysz i gładzik nadal działają — kliknij ikonę ponownie, aby odblokować."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5456,6 +7574,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fare ve trackpad çalışmaya devam eder — kilidi açmak için simgeye tekrar tıklayın."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Миша й трекпад продовжують працювати — клацніть піктограму ще раз, щоб розблокувати."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chuột và bàn di chuột vẫn hoạt động — nhấp lại biểu tượng để mở khóa."
           }
         },
         "zh-Hans": {
@@ -5499,6 +7629,12 @@
             "value": "La souris et le trackpad restent actifs."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mouse dan trackpad tetap aktif."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5517,6 +7653,18 @@
             "value": "마우스와 트랙패드는 계속 사용할 수 있습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muis en trackpad blijven ingeschakeld."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mysz i gładzik pozostają włączone."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5533,6 +7681,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fare ve trackpad çalışmaya devam eder."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Миша й трекпад залишаються ввімкненими."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chuột và bàn di chuột vẫn bật."
           }
         },
         "zh-Hans": {
@@ -5576,6 +7736,12 @@
             "value": "La souris et le trackpad seront aussi figés."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mouse dan trackpad juga akan dibekukan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5594,6 +7760,18 @@
             "value": "마우스와 트랙패드도 멈춥니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Muis en trackpad worden ook bevroren."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mysz i gładzik także zostaną zablokowane."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5610,6 +7788,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fare ve trackpad de donacak."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Миша й трекпад також буде заморожено."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chuột và bàn di chuột cũng sẽ bị đóng băng."
           }
         },
         "zh-Hans": {
@@ -5653,6 +7843,12 @@
             "value": "La souris sera figée. Maintenez Échap 3 s pour déverrouiller."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mouse akan dibekukan. Tahan Esc selama 3 dtk untuk memaksa membuka kunci."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5671,6 +7867,18 @@
             "value": "마우스가 멈춥니다. Esc를 3초간 누르면 강제 해제됩니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De muis wordt bevroren. Houd Esc 3 s ingedrukt om geforceerd te ontgrendelen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mysz zostanie zablokowana. Przytrzymaj Esc przez 3 s, aby wymusić odblokowanie."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5687,6 +7895,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fare donacak. Kilidi açmak için Esc'i 3sn basılı tutun."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Мишу буде заморожено. Утримуйте Esc 3 с для примусового розблокування."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chuột sẽ bị đóng băng. Giữ Esc 3 giây để buộc mở khóa."
           }
         },
         "zh-Hans": {
@@ -5730,6 +7950,12 @@
             "value": "Nouvelle icône"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ikon baru"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5748,6 +7974,18 @@
             "value": "새로운 아이콘"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nieuw symbool"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowa ikona"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5764,6 +8002,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yeni simge"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Нова піктограма"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Biểu tượng mới"
           }
         },
         "zh-Hans": {
@@ -5807,6 +8057,12 @@
             "value": "Désactivé"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mati"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5825,6 +8081,18 @@
             "value": "끔"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Uit"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyłączone"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5841,6 +8109,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kapalı"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкнено"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tắt"
           }
         },
         "zh-Hans": {
@@ -5884,6 +8164,12 @@
             "value": "Ouvrir à l'ouverture de session"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka saat login"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5902,6 +8188,18 @@
             "value": "로그인 시 열기"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open bij inloggen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwieraj przy logowaniu"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5918,6 +8216,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Oturum açıldığında başlat"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкривати під час входу"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở khi đăng nhập"
           }
         },
         "zh-Hans": {
@@ -5961,6 +8271,12 @@
             "value": "Ouvrir dirtymac à l'ouverture de session"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka dirtymac saat login"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -5979,6 +8295,18 @@
             "value": "로그인 시 dirtymac 열기"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open dirtymac bij inloggen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwieraj dirtymac przy logowaniu"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -5995,6 +8323,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Oturum açıldığında dirtymac'i başlat"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкривати dirtymac під час входу"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở dirtymac khi đăng nhập"
           }
         },
         "zh-Hans": {
@@ -6038,6 +8378,12 @@
             "value": "Ouvrez dirtymac depuis n'importe quelle app avec ⌃⌥⌘K. Choisissez une autre combinaison ou désactivez-le dans les Réglages."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka dirtymac dari aplikasi mana pun dengan ⌃⌥⌘K. Pilih kombinasi lain atau matikan di Pengaturan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6056,6 +8402,18 @@
             "value": "어떤 앱에서든 ⌃⌥⌘K로 dirtymac을 열 수 있습니다. 설정에서 다른 조합을 고르거나 끌 수 있습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open dirtymac vanuit elke app met ⌃⌥⌘K. Kies een andere combinatie of zet het uit in Instellingen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwieraj dirtymac z dowolnej aplikacji skrótem ⌃⌥⌘K. Wybierz inną kombinację lub wyłącz skrót w Ustawieniach."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6072,6 +8430,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac'i herhangi bir uygulamadan ⌃⌥⌘K ile açın. Ayarlar'dan başka bir kombinasyon seçebilir veya kapatabilirsiniz."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкривайте dirtymac з будь-якої програми за допомогою ⌃⌥⌘K. Виберіть іншу комбінацію або вимкніть її в Налаштуваннях."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở dirtymac từ bất kỳ ứng dụng nào bằng ⌃⌥⌘K. Chọn tổ hợp khác hoặc tắt trong Cài đặt."
           }
         },
         "zh-Hans": {
@@ -6115,6 +8485,12 @@
             "value": "Ouvrir les Réglages"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka Pengaturan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6133,6 +8509,18 @@
             "value": "설정 열기"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open Instellingen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz Ustawienia"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6149,6 +8537,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ayarları Aç"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити Налаштування"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở Cài đặt"
           }
         },
         "zh-Hans": {
@@ -6192,6 +8592,12 @@
             "value": "Ouvre le panneau dirtymac dans la barre des menus."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Membuka panel dirtymac di bar menu."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6210,6 +8616,18 @@
             "value": "메뉴 막대의 dirtymac 패널을 엽니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opent het dirtymac-paneel in de menubalk."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwiera panel dirtymac na pasku menu."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6226,6 +8644,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Menü çubuğundaki dirtymac panelini açar."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкриває панель dirtymac у рядку меню."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở bảng điều khiển dirtymac trên thanh menu."
           }
         },
         "zh-Hans": {
@@ -6269,6 +8699,12 @@
             "value": "Jouer des sons"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Putar suara"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6287,6 +8723,18 @@
             "value": "사운드 재생"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geluiden afspelen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odtwarzaj dźwięki"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6303,6 +8751,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sesleri çal"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відтворювати звуки"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phát âm thanh"
           }
         },
         "zh-Hans": {
@@ -6346,6 +8806,12 @@
             "value": "Appuyez sur %@ dans n'importe quelle app pour ouvrir dirtymac."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tekan %@ di aplikasi mana pun untuk membuka dirtymac."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6364,6 +8830,18 @@
             "value": "어떤 앱에서든 %@ 키를 누르면 dirtymac이 열립니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Druk in elke app op %@ om dirtymac te openen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naciśnij %@ w dowolnej aplikacji, aby otworzyć dirtymac."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6380,6 +8858,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac'i açmak için herhangi bir uygulamada %@ tuşlarına basın."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Натисніть %@ у будь-якій програмі, щоб відкрити dirtymac."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nhấn %@ trong bất kỳ ứng dụng nào để mở dirtymac."
           }
         },
         "zh-Hans": {
@@ -6423,6 +8913,12 @@
             "value": "Appuyez sur le bouton d'alimentation pour verrouiller le clavier."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tekan tombol daya untuk mengunci keyboard."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6441,6 +8937,18 @@
             "value": "전원 버튼을 눌러 키보드를 잠그세요."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Druk op de aan/uit-knop om het toetsenbord te vergrendelen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Naciśnij przycisk zasilania, aby zablokować klawiaturę."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6457,6 +8965,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klavyeyi kilitlemek için güç düğmesine basın."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Натисніть кнопку живлення, щоб заблокувати клавіатуру."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nhấn nút nguồn để khóa bàn phím."
           }
         },
         "zh-Hans": {
@@ -6500,6 +9020,12 @@
             "value": "Accès rapide"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Akses Cepat"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6518,6 +9044,18 @@
             "value": "빠른 접근"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Snelle toegang"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Szybki dostęp"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6534,6 +9072,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hızlı Erişim"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Швидкий доступ"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Truy cập nhanh"
           }
         },
         "zh-Hans": {
@@ -6577,6 +9127,12 @@
             "value": "Quitter"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keluar"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6595,6 +9151,18 @@
             "value": "종료"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zakończ"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6611,6 +9179,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Çık"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вийти"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thoát"
           }
         },
         "zh-Hans": {
@@ -6654,6 +9234,12 @@
             "value": "Pour la désactiver, quittez cette app ou verrouillez puis déverrouillez l’écran."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keluar dari aplikasi itu, atau kunci lalu buka kunci layar Anda, untuk membersihkannya."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6672,6 +9258,18 @@
             "value": "해제하려면 해당 앱을 종료하거나 화면을 잠갔다가 잠금 해제하세요."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sluit die app af, of vergrendel en ontgrendel je scherm, om het te wissen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zamknij tę aplikację albo zablokuj i odblokuj ekran, aby to wyczyścić."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6688,6 +9286,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kapatmak için o uygulamadan çıkın ya da ekranı kilitleyip kilidini açın."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Закрийте цю програму або заблокуйте й розблокуйте екран, щоб це скасувати."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hãy thoát ứng dụng đó, hoặc khóa rồi mở khóa màn hình để xóa trạng thái này."
           }
         },
         "zh-Hans": {
@@ -6731,6 +9341,12 @@
             "value": "Prêt"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Siap"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6749,6 +9365,18 @@
             "value": "준비됨"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gereed"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gotowe"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6765,6 +9393,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Hazır"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Готово"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sẵn sàng"
           }
         },
         "zh-Hans": {
@@ -6808,6 +9448,12 @@
             "value": "Notes de version"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Catatan rilis"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6826,6 +9472,18 @@
             "value": "릴리스 노트"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Releasenotes"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Informacje o wersji"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6842,6 +9500,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sürüm notları"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Примітки до випуску"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ghi chú phát hành"
           }
         },
         "zh-Hans": {
@@ -6885,6 +9555,12 @@
             "value": "Déverrouillage plus sûr"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pembukaan kunci lebih aman"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6903,6 +9579,18 @@
             "value": "더 안전한 잠금 해제"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veiliger ontgrendelen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bezpieczniejsze odblokowanie"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6919,6 +9607,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Daha güvenli kilit açma"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Безпечніше розблокування"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở khóa an toàn hơn"
           }
         },
         "zh-Hans": {
@@ -6962,6 +9662,12 @@
             "value": "Recherchez « Lock keyboard » dans Spotlight ou ajoutez-le à un raccourci. Cela fonctionne même si dirtymac n'est pas ouvert."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cari “Lock keyboard” di Spotlight atau tambahkan ke pintasan. Berfungsi bahkan saat dirtymac tidak berjalan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -6980,6 +9686,18 @@
             "value": "Spotlight에서 “Lock keyboard”를 검색하거나 단축어에 추가하세요. dirtymac이 실행 중이 아니어도 작동합니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zoek naar “Lock keyboard” in Spotlight of voeg het toe aan een opdracht. Het werkt zelfs als dirtymac niet draait."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyszukaj „Lock keyboard” w Spotlight lub dodaj to do skrótu. Działa nawet wtedy, gdy dirtymac nie jest uruchomiony."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -6996,6 +9714,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spotlight'ta “Lock keyboard” diye arayın veya bir kestirmeye ekleyin. dirtymac çalışmıyorken bile çalışır."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Знайдіть «Lock keyboard» у Spotlight або додайте до команди. Це працює, навіть якщо dirtymac не запущено."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tìm “Lock keyboard” trong Spotlight hoặc thêm vào một phím tắt. Hoạt động cả khi dirtymac không chạy."
           }
         },
         "zh-Hans": {
@@ -7039,6 +9769,12 @@
             "value": "Alerte de saisie sécurisée"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Peringatan input aman"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7057,6 +9793,18 @@
             "value": "보안 입력 경고"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waarschuwing voor beveiligde invoer"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ostrzeżenie o bezpiecznym wprowadzaniu"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7073,6 +9821,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Güvenli giriş uyarısı"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Попередження про захищене введення"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cảnh báo nhập liệu bảo mật"
           }
         },
         "zh-Hans": {
@@ -7116,6 +9876,12 @@
             "value": "Réglages"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pengaturan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7134,6 +9900,18 @@
             "value": "설정"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Instellingen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ustawienia"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7150,6 +9928,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ayarlar"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Налаштування"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cài đặt"
           }
         },
         "zh-Hans": {
@@ -7193,6 +9983,12 @@
             "value": "Afficher l'écran d'accueil"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tampilkan Layar Selamat Datang"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7211,6 +10007,18 @@
             "value": "시작 화면 표시"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Toon welkomstscherm"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pokaż ekran powitalny"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7227,6 +10035,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Karşılama Ekranını Göster"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Показати вітальний екран"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hiện màn hình chào mừng"
           }
         },
         "zh-Hans": {
@@ -7270,6 +10090,12 @@
             "value": "Ignorer pour l'instant"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lewati Dulu"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7288,6 +10114,18 @@
             "value": "나중에 하기"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nu overslaan"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pomiń na razie"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7304,6 +10142,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Şimdilik Atla"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пропустити поки що"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bỏ qua lúc này"
           }
         },
         "zh-Hans": {
@@ -7347,6 +10197,12 @@
             "value": "Son"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Suara"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7365,6 +10221,18 @@
             "value": "사운드"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geluid"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dźwięk"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7381,6 +10249,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ses"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Звук"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Âm thanh"
           }
         },
         "zh-Hans": {
@@ -7424,6 +10304,12 @@
             "value": "Signaux sonores"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Isyarat suara"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7442,6 +10328,18 @@
             "value": "사운드 알림"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Geluidssignalen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sygnały dźwiękowe"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7458,6 +10356,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sesli işaretler"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Звукові сигнали"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Âm báo"
           }
         },
         "zh-Hans": {
@@ -7501,6 +10411,12 @@
             "value": "Spotlight et Raccourcis"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight dan Pintasan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7519,6 +10435,18 @@
             "value": "Spotlight 및 단축어"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight en Opdrachten"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight i Skróty"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7535,6 +10463,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Spotlight ve Kestirmeler"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight і Команди"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Spotlight và Phím tắt"
           }
         },
         "zh-Hans": {
@@ -7578,6 +10518,12 @@
             "value": "Délai de démarrage"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jeda mulai"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7596,6 +10542,18 @@
             "value": "시작 지연"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Startvertraging"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Opóźnienie startu"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7612,6 +10570,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Başlangıç gecikmesi"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Затримка початку"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Độ trễ bắt đầu"
           }
         },
         "zh-Hans": {
@@ -7655,6 +10625,12 @@
             "value": "Empêche l'écran de s'assombrir ou de se mettre en veille pendant que le clavier est verrouillé, afin que l'économiseur d'écran ou un verrouillage d'écran ne mette pas fin au verrouillage."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mencegah layar meredup atau tidur saat keyboard terkunci, sehingga screen saver atau kunci layar tidak mengakhiri penguncian."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7673,6 +10649,18 @@
             "value": "키보드가 잠겨 있는 동안 화면이 어두워지거나 잠자기 상태가 되지 않게 하여, 화면 보호기나 화면 잠금으로 키보드 잠금이 끝나지 않도록 합니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voorkomt dat het scherm dimt of in slaap valt terwijl het toetsenbord vergrendeld is, zodat de schermbeveiliging of een schermvergrendeling de vergrendeling niet beëindigt."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nie pozwala ekranowi przygasać ani przechodzić w stan uśpienia, gdy klawiatura jest zablokowana, dzięki czemu wygaszacz ekranu ani blokada ekranu nie kończą blokady."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7689,6 +10677,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klavye kilitliyken ekranın kararmasını ya da uykuya geçmesini engeller. Böylece ekran koruyucu veya ekran kilidi klavye kilidini bitirmez."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не дає екрану тьмяніти чи переходити в сплячий режим, поки клавіатуру заблоковано, щоб заставка чи блокування екрана не завершували блокування."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ngăn màn hình mờ đi hoặc chuyển sang chế độ ngủ khi bàn phím đang khóa, để trình bảo vệ màn hình hay khóa màn hình không kết thúc việc khóa."
           }
         },
         "zh-Hans": {
@@ -7732,6 +10732,12 @@
             "value": "Système"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sistem"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7750,6 +10756,18 @@
             "value": "시스템"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Systeem"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Systemowy"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7766,6 +10784,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sistem"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Системний"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Hệ thống"
           }
         },
         "zh-Hans": {
@@ -7809,6 +10839,12 @@
             "value": "Le clavier reste verrouillé pendant %@, sauf si vous le déverrouillez avant."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyboard tetap terkunci selama %@ kecuali Anda membukanya lebih awal."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7827,6 +10863,18 @@
             "value": "먼저 해제하지 않으면 키보드는 %@ 동안 잠깁니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het toetsenbord blijft %@ vergrendeld, tenzij je het eerder ontgrendelt."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klawiatura pozostanie zablokowana przez %@, chyba że odblokujesz ją wcześniej."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7843,6 +10891,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klavye, daha önce açmazsanız %@ boyunca kilitli kalır."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавіатуру буде заблоковано на %@, якщо ви не розблокуєте її раніше."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bàn phím sẽ bị khóa trong %@ trừ khi bạn mở khóa sớm hơn."
           }
         },
         "zh-Hans": {
@@ -7886,6 +10946,12 @@
             "value": "Le clavier a été déverrouillé car l’accès à l’Accessibilité a été désactivé."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyboard dibuka kuncinya karena akses Aksesibilitas dimatikan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7904,6 +10970,18 @@
             "value": "손쉬운 사용 권한이 꺼져 키보드 잠금이 해제되었습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het toetsenbord is ontgrendeld omdat toegang via Toegankelijkheid is uitgezet."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klawiatura została odblokowana, ponieważ wyłączono uprawnienie Dostępność."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7920,6 +10998,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Erişilebilirlik izni kapatıldığı için klavyenin kilidi açıldı."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавіатуру розблоковано, бо доступ до спеціальних можливостей вимкнено."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bàn phím đã được mở khóa vì quyền Trợ năng bị tắt."
           }
         },
         "zh-Hans": {
@@ -7963,6 +11053,12 @@
             "value": "Le clavier a été déverrouillé car une autre app a activé la saisie sécurisée."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyboard dibuka kuncinya karena aplikasi lain mengaktifkan input aman."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -7981,6 +11077,18 @@
             "value": "다른 앱에서 보안 입력을 켜서 키보드 잠금이 해제되었습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het toetsenbord is ontgrendeld omdat een andere app beveiligde invoer heeft ingeschakeld."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klawiatura została odblokowana, ponieważ inna aplikacja włączyła bezpieczne wprowadzanie."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -7997,6 +11105,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Başka bir uygulama güvenli girişi açtığı için klavyenin kilidi açıldı."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавіатуру розблоковано, бо інша програма ввімкнула захищене введення."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bàn phím đã được mở khóa vì một ứng dụng khác bật nhập liệu bảo mật."
           }
         },
         "zh-Hans": {
@@ -8040,6 +11160,12 @@
             "value": "Le clavier a été déverrouillé car Réglages Système s’est ouvert."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyboard dibuka kuncinya karena Pengaturan Sistem dibuka."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8058,6 +11184,18 @@
             "value": "시스템 설정이 열려 키보드 잠금이 해제되었습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het toetsenbord is ontgrendeld omdat Systeeminstellingen is geopend."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klawiatura została odblokowana, ponieważ otwarto Ustawienia systemowe."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8074,6 +11212,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sistem Ayarları açıldığı için klavyenin kilidi açıldı."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавіатуру розблоковано, бо відкрилися Системні налаштування."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bàn phím đã được mở khóa vì Cài đặt Hệ thống được mở."
           }
         },
         "zh-Hans": {
@@ -8117,6 +11267,12 @@
             "value": "Le clavier a été déverrouillé quand votre Mac s’est mis en veille."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyboard dibuka kuncinya saat Mac Anda tidur."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8135,6 +11291,18 @@
             "value": "Mac이 잠자기 상태로 전환되어 키보드 잠금이 해제되었습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het toetsenbord is ontgrendeld toen je Mac in slaap viel."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klawiatura została odblokowana, gdy Mac przeszedł w stan uśpienia."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8151,6 +11319,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mac'iniz uyku moduna geçtiği için klavyenin kilidi açıldı."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавіатуру розблоковано, коли Mac перейшов у сплячий режим."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bàn phím đã được mở khóa khi máy Mac chuyển sang chế độ ngủ."
           }
         },
         "zh-Hans": {
@@ -8194,6 +11374,12 @@
             "value": "Le clavier a été déverrouillé quand l’écran a été verrouillé."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keyboard dibuka kuncinya saat layar Anda dikunci."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8212,6 +11398,18 @@
             "value": "화면이 잠겨 키보드 잠금이 해제되었습니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Het toetsenbord is ontgrendeld toen je scherm werd vergrendeld."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klawiatura została odblokowana, gdy ekran został zablokowany."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8228,6 +11426,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Ekranınız kilitlendiği için klavyenin kilidi açıldı."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Клавіатуру розблоковано, коли екран було заблоковано."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bàn phím đã được mở khóa khi màn hình bị khóa."
           }
         },
         "zh-Hans": {
@@ -8271,6 +11481,12 @@
             "value": "Le verrouillage prend fin quand votre Mac se met en veille ou se verrouille, et maintenir Échap déverrouille dès que vous relâchez."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Penguncian berakhir saat Mac tidur atau terkunci, dan menahan Esc membuka kunci begitu Anda melepasnya."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8289,6 +11505,18 @@
             "value": "Mac이 잠자기 상태가 되거나 잠기면 잠금이 끝나고, Esc를 길게 누르면 손을 뗄 때 잠금이 해제됩니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "De vergrendeling eindigt als je Mac in slaap valt of vergrendelt, en Esc ingedrukt houden ontgrendelt zodra je loslaat."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blokada kończy się, gdy Mac przechodzi w stan uśpienia lub blokuje ekran, a przytrzymanie Esc odblokowuje po puszczeniu klawisza."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8305,6 +11533,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Mac'iniz uyku moduna geçtiğinde ya da kilitlendiğinde kilit sona erer; Esc'i basılı tuttuğunuzda kilit, bıraktığınız anda açılır."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блокування закінчується, коли Mac переходить у сплячий режим або блокується, а утримання Esc розблоковує, щойно ви відпустите клавішу."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khóa sẽ kết thúc khi máy Mac ngủ hoặc bị khóa, và giữ Esc sẽ mở khóa ngay khi bạn thả tay."
           }
         },
         "zh-Hans": {
@@ -8348,6 +11588,12 @@
             "value": "Cette fenêtre s'affiche une fois après chaque mise à jour pour que vous ne manquiez aucun changement."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jendela ini muncul sekali setelah setiap pembaruan agar Anda tidak melewatkan perubahan."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8366,6 +11612,18 @@
             "value": "이 창은 업데이트할 때마다 한 번 표시되어 변경 사항을 놓치지 않게 해 줍니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dit venster verschijnt één keer na elke update, zodat je geen wijziging mist."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "To okno pojawia się raz po każdej aktualizacji, żebyś nie przegapił żadnej zmiany."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8382,6 +11640,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Bu pencere her güncellemeden sonra bir kez açılır; böylece hiçbir değişikliği kaçırmazsınız."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Це вікно з'являється один раз після кожного оновлення, щоб ви не пропустили жодної зміни."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cửa sổ này hiện một lần sau mỗi bản cập nhật để bạn không bỏ lỡ thay đổi nào."
           }
         },
         "zh-Hans": {
@@ -8425,6 +11695,12 @@
             "value": "Activer la recherche"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktifkan pemeriksaan pembaruan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8443,6 +11719,18 @@
             "value": "업데이트 확인 켜기"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updatecontrole inschakelen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Włącz sprawdzanie aktualizacji"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8459,6 +11747,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Denetimi aç"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Увімкнути перевірку оновлень"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bật kiểm tra cập nhật"
           }
         },
         "zh-Hans": {
@@ -8502,6 +11802,12 @@
             "value": "Déverrouiller le clavier"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka Kunci Keyboard"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8520,6 +11826,18 @@
             "value": "키보드 잠금 해제"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontgrendel toetsenbord"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odblokuj klawiaturę"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8536,6 +11854,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Klavyenin Kilidini Aç"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Розблокувати клавіатуру"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở khóa bàn phím"
           }
         },
         "zh-Hans": {
@@ -8579,6 +11909,12 @@
             "value": "Déverrouillage dans %lld…"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Membuka kunci dalam %lld…"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8597,6 +11933,18 @@
             "value": "%lld초 후 해제…"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontgrendelen over %lld…"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odblokowanie za %lld…"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8613,6 +11961,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%lld sn sonra açılıyor…"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Розблокування через %lld…"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở khóa sau %lld…"
           }
         },
         "zh-Hans": {
@@ -8656,6 +12016,12 @@
             "value": "Déverrouillage dans %@"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terbuka dalam %@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8674,6 +12040,18 @@
             "value": "%@ 후 잠금 해제"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ontgrendelt over %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Odblokowanie za %@"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8690,6 +12068,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ sonra açılır"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Розблокування через %@"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở khóa sau %@"
           }
         },
         "zh-Hans": {
@@ -8733,6 +12123,12 @@
             "value": "Recherche de mises à jour"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pemeriksaan pembaruan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8751,6 +12147,18 @@
             "value": "업데이트 확인"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updatecontrole"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sprawdzanie aktualizacji"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8767,6 +12175,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Güncelleme denetimi"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перевірка оновлень"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kiểm tra cập nhật"
           }
         },
         "zh-Hans": {
@@ -8810,6 +12230,12 @@
             "value": "Mises à jour"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pembaruan"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8828,6 +12254,18 @@
             "value": "업데이트"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updates"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aktualizacje"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8844,6 +12282,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Güncellemeler"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Оновлення"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cập nhật"
           }
         },
         "zh-Hans": {
@@ -8887,6 +12337,12 @@
             "value": "Version %@"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versi %@"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8905,6 +12361,18 @@
             "value": "버전 %@"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versie %@"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wersja %@"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8921,6 +12389,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sürüm %@"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Версія %@"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Phiên bản %@"
           }
         },
         "zh-Hans": {
@@ -8964,6 +12444,12 @@
             "value": "Voir les versions"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Lihat rilis"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -8982,6 +12468,18 @@
             "value": "릴리스 보기"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bekijk releases"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zobacz wydania"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -8998,6 +12496,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Sürümleri gör"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Переглянути випуски"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Xem các bản phát hành"
           }
         },
         "zh-Hans": {
@@ -9041,6 +12551,12 @@
             "value": "Attend quelques secondes après le clic sur Verrouiller, pour que vous puissiez retirer vos mains du clavier. Annuler l'interrompt."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Menunggu beberapa detik setelah Anda mengeklik Kunci, agar Anda bisa melepas tangan dari keyboard. Batal menghentikannya."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -9059,6 +12575,18 @@
             "value": "잠금을 누른 뒤 몇 초 기다리므로 그 사이 키보드에서 손을 뗄 수 있습니다. 취소하면 중단됩니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wacht een paar seconden nadat je op Vergrendel klikt, zodat je je handen van het toetsenbord kunt halen. Annuleer stopt het."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Po kliknięciu Zablokuj czeka kilka sekund, abyś mógł zabrać ręce z klawiatury. Anuluj przerywa odliczanie."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -9075,6 +12603,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kilitle düğmesine tıkladıktan sonra birkaç saniye bekler, böylece ellerinizi klavyeden çekebilirsiniz. İptal bunu durdurur."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Після натискання «Заблокувати» чекає кілька секунд, щоб ви могли прибрати руки з клавіатури. «Скасувати» зупиняє відлік."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chờ vài giây sau khi bạn nhấp Khóa để bạn kịp rời tay khỏi bàn phím. Hủy sẽ dừng việc này."
           }
         },
         "zh-Hans": {
@@ -9118,6 +12658,12 @@
             "value": "Bienvenue dans dirtymac"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Selamat datang di dirtymac"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -9136,6 +12682,18 @@
             "value": "dirtymac에 오신 것을 환영합니다"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Welkom bij dirtymac"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Witaj w dirtymac"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -9152,6 +12710,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac'e hoş geldiniz"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вітаємо в dirtymac"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chào mừng đến với dirtymac"
           }
         },
         "zh-Hans": {
@@ -9195,6 +12765,12 @@
             "value": "Nouveautés"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yang Baru"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -9213,6 +12789,18 @@
             "value": "새로운 기능"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wat is er nieuw"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowości"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -9229,6 +12817,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Yenilikler"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що нового"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Có gì mới"
           }
         },
         "zh-Hans": {
@@ -9272,6 +12872,12 @@
             "value": "Nouveautés de dirtymac"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Yang Baru di dirtymac"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -9290,6 +12896,18 @@
             "value": "dirtymac의 새로운 기능"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wat is er nieuw in dirtymac"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nowości w dirtymac"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -9306,6 +12924,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac'teki Yenilikler"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Що нового в dirtymac"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Có gì mới trong dirtymac"
           }
         },
         "zh-Hans": {
@@ -9349,6 +12979,12 @@
             "value": "Pendant le verrouillage"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saat terkunci"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -9367,6 +13003,18 @@
             "value": "잠금 중"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tijdens de vergrendeling"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdy zablokowane"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -9383,6 +13031,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Kilitliyken"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Під час блокування"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khi đang khóa"
           }
         },
         "zh-Hans": {
@@ -9426,6 +13086,12 @@
             "value": "Avec la souris figée, le verrouillage dure au plus %@. Au-delà de %@, dirtymac vous demande d'abord de maintenir Échap pour vérifier votre issue de secours."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saat mouse dibekukan, penguncian berlangsung paling lama %@. Di atas %@, dirtymac meminta Anda menahan Esc dulu untuk memeriksa jalan keluar."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -9444,6 +13110,18 @@
             "value": "마우스를 고정하면 잠금은 최대 %@ 동안 유지됩니다. %@보다 길면 먼저 Esc를 길게 눌러 해제 방법을 확인합니다."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Met een bevroren muis duurt de vergrendeling maximaal %@. Boven %@ vraagt dirtymac eerst om Esc ingedrukt te houden om je uitweg te controleren."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przy zablokowanej myszy blokada trwa najwyżej %@. Powyżej %@ dirtymac najpierw prosi o przytrzymanie Esc, aby sprawdzić drogę wyjścia."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -9460,6 +13138,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fare donukken kilit en fazla %@ sürer. %@ süresini aşarsa dirtymac önce çıkış yolunuzu denetlemek için Esc'e basılı tutmanızı ister."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коли мишу заморожено, блокування триває щонайбільше %@. Якщо довше за %@, dirtymac спершу попросить утримати Esc, щоб перевірити вихід."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khi chuột bị đóng băng, khóa kéo dài tối đa %@. Trên %@, dirtymac sẽ yêu cầu bạn giữ Esc trước để kiểm tra lối thoát."
           }
         },
         "zh-Hans": {
@@ -9503,6 +13193,12 @@
             "value": "Tout est prêt"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Semuanya siap"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -9521,6 +13217,18 @@
             "value": "모든 준비가 끝났습니다"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je bent klaar"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wszystko gotowe"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -9537,6 +13245,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Her şey hazır"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Усе готово"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mọi thứ đã sẵn sàng"
           }
         },
         "zh-Hans": {
@@ -9580,6 +13300,12 @@
             "value": "La souris et le trackpad seront aussi figés. Pour déverrouiller : maintenez Échap 3 secondes ou attendez le minuteur de déverrouillage automatique."
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mouse dan trackpad Anda juga akan dibekukan. Untuk membuka kunci: tahan Esc selama 3 detik, atau tunggu timer buka kunci otomatis."
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -9598,6 +13324,18 @@
             "value": "마우스와 트랙패드도 멈춥니다. 잠금을 해제하려면 Esc를 3초간 누르거나 자동 잠금 해제 타이머를 기다리세요."
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Je muis en trackpad worden ook bevroren. Ontgrendelen: houd Esc 3 seconden ingedrukt of wacht op de timer voor automatisch ontgrendelen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mysz i gładzik także zostaną zablokowane. Aby odblokować: przytrzymaj Esc przez 3 sekundy lub poczekaj na automatyczne odblokowanie."
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -9614,6 +13352,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "Fare ve trackpad de donacak. Kilidi açmak için: Esc'i 3 saniye basılı tutun veya otomatik açılma sayacını bekleyin."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Мишу й трекпад також буде заморожено. Щоб розблокувати: утримуйте Esc 3 секунди або дочекайтеся автоматичного розблокування."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Chuột và bàn di chuột của bạn cũng sẽ bị đóng băng. Để mở khóa: giữ Esc trong 3 giây, hoặc chờ bộ hẹn giờ tự động mở khóa."
           }
         },
         "zh-Hans": {
@@ -9657,6 +13407,12 @@
             "value": "Ouvrir dirtymac"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buka dirtymac"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -9675,6 +13431,18 @@
             "value": "dirtymac 열기"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Open dirtymac"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Otwórz dirtymac"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -9691,6 +13459,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac'i aç"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Відкрити dirtymac"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mở dirtymac"
           }
         },
         "zh-Hans": {
@@ -9734,6 +13514,12 @@
             "value": "Quitter dirtymac"
           }
         },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keluar dari dirtymac"
+          }
+        },
         "it": {
           "stringUnit": {
             "state": "translated",
@@ -9752,6 +13538,18 @@
             "value": "dirtymac 종료"
           }
         },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stop dirtymac"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Zakończ dirtymac"
+          }
+        },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
@@ -9768,6 +13566,18 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac'ten çık"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вийти з dirtymac"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Thoát dirtymac"
           }
         },
         "zh-Hans": {

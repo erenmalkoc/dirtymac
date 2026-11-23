@@ -54,6 +54,10 @@ enum AppearancePreference: String, CaseIterable, Identifiable {
 enum LanguagePreference: String, CaseIterable, Identifiable {
     case system = ""
     case de, en, es, fr, it, tr, ru, ko, ja
+    case pl, nl, uk, vi
+    /// `id` is the Indonesian code, but a case named id would clash with
+    /// Identifiable.id.
+    case indonesian = "id"
     case ptBR = "pt-BR"
     case zhHans = "zh-Hans"
     case zhHant = "zh-Hant"
@@ -77,6 +81,11 @@ enum LanguagePreference: String, CaseIterable, Identifiable {
         case .ru:     "Русский"
         case .ko:     "한국어"
         case .ja:     "日本語"
+        case .pl:     "Polski"
+        case .nl:     "Nederlands"
+        case .uk:     "Українська"
+        case .vi:     "Tiếng Việt"
+        case .indonesian: "Bahasa Indonesia"
         case .zhHans: "简体中文"
         case .zhHant: "繁體中文"
         }
