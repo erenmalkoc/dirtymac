@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.2] - 2026-11-24
+
 ### Added
 - **The pointer is also caught at the HID level.** On at least one Mac (macOS 27) scrolling and clicks still reached apps during a lock although the session event tap listed every pointer event, so the session tap alone was not enough. Pointer events are now tapped a second time at the HID level, before the session in the input path, with the same guard (clicks on dirtymac's own windows still go through). If macOS refuses that second tap the lock carries on with the session tap alone.
 - **An optional event log for finding such problems.** `defaults write tech.erenium.dirtymac tapDiagnostics -bool true` makes a lock write, once a second, how many events of each kind each tap saw and whether they were blocked or passed (for example `scroll blocked 12`). Counts only: nothing that was typed or where anything was clicked. Off unless asked for. Read it with `/usr/bin/log show --last 5m --predicate 'subsystem == "tech.erenium.dirtymac"'`.
@@ -160,7 +162,8 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.4.1...HEAD
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.4.2...HEAD
+[1.4.2]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.2
 [1.4.1]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.1
 [1.4.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.0
 [1.3.2]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.3.2
