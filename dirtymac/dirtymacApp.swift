@@ -27,6 +27,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     let blocker = KeyboardBlocker()
     let updates = UpdateChecker()
+    /// Created with the delegate: the closure reaches the delegate only
+    /// when a click needs the panel, long after init.
+    private(set) lazy var quickLock = QuickLockController(blocker: blocker) { [weak self] in
+        self?.showPopover()
+    }
     private var updateObserver: AnyCancellable?
     private var lockTitleObserver: AnyCancellable?
 
@@ -207,6 +212,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         )
         openItem.target = self
         menu.addItem(openItem)
+
+        let locale = LanguagePreference.current.locale ?? Locale.current
+        if let quick = quickLock.makeMenuItem(
+            title: String(localized: "Lock for", bundle: LanguagePreference.current.bundle),
+            locale: locale
+        ) {
+            menu.addItem(quick)
+        }
 
         if let version = updates.availableVersion {
             let format = String(localized: "dirtymac \(version) is available.", bundle: LanguagePreference.current.bundle)
