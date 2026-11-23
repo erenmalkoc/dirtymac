@@ -7,8 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.3] - 2026-11-24
+
 ### Added
 - **Choose how long the lock lasts right on the panel.** Before locking, the panel shows an **Auto-unlock** menu (off, 30 seconds up to 1 hour) under the power button. Until now the timer lived in Settings and only in Advanced mode, so most people never found it and Basic mode could not lock for a set time at all. It is the same setting as in Settings. Basic mode now keeps the timer you chose (it is safe there because the mouse is free and a click on the icon always ends the lock). While the mouse is frozen the menu offers only what the lock will really use, 30 seconds to 15 minutes.
+
+### Fixed
+- **The panel's arrow points at the menu bar icon.** The panel centred its arrow on the whole menu bar button, which is wider than the icon whenever text sits beside it, so the arrow could land beside the icon and look like a bump on the panel's corner. It now points at the icon's own span.
 
 ## [1.4.2] - 2026-11-24
 
@@ -165,7 +170,8 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.4.2...HEAD
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.4.3...HEAD
+[1.4.3]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.3
 [1.4.2]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.2
 [1.4.1]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.1
 [1.4.0]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.0
