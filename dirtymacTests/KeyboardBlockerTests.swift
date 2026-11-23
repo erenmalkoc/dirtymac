@@ -23,6 +23,59 @@ final class KeyboardBlockerTests: XCTestCase {
         rig.clock.advance(by: 0)
     }
 
+    // MARK: The Esc check
+
+    func testALongFullLockdownDoesNotStartWithoutTheEscCheck() {
+        let rig = BlockerRig()
+        XCTAssertFalse(rig.blocker.start(fullLockdown(600)))
+        XCTAssertFalse(rig.blocker.isActive)
+        XCTAssertEqual(rig.tap.installCount, 0, "no tap may be installed")
+        XCTAssertEqual(rig.permission.requests, 0)
+    }
+
+    func testALongFullLockdownStartsOnceTheEscCheckPassed() {
+        let rig = BlockerRig()
+        XCTAssertTrue(rig.blocker.start(fullLockdown(600), escVerified: true))
+        XCTAssertTrue(rig.blocker.isActive)
+        XCTAssertEqual(rig.blocker.autoUnlockTotal, 600)
+    }
+
+    func testTheTimerAboveTheCapIsClampedBeforeTheCheckIsJudged() {
+        let rig = BlockerRig()
+        // 1 h is cut to 15 min, still above 5 min: needs the check.
+        XCTAssertFalse(rig.blocker.start(fullLockdown(3600)))
+        XCTAssertTrue(rig.blocker.start(fullLockdown(3600), escVerified: true))
+        XCTAssertEqual(rig.blocker.autoUnlockTotal, 900)
+    }
+
+    func testLocksThatNeverNeededTheCheckStartWithoutIt() {
+        for configuration in [basic, timed(0), timed(3600), fullLockdown(30), fullLockdown(300)] {
+            let rig = BlockerRig()
+            XCTAssertTrue(rig.blocker.start(configuration), "\(configuration)")
+        }
+    }
+
+    func testTheCheckCannotBeSkippedByAnAlreadyRunningLockEither() {
+        let rig = BlockerRig()
+        XCTAssertTrue(rig.blocker.start(basic))
+        // A second start while locked is a no-op that reports the lock.
+        XCTAssertTrue(rig.blocker.start(fullLockdown(900)))
+        XCTAssertEqual(rig.blocker.autoUnlockTotal, 0, "the running lock keeps its own settings")
+    }
+
+    func testALongFullLockdownStillEndsWithHoldEscAndWithTheTimer() {
+        let rig = BlockerRig()
+        rig.blocker.start(fullLockdown(900), escVerified: true)
+        holdEsc(rig)
+        XCTAssertFalse(rig.blocker.isActive)
+        XCTAssertEqual(rig.blocker.lastUnlockReason, .escHeld)
+
+        rig.blocker.start(fullLockdown(900), escVerified: true)
+        rig.clock.advance(by: 900)
+        XCTAssertFalse(rig.blocker.isActive)
+        XCTAssertEqual(rig.blocker.lastUnlockReason, .autoUnlock)
+    }
+
     // MARK: Starting
 
     func testLocksWithTheMaskOfTheConfiguration() {

@@ -108,4 +108,110 @@ final class LockConfigurationTests: XCTestCase {
         LockConfiguration.normalizeStoredAutoUnlock(in: defaults)
         XCTAssertNil(defaults.object(forKey: LockConfiguration.Key.autoUnlockSeconds))
     }
+
+    // MARK: Longer locks
+
+    func testTheChoicesAreSortedUniqueAndStartAtOff() {
+        let choices = LockConfiguration.unlockChoices
+        XCTAssertEqual(choices.first, 0)
+        XCTAssertEqual(choices, Array(Set(choices)).sorted())
+        XCTAssertEqual(choices.last, 3600, "a keyboard-only lock can last an hour")
+        for choice in [30, 60, 120, 300] {
+            XCTAssertTrue(choices.contains(choice), "\(choice) s stays on offer")
+        }
+    }
+
+    func testAFrozenMouseLockIsCappedAtFifteenMinutes() {
+        XCTAssertEqual(LockConfiguration.maxMouseLockSeconds, 900)
+        for seconds in [901, 1800, 3600, 86_400] {
+            let c = LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: seconds).effective
+            XCTAssertEqual(c.autoUnlockSeconds, 900, "\(seconds) s")
+        }
+        let atTheCap = LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: 900).effective
+        XCTAssertEqual(atTheCap.autoUnlockSeconds, 900)
+    }
+
+    func testAKeyboardOnlyLockKeepsItsFullLength() {
+        for seconds in [0, 300, 900, 1800, 3600] {
+            let c = LockConfiguration(mode: .advanced, autoUnlockSeconds: seconds).effective
+            XCTAssertEqual(c.autoUnlockSeconds, seconds)
+        }
+    }
+
+    func testThePickerOffersNothingAboveTheCapForAFrozenMouse() {
+        let offered = LockConfiguration.offeredChoices(mouseLocked: true)
+        XCTAssertEqual(offered.max(), 900)
+        XCTAssertEqual(offered, [30, 60, 120, 300, 600, 900])
+        XCTAssertEqual(LockConfiguration.offeredChoices(mouseLocked: false).max(), 3600)
+    }
+
+    func testTurningTheMouseFreezeOnPullsALongTimerDownToTheCap() {
+        // What the Settings toggle does through clampedSeconds.
+        XCTAssertEqual(LockConfiguration.clampedSeconds(3600, mouseLocked: true), 900)
+        XCTAssertEqual(LockConfiguration.clampedSeconds(3600, mouseLocked: false), 3600)
+    }
+
+    func testEveryChoiceAndEveryStoredValueEndsOnAnOfferedChoice() {
+        for mouseLocked in [false, true] {
+            let offered = LockConfiguration.offeredChoices(mouseLocked: mouseLocked)
+            for seconds in [-5, 0, 1, 29, 31, 299, 301, 899, 901, 5000, 1_000_000] {
+                let clamped = LockConfiguration.clampedSeconds(seconds, mouseLocked: mouseLocked)
+                if mouseLocked {
+                    XCTAssertTrue((30...900).contains(clamped), "\(seconds) → \(clamped)")
+                } else {
+                    XCTAssertEqual(clamped, seconds)
+                }
+            }
+            XCTAssertFalse(offered.isEmpty)
+        }
+    }
+
+    func testAStoredLongTimerLoadsClampedWhenTheMouseIsFrozen() throws {
+        let defaults = try TestDefaults.make(self)
+        defaults.set(LockMode.advanced.rawValue, forKey: LockConfiguration.Key.mode)
+        defaults.set(true, forKey: LockConfiguration.Key.blockMouseAndTrackpad)
+        defaults.set(3600, forKey: LockConfiguration.Key.autoUnlockSeconds)
+        XCTAssertEqual(LockConfiguration.load(from: defaults).autoUnlockSeconds, 900)
+    }
+
+    func testNormalizingLowersATimerThatNowExceedsTheCap() throws {
+        let defaults = try TestDefaults.make(self)
+        defaults.set(true, forKey: LockConfiguration.Key.blockMouseAndTrackpad)
+        defaults.set(3600, forKey: LockConfiguration.Key.autoUnlockSeconds)
+        LockConfiguration.normalizeStoredAutoUnlock(in: defaults)
+        XCTAssertEqual(defaults.integer(forKey: LockConfiguration.Key.autoUnlockSeconds), 900)
+    }
+
+    func testTheDurationLabelsReadNaturallyInEveryLanguage() {
+        for language in LanguagePreference.allCases where language != .system {
+            let locale = Locale(identifier: language.rawValue)
+            let titles = LockConfiguration.unlockChoices.filter { $0 > 0 }.map {
+                LockConfiguration.unlockChoiceTitle($0, locale: locale)
+            }
+            XCTAssertEqual(Set(titles).count, titles.count, "\(language.rawValue): every choice reads differently")
+            for title in titles { XCTAssertFalse(title.isEmpty, language.rawValue) }
+        }
+        let en = Locale(identifier: "en")
+        XCTAssertEqual(LockConfiguration.unlockChoiceTitle(30, locale: en), "30 sec")
+        XCTAssertEqual(LockConfiguration.unlockChoiceTitle(300, locale: en), "5 min")
+        XCTAssertEqual(LockConfiguration.unlockChoiceTitle(3600, locale: en), "1 hr")
+    }
+
+    // MARK: When the Esc check is needed
+
+    func testOnlyALongFrozenMouseLockNeedsTheEscCheck() {
+        func needs(_ seconds: Int, mouse: Bool, mode: LockMode = .advanced) -> Bool {
+            LockConfiguration(mode: mode, blockMouseAndTrackpad: mouse, autoUnlockSeconds: seconds).effective.requiresEscCheck
+        }
+        XCTAssertFalse(needs(30, mouse: true))
+        XCTAssertFalse(needs(300, mouse: true), "exactly five minutes is still without the check")
+        XCTAssertTrue(needs(301, mouse: true))
+        XCTAssertTrue(needs(600, mouse: true))
+        XCTAssertTrue(needs(900, mouse: true))
+        XCTAssertTrue(needs(3600, mouse: true), "clamped to 15 minutes, which is above five")
+        for seconds in [0, 300, 600, 3600] {
+            XCTAssertFalse(needs(seconds, mouse: false), "the mouse is free: clicking the icon is the way out")
+        }
+        XCTAssertFalse(needs(900, mouse: true, mode: .basic), "Basic is a fixed preset")
+    }
 }

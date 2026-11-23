@@ -117,9 +117,11 @@ final class KeyboardBlocker: ObservableObject {
     /// Locks with `configuration`, the stored settings by default.
     /// Returns false when no lock started: the app has no Accessibility
     /// permission (the system prompt is shown), a full lockdown was asked
-    /// for while secure input is on, or macOS refused the tap.
+    /// for while secure input is on, a long full lockdown was asked for
+    /// without `escVerified` (the panel passes it once the user has held
+    /// Esc), or macOS refused the tap.
     @discardableResult
-    func start(_ configuration: LockConfiguration = .current) -> Bool {
+    func start(_ configuration: LockConfiguration = .current, escVerified: Bool = false) -> Bool {
         guard !isActive else { return true }
 
         refreshPermission()
@@ -136,6 +138,9 @@ final class KeyboardBlocker: ObservableObject {
             secureInputOn: secureInput != nil,
             mouseLocked: config.blockMouseAndTrackpad
         ) else { return false }
+        // Enforced here, not only in the panel, so no other way of starting
+        // a lock (a shortcut, an intent, a future caller) can skip the check.
+        guard !config.requiresEscCheck || escVerified else { return false }
 
         let installed = tap.install(mask: EventMask.build(for: config)) { [weak self] decision in
             self?.handleEsc(decision)

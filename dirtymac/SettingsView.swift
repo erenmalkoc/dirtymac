@@ -145,20 +145,37 @@ struct LockConfiguration: Equatable {
     /// is part of the lockdown — the menu bar can no longer be clicked.
     static let minMouseLockSeconds = 30
 
+    /// ...and at most this long. With the mouse frozen the only ways out
+    /// are hold-Esc and the timer, so the time someone could be stuck
+    /// behind a key that does not work is bounded. With the mouse free,
+    /// clicking the menu bar icon always ends the lock, so no bound.
+    static let maxMouseLockSeconds = 15 * 60
+
+    /// A frozen-mouse lock longer than this first asks the user to hold
+    /// Esc, to prove that the way out works on this keyboard.
+    static let escCheckAboveSeconds = 5 * 60
+
     /// Selectable auto-unlock durations, in seconds. 0 = off.
-    static let unlockChoices = [0, 30, 60, 120, 300]
+    static let unlockChoices = [0, 30, 60, 120, 300, 600, 900, 1800, 3600]
 
     /// The auto-unlock the lock really uses for a stored value: once the
     /// mouse is part of the lockdown the menu bar can no longer be
-    /// clicked, so it is never off and never shorter than the minimum.
+    /// clicked, so it is never off, never shorter than the minimum and
+    /// never longer than the maximum.
     static func clampedSeconds(_ seconds: Int, mouseLocked: Bool) -> Int {
-        mouseLocked ? max(seconds, minMouseLockSeconds) : seconds
+        mouseLocked ? min(max(seconds, minMouseLockSeconds), maxMouseLockSeconds) : seconds
+    }
+
+    /// Whether starting this lock needs the Esc check first. `self` should
+    /// be an `effective` configuration, so the clamps are already applied.
+    var requiresEscCheck: Bool {
+        blockMouseAndTrackpad && autoUnlockSeconds > Self.escCheckAboveSeconds
     }
 
     /// A picker label such as "30 sec" or "2 min", in `locale`.
     static func unlockChoiceTitle(_ seconds: Int, locale: Locale) -> String {
         Duration.seconds(seconds)
-            .formatted(.units(allowed: [.minutes, .seconds], width: .abbreviated).locale(locale))
+            .formatted(.units(allowed: [.hours, .minutes, .seconds], width: .abbreviated).locale(locale))
     }
 
     /// What the Settings picker offers: never a value the lock would
