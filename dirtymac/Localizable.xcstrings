@@ -5997,6 +5997,113 @@
         }
       }
     },
+    "Ignore scrolling and clicks": {
+      "comment": "Settings toggle: while locked, scrolling, gestures and clicks do nothing.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scrollen und Klicks ignorieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignore scrolling and clicks"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignorar desplazamiento y clics"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignorer le défilement et les clics"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Abaikan gulir dan klik"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignora scorrimento e clic"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スクロールとクリックを無視"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "스크롤과 클릭 무시"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scrollen en klikken negeren"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignoruj przewijanie i kliknięcia"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ignorar rolagem e cliques"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Игнорировать прокрутку и клики"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kaydırmayı ve tıklamaları yok say"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ігнорувати прокручування та кліки"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bỏ qua cuộn và nhấp chuột"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "忽略滚动和点按"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "忽略捲動和點按"
+          }
+        }
+      }
+    },
     "Keyboard unlocked": {
       "comment": "Spoken by VoiceOver when the keyboard lock ends.",
       "localizations": {
@@ -10701,6 +10808,113 @@
           "stringUnit": {
             "state": "translated",
             "value": "鍵盤鎖定期間，螢幕不會變暗或進入睡眠，這樣螢幕保護程式或鎖定螢幕就不會結束鍵盤鎖定。"
+          }
+        }
+      }
+    },
+    "While the keyboard is locked, scrolling, gestures and clicks do nothing, so a palm on the trackpad changes nothing. The dirtymac icon and panel still respond, and the cursor still moves.": {
+      "comment": "Caption under Ignore scrolling and clicks.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei gesperrter Tastatur bewirken Scrollen, Gesten und Klicks nichts, sodass eine Handfläche auf dem Trackpad nichts verändert. Das dirtymac-Symbol und das Fenster reagieren weiterhin, und der Zeiger bewegt sich weiter."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "While the keyboard is locked, scrolling, gestures and clicks do nothing, so a palm on the trackpad changes nothing. The dirtymac icon and panel still respond, and the cursor still moves."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con el teclado bloqueado, el desplazamiento, los gestos y los clics no hacen nada, así que una palma sobre el trackpad no cambia nada. El icono y el panel de dirtymac siguen respondiendo y el cursor sigue moviéndose."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Quand le clavier est verrouillé, le défilement, les gestes et les clics ne font rien, donc une paume sur le trackpad ne change rien. L'icône et le panneau de dirtymac répondent toujours, et le curseur bouge toujours."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saat keyboard terkunci, gulir, gestur, dan klik tidak melakukan apa pun, jadi telapak tangan di trackpad tidak mengubah apa pun. Ikon dan panel dirtymac tetap merespons, dan kursor tetap bergerak."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con la tastiera bloccata, scorrimento, gesti e clic non fanno nulla, quindi un palmo sul trackpad non cambia niente. L'icona e il pannello di dirtymac rispondono ancora e il cursore si muove ancora."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーボードのロック中は、スクロール、ジェスチャ、クリックが何も起こさないため、手のひらがトラックパッドに触れても何も変わりません。dirtymacのアイコンとパネルは引き続き反応し、カーソルも動かせます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키보드가 잠겨 있는 동안 스크롤, 제스처, 클릭은 아무 동작도 하지 않으므로 손바닥이 트랙패드에 닿아도 아무것도 바뀌지 않습니다. dirtymac 아이콘과 패널은 계속 반응하고 커서도 계속 움직입니다."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Terwijl het toetsenbord is vergrendeld, doen scrollen, gebaren en klikken niets, dus een handpalm op de trackpad verandert niets. Het dirtymac-symbool en het paneel reageren nog steeds en de aanwijzer beweegt nog steeds."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gdy klawiatura jest zablokowana, przewijanie, gesty i kliknięcia nic nie robią, więc dłoń na gładziku niczego nie zmieni. Ikona i panel dirtymac nadal reagują, a kursor nadal się porusza."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com o teclado bloqueado, rolagem, gestos e cliques não fazem nada, então uma palma sobre o trackpad não muda nada. O ícone e o painel do dirtymac continuam respondendo e o cursor continua se movendo."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пока клавиатура заблокирована, прокрутка, жесты и клики ничего не делают, поэтому ладонь на трекпаде ничего не изменит. Значок и панель dirtymac по-прежнему отвечают, а курсор по-прежнему двигается."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klavye kilitliyken kaydırma, hareketler ve tıklamalar hiçbir şey yapmaz, böylece izleme dörtgenine değen bir avuç içi hiçbir şeyi değiştirmez. dirtymac simgesi ve paneli yine de yanıt verir, imleç de hareket etmeye devam eder."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Поки клавіатуру заблоковано, прокручування, жести та кліки нічого не роблять, тож долоня на трекпаді нічого не змінить. Значок і панель dirtymac, як і раніше, відгукуються, а курсор, як і раніше, рухається."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khi bàn phím bị khóa, cuộn, cử chỉ và nhấp chuột không làm gì cả, nên lòng bàn tay chạm vào trackpad cũng không thay đổi gì. Biểu tượng và bảng điều khiển của dirtymac vẫn phản hồi, và con trỏ vẫn di chuyển."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "键盘锁定期间，滚动、手势和点按都不会起作用，因此手掌碰到触控板也不会改变任何内容。dirtymac 的图标和面板仍可使用，光标也仍可移动。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鍵盤鎖定期間，捲動、手勢和點按都不會起作用，因此手掌碰到觸控式軌跡板也不會改變任何內容。dirtymac 的圖示和面板仍可使用，游標也仍可移動。"
           }
         }
       }

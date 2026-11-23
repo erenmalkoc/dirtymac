@@ -1,6 +1,6 @@
 # dirtymac
 
-A native macOS menu bar utility that temporarily locks your keyboard so you can clean it without triggering keys. Mouse and trackpad stay fully responsive.
+A native macOS menu bar utility that temporarily locks your keyboard so you can clean it without triggering keys. The cursor keeps moving, and scrolling and clicks are ignored while it is locked, except on dirtymac itself.
 
 <p align="center">
   <img src="assets/demo.gif" alt="dirtymac demo" width="420">
@@ -8,13 +8,13 @@ A native macOS menu bar utility that temporarily locks your keyboard so you can 
 
 ## Why
 
-Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window full of garbage characters and accidentally launching apps. dirtymac suppresses every keystroke at the system event-tap level until you click stop. Your trackpad keeps working the entire time.
+Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window full of garbage characters and accidentally launching apps. dirtymac suppresses every keystroke at the system event-tap level until you click stop. The cursor keeps moving the entire time, but a palm on the trackpad scrolls and clicks nothing.
 
 ## Features
 
 - One-click keyboard lock from the menu bar
 - Blocks every keyboard input: regular keys, modifiers, **and** brightness / volume / media / F-key controls (see [Troubleshooting](#troubleshooting) for the one case macOS does not allow)
-- **Basic mode**: mouse and trackpad stay live — click the menu bar icon to release
+- **Basic mode**: the cursor stays live and so does the menu bar icon — click it to release. Scrolling, gestures and clicks elsewhere are ignored (Settings → While locked → Ignore scrolling and clicks)
 - **Advanced mode**: optionally freeze the mouse & trackpad too, choose which key classes to block, and set an auto-unlock timer (30 seconds to 1 hour, at most 15 minutes while the mouse is frozen)
 - Universal hold-Esc emergency exit (3 seconds) — works even in full lockdown, and finishes when you let go so no stray Esc reaches your app
 - Warns when another app holds Secure Input (password fields, Terminal's Secure Keyboard Entry) and keys get past the lock
@@ -118,7 +118,7 @@ The accessibility tap only swallows events; nothing is recorded, logged, or forw
 
 ## How it works
 
-dirtymac creates a `CGEventTap` at the session level (`.cgSessionEventTap`). The mask is built from the active lock configuration: `keyDown` and `keyUp` are always present; `flagsChanged`, `kCGEventSystemDefined` (subtype 8 — the aux-control channel that brightness, volume, and media keys use), and the mouse / trackpad / scroll types are added when the matching Advanced toggles are on. Full lockdown also adds trackpad gestures (NSEvent type 29). The callback returns `nil` for events that are meant to be blocked, removing them from the system input queue. By default (Basic mode) mouse and trackpad are not in the mask, so they keep working — including the click that opens the menu and disables the lock. Advanced full lockdown adds them; the universal hold-Esc (3 s) emergency exit and a mandatory auto-unlock timer (30 seconds to 15 minutes) guarantee the lock can always be released. With the mouse frozen, only those two exits exist, so a lock longer than 5 minutes first asks you to hold Esc for 3 seconds. That proves the exit works on the keyboard in front of you before anything is locked, and `KeyboardBlocker.start` refuses such a lock without it. The power button (`systemDefined` subtype 1) is deliberately allowed through so the user keeps a hardware emergency exit.
+dirtymac creates a `CGEventTap` at the session level (`.cgSessionEventTap`). The mask is built from the active lock configuration: `keyDown` and `keyUp` are always present; `flagsChanged`, `kCGEventSystemDefined` (subtype 8 — the aux-control channel that brightness, volume, and media keys use), and the mouse / trackpad / scroll types are added when the matching Advanced toggles are on. Full lockdown also adds trackpad gestures (NSEvent type 29). The callback returns `nil` for events that are meant to be blocked, removing them from the system input queue. By default (Basic mode) plain mouse movement is not in the mask, so the cursor keeps moving. Clicks, drags, scrolling and gestures are, as a pointer guard: a `PointerGuard` swallows them unless a button goes down over one of dirtymac's own windows (found with `CGWindowListCopyWindowInfo`, the first window of the front-to-back list that holds the cursor), and then follows that press through its drags to its release. That keeps the click that opens the menu and disables the lock working, while a palm on the trackpad does nothing. The Ignore scrolling and clicks setting turns the guard off. Advanced full lockdown adds them; the universal hold-Esc (3 s) emergency exit and a mandatory auto-unlock timer (30 seconds to 15 minutes) guarantee the lock can always be released. With the mouse frozen, only those two exits exist, so a lock longer than 5 minutes first asks you to hold Esc for 3 seconds. That proves the exit works on the keyboard in front of you before anything is locked, and `KeyboardBlocker.start` refuses such a lock without it. A short press of the power (Touch ID) button (`systemDefined` subtype 1) and the sleep event (subtype 11) are swallowed while locked, so the press does not put the Mac to sleep and end the lock. That is best effort, because whether the press reaches an event tap depends on the Mac. The long press that shuts the Mac down is hardware and is never touched, and restart and shutdown requests (subtypes 12 and 13) are let through, so the hardware emergency exit remains.
 
 If macOS disables the tap (timeout or excessive callback latency), dirtymac re-enables it automatically.
 

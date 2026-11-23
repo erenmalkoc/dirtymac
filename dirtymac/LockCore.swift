@@ -10,11 +10,20 @@ import CoreGraphics
 // with the aux-buttons subtype (NX_SUBTYPE_AUX_CONTROL_BUTTONS = 8).
 // They do NOT arrive as keyDown / keyUp, so a plain keyboard tap
 // lets them through. We add the system-defined type to the mask and
-// then filter by subtype so other system events (e.g. power button,
-// subtype 1) keep working — leaving the user a hardware emergency exit
-// if anything goes wrong.
+// then filter by subtype. The power button (subtype 1) and the sleep
+// event (11) are swallowed as well, so a short press during a lock does
+// not put the Mac to sleep and end the lock. Whether macOS routes the
+// press through this channel on a given Mac is not guaranteed, so this is
+// best effort: the long press that shuts the Mac down is hardware and is
+// never touched, and restart / shutdown requests (12, 13) pass too, so
+// there is always a way out.
 let kCGEventSystemDefined: UInt32 = 14
 let kAuxControlButtonsSubtype: Int16 = 8
+let kPowerKeySubtype: Int16 = 1
+let kSleepEventSubtype: Int16 = 11
+
+/// The system-defined subtypes a lock swallows.
+let blockedSystemSubtypes: Set<Int16> = [kAuxControlButtonsSubtype, kPowerKeySubtype, kSleepEventSubtype]
 
 // Escape key. Holding it force-unlocks — the universal emergency exit,
 // available in every mode and essential when the mouse is part of the
@@ -35,6 +44,19 @@ enum EventMask {
     /// NSEvent type 29, which has no CGEventType case of its own.
     static let gestureBit = CGEventMask(NSEvent.EventTypeMask.gesture.rawValue)
 
+    /// What the pointer guard intercepts: everything of `pointerTypes`
+    /// except plain movement, so the cursor still moves and can reach the
+    /// menu bar icon.
+    static let guardedPointerTypes: [CGEventType] = pointerTypes.filter { $0 != .mouseMoved }
+
+    /// Raw event type of trackpad gestures (NSEvent.EventType.gesture).
+    static let gestureEventType: UInt32 = 29
+
+    /// Whether the pointer guard decides this type.
+    static func isGuarded(_ type: CGEventType) -> Bool {
+        guardedPointerTypes.contains(type) || type.rawValue == gestureEventType
+    }
+
     static func bit(_ type: CGEventType) -> CGEventMask {
         CGEventMask(1) << type.rawValue
     }
@@ -51,6 +73,9 @@ enum EventMask {
         }
         if config.blockMouseAndTrackpad {
             for type in pointerTypes { mask |= bit(type) }
+            mask |= gestureBit
+        } else if config.guardPointer {
+            for type in guardedPointerTypes { mask |= bit(type) }
             mask |= gestureBit
         }
         return mask
@@ -81,11 +106,12 @@ enum TapEventDecision: Equatable {
         case .keyUp where keyCode == kEscapeKeyCode:
             return .escUp
         default:
-            // System-defined events: only swallow the aux-button subtype
-            // (brightness, volume, media, F-key controls). Everything
-            // else, like the power button, still reaches the system.
+            // System-defined events: swallow the aux-button subtype
+            // (brightness, volume, media, F-key controls) and the power
+            // and sleep presses. Everything else still reaches the system.
             if type.rawValue == kCGEventSystemDefined {
-                return systemSubtype == kAuxControlButtonsSubtype ? .block : .pass
+                guard let systemSubtype else { return .pass }
+                return blockedSystemSubtypes.contains(systemSubtype) ? .block : .pass
             }
             // Everything else in the mask is meant to be blocked.
             return .block
@@ -100,5 +126,58 @@ enum TapEventDecision: Equatable {
             ? NSEvent(cgEvent: event)?.subtype.rawValue
             : nil
         return decide(type: type, keyCode: keyCode, systemSubtype: subtype)
+    }
+}
+
+/// The guard that keeps stray touches off a locked Mac: while the
+/// keyboard is locked, scrolling, gestures and clicks go nowhere, except
+/// clicks on dirtymac's own windows (its menu bar icon, its panel and
+/// menus), which stay usable so the lock can always be ended. Moving the
+/// cursor stays free.
+///
+/// A press that was let through is followed through to its release and
+/// the drags in between, and a blocked press is blocked to its release, so
+/// no app ever sees half a click.
+struct PointerGuard: Equatable {
+    /// The mouse buttons whose current press was let through.
+    private var passing: Set<Button> = []
+
+    enum Button: Hashable {
+        case left, right, other
+    }
+
+    private static func button(of type: CGEventType) -> Button? {
+        switch type {
+        case .leftMouseDown, .leftMouseUp, .leftMouseDragged: return .left
+        case .rightMouseDown, .rightMouseUp, .rightMouseDragged: return .right
+        case .otherMouseDown, .otherMouseUp, .otherMouseDragged: return .other
+        default: return nil
+        }
+    }
+
+    /// `overOwnWindow` is only asked for when a button goes down.
+    mutating func decide(type: CGEventType, overOwnWindow: () -> Bool) -> TapEventDecision {
+        guard let button = Self.button(of: type) else {
+            // Scrolling, gestures and anything else of the guarded set.
+            return .block
+        }
+        switch type {
+        case .leftMouseDown, .rightMouseDown, .otherMouseDown:
+            if overOwnWindow() {
+                passing.insert(button)
+                return .pass
+            }
+            passing.remove(button)
+            return .block
+        case .leftMouseUp, .rightMouseUp, .otherMouseUp:
+            return passing.remove(button) != nil ? .pass : .block
+        default:
+            return passing.contains(button) ? .pass : .block
+        }
+    }
+
+    /// Forgets every press, for a tap that was switched off and on again.
+    mutating func reset() {
+        passing.removeAll()
     }
 }

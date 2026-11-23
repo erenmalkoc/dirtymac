@@ -165,7 +165,10 @@ final class KeyboardBlocker: ObservableObject {
         let config = configuration.effective
         guard preflight(config, escVerified: escVerified) else { return false }
 
-        let installed = tap.install(mask: EventMask.build(for: config)) { [weak self] decision in
+        let installed = tap.install(
+            mask: EventMask.build(for: config),
+            guardPointer: config.guardPointer && !config.blockMouseAndTrackpad
+        ) { [weak self] decision in
             self?.handleEsc(decision)
         }
         guard installed else {

@@ -144,6 +144,7 @@ struct LockConfiguration: Equatable {
         static let autoUnlockSeconds = "autoUnlockSeconds"
         static let keepDisplayAwake = "keepDisplayAwakeWhileLocked"
         static let startDelaySeconds = "lockStartDelaySeconds"
+        static let guardPointer = "guardPointerWhileLocked"
     }
 
     var mode: LockMode = .basic
@@ -158,6 +159,11 @@ struct LockConfiguration: Equatable {
     /// the hands off the keyboard. 0 = lock at once. Like keepDisplayAwake
     /// it is no part of the Basic safety preset.
     var startDelaySeconds = 0
+    /// While locked, scrolling, gestures and clicks go nowhere except on
+    /// dirtymac's own icon and panel, so a palm on the trackpad does
+    /// nothing. Moving the cursor stays free. Applies to every lock, Basic
+    /// included. The full mouse lockdown covers it anyway.
+    var guardPointer = true
 
     /// What the Settings picker offers.
     static let startDelayChoices = [0, 3, 5, 10]
@@ -220,7 +226,8 @@ struct LockConfiguration: Equatable {
                 blockMouseAndTrackpad: false,
                 autoUnlockSeconds: 0,
                 keepDisplayAwake: keepDisplayAwake,
-                startDelaySeconds: Self.sanitizedStartDelay(startDelaySeconds)
+                startDelaySeconds: Self.sanitizedStartDelay(startDelaySeconds),
+                guardPointer: guardPointer
             )
         }
         var c = self
@@ -243,7 +250,8 @@ struct LockConfiguration: Equatable {
             blockMouseAndTrackpad: boolOr(Key.blockMouseAndTrackpad, false),
             autoUnlockSeconds: d.integer(forKey: Key.autoUnlockSeconds),
             keepDisplayAwake: boolOr(Key.keepDisplayAwake, true),
-            startDelaySeconds: d.integer(forKey: Key.startDelaySeconds)
+            startDelaySeconds: d.integer(forKey: Key.startDelaySeconds),
+            guardPointer: boolOr(Key.guardPointer, true)
         )
         return cfg.effective
     }
@@ -273,6 +281,7 @@ struct SettingsView: View {
     @AppStorage(SystemSounds.enabledKey) private var playSounds = true
     @AppStorage(LockConfiguration.Key.keepDisplayAwake) private var keepDisplayAwake = true
     @AppStorage(LockConfiguration.Key.startDelaySeconds) private var startDelaySeconds = 0
+    @AppStorage(LockConfiguration.Key.guardPointer) private var guardPointer = true
     @Binding var isPresented: Bool
     /// The in-app language (set by the popover), for the duration labels.
     @Environment(\.locale) private var locale
@@ -390,6 +399,15 @@ struct SettingsView: View {
                     .toggleStyle(.switch)
                     .controlSize(.small)
                 Text("Stops the screen from dimming or going to sleep while the keyboard is locked, so the screen saver or a screen lock does not end the lock.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Toggle("Ignore scrolling and clicks", isOn: $guardPointer)
+                    .font(.callout)
+                    .toggleStyle(.switch)
+                    .controlSize(.small)
+                Text("While the keyboard is locked, scrolling, gestures and clicks do nothing, so a palm on the trackpad changes nothing. The dirtymac icon and panel still respond, and the cursor still moves.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)

@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **A guard for the trackpad while the keyboard is locked.** A palm resting on the trackpad could still scroll and click things in the apps behind the lock. Now, in every mode, scrolling, trackpad gestures and clicks go nowhere while the keyboard is locked. The cursor still moves, and a click on the dirtymac menu bar icon, its panel and its menus still works, so the lock can always be ended with a click. A press that was let through is followed to its release, and a blocked one is blocked to its release, so no app sees half a click. Settings → While locked → **Ignore scrolling and clicks**, on by default, switches it off. With the mouse frozen (Advanced) everything is blocked as before. Which window is under the cursor comes from the window server and needs no extra permission.
+- **The power (Touch ID) button is caught during a lock.** A short press used to put the Mac to sleep or lock the screen and so end the lock. dirtymac now swallows the power and sleep events of the keyboard lock (the same channel as the media keys, so it follows the **Block media & brightness keys** setting and is always on in Basic mode). This is best effort: whether macOS delivers a press of the button to an event tap depends on the Mac, so check it on yours. Holding the button to shut the Mac down is hardware and is never touched, and restart and shutdown requests still get through.
+
+### Fixed
+- The README and the code comment named subtype 1 as the power button that is let through on purpose. It is the power button, and it is now blocked during a lock. The long press stays the hardware way out.
+
 ## [1.4.0] - 2026-11-23
 
 ### Added

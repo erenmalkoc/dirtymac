@@ -7,16 +7,18 @@ import Foundation
 final class FakeEventTap: EventTapping {
     var refuses = false
     private(set) var installedMask: CGEventMask?
+    private(set) var installedGuardPointer: Bool?
     private(set) var installCount = 0
     private(set) var uninstallCount = 0
     private var onEsc: (@MainActor (TapEventDecision) -> Void)?
 
     var isInstalled: Bool { onEsc != nil }
 
-    func install(mask: CGEventMask, onEsc: @escaping @MainActor (TapEventDecision) -> Void) -> Bool {
+    func install(mask: CGEventMask, guardPointer: Bool, onEsc: @escaping @MainActor (TapEventDecision) -> Void) -> Bool {
         guard !refuses else { return false }
         installCount += 1
         installedMask = mask
+        installedGuardPointer = guardPointer
         self.onEsc = onEsc
         return true
     }

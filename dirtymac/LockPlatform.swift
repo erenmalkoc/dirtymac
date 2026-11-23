@@ -9,10 +9,12 @@ import CoreGraphics
 // MARK: - Event tap
 
 protocol EventTapping: AnyObject {
-    /// Starts intercepting the events in `mask`. `onEsc` receives the
+    /// Starts intercepting the events in `mask`. With `guardPointer` the
+    /// mouse buttons and scrolling in the mask are only let through over
+    /// dirtymac's own windows (see `PointerGuard`). `onEsc` receives the
     /// hold-Esc input (`.escDown` / `.escUp`). Returns false when macOS
     /// refused the tap.
-    func install(mask: CGEventMask, onEsc: @escaping @MainActor (TapEventDecision) -> Void) -> Bool
+    func install(mask: CGEventMask, guardPointer: Bool, onEsc: @escaping @MainActor (TapEventDecision) -> Void) -> Bool
     /// Stops intercepting. Safe to call when nothing is installed.
     func uninstall()
 }
@@ -22,9 +24,16 @@ final class SessionEventTap: EventTapping {
     private var port: CFMachPort?
     private var source: CFRunLoopSource?
     private var onEsc: (@MainActor (TapEventDecision) -> Void)?
+    private var pointerGuard: PointerGuard?
+    private let ownWindows: OwnWindowHitTesting
 
-    func install(mask: CGEventMask, onEsc: @escaping @MainActor (TapEventDecision) -> Void) -> Bool {
+    init(ownWindows: OwnWindowHitTesting = OwnWindowHitTest()) {
+        self.ownWindows = ownWindows
+    }
+
+    func install(mask: CGEventMask, guardPointer: Bool, onEsc: @escaping @MainActor (TapEventDecision) -> Void) -> Bool {
         uninstall()
+        pointerGuard = guardPointer ? PointerGuard() : nil
         let refcon = Unmanaged.passUnretained(self).toOpaque()
 
         guard let port = CGEvent.tapCreate(
@@ -38,7 +47,7 @@ final class SessionEventTap: EventTapping {
                 // The run-loop source is on the main run loop, so the
                 // callback already runs on the main thread.
                 let swallow = MainActor.assumeIsolated {
-                    tap.handle(TapEventDecision.decide(type: type, event: event))
+                    tap.handle(tap.decision(type: type, event: event))
                 }
                 return swallow ? nil : Unmanaged.passUnretained(event)
             },
@@ -66,6 +75,7 @@ final class SessionEventTap: EventTapping {
         port = nil
         source = nil
         onEsc = nil
+        pointerGuard = nil
     }
 
     /// Removes the source from the main run loop and invalidates the
@@ -75,6 +85,23 @@ final class SessionEventTap: EventTapping {
     static func invalidate(port: CFMachPort, source: CFRunLoopSource) {
         CFRunLoopRemoveSource(CFRunLoopGetMain(), source, .commonModes)
         CFMachPortInvalidate(port)
+    }
+
+    /// The pointer events of a guarded lock go through the guard, which
+    /// looks at the window under the cursor only when a button goes down.
+    /// Everything else is decided by the plain rules.
+    private func decision(type: CGEventType, event: CGEvent) -> TapEventDecision {
+        if var pointerGuard, EventMask.isGuarded(type) {
+            let location = event.location
+            let windows = ownWindows
+            let decision = pointerGuard.decide(type: type) { windows.isOverOwnWindow(at: location) }
+            self.pointerGuard = pointerGuard
+            return decision
+        }
+        if type == .tapDisabledByTimeout || type == .tapDisabledByUserInput {
+            pointerGuard?.reset()
+        }
+        return TapEventDecision.decide(type: type, event: event)
     }
 
     /// Acts on one decision; returns whether to swallow the event. Esc is
@@ -93,6 +120,46 @@ final class SessionEventTap: EventTapping {
             if let port { CGEvent.tapEnable(tap: port, enable: true) }
             return false
         }
+    }
+}
+
+// MARK: - Own windows
+
+/// Whether a point on the screen is over one of dirtymac's own windows.
+protocol OwnWindowHitTesting {
+    /// `point` is in global display coordinates, origin at the top left
+    /// of the main display, which is what event locations use.
+    func isOverOwnWindow(at point: CGPoint) -> Bool
+}
+
+/// Asks the window server which window is frontmost at the point: the
+/// menu bar icon, the open panel and its menus are all windows of this
+/// process, and the first window of the front-to-back list that holds the
+/// point is the one a click would hit. Bounds and owner need no Screen
+/// Recording permission.
+struct OwnWindowHitTest: OwnWindowHitTesting {
+    var pid: pid_t = ProcessInfo.processInfo.processIdentifier
+
+    func isOverOwnWindow(at point: CGPoint) -> Bool {
+        guard let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] else {
+            return false
+        }
+        return Self.frontmostOwner(at: point, in: list) == pid
+    }
+
+    /// The owner of the first visible window in `windows` (front to back)
+    /// that holds `point`.
+    static func frontmostOwner(at point: CGPoint, in windows: [[String: Any]]) -> pid_t? {
+        for window in windows {
+            let alpha = (window[kCGWindowAlpha as String] as? Double) ?? 1
+            guard alpha > 0,
+                  let boundsDict = window[kCGWindowBounds as String] as? NSDictionary,
+                  let bounds = CGRect(dictionaryRepresentation: boundsDict),
+                  bounds.contains(point)
+            else { continue }
+            return (window[kCGWindowOwnerPID as String] as? NSNumber)?.int32Value
+        }
+        return nil
     }
 }
 

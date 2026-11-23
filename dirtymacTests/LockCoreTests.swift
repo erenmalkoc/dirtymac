@@ -21,7 +21,7 @@ final class LockCoreTests: XCTestCase {
     func testKeyDownAndKeyUpAreAlwaysIntercepted() {
         let configs = [
             LockConfiguration(),
-            LockConfiguration(mode: .advanced, blockModifierKeys: false, blockMediaKeys: false),
+            LockConfiguration(mode: .advanced, blockModifierKeys: false, blockMediaKeys: false, guardPointer: false),
         ]
         for config in configs {
             XCTAssertNotEqual(mask(config) & EventMask.bit(.keyDown), 0)
@@ -36,7 +36,8 @@ final class LockCoreTests: XCTestCase {
             blockModifierKeys: false,
             blockMediaKeys: false,
             blockMouseAndTrackpad: true,
-            autoUnlockSeconds: 60
+            autoUnlockSeconds: 60,
+            guardPointer: false
         )
         let expected = EventMask.bit(.keyDown) | EventMask.bit(.keyUp)
             | EventMask.bit(.flagsChanged) | systemDefinedBit
@@ -44,13 +45,13 @@ final class LockCoreTests: XCTestCase {
     }
 
     func testAdvancedTogglesMapOneToOne() {
-        let keysOnly = mask(LockConfiguration(mode: .advanced, blockModifierKeys: false, blockMediaKeys: false))
+        let keysOnly = mask(LockConfiguration(mode: .advanced, blockModifierKeys: false, blockMediaKeys: false, guardPointer: false))
         XCTAssertEqual(keysOnly, EventMask.bit(.keyDown) | EventMask.bit(.keyUp))
 
-        let modifiers = mask(LockConfiguration(mode: .advanced, blockModifierKeys: true, blockMediaKeys: false))
+        let modifiers = mask(LockConfiguration(mode: .advanced, blockModifierKeys: true, blockMediaKeys: false, guardPointer: false))
         XCTAssertEqual(modifiers, keysOnly | EventMask.bit(.flagsChanged))
 
-        let media = mask(LockConfiguration(mode: .advanced, blockModifierKeys: false, blockMediaKeys: true))
+        let media = mask(LockConfiguration(mode: .advanced, blockModifierKeys: false, blockMediaKeys: true, guardPointer: false))
         XCTAssertEqual(media, keysOnly | systemDefinedBit)
     }
 
@@ -65,8 +66,8 @@ final class LockCoreTests: XCTestCase {
     }
 
     func testGesturesStayLiveWhileThePointerIsFree() {
-        XCTAssertEqual(mask(LockConfiguration()) & EventMask.gestureBit, 0)
-        XCTAssertEqual(mask(LockConfiguration(mode: .advanced)) & EventMask.gestureBit, 0)
+        XCTAssertEqual(mask(LockConfiguration(guardPointer: false)) & EventMask.gestureBit, 0)
+        XCTAssertEqual(mask(LockConfiguration(mode: .advanced, guardPointer: false)) & EventMask.gestureBit, 0)
     }
 
     func testGesturesAreBlockedByTheTapLikeOtherPointerEvents() throws {
@@ -90,13 +91,24 @@ final class LockCoreTests: XCTestCase {
         }
     }
 
-    func testOnlyAuxControlSystemEventsAreBlocked() throws {
+    func testAuxControlPowerAndSleepSystemEventsAreBlocked() throws {
         let systemDefined = try XCTUnwrap(CGEventType(rawValue: kCGEventSystemDefined))
         XCTAssertEqual(decide(systemDefined, subtype: kAuxControlButtonsSubtype), .block)
-        // The power button (subtype 1) must stay a hardware way out.
-        XCTAssertEqual(decide(systemDefined, subtype: 1), .pass)
+        // A short press of the power (Touch ID) button and the sleep event
+        // it can cause must not end the lock.
+        XCTAssertEqual(kPowerKeySubtype, 1)
+        XCTAssertEqual(kSleepEventSubtype, 11)
+        XCTAssertEqual(decide(systemDefined, subtype: kPowerKeySubtype), .block)
+        XCTAssertEqual(decide(systemDefined, subtype: kSleepEventSubtype), .block)
+    }
+
+    func testOtherSystemEventsStillReachTheSystem() throws {
+        let systemDefined = try XCTUnwrap(CGEventType(rawValue: kCGEventSystemDefined))
         XCTAssertEqual(decide(systemDefined, subtype: 0), .pass)
         XCTAssertEqual(decide(systemDefined, subtype: nil), .pass)
+        // Restart and shutdown requests stay a way out.
+        XCTAssertEqual(decide(systemDefined, subtype: 12), .pass)
+        XCTAssertEqual(decide(systemDefined, subtype: 13), .pass)
     }
 
     func testADisabledTapIsTurnedBackOn() {
@@ -135,7 +147,10 @@ final class LockCoreTests: XCTestCase {
         XCTAssertEqual(media.type.rawValue, kCGEventSystemDefined)
         XCTAssertEqual(TapEventDecision.decide(type: media.type, event: media), .block)
 
-        let power = try systemEvent(subtype: 1)
-        XCTAssertEqual(TapEventDecision.decide(type: power.type, event: power), .pass)
+        let power = try systemEvent(subtype: kPowerKeySubtype)
+        XCTAssertEqual(TapEventDecision.decide(type: power.type, event: power), .block)
+
+        let shutdown = try systemEvent(subtype: 13)
+        XCTAssertEqual(TapEventDecision.decide(type: shutdown.type, event: shutdown), .pass)
     }
 }
