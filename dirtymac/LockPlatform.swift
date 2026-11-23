@@ -101,7 +101,7 @@ final class SessionEventTap: EventTapping {
                 // The run-loop source is on the main run loop, so the
                 // callback already runs on the main thread.
                 let swallow = MainActor.assumeIsolated {
-                    context.owner.handle(context.owner.decision(type: type, event: event, in: context), type: type, in: context)
+                    context.owner.handle(context.owner.decision(type: type, event: event, in: context), type: type, event: event, in: context)
                 }
                 return swallow ? nil : Unmanaged.passUnretained(event)
             },
@@ -163,7 +163,7 @@ final class SessionEventTap: EventTapping {
     /// Acts on one decision; returns whether to swallow the event. Esc is
     /// swallowed too: the hold is only our unlock trigger and must never
     /// reach apps.
-    fileprivate func handle(_ decision: TapEventDecision, type: CGEventType, in context: TapContext) -> Bool {
+    fileprivate func handle(_ decision: TapEventDecision, type: CGEventType, event: CGEvent, in context: TapContext) -> Bool {
         let swallow: Bool
         switch decision {
         case .pass:
@@ -178,7 +178,8 @@ final class SessionEventTap: EventTapping {
             swallow = false
         }
         if context.tally != nil {
-            context.tally?.record(TapTally.kind(of: type), swallowed: swallow)
+            let subtype = type.rawValue == kCGEventSystemDefined ? NSEvent(cgEvent: event)?.subtype.rawValue : nil
+            context.tally?.record(TapTally.kind(of: type, systemSubtype: subtype), swallowed: swallow)
             flush(context, force: false)
         }
         return swallow
@@ -214,25 +215,40 @@ protocol OwnWindowHitTesting {
 /// Recording permission.
 struct OwnWindowHitTest: OwnWindowHitTesting {
     var pid: pid_t = ProcessInfo.processInfo.processIdentifier
+    /// The cover over the screens is one of our windows too, but a click
+    /// on it is exactly what must not count as a click on dirtymac.
+    var shieldLayer: Int = Int(ShieldGeometry.level.rawValue)
 
     func isOverOwnWindow(at point: CGPoint) -> Bool {
-        guard let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] else {
-            return false
-        }
-        return Self.frontmostOwner(at: point, in: list) == pid
+        guard let list = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]],
+              let front = Self.frontmostWindow(at: point, in: list)
+        else { return false }
+        return Self.isOwn(front, pid: pid, shieldLayer: shieldLayer)
+    }
+
+    /// One of our windows, but not the cover.
+    static func isOwn(_ front: (owner: pid_t, layer: Int), pid: pid_t, shieldLayer: Int) -> Bool {
+        front.owner == pid && front.layer != shieldLayer
     }
 
     /// The owner of the first visible window in `windows` (front to back)
     /// that holds `point`.
     static func frontmostOwner(at point: CGPoint, in windows: [[String: Any]]) -> pid_t? {
+        frontmostWindow(at: point, in: windows)?.owner
+    }
+
+    /// Owner and level of the first visible window in `windows` (front to
+    /// back) that holds `point`.
+    static func frontmostWindow(at point: CGPoint, in windows: [[String: Any]]) -> (owner: pid_t, layer: Int)? {
         for window in windows {
             let alpha = (window[kCGWindowAlpha as String] as? Double) ?? 1
             guard alpha > 0,
                   let boundsDict = window[kCGWindowBounds as String] as? NSDictionary,
                   let bounds = CGRect(dictionaryRepresentation: boundsDict),
-                  bounds.contains(point)
+                  bounds.contains(point),
+                  let owner = (window[kCGWindowOwnerPID as String] as? NSNumber)?.int32Value
             else { continue }
-            return (window[kCGWindowOwnerPID as String] as? NSNumber)?.int32Value
+            return (owner, (window[kCGWindowLayer as String] as? NSNumber)?.intValue ?? 0)
         }
         return nil
     }

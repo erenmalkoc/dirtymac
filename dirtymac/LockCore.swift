@@ -211,7 +211,9 @@ struct TapTally: Equatable {
         return text
     }
 
-    static func kind(of type: CGEventType) -> String {
+    /// `systemSubtype` names which system-defined event it was (media key,
+    /// power button, sleep...), the thing a plain "system" count hides.
+    static func kind(of type: CGEventType, systemSubtype: Int16? = nil) -> String {
         switch type {
         case .scrollWheel: return "scroll"
         case .leftMouseDown, .rightMouseDown, .otherMouseDown: return "down"
@@ -224,7 +226,7 @@ struct TapTally: Equatable {
         default:
             switch type.rawValue {
             case EventMask.gestureEventType: return "gesture"
-            case kCGEventSystemDefined: return "system"
+            case kCGEventSystemDefined: return "system-\(systemSubtype.map(String.init) ?? "?")"
             default: return "other-\(type.rawValue)"
             }
         }

@@ -267,7 +267,10 @@ final class TapTallyTests: XCTestCase {
         XCTAssertEqual(TapTally.kind(of: .flagsChanged), "modifier")
         XCTAssertEqual(TapTally.kind(of: .tapDisabledByTimeout), "tap-disabled")
         XCTAssertEqual(TapTally.kind(of: try XCTUnwrap(CGEventType(rawValue: 29))), "gesture")
-        XCTAssertEqual(TapTally.kind(of: try XCTUnwrap(CGEventType(rawValue: kCGEventSystemDefined))), "system")
+        let system = try XCTUnwrap(CGEventType(rawValue: kCGEventSystemDefined))
+        XCTAssertEqual(TapTally.kind(of: system), "system-?")
+        XCTAssertEqual(TapTally.kind(of: system, systemSubtype: kPowerKeySubtype), "system-1")
+        XCTAssertEqual(TapTally.kind(of: system, systemSubtype: 8), "system-8")
         XCTAssertEqual(TapTally.kind(of: try XCTUnwrap(CGEventType(rawValue: 21))), "other-21")
     }
 

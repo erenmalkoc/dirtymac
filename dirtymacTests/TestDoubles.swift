@@ -141,6 +141,23 @@ final class FakeDisplayWake: DisplayWakeHolding {
     }
 }
 
+/// Counts how often the pointer is covered and uncovered.
+final class FakeShield: PointerShielding {
+    private(set) var showCalls = 0
+    private(set) var hideCalls = 0
+    private(set) var isShown = false
+
+    func show() {
+        showCalls += 1
+        isShown = true
+    }
+
+    func hide() {
+        hideCalls += 1
+        isShown = false
+    }
+}
+
 /// A blocker wired to fakes.
 final class BlockerRig {
     let tap = FakeEventTap()
@@ -149,12 +166,14 @@ final class BlockerRig {
     let secureInput = FakeSecureInput()
     let sounds = FakeSounds()
     let displayWake = FakeDisplayWake()
+    let shield = FakeShield()
     lazy var blocker = KeyboardBlocker(
         tap: tap,
         permission: permission,
         scheduler: clock,
         secureInput: secureInput,
         sounds: sounds,
-        displayWake: displayWake
+        displayWake: displayWake,
+        shield: shield
     )
 }
