@@ -4009,6 +4009,83 @@
         }
       }
     },
+    "How long to lock, from 1 to 60. Leave it empty to use the timer from Settings.": {
+      "comment": "Description of the Minutes parameter of the Shortcuts action. 1 to 60 is the range the action accepts.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wie lange gesperrt wird, von 1 bis 60. Leer lassen, um den Timer aus den Einstellungen zu verwenden."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "How long to lock, from 1 to 60. Leave it empty to use the timer from Settings."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cuánto tiempo bloquear, de 1 a 60. Déjalo vacío para usar el temporizador de Ajustes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durée du verrouillage, de 1 à 60. Laissez vide pour utiliser le minuteur des Réglages."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Per quanto tempo bloccare, da 1 a 60. Lascia vuoto per usare il timer di Impostazioni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ロックする時間(1〜60分)。空欄の場合は設定のタイマーを使います。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "잠글 시간(1~60분)입니다. 비워 두면 설정의 타이머를 사용합니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Por quanto tempo bloquear, de 1 a 60. Deixe vazio para usar o temporizador de Ajustes."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "На сколько заблокировать, от 1 до 60. Оставьте пустым, чтобы использовать таймер из настроек."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ne kadar süre kilitleneceği, 1 ile 60 arası. Ayarlar'daki zamanlayıcıyı kullanmak için boş bırakın."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "锁定时长，1 到 60 分钟。留空则使用“设置”中的计时。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鎖定時長，1 到 60 分鐘。留空則使用「設定」中的計時。"
+          }
+        }
+      }
+    },
     "It has been %lld days since you installed this version. A newer one may be available. You can check the releases page, or turn on update checks in Settings.": {
       "comment": "Reminder in the panel, shown every 60 days to people who left update checks off. %lld is the number of days since this version was installed (always 60 or more).",
       "localizations": {
@@ -4929,6 +5006,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "鎖定鍵盤以便清潔。長按 Esc 3 秒解鎖。"
+          }
+        }
+      }
+    },
+    "Minutes": {
+      "comment": "Title of the optional length parameter of the Lock Keyboard for Cleaning Shortcuts action.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minuten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minutes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minutos"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minutes"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minuti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "분"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Minutos"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Минуты"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Dakika"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分钟"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "分鐘"
           }
         }
       }

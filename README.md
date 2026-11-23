@@ -21,7 +21,7 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 - The lock ends by itself when the Mac sleeps, the screen locks or users switch. To keep that from happening in the middle of a cleaning, the screen is kept awake while the keyboard is locked (Settings → While locked, on by default)
 - Optional sound cues for lock, the Esc hold, the last seconds before auto-unlock, and unlock
 - Global shortcut (⌃⌥⌘K by default, configurable) opens the panel from any app
-- Spotlight and Shortcuts actions — lock the keyboard or open the panel even when dirtymac isn't running
+- Spotlight and Shortcuts actions — lock the keyboard (optionally for a number of minutes) or open the panel even when dirtymac isn't running
 - Optional open at login, offered during onboarding
 - One-time What's New window after each update
 - Guided first-launch onboarding with live Accessibility-permission status

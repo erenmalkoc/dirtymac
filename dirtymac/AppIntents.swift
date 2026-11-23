@@ -22,26 +22,103 @@ struct LockKeyboardIntent: AppIntent {
     static let description = IntentDescription("Locks the keyboard so you can clean it. Hold Esc for 3 seconds to unlock.")
     static let openAppWhenRun = true
 
+    /// Optional. Without it the lock uses the timer from Settings, as
+    /// before. The range is the same one IntentLockPlan clamps to.
+    @Parameter(
+        title: "Minutes",
+        description: "How long to lock, from 1 to 60. Leave it empty to use the timer from Settings.",
+        inclusiveRange: (1, 60)
+    )
+    var minutes: Int?
+
     @MainActor
     func perform() async throws -> some IntentResult {
         guard let app = AppDelegate.shared else { return .result() }
-        let blocker = app.blocker
+        Self.run(
+            minutes: minutes,
+            blocker: app.blocker,
+            storedConfiguration: LockConfiguration.current,
+            openPanel: { app.showPopoverWhenReady() }
+        )
+        return .result()
+    }
+
+    /// The whole action, apart from where its inputs come from, so it can
+    /// be run against a fake blocker.
+    @MainActor
+    static func run(
+        minutes: Int?,
+        blocker: KeyboardBlocker,
+        storedConfiguration: LockConfiguration,
+        openPanel: () -> Void
+    ) {
         blocker.refreshPermission()
         blocker.refreshSecureInput()
-        switch IntentLockDecision.decide(
+        switch IntentLockPlan.plan(
+            minutes: minutes,
             isActive: blocker.isActive,
             hasPermission: blocker.hasPermission,
-            mouseLocked: LockConfiguration.current.blockMouseAndTrackpad,
-            secureInputOn: blocker.secureInput != nil
+            secureInputOn: blocker.secureInput != nil,
+            storedConfiguration: storedConfiguration
         ) {
         case .alreadyLocked:
             break
         case .openPanel:
-            app.showPopoverWhenReady()
-        case .lock:
-            blocker.start()
+            openPanel()
+        case .lock(let configuration):
+            if let configuration {
+                blocker.start(configuration)
+            } else {
+                blocker.start(storedConfiguration)
+            }
         }
-        return .result()
+    }
+}
+
+/// What the action does with its optional length.
+enum IntentLockPlan: Equatable {
+    case alreadyLocked
+    case openPanel
+    /// Lock now. nil means "with the stored settings", as the action always
+    /// did, a configuration means "for the length that was asked for".
+    case lock(LockConfiguration?)
+
+    /// The lengths the action accepts, in minutes. Shortcuts can pass any
+    /// number from a variable, so anything else is pulled into this range.
+    static let minMinutes = 1
+    static let maxMinutes = 60
+
+    static func seconds(forMinutes minutes: Int) -> Int {
+        min(max(minutes, minMinutes), maxMinutes) * 60
+    }
+
+    /// The same gates as before decide whether to lock at all (a frozen
+    /// mouse, a missing permission and secure input all go to the panel).
+    /// A length only changes what a lock that was going to start does.
+    static func plan(
+        minutes: Int?,
+        isActive: Bool,
+        hasPermission: Bool,
+        secureInputOn: Bool,
+        storedConfiguration: LockConfiguration
+    ) -> IntentLockPlan {
+        switch IntentLockDecision.decide(
+            isActive: isActive,
+            hasPermission: hasPermission,
+            mouseLocked: storedConfiguration.effective.blockMouseAndTrackpad,
+            secureInputOn: secureInputOn
+        ) {
+        case .alreadyLocked:
+            return .alreadyLocked
+        case .openPanel:
+            return .openPanel
+        case .lock:
+            guard let minutes else { return .lock(nil) }
+            return .lock(QuickLock.configuration(
+                seconds: seconds(forMinutes: minutes),
+                storedConfiguration: storedConfiguration
+            ))
+        }
     }
 }
 
