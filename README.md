@@ -30,7 +30,8 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 - Auto re-enables the event tap if macOS times it out
 - Settings with light / dark override and 12-language UI (runtime switching, no relaunch)
 - No Dock icon (`LSUIElement`)
-- No network access, no analytics, no background daemons
+- Optional update checks, **off by default**: turn them on in Settings and dirtymac tells you when a new version is out. If you leave them off, it reminds you every 60 days to look for one yourself
+- No network access unless you turn on update checks, no analytics, no background daemons
 
 ## Install
 
@@ -135,6 +136,8 @@ dirtymac/
 ├── GlobalHotKey.swift         # Carbon hot-key presets
 ├── LaunchAtLogin.swift        # SMAppService login item
 ├── AppIntents.swift           # Spotlight / Shortcuts actions
+├── UpdateCheck.swift          # pure rules for update checks and reminders, the one request
+├── UpdateChecker.swift        # observable state behind the panel notice and Settings
 ├── WhatsNew.swift             # one-time release notes window
 ├── MenuBarPopoverView.swift   # popover root: navigation, preferences, appearance + locale
 ├── MainView.swift             # keyboard lock control + inline full-lockdown confirmation
@@ -171,7 +174,8 @@ For local releases, run [`scripts/release.sh`](scripts/release.sh) with the same
 
 dirtymac runs entirely on your Mac:
 
-- No network connections
+- No network connections, unless you turn on **Settings → Updates → Check for updates**. It is off by default. When on, dirtymac asks GitHub once a day for the number of the latest release (`api.github.com/repos/erenmalkoc/dirtymac/releases/latest`) and nothing else. No identifier, cookie or usage data is sent, and nothing is stored by the request. As with any web request, GitHub can see your IP address. Turning it off stops all requests at once
+- With update checks off, a notice every 60 days (60, 120, 180 …) suggests looking for a new version yourself. It is computed from the date you installed this version and needs no connection. Its **View releases** button opens GitHub in your browser only when you click it
 - No telemetry, analytics, or crash reporting
 - No background processes — quitting the app fully releases the keyboard
 

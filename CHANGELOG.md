@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- **Update checks, off by default.** Nobody noticed when a new version came out, because dirtymac had no way to say so. Settings → Updates → Check for updates lets the app ask GitHub once a day for the number of the latest release. That one request is the only network use in the app: no identifier, cookie or usage data is sent, and the setting says plainly what leaves the Mac. When a newer version is found, the panel shows a notice with its release notes and, depending on how dirtymac was installed, the Homebrew command to copy or a download link. The menu bar icon gets a small dot and the right-click menu an entry for it.
+- **Reminders for people who leave update checks off.** Every 60 days after a version was installed (60, 120, 180 …) the panel suggests looking for a new version, with a link to the releases page and a shortcut to the setting. **Later** hides it until the next step. This needs no connection: it only counts days.
+- **A one-time offer in What's New** to turn update checks on. The box starts unticked.
+
+### Development
+- Tests cover the rules (daily limit, 60-day steps, version parsing that refuses anything but a plain number), the request against a stand-in server (what is sent, what a bad reply does), races such as switching the setting off while a request is out, and a guard that fails when any source file other than `UpdateCheck.swift` touches the network.
+
 ## [1.3.2] - 2026-10-11
 
 ### Fixed
