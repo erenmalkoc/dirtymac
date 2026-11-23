@@ -133,6 +133,7 @@ struct LockConfiguration: Equatable {
         static let blockMediaKeys = "blockMediaKeys"
         static let blockMouseAndTrackpad = "blockMouseAndTrackpad"
         static let autoUnlockSeconds = "autoUnlockSeconds"
+        static let keepDisplayAwake = "keepDisplayAwakeWhileLocked"
     }
 
     var mode: LockMode = .basic
@@ -140,6 +141,9 @@ struct LockConfiguration: Equatable {
     var blockMediaKeys = true
     var blockMouseAndTrackpad = false
     var autoUnlockSeconds = 0          // 0 = off
+    /// Keep the screen from dimming or sleeping while locked. Not part of
+    /// the Basic safety preset: it applies to every lock.
+    var keepDisplayAwake = true
 
     /// Auto-unlock is mandatory (and at least this long) once the mouse
     /// is part of the lockdown — the menu bar can no longer be clicked.
@@ -191,7 +195,8 @@ struct LockConfiguration: Equatable {
                 blockModifierKeys: true,
                 blockMediaKeys: true,
                 blockMouseAndTrackpad: false,
-                autoUnlockSeconds: 0
+                autoUnlockSeconds: 0,
+                keepDisplayAwake: keepDisplayAwake
             )
         }
         var c = self
@@ -211,7 +216,8 @@ struct LockConfiguration: Equatable {
             blockModifierKeys: boolOr(Key.blockModifierKeys, true),
             blockMediaKeys: boolOr(Key.blockMediaKeys, true),
             blockMouseAndTrackpad: boolOr(Key.blockMouseAndTrackpad, false),
-            autoUnlockSeconds: d.integer(forKey: Key.autoUnlockSeconds)
+            autoUnlockSeconds: d.integer(forKey: Key.autoUnlockSeconds),
+            keepDisplayAwake: boolOr(Key.keepDisplayAwake, true)
         )
         return cfg.effective
     }
@@ -238,6 +244,7 @@ struct SettingsView: View {
     @AppStorage(LockConfiguration.Key.blockMouseAndTrackpad) private var blockMouseAndTrackpad = false
     @AppStorage(LockConfiguration.Key.autoUnlockSeconds) private var autoUnlockSeconds = 0
     @AppStorage(SystemSounds.enabledKey) private var playSounds = true
+    @AppStorage(LockConfiguration.Key.keepDisplayAwake) private var keepDisplayAwake = true
     @Binding var isPresented: Bool
     /// The in-app language (set by the popover), for the duration labels.
     @Environment(\.locale) private var locale
@@ -327,6 +334,17 @@ struct SettingsView: View {
                         .padding(.top, 4)
                         .transition(.opacity.combined(with: .move(edge: .top)))
                 }
+            }
+
+            section("While locked") {
+                Toggle("Keep the screen awake", isOn: $keepDisplayAwake)
+                    .font(.callout)
+                    .toggleStyle(.switch)
+                    .controlSize(.small)
+                Text("Stops the screen from dimming or going to sleep while the keyboard is locked, so the screen saver or a screen lock does not end the lock.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
             section("Sound") {

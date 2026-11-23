@@ -4086,6 +4086,83 @@
         }
       }
     },
+    "Keep the screen awake": {
+      "comment": "Settings toggle: stop the display from dimming or sleeping while locked.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bildschirm wach halten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Keep the screen awake"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantener la pantalla activa"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Garder l'écran allumé"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mantieni lo schermo attivo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画面をスリープさせない"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "화면 켜 두기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Manter a tela ativa"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не выключать экран"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekranı açık tut"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保持屏幕唤醒"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保持螢幕喚醒"
+          }
+        }
+      }
+    },
     "Keyboard utility": {
       "comment": "Subtitle shown under the app name in the popover header.",
       "localizations": {
@@ -7012,6 +7089,83 @@
         }
       }
     },
+    "Stops the screen from dimming or going to sleep while the keyboard is locked, so the screen saver or a screen lock does not end the lock.": {
+      "comment": "Caption under Keep the screen awake. A screen lock or sleep ends the keyboard lock.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verhindert, dass der Bildschirm bei gesperrter Tastatur dunkel wird oder in den Ruhezustand geht, damit der Bildschirmschoner oder eine Bildschirmsperre die Sperre nicht beendet."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Stops the screen from dimming or going to sleep while the keyboard is locked, so the screen saver or a screen lock does not end the lock."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Evita que la pantalla se atenúe o se suspenda mientras el teclado está bloqueado, para que el salvapantallas o un bloqueo de pantalla no termine el bloqueo."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Empêche l'écran de s'assombrir ou de se mettre en veille pendant que le clavier est verrouillé, afin que l'économiseur d'écran ou un verrouillage d'écran ne mette pas fin au verrouillage."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impedisce allo schermo di oscurarsi o andare in stop mentre la tastiera è bloccata, così il salvaschermo o un blocco dello schermo non interrompe il blocco."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キーボードのロック中は画面が暗くなったりスリープしたりしないようにし、スクリーンセーバや画面のロックでキーボードのロックが終わらないようにします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "키보드가 잠겨 있는 동안 화면이 어두워지거나 잠자기 상태가 되지 않게 하여, 화면 보호기나 화면 잠금으로 키보드 잠금이 끝나지 않도록 합니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impede que a tela escureça ou entre em repouso enquanto o teclado está bloqueado, para que a proteção de tela ou um bloqueio de tela não encerre o bloqueio."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не даёт экрану гаснуть и переходить в сон, пока клавиатура заблокирована, чтобы заставка или блокировка экрана не прерывали блокировку."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Klavye kilitliyken ekranın kararmasını ya da uykuya geçmesini engeller. Böylece ekran koruyucu veya ekran kilidi klavye kilidini bitirmez."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "键盘锁定期间，屏幕不会变暗或进入睡眠，这样屏幕保护程序或锁定屏幕就不会结束键盘锁定。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鍵盤鎖定期間，螢幕不會變暗或進入睡眠，這樣螢幕保護程式或鎖定螢幕就不會結束鍵盤鎖定。"
+          }
+        }
+      }
+    },
     "System": {
       "comment": "Picker option meaning 'follow the macOS-wide setting' for both Appearance and Language.",
       "localizations": {
@@ -8548,6 +8702,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac 新功能"
+          }
+        }
+      }
+    },
+    "While locked": {
+      "comment": "Settings section title for options that apply while the keyboard is locked.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Während der Sperre"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "While locked"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mientras está bloqueado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Pendant le verrouillage"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durante il blocco"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ロック中"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "잠금 중"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Durante o bloqueio"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Во время блокировки"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kilitliyken"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "锁定期间"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鎖定期間"
           }
         }
       }

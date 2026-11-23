@@ -18,7 +18,7 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 - **Advanced mode**: optionally freeze the mouse & trackpad too, choose which key classes to block, and set an auto-unlock timer (30 seconds to 1 hour, at most 15 minutes while the mouse is frozen)
 - Universal hold-Esc emergency exit (3 seconds) — works even in full lockdown, and finishes when you let go so no stray Esc reaches your app
 - Warns when another app holds Secure Input (password fields, Terminal's Secure Keyboard Entry) and keys get past the lock
-- The lock ends by itself when the Mac sleeps, the screen locks or users switch
+- The lock ends by itself when the Mac sleeps, the screen locks or users switch. To keep that from happening in the middle of a cleaning, the screen is kept awake while the keyboard is locked (Settings → While locked, on by default)
 - Optional sound cues for lock, the Esc hold, the last seconds before auto-unlock, and unlock
 - Global shortcut (⌃⌥⌘K by default, configurable) opens the panel from any app
 - Spotlight and Shortcuts actions — lock the keyboard or open the panel even when dirtymac isn't running

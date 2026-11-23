@@ -119,6 +119,26 @@ final class ManualScheduler: LockScheduling {
     }
 }
 
+/// Counts how often the display is held and let go.
+final class FakeDisplayWake: DisplayWakeHolding {
+    var refuses = false
+    private(set) var holdCalls = 0
+    private(set) var releaseCalls = 0
+    private(set) var isHeld = false
+
+    func hold() -> Bool {
+        holdCalls += 1
+        guard !refuses else { return false }
+        isHeld = true
+        return true
+    }
+
+    func release() {
+        releaseCalls += 1
+        isHeld = false
+    }
+}
+
 /// A blocker wired to fakes.
 final class BlockerRig {
     let tap = FakeEventTap()
@@ -126,11 +146,13 @@ final class BlockerRig {
     let clock = ManualScheduler()
     let secureInput = FakeSecureInput()
     let sounds = FakeSounds()
+    let displayWake = FakeDisplayWake()
     lazy var blocker = KeyboardBlocker(
         tap: tap,
         permission: permission,
         scheduler: clock,
         secureInput: secureInput,
-        sounds: sounds
+        sounds: sounds,
+        displayWake: displayWake
     )
 }

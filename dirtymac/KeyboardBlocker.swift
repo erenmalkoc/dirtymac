@@ -76,6 +76,7 @@ final class KeyboardBlocker: ObservableObject {
     private let scheduler: LockScheduling
     private let secureInputDetector: SecureInputDetecting
     private let sounds: SoundPlaying
+    private let displayWake: DisplayWakeHolding
 
     private var startedAt: TimeInterval?
     private var ticker: LockTimer?
@@ -102,13 +103,15 @@ final class KeyboardBlocker: ObservableObject {
         permission: AccessibilityPermission = SystemAccessibility(),
         scheduler: LockScheduling = RunLoopScheduler(),
         secureInput: SecureInputDetecting = SystemSecureInput(),
-        sounds: SoundPlaying = SystemSounds()
+        sounds: SoundPlaying = SystemSounds(),
+        displayWake: DisplayWakeHolding = SystemDisplayWake()
     ) {
         self.tap = tap
         self.permission = permission
         self.scheduler = scheduler
         self.secureInputDetector = secureInput
         self.sounds = sounds
+        self.displayWake = displayWake
         refreshPermission()
     }
 
@@ -178,6 +181,10 @@ final class KeyboardBlocker: ObservableObject {
             return false
         }
 
+        // Only once the lock is certain to run, so a refused start never
+        // leaves the display held.
+        if config.keepDisplayAwake { displayWake.hold() }
+
         startedAt = scheduler.now
         elapsed = 0
         autoUnlockTotal = config.autoUnlockSeconds
@@ -205,6 +212,7 @@ final class KeyboardBlocker: ObservableObject {
     func stop(reason: UnlockReason) {
         guard isActive else { return }
         tap.uninstall()
+        displayWake.release()
         ticker?.cancel()
         ticker = nil
         autoUnlockTimer?.cancel()
