@@ -7,6 +7,7 @@ import Combine
 /// preferences.
 struct MainView: View {
     @EnvironmentObject private var blocker: KeyboardBlocker
+    @EnvironmentObject private var updates: UpdateChecker
     @Binding var showingSettings: Bool
     @State private var confirmLockdown = false
 
@@ -19,6 +20,11 @@ struct MainView: View {
             header
 
             Divider()
+
+            // Not while the keyboard is locked: that screen is for one thing.
+            if !blocker.isActive {
+                UpdateNoticeView(openSettings: { showingSettings = true })
+            }
 
             content
                 .padding(.vertical, 22)
@@ -33,6 +39,8 @@ struct MainView: View {
         // frame. The cached value from init renders immediately; if it
         // turns out stale, the view updates a tick later.
         .onAppear {
+            // The app may have run for weeks: a reminder can have come due.
+            updates.refreshReminder()
             DispatchQueue.main.async {
                 blocker.refreshPermission()
                 if !blocker.isActive { blocker.refreshSecureInput() }

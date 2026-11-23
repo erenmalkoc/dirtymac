@@ -1464,6 +1464,237 @@
         }
       }
     },
+    "Check for updates": {
+      "comment": "Settings toggle that allows the once-a-day lookup of the latest release. Also the checkbox in the What's New window.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Nach Updates suchen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check for updates"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Buscar actualizaciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Rechercher des mises à jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cerca aggiornamenti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アップデートを確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트 확인"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificar atualizações"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проверять обновления"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeleri denetle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "检查更新"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "檢查更新"
+          }
+        }
+      }
+    },
+    "Check now": {
+      "comment": "Settings button that runs an update check at once.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Jetzt prüfen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Check now"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprobar ahora"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérifier maintenant"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Controlla ora"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "今すぐ確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "지금 확인"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificar agora"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проверить сейчас"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Şimdi denetle"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "立即检查"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "立即檢查"
+          }
+        }
+      }
+    },
+    "Checking…": {
+      "comment": "Shown in Settings while an update check is running.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wird geprüft…"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Checking…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprobando…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vérification…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Controllo in corso…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "確認中…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "확인 중…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificando…"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проверка…"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denetleniyor…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在检查…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "正在檢查…"
+          }
+        }
+      }
+    },
     "Cleaning Mode Active": {
       "comment": "Headline above the power button when the keyboard is locked.",
       "localizations": {
@@ -1772,6 +2003,237 @@
         }
       }
     },
+    "Copied": {
+      "comment": "Replaces the Copy brew command label for a moment after the command was copied.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopiert"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copied"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiado"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copié"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiato"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーしました"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "복사됨"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiado"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скопировано"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kopyalandı"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已拷贝"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "已拷貝"
+          }
+        }
+      }
+    },
+    "Copy brew command": {
+      "comment": "Button that copies the Homebrew upgrade command. Shown only to people who installed with Homebrew. brew stays untranslated.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brew-Befehl kopieren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copy brew command"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar comando de brew"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copier la commande brew"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copia il comando brew"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "brew コマンドをコピー"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "brew 명령 복사"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Copiar comando do brew"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скопировать команду brew"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Brew komutunu kopyala"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷贝 brew 命令"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "拷貝 brew 指令"
+          }
+        }
+      }
+    },
+    "Couldn't check for updates. Try again later.": {
+      "comment": "Result of an update check that failed (offline, GitHub unreachable).",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Die Suche nach Updates ist fehlgeschlagen. Versuche es später erneut."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Couldn't check for updates. Try again later."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No se pudo comprobar si hay actualizaciones. Inténtalo de nuevo más tarde."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossible de rechercher les mises à jour. Réessayez plus tard."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Impossibile cercare aggiornamenti. Riprova più tardi."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アップデートを確認できませんでした。しばらくしてからもう一度お試しください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트를 확인하지 못했습니다. 나중에 다시 시도하세요."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Não foi possível verificar atualizações. Tente novamente mais tarde."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Не удалось проверить обновления. Повторите попытку позже."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeler denetlenemedi. Daha sonra tekrar deneyin."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "无法检查更新。请稍后再试。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "無法檢查更新。請稍後再試。"
+          }
+        }
+      }
+    },
     "Dark": {
       "comment": "Appearance picker option — dark mode.",
       "localizations": {
@@ -1852,6 +2314,83 @@
     "dirtymac": {
       "comment": "App brand name — do not translate.",
       "shouldTranslate": false
+    },
+    "dirtymac %@ is available.": {
+      "comment": "Notice in the panel and right-click menu when an update check found a newer version. %@ is the version number.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ ist verfügbar."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ is available."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ ya está disponible."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ est disponible."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ è disponibile."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ が利用できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ 버전이 나왔습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O dirtymac %@ está disponível."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Доступна версия dirtymac %@."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ çıktı."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ 现已推出。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac %@ 現已推出。"
+          }
+        }
+      }
     },
     "dirtymac can start with your Mac, so it's always one shortcut away.": {
       "comment": "What's New 1.2.0 item detail.",
@@ -2003,6 +2542,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "dirtymac — 鍵盤已鎖定"
+          }
+        }
+      }
+    },
+    "dirtymac is up to date.": {
+      "comment": "Result of a manual update check when no newer version exists.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac ist auf dem neuesten Stand."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac is up to date."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac está actualizado."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac est à jour."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac è aggiornato."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac は最新です。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac이 최신 버전입니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O dirtymac está atualizado."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac обновлён до последней версии."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac güncel."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac 已是最新版本。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac 已是最新版本。"
           }
         }
       }
@@ -2315,6 +2931,160 @@
         }
       }
     },
+    "dirtymac stays offline unless you turn on update checks in Settings. Then it tells you when a new version is out.": {
+      "comment": "What's New item text for version 1.4.0.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac bleibt offline, solange du die Update-Prüfung nicht in den Einstellungen einschaltest. Dann sagt es dir Bescheid, wenn eine neue Version erscheint."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac stays offline unless you turn on update checks in Settings. Then it tells you when a new version is out."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac sigue sin conexión mientras no actives la comprobación de actualizaciones en Ajustes. Entonces te avisa cuando sale una versión nueva."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac reste hors ligne tant que vous n'activez pas la recherche de mises à jour dans les Réglages. Il vous prévient alors lorsqu'une nouvelle version est disponible."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac resta offline finché non attivi il controllo degli aggiornamenti in Impostazioni. Poi ti avvisa quando esce una nuova versione."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定でアップデートの確認をオンにしない限り、dirtymac はオフラインのままです。オンにすると、新しいバージョンが出たときにお知らせします。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "설정에서 업데이트 확인을 켜지 않으면 dirtymac은 계속 오프라인으로 동작합니다. 켜면 새 버전이 나왔을 때 알려 드립니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O dirtymac continua offline, a menos que você ative a verificação de atualizações em Ajustes. Depois disso, ele avisa quando houver uma nova versão."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac остаётся без подключения к интернету, пока вы не включите проверку обновлений в настройках. После этого он сообщит, когда выйдет новая версия."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ayarlar'dan güncelleme denetimini açmadığınız sürece dirtymac çevrimdışı kalır. Açarsanız yeni bir sürüm çıktığında sizi haberdar eder."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "除非您在“设置”中开启更新检查，否则 dirtymac 会一直保持离线。开启后，有新版本时它会通知您。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "除非您在「設定」中開啟更新檢查，否則 dirtymac 會一直保持離線。開啟後，有新版本時它會通知您。"
+          }
+        }
+      }
+    },
+    "dirtymac takes your privacy seriously, so it stays offline by default. If you like, you can allow it to check once a day whether a new version is out. Only the latest version number is requested from GitHub. No personal data or usage information leaves your Mac. As with any web request, GitHub can see your IP address.": {
+      "comment": "Privacy note under the update-check toggle, also shown in the What's New window. It must stay accurate: it is the promise the README makes.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac nimmt deine Privatsphäre ernst und bleibt deshalb standardmäßig offline. Wenn du möchtest, kannst du erlauben, dass es einmal täglich prüft, ob eine neue Version erschienen ist. Dabei wird nur die neueste Versionsnummer bei GitHub abgefragt. Es verlassen keine persönlichen Daten und keine Nutzungsinformationen deinen Mac. Wie bei jeder Webanfrage kann GitHub deine IP-Adresse sehen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac takes your privacy seriously, so it stays offline by default. If you like, you can allow it to check once a day whether a new version is out. Only the latest version number is requested from GitHub. No personal data or usage information leaves your Mac. As with any web request, GitHub can see your IP address."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac se toma tu privacidad muy en serio, por eso funciona sin conexión de forma predeterminada. Si quieres, puedes permitirle comprobar una vez al día si hay una versión nueva. Solo se pide a GitHub el número de la última versión. Ningún dato personal ni información de uso sale de tu Mac. Como en cualquier solicitud web, GitHub puede ver tu dirección IP."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac prend votre vie privée très au sérieux, c'est pourquoi il reste hors ligne par défaut. Si vous le souhaitez, vous pouvez l'autoriser à vérifier une fois par jour si une nouvelle version est disponible. Seul le numéro de la dernière version est demandé à GitHub. Aucune donnée personnelle ni information d'utilisation ne quitte votre Mac. Comme pour toute requête web, GitHub peut voir votre adresse IP."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac tiene molto alla tua privacy, quindi per impostazione predefinita resta offline. Se vuoi, puoi consentirgli di controllare una volta al giorno se è uscita una nuova versione. A GitHub viene richiesto solo il numero dell'ultima versione. Nessun dato personale né informazione d'uso lascia il tuo Mac. Come per qualsiasi richiesta web, GitHub può vedere il tuo indirizzo IP."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac はプライバシーを大切にするため、初期設定ではオフラインで動作します。ご希望であれば、新しいバージョンが出ているかを1日1回確認するよう許可できます。GitHub に問い合わせるのは最新のバージョン番号だけです。個人データや使用状況の情報が Mac の外に出ることはありません。Web リクエストの常として、GitHub には IP アドレスが見えます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac은 개인정보를 소중히 여기므로 기본적으로 오프라인으로 동작합니다. 원하시면 하루에 한 번 새 버전이 나왔는지 확인하도록 허용할 수 있습니다. GitHub에는 최신 버전 번호만 요청합니다. 개인 정보나 사용 정보는 Mac 밖으로 나가지 않습니다. 모든 웹 요청과 마찬가지로 GitHub에서는 IP 주소를 볼 수 있습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "O dirtymac leva sua privacidade a sério, por isso fica offline por padrão. Se quiser, você pode permitir que ele verifique uma vez por dia se há uma nova versão. Apenas o número da versão mais recente é solicitado ao GitHub. Nenhum dado pessoal nem informação de uso sai do seu Mac. Como em qualquer solicitação web, o GitHub pode ver seu endereço IP."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac серьёзно относится к вашей конфиденциальности, поэтому по умолчанию работает без подключения к интернету. При желании вы можете разрешить ему раз в сутки проверять, вышла ли новая версия. У GitHub запрашивается только номер последней версии. Личные данные и сведения об использовании не покидают ваш Mac. Как и при любом веб-запросе, GitHub видит ваш IP-адрес."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac gizliliğinize büyük önem verir, bu yüzden varsayılan olarak çevrimdışı çalışır. İsterseniz internet bağlantısına izin verip yeni sürümlerden haberdar olabilirsiniz. Denetim günde en fazla bir kez yapılır. GitHub'dan yalnızca en son sürüm numarası istenir. Mac'inizden hiçbir kişisel veri ya da kullanım bilgisi çıkmaz. Her web isteğinde olduğu gibi GitHub IP adresinizi görebilir."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac 十分重视您的隐私，因此默认保持离线。如果您愿意，可以允许它每天检查一次是否有新版本。只会向 GitHub 请求最新的版本号。任何个人数据或使用信息都不会离开您的 Mac。与任何网络请求一样，GitHub 能看到您的 IP 地址。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "dirtymac 十分重視您的隱私，因此預設保持離線。如果您願意，可以允許它每天檢查一次是否有新版本。只會向 GitHub 要求最新的版本號碼。任何個人資料或使用資訊都不會離開您的 Mac。與任何網路請求一樣，GitHub 能看到您的 IP 位址。"
+          }
+        }
+      }
+    },
     "Done": {
       "comment": "Onboarding step 3 primary button — finishes onboarding.",
       "localizations": {
@@ -2388,6 +3158,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "完成"
+          }
+        }
+      }
+    },
+    "Download": {
+      "comment": "Button that opens the DMG download of the new version. Shown to people who did not install with Homebrew.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Herunterladen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Download"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Descargar"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Télécharger"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Scarica"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダウンロード"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "다운로드"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Baixar"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Скачать"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İndir"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下载"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下載"
           }
         }
       }
@@ -3008,6 +3855,83 @@
         }
       }
     },
+    "It has been %lld days since you installed this version. A newer one may be available. You can check the releases page, or turn on update checks in Settings.": {
+      "comment": "Reminder in the panel, shown every 60 days to people who left update checks off. %lld is the number of days since this version was installed (always 60 or more).",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Seit der Installation dieser Version sind %lld Tage vergangen. Möglicherweise ist eine neuere verfügbar. Du kannst die Seite mit den Versionen ansehen oder in den Einstellungen die Update-Prüfung einschalten."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "It has been %lld days since you installed this version. A newer one may be available. You can check the releases page, or turn on update checks in Settings."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Han pasado %lld días desde que instalaste esta versión. Puede que haya una más reciente. Puedes consultar la página de versiones o activar la comprobación de actualizaciones en Ajustes."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Cela fait %lld jours que vous avez installé cette version. Une version plus récente est peut-être disponible. Vous pouvez consulter la page des versions ou activer la recherche de mises à jour dans les Réglages."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sono passati %lld giorni da quando hai installato questa versione. Potrebbe essercene una più recente. Puoi consultare la pagina delle versioni o attivare il controllo degli aggiornamenti in Impostazioni."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このバージョンをインストールしてから %lld 日が経ちました。より新しいバージョンが公開されている可能性があります。リリースページを確認するか、設定でアップデートの確認をオンにできます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "이 버전을 설치한 지 %lld일이 지났습니다. 더 새로운 버전이 나왔을 수 있습니다. 릴리스 페이지를 확인하거나 설정에서 업데이트 확인을 켤 수 있습니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Já se passaram %lld dias desde que você instalou esta versão. Pode haver uma mais recente. Você pode consultar a página de versões ou ativar a verificação de atualizações em Ajustes."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "С момента установки этой версии прошло дней: %lld. Возможно, вышла более новая. Вы можете посмотреть страницу версий или включить проверку обновлений в настройках."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bu sürümü kurmanızın üzerinden %lld gün geçti. Daha yeni bir sürüm çıkmış olabilir. Sürümler sayfasına göz atabilir ya da Ayarlar'dan güncelleme denetimini açabilirsiniz."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自安装此版本以来已过去 %lld 天。可能已有更新的版本。您可以查看发布页面，或在“设置”中开启更新检查。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自安裝此版本以來已過了 %lld 天。可能已有更新的版本。您可以查看發佈頁面，或在「設定」中開啟更新檢查。"
+          }
+        }
+      }
+    },
     "Keyboard utility": {
       "comment": "Subtitle shown under the app name in the popover header.",
       "localizations": {
@@ -3158,6 +4082,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "語言"
+          }
+        }
+      }
+    },
+    "Later": {
+      "comment": "Reminder button that hides the reminder until the next 60-day step.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Später"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Later"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Más tarde"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Plus tard"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Più tardi"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "あとで"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "나중에"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Depois"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Позже"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sonra"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "稍后"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "稍後"
           }
         }
       }
@@ -5010,6 +6011,83 @@
         }
       }
     },
+    "Release notes": {
+      "comment": "Button that opens the GitHub release page of the new version.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versionshinweise"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Release notes"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notas de la versión"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notes de version"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Note di rilascio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リリースノート"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "릴리스 노트"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Notas da versão"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Список изменений"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürüm notları"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "发行说明"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "發行說明"
+          }
+        }
+      }
+    },
     "Safer unlocking": {
       "comment": "What's New 1.3.0 item title.",
       "localizations": {
@@ -6319,6 +7397,83 @@
         }
       }
     },
+    "Turn on update checks": {
+      "comment": "Reminder button that opens Settings where the update-check toggle is.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Update-Prüfung einschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn on update checks"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activar comprobación"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Activer la recherche"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attiva il controllo"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "確認をオンにする"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트 확인 켜기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ativar verificação"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Включить проверку"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Denetimi aç"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开启更新检查"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開啟更新檢查"
+          }
+        }
+      }
+    },
     "Unlock Keyboard": {
       "comment": "VoiceOver label of the power button while the keyboard is locked.",
       "localizations": {
@@ -6473,6 +7628,160 @@
         }
       }
     },
+    "Update checks": {
+      "comment": "What's New item title for version 1.4.0.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Update-Prüfung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Update checks"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Comprobación de actualizaciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Recherche de mises à jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Controllo aggiornamenti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アップデートの確認"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트 확인"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verificação de atualizações"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Проверка обновлений"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncelleme denetimi"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新检查"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新檢查"
+          }
+        }
+      }
+    },
+    "Updates": {
+      "comment": "Settings section title for update checks.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updates"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Updates"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Actualizaciones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Mises à jour"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Aggiornamenti"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アップデート"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "업데이트"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atualizações"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Обновления"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Güncellemeler"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "更新"
+          }
+        }
+      }
+    },
     "Version %@": {
       "comment": "Release notes section header. %@ is the version number, e.g. 1.2.0.",
       "localizations": {
@@ -6546,6 +7855,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "版本 %@"
+          }
+        }
+      }
+    },
+    "View releases": {
+      "comment": "Reminder button that opens the GitHub releases page in the browser.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Versionen ansehen"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "View releases"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver versiones"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Voir les versions"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vedi versioni"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リリースを見る"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "릴리스 보기"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ver versões"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Открыть версии"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sürümleri gör"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查看发布"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "查看發佈"
           }
         }
       }

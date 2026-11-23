@@ -19,6 +19,18 @@ nonisolated enum UpdateCheck {
         static let dismissedMilestone = "updateDismissedMilestone"
     }
 
+    /// Nothing is switched on for the user: the setting starts off, and so
+    /// does the box in the What's New window.
+    static let enabledByDefault = false
+
+    static func wasOffered(in defaults: UserDefaults = .standard) -> Bool {
+        defaults.bool(forKey: Key.offered)
+    }
+
+    static func markOffered(in defaults: UserDefaults = .standard) {
+        defaults.set(true, forKey: Key.offered)
+    }
+
     static let repository = "erenmalkoc/dirtymac"
     static let brewCommand = "brew upgrade --cask erenmalkoc/tap/dirtymac"
 

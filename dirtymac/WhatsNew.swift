@@ -28,6 +28,13 @@ enum WhatsNew {
     /// release without an entry shows no window to people who saw the
     /// one before it.
     static let catalog: [ReleaseNote] = [
+        ReleaseNote(version: "1.4.0", items: [
+            ReleaseNoteItem(
+                systemImage: "arrow.triangle.2.circlepath",
+                title: "Update checks",
+                detail: "dirtymac stays offline unless you turn on update checks in Settings. Then it tells you when a new version is out."
+            ),
+        ]),
         ReleaseNote(version: "1.3.0", items: [
             ReleaseNoteItem(
                 systemImage: "exclamationmark.shield",
@@ -139,9 +146,13 @@ struct WhatsNewView: View {
     /// Existing users are offered launch-at-login here once; it's the
     /// only place they'd otherwise discover it.
     let offerLaunchAtLogin: Bool
-    var onFinish: (_ launchAtLogin: Bool) -> Void
+    /// Asked once, to whoever has never answered. The box starts empty:
+    /// the network is only used for what the user ticked.
+    var offerUpdateChecks = false
+    var onFinish: (_ launchAtLogin: Bool, _ updateChecks: Bool) -> Void
 
     @State private var launchAtLogin = true
+    @State private var updateChecks = UpdateCheck.enabledByDefault
 
     var body: some View {
         VStack(spacing: 0) {
@@ -159,6 +170,16 @@ struct WhatsNewView: View {
                 .padding(.vertical, 20)
             }
             .frame(maxHeight: .infinity)
+
+            if offerUpdateChecks {
+                // The notes scroll above this. A rule shows where they end,
+                // so a row cut by the edge reads as "more below".
+                Divider()
+                updateChecksOffer
+                    .padding(.horizontal, 32)
+                    .padding(.top, 14)
+                    .padding(.bottom, 2)
+            }
 
             footer
                 .padding(.horizontal, 28)
@@ -208,6 +229,18 @@ struct WhatsNewView: View {
         }
     }
 
+    private var updateChecksOffer: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Toggle("Check for updates", isOn: $updateChecks)
+                .toggleStyle(.checkbox)
+            Text("dirtymac takes your privacy seriously, so it stays offline by default. If you like, you can allow it to check once a day whether a new version is out. Only the latest version number is requested from GitHub. No personal data or usage information leaves your Mac. As with any web request, GitHub can see your IP address.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
     private var footer: some View {
         HStack {
             if offerLaunchAtLogin {
@@ -215,7 +248,9 @@ struct WhatsNewView: View {
                     .toggleStyle(.checkbox)
             }
             Spacer()
-            Button("Continue") { onFinish(offerLaunchAtLogin && launchAtLogin) }
+            Button("Continue") {
+                onFinish(offerLaunchAtLogin && launchAtLogin, offerUpdateChecks && updateChecks)
+            }
                 .buttonStyle(.borderedProminent)
                 .keyboardShortcut(.defaultAction)
         }
@@ -223,5 +258,5 @@ struct WhatsNewView: View {
 }
 
 #Preview {
-    WhatsNewView(notes: WhatsNew.catalog, offerLaunchAtLogin: true, onFinish: { _ in })
+    WhatsNewView(notes: WhatsNew.catalog, offerLaunchAtLogin: true, offerUpdateChecks: true, onFinish: { _, _ in })
 }

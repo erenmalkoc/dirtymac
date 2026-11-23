@@ -99,8 +99,11 @@ final class UpdateChecker: ObservableObject {
     // MARK: Actions
 
     func setEnabled(_ on: Bool) {
+        // Answering the question, either way, ends the one-time offer.
+        UpdateCheck.markOffered(in: defaults)
+        // Setting what is already set must not start another request.
+        guard on != isEnabled else { return }
         defaults.set(on, forKey: UpdateCheck.Key.enabled)
-        defaults.set(true, forKey: UpdateCheck.Key.offered)
         refreshReminder()
         if on {
             startCheck()

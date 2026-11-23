@@ -26,6 +26,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private(set) static weak var shared: AppDelegate?
 
     let blocker = KeyboardBlocker()
+    let updates = UpdateChecker()
+    private var updateObserver: AnyCancellable?
 
     override init() {
         super.init()
@@ -40,6 +42,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var onboardingWindow: NSWindow?
     private static let onboardedKey = "hasOnboarded"
     private var whatsNewWindow: NSWindow?
+    private var whatsNewOffersUpdateChecks = false
 
     private var hotKey: GlobalHotKey?
     private var registeredHotKey: HotKeyPreset?
@@ -67,6 +70,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         setupPopover()
         setupStatusItem()
         observeLockState()
+        observeUpdates()
+        // With update checks off (the default) this only counts days.
+        updates.start()
 
         NotificationCenter.default.addObserver(
             self,
@@ -200,6 +206,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         openItem.target = self
         menu.addItem(openItem)
 
+        if let version = updates.availableVersion {
+            let format = String(localized: "dirtymac \(version) is available.", bundle: LanguagePreference.current.bundle)
+            let updateItem = NSMenuItem(title: format, action: #selector(openReleaseNotes), keyEquivalent: "")
+            updateItem.target = self
+            updateItem.image = NSImage(systemSymbolName: "arrow.down.circle", accessibilityDescription: nil)
+            menu.addItem(updateItem)
+        }
+
         menu.addItem(.separator())
 
         let quitItem = NSMenuItem(
@@ -218,6 +232,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc private func openFromMenu() { showPopover() }
+
+    @objc private func openReleaseNotes() {
+        guard let version = updates.availableVersion else { return }
+        NSWorkspace.shared.open(UpdateCheck.notesURL(version: version))
+    }
     // Release the keyboard before terminating, exactly like the popover's
     // Quit button. The tap dies with the process either way, but not
     // relying on that keeps both quit paths identical.
@@ -230,7 +249,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private func setupPopover() {
         let hosting = NSHostingController(
-            rootView: MenuBarPopoverView().environmentObject(blocker)
+            rootView: MenuBarPopoverView()
+                .environmentObject(blocker)
+                .environmentObject(updates)
         )
         hosting.sizingOptions = .preferredContentSize
         popover.behavior = .transient
@@ -326,19 +347,54 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// The keycap glyph from the asset catalog. Idle it is a template that
     /// adapts to the menu bar; locked it is drawn in its own red, which a
     /// template (or contentTintColor on a non-template) could not give.
-    static func statusImage(active: Bool) -> NSImage? {
-        let image = NSImage(named: active ? "MenuBarIconLocked" : "MenuBarIcon")?.copy() as? NSImage
-        image?.isTemplate = !active
+    static func statusImage(active: Bool, badged: Bool = false) -> NSImage? {
+        guard let base = NSImage(named: active ? "MenuBarIconLocked" : "MenuBarIcon")?.copy() as? NSImage else {
+            return nil
+        }
+        guard badged else {
+            base.isTemplate = !active
+            return base
+        }
+        // A newer version is out: the same glyph with a small dot in the
+        // top-right corner, ringed by a gap so it reads against the keycap.
+        let image = NSImage(size: base.size, flipped: false) { rect in
+            base.draw(in: rect)
+            let diameter = max(4, (rect.height * 0.3).rounded())
+            let dot = NSRect(x: rect.maxX - diameter, y: rect.maxY - diameter, width: diameter, height: diameter)
+            NSGraphicsContext.current?.cgContext.setBlendMode(.clear)
+            NSBezierPath(ovalIn: dot.insetBy(dx: -1.25, dy: -1.25)).fill()
+            NSGraphicsContext.current?.cgContext.setBlendMode(.normal)
+            // A template image keeps only alpha, so the colour matters only
+            // for the locked (non-template) glyph.
+            (active ? NSColor.white : NSColor.black).setFill()
+            NSBezierPath(ovalIn: dot).fill()
+            return true
+        }
+        image.isTemplate = !active
         return image
+    }
+
+    private func observeUpdates() {
+        updateObserver = updates.$availableVersion
+            .removeDuplicates()
+            .receive(on: RunLoop.main)
+            .sink { [weak self] _ in
+                guard let self else { return }
+                self.updateIcon(active: self.blocker.isActive)
+            }
     }
 
     private func updateIcon(active: Bool) {
         guard let button = statusItem?.button else { return }
 
-        let label = active
+        let available = updates.availableVersion
+        var label = active
             ? String(localized: "dirtymac — keyboard locked", bundle: LanguagePreference.current.bundle)
             : "dirtymac"
-        let image = Self.statusImage(active: active)
+        if let available {
+            label += " — " + String(localized: "dirtymac \(available) is available.", bundle: LanguagePreference.current.bundle)
+        }
+        let image = Self.statusImage(active: active, badged: available != nil)
         image?.accessibilityDescription = label
         button.image = image
         button.contentTintColor = nil
@@ -429,7 +485,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             return false
         }
         let offer = !LaunchAtLogin.wasOffered && !LaunchAtLogin.isEnabled
-        showWhatsNew(notes: notes, offerLaunchAtLogin: offer)
+        // Asked once, and only of someone who has never answered.
+        let offerChecks = !UpdateCheck.wasOffered() && !updates.isEnabled
+        showWhatsNew(notes: notes, offerLaunchAtLogin: offer, offerUpdateChecks: offerChecks)
         return true
     }
 
@@ -439,21 +497,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         showWhatsNew(notes: notes, offerLaunchAtLogin: false)
     }
 
-    private func showWhatsNew(notes: [ReleaseNote], offerLaunchAtLogin: Bool) {
+    private func showWhatsNew(notes: [ReleaseNote], offerLaunchAtLogin: Bool, offerUpdateChecks: Bool = false) {
         if let window = whatsNewWindow {
             window.makeKeyAndOrderFront(nil)
             NSApp.activate(ignoringOtherApps: true)
             return
         }
 
+        whatsNewOffersUpdateChecks = offerUpdateChecks
         let root = WhatsNewView(
             notes: notes,
             offerLaunchAtLogin: offerLaunchAtLogin,
-            onFinish: { [weak self] launchAtLogin in
+            offerUpdateChecks: offerUpdateChecks,
+            onFinish: { [weak self] launchAtLogin, updateChecks in
                 if offerLaunchAtLogin {
                     LaunchAtLogin.set(launchAtLogin)
                     LaunchAtLogin.markOffered()
                 }
+                // Only the box the user ticked turns anything on.
+                if offerUpdateChecks { self?.updates.setEnabled(updateChecks) }
                 self?.whatsNewWindow?.close()
             }
         )
@@ -485,6 +547,10 @@ extension AppDelegate: NSWindowDelegate {
             // alone but still ends the offer.
             WhatsNew.markCurrentSeen()
             LaunchAtLogin.markOffered()
+            // The update-check question was on screen: leaving it unticked
+            // is an answer too, so it is not asked again.
+            if whatsNewOffersUpdateChecks { UpdateCheck.markOffered() }
+            whatsNewOffersUpdateChecks = false
             whatsNewWindow = nil
         }
     }

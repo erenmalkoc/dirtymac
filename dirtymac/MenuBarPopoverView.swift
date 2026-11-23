@@ -37,4 +37,5 @@ struct MenuBarPopoverView: View {
 #Preview {
     MenuBarPopoverView()
         .environmentObject(KeyboardBlocker())
+        .environmentObject(UpdateChecker())
 }

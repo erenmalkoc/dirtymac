@@ -232,6 +232,17 @@ struct SettingsView: View {
     @State private var launchAtLogin = LaunchAtLogin.isEnabled
     @State private var loginItemNeedsApproval = LaunchAtLogin.requiresApproval
 
+    @EnvironmentObject private var updates: UpdateChecker
+    @State private var updateChecksOn: Bool
+
+    init(
+        isPresented: Binding<Bool>,
+        updateChecksOn: Bool = UserDefaults.standard.bool(forKey: UpdateCheck.Key.enabled)
+    ) {
+        _isPresented = isPresented
+        _updateChecksOn = State(initialValue: updateChecksOn)
+    }
+
     var body: some View {
         VStack(spacing: 0) {
             header
@@ -315,6 +326,10 @@ struct SettingsView: View {
 
             section("Quick Access") {
                 startupControls
+            }
+
+            section("Updates") {
+                updateControls
             }
 
             section("Help") {
@@ -432,6 +447,55 @@ struct SettingsView: View {
         .onAppear(perform: refreshLoginItemState)
     }
 
+    /// The only switch that lets dirtymac use the network, so the
+    /// sentence under it says exactly what that means.
+    private var updateControls: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Toggle("Check for updates", isOn: $updateChecksOn)
+                .font(.callout)
+                .toggleStyle(.switch)
+                .controlSize(.small)
+                .onChange(of: updateChecksOn) { _, on in
+                    updates.setEnabled(on)
+                }
+
+            Text("dirtymac takes your privacy seriously, so it stays offline by default. If you like, you can allow it to check once a day whether a new version is out. Only the latest version number is requested from GitHub. No personal data or usage information leaves your Mac. As with any web request, GitHub can see your IP address.")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .fixedSize(horizontal: false, vertical: true)
+
+            if updateChecksOn {
+                HStack(spacing: 10) {
+                    Button("Check now") {
+                        Task { await updates.check() }
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    .disabled(updates.status == .checking)
+
+                    updateStatus
+                }
+            }
+        }
+        // Settings can be opened right after the toggle was changed from
+        // the reminder: show what the model holds, not what was cached.
+        .onAppear { updateChecksOn = updates.isEnabled }
+    }
+
+    @ViewBuilder
+    private var updateStatus: some View {
+        switch updates.status {
+        case .checking:
+            Text("Checking…")
+        case .upToDate:
+            Text("dirtymac is up to date.")
+        case .failed:
+            Text("Couldn't check for updates. Try again later.")
+        case .idle:
+            EmptyView()
+        }
+    }
+
     private func refreshLoginItemState() {
         launchAtLogin = LaunchAtLogin.isEnabled
         loginItemNeedsApproval = LaunchAtLogin.requiresApproval
@@ -489,5 +553,6 @@ struct SettingsView: View {
 
 #Preview {
     SettingsView(isPresented: .constant(true))
+        .environmentObject(UpdateChecker())
         .frame(width: 300)
 }
