@@ -48,12 +48,40 @@ nonisolated enum LockStatusTitle {
         ])
     }
 
+    /// The longest things the title can say while a lock runs: the start
+    /// delay's wording with its widest number, the clock (one digit more
+    /// without a timer, which counts up) and the hold-Esc countdown. The
+    /// menu bar item is made this wide and kept so, because an item that
+    /// changes width moves the panel that hangs from it.
+    static func widestTexts(autoUnlockTotal: Int, pendingText: (Int) -> String) -> [String] {
+        [
+            pendingText(10),
+            autoUnlockTotal > 0 ? "88:88" : "888:88",
+            "\(escLabel) 3",
+        ]
+    }
+
+    /// The width a button needs for the widest of `texts` beside its icon.
+    /// Leaves the button showing the last of them: apply the real title after.
+    @MainActor
+    static func reservedWidth(for button: NSButton, texts: [String]) -> CGFloat {
+        var widest: CGFloat = 0
+        for text in texts {
+            apply(text, to: button)
+            widest = max(widest, button.fittingSize.width)
+        }
+        return widest.rounded(.up)
+    }
+
     /// Puts `text` beside the icon, or takes it away again.
     @MainActor
     static func apply(_ text: String?, to button: NSButton) {
         if let text {
             button.attributedTitle = attributed(" " + text)
             button.imagePosition = .imageLeft
+            // Packed to the left so the icon stays where it is however
+            // wide the text is.
+            button.alignment = .left
         } else {
             button.attributedTitle = NSAttributedString(string: "")
             button.imagePosition = .imageOnly

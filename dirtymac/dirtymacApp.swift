@@ -34,6 +34,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
     private var updateObserver: AnyCancellable?
     private var lockTitleObserver: AnyCancellable?
+    private var statusItemWidthRelease: DispatchWorkItem?
+    private var statusItemWidthReleaseWaitsForPanel = false
     private var statusAnnouncer: StatusAnnouncer?
     private var accessibilityObserver: NSObjectProtocol?
 
@@ -415,19 +417,52 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         )
         .receive(on: RunLoop.main)
         .sink { [weak self] state, countdown in
-            guard let button = self?.statusItem?.button else { return }
+            guard let self, let button = self.statusItem?.button else { return }
             let (active, elapsed, escHold, total) = state
             let pending = countdown.map {
                 String(localized: "Locking in \($0)…", bundle: LanguagePreference.current.bundle)
             }
-            LockStatusTitle.apply(
-                LockStatusTitle.text(
-                    isActive: active, escHold: escHold, autoUnlockTotal: total,
-                    elapsed: elapsed, pendingLockText: pending
-                ),
-                to: button
+            let text = LockStatusTitle.text(
+                isActive: active, escHold: escHold, autoUnlockTotal: total,
+                elapsed: elapsed, pendingLockText: pending
             )
+            if text != nil { self.reserveStatusItemWidth(for: button, autoUnlockTotal: total) }
+            LockStatusTitle.apply(text, to: button)
+            if text == nil { self.scheduleStatusItemWidthRelease() }
         }
+    }
+
+    /// The menu bar item keeps one width for as long as a lock (or its
+    /// start delay) runs. With a variable width it grew and shrank with
+    /// the text beside the icon and the open panel slid sideways with it.
+    private func reserveStatusItemWidth(for button: NSStatusBarButton, autoUnlockTotal: Int) {
+        statusItemWidthRelease?.cancel()
+        statusItemWidthRelease = nil
+        statusItemWidthReleaseWaitsForPanel = false
+        guard statusItem.length == NSStatusItem.variableLength else { return }
+        let bundle = LanguagePreference.current.bundle
+        let texts = LockStatusTitle.widestTexts(autoUnlockTotal: autoUnlockTotal) {
+            String(localized: "Locking in \($0)…", bundle: bundle)
+        }
+        statusItem.length = LockStatusTitle.reservedWidth(for: button, texts: texts)
+    }
+
+    /// Back to the icon's own width once the title has been gone for a
+    /// moment (a start delay hands over to the lock through a gap of no
+    /// text), and not while the panel is open: it would jump.
+    private func scheduleStatusItemWidthRelease() {
+        guard statusItem.length != NSStatusItem.variableLength, statusItemWidthRelease == nil else { return }
+        let work = DispatchWorkItem { [weak self] in
+            guard let self else { return }
+            self.statusItemWidthRelease = nil
+            if self.popover.isShown {
+                self.statusItemWidthReleaseWaitsForPanel = true
+            } else {
+                self.statusItem.length = NSStatusItem.variableLength
+            }
+        }
+        statusItemWidthRelease = work
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: work)
     }
 
     private func observeUpdates() {
@@ -611,6 +646,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 extension AppDelegate: NSPopoverDelegate {
     /// Lets the panel drop a confirmation that was left open.
     func popoverDidClose(_ notification: Notification) {
+        if statusItemWidthReleaseWaitsForPanel {
+            statusItemWidthReleaseWaitsForPanel = false
+            statusItem.length = NSStatusItem.variableLength
+        }
         NotificationCenter.default.post(name: .panelDidClose, object: nil)
     }
 }

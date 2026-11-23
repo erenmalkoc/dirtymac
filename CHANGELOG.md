@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **The panel no longer slides sideways while the keyboard is locked.** The menu bar item changed its width with the text beside the icon (the start delay, the clock, the hold-Esc countdown), and the open panel, which hangs from the item, followed it. The item now keeps one width for as long as the lock or its start delay runs, wide enough for the longest text in every language, and the icon stays at its left edge. The width goes back to the icon's own once the lock is over, and not while the panel is open.
+
 ## [1.4.1] - 2026-11-23
 
 ### Added
