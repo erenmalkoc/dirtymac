@@ -303,7 +303,13 @@ struct SettingsView: View {
     /// screen height less room for the header, the footer and the popover's
     /// own margin. A small MacBook screen ends up near 700 points.
     static var defaultMaxContentHeight: CGFloat {
-        max(360, (NSScreen.main?.visibleFrame.height ?? 800) - 190)
+        maxContentHeight(forVisibleHeight: NSScreen.main?.visibleFrame.height ?? 800)
+    }
+
+    /// The same rule for a given visible screen height, so it can be
+    /// checked without depending on the displays that happen to be connected.
+    static func maxContentHeight(forVisibleHeight height: CGFloat) -> CGFloat {
+        max(360, height - 190)
     }
 
     init(

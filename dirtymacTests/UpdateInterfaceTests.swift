@@ -272,7 +272,12 @@ final class UpdateInterfaceTests: XCTestCase {
         XCTAssertTrue(model.isEnabled)
         var tallest: (String, CGFloat) = ("", 0)
         for language in languages {
-            let view = SettingsView(isPresented: .constant(true), updateChecksOn: true)
+            // A fixed small screen, not whatever displays are connected:
+            // an external monitor made the test host's main screen tall.
+            let view = SettingsView(
+                isPresented: .constant(true), updateChecksOn: true,
+                maxContentHeight: SettingsView.maxContentHeight(forVisibleHeight: 840)
+            )
                 .defaultAppStorage(defaults)
                 .environmentObject(model)
                 .environment(\.locale, Locale(identifier: language))

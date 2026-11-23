@@ -145,6 +145,12 @@ final class LockdownConfirmTests: XCTestCase {
         XCTAssertEqual(try basicHeight(max: roomy + 500), roomy, "extra room is not filled")
     }
 
+    func testTheLimitIsTheScreenLessRoomForTheChrome() {
+        XCTAssertEqual(SettingsView.maxContentHeight(forVisibleHeight: 840), 650)
+        XCTAssertEqual(SettingsView.maxContentHeight(forVisibleHeight: 1152), 962)
+        XCTAssertEqual(SettingsView.maxContentHeight(forVisibleHeight: 300), 360, "never collapses to nothing")
+    }
+
     func testTheDefaultLimitFollowsTheScreen() {
         let limit = SettingsView.defaultMaxContentHeight
         XCTAssertGreaterThanOrEqual(limit, 360)
