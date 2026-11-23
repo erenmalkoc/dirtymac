@@ -1,6 +1,7 @@
 import AppKit
 import ApplicationServices
 import CoreGraphics
+import os
 
 // The three things KeyboardBlocker needs from the system, behind small
 // protocols so the whole lock lifecycle can be unit-tested with fakes:
@@ -19,13 +20,34 @@ protocol EventTapping: AnyObject {
     func uninstall()
 }
 
-/// The real tap: session-level, head-inserted, on the main run loop.
+/// One installed tap and what its callback needs to know.
+final class TapContext {
+    unowned let owner: SessionEventTap
+    let label: String
+    var port: CFMachPort?
+    var source: CFRunLoopSource?
+    var pointerGuard: PointerGuard?
+    var tally: TapTally?
+    var lastFlush = CFAbsoluteTimeGetCurrent()
+
+    init(owner: SessionEventTap, label: String, pointerGuard: PointerGuard?, diagnostics: Bool) {
+        self.owner = owner
+        self.label = label
+        self.pointerGuard = pointerGuard
+        self.tally = diagnostics ? TapTally() : nil
+    }
+}
+
+/// The real tap: session-level, head-inserted, on the main run loop. The
+/// pointer events are tapped a second time at the HID level, which sits
+/// before the session in the input path, so a Mac that hands trackpad
+/// input to apps without it passing the session tap is still covered.
+/// If the HID tap cannot be made, the session tap alone does the job.
 final class SessionEventTap: EventTapping {
-    private var port: CFMachPort?
-    private var source: CFRunLoopSource?
+    private var contexts: [TapContext] = []
     private var onEsc: (@MainActor (TapEventDecision) -> Void)?
-    private var pointerGuard: PointerGuard?
     private let ownWindows: OwnWindowHitTesting
+    private let logger = Logger(subsystem: "tech.erenium.dirtymac", category: "tap")
 
     init(ownWindows: OwnWindowHitTesting = OwnWindowHitTest()) {
         self.ownWindows = ownWindows
@@ -33,49 +55,83 @@ final class SessionEventTap: EventTapping {
 
     func install(mask: CGEventMask, guardPointer: Bool, onEsc: @escaping @MainActor (TapEventDecision) -> Void) -> Bool {
         uninstall()
-        pointerGuard = guardPointer ? PointerGuard() : nil
-        let refcon = Unmanaged.passUnretained(self).toOpaque()
+        let diagnostics = UserDefaults.standard.bool(forKey: TapTally.defaultsKey)
+
+        guard let session = makeTap(
+            label: "session", location: .cgSessionEventTap, mask: mask,
+            guardPointer: guardPointer, diagnostics: diagnostics
+        ) else {
+            return false
+        }
+        contexts = [session]
+        self.onEsc = onEsc
+
+        let pointerMask = mask & EventMask.pointerMask
+        if pointerMask != 0,
+           let hid = makeTap(
+            label: "hid", location: .cghidEventTap, mask: pointerMask,
+            guardPointer: guardPointer, diagnostics: diagnostics
+           ) {
+            contexts.append(hid)
+        }
+        if diagnostics {
+            logger.notice("installed \(self.contexts.map(\.label).joined(separator: "+"), privacy: .public), mask \(String(mask, radix: 16), privacy: .public)")
+        }
+        return true
+    }
+
+    private func makeTap(
+        label: String, location: CGEventTapLocation, mask: CGEventMask,
+        guardPointer: Bool, diagnostics: Bool
+    ) -> TapContext? {
+        let context = TapContext(
+            owner: self, label: label,
+            pointerGuard: guardPointer ? PointerGuard() : nil, diagnostics: diagnostics
+        )
+        let refcon = Unmanaged.passUnretained(context).toOpaque()
 
         guard let port = CGEvent.tapCreate(
-            tap: .cgSessionEventTap,
+            tap: location,
             place: .headInsertEventTap,
             options: .defaultTap,
             eventsOfInterest: mask,
             callback: { _, type, event, refcon in
                 guard let refcon else { return Unmanaged.passUnretained(event) }
-                let tap = Unmanaged<SessionEventTap>.fromOpaque(refcon).takeUnretainedValue()
+                let context = Unmanaged<TapContext>.fromOpaque(refcon).takeUnretainedValue()
                 // The run-loop source is on the main run loop, so the
                 // callback already runs on the main thread.
                 let swallow = MainActor.assumeIsolated {
-                    tap.handle(tap.decision(type: type, event: event))
+                    context.owner.handle(context.owner.decision(type: type, event: event, in: context), type: type, in: context)
                 }
                 return swallow ? nil : Unmanaged.passUnretained(event)
             },
             userInfo: refcon
         ) else {
-            return false
+            return nil
         }
 
         let source = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, port, 0)
         CFRunLoopAddSource(CFRunLoopGetMain(), source, .commonModes)
         CGEvent.tapEnable(tap: port, enable: true)
-        self.port = port
-        self.source = source
-        self.onEsc = onEsc
-        return true
+        context.port = port
+        context.source = source
+        return context
     }
 
     func uninstall() {
-        if let port {
-            CGEvent.tapEnable(tap: port, enable: false)
+        for context in contexts {
+            flush(context, force: true)
+            if let port = context.port {
+                CGEvent.tapEnable(tap: port, enable: false)
+            }
+            if let port = context.port, let source = context.source {
+                Self.invalidate(port: port, source: source)
+            }
+            context.port = nil
+            context.source = nil
         }
-        if let port, let source {
-            Self.invalidate(port: port, source: source)
-        }
-        port = nil
-        source = nil
+        contexts = []
         onEsc = nil
-        pointerGuard = nil
     }
 
     /// Removes the source from the main run loop and invalidates the
@@ -90,16 +146,16 @@ final class SessionEventTap: EventTapping {
     /// The pointer events of a guarded lock go through the guard, which
     /// looks at the window under the cursor only when a button goes down.
     /// Everything else is decided by the plain rules.
-    private func decision(type: CGEventType, event: CGEvent) -> TapEventDecision {
-        if var pointerGuard, EventMask.isGuarded(type) {
+    fileprivate func decision(type: CGEventType, event: CGEvent, in context: TapContext) -> TapEventDecision {
+        if var pointerGuard = context.pointerGuard, EventMask.isGuarded(type) {
             let location = event.location
             let windows = ownWindows
             let decision = pointerGuard.decide(type: type) { windows.isOverOwnWindow(at: location) }
-            self.pointerGuard = pointerGuard
+            context.pointerGuard = pointerGuard
             return decision
         }
         if type == .tapDisabledByTimeout || type == .tapDisabledByUserInput {
-            pointerGuard?.reset()
+            context.pointerGuard?.reset()
         }
         return TapEventDecision.decide(type: type, event: event)
     }
@@ -107,18 +163,37 @@ final class SessionEventTap: EventTapping {
     /// Acts on one decision; returns whether to swallow the event. Esc is
     /// swallowed too: the hold is only our unlock trigger and must never
     /// reach apps.
-    private func handle(_ decision: TapEventDecision) -> Bool {
+    fileprivate func handle(_ decision: TapEventDecision, type: CGEventType, in context: TapContext) -> Bool {
+        let swallow: Bool
         switch decision {
         case .pass:
-            return false
+            swallow = false
         case .block:
-            return true
+            swallow = true
         case .escDown, .escUp:
             onEsc?(decision)
-            return true
+            swallow = true
         case .reEnable:
-            if let port { CGEvent.tapEnable(tap: port, enable: true) }
-            return false
+            if let port = context.port { CGEvent.tapEnable(tap: port, enable: true) }
+            swallow = false
+        }
+        if context.tally != nil {
+            context.tally?.record(TapTally.kind(of: type), swallowed: swallow)
+            flush(context, force: false)
+        }
+        return swallow
+    }
+
+    /// With diagnostics on, once a second says how many events of each
+    /// kind a tap saw and what became of them. Counts only: nothing that
+    /// was typed or where anything was clicked.
+    private func flush(_ context: TapContext, force: Bool) {
+        guard context.tally != nil else { return }
+        let now = CFAbsoluteTimeGetCurrent()
+        guard force || now - context.lastFlush >= 1 else { return }
+        context.lastFlush = now
+        if let summary = context.tally?.flush() {
+            logger.notice("\(context.label, privacy: .public) tap: \(summary, privacy: .public)")
         }
     }
 }

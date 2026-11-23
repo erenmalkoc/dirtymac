@@ -49,6 +49,10 @@ enum EventMask {
     /// menu bar icon.
     static let guardedPointerTypes: [CGEventType] = pointerTypes.filter { $0 != .mouseMoved }
 
+    /// Every pointer type but gestures, which only exist after the HID
+    /// level and so are tapped at the session level alone.
+    static let pointerMask: CGEventMask = pointerTypes.reduce(0) { $0 | bit($1) }
+
     /// Raw event type of trackpad gestures (NSEvent.EventType.gesture).
     static let gestureEventType: UInt32 = 29
 
@@ -179,5 +183,50 @@ struct PointerGuard: Equatable {
     /// Forgets every press, for a tap that was switched off and on again.
     mutating func reset() {
         passing.removeAll()
+    }
+}
+
+/// A count of what a tap saw, for the diagnostics log: how many events of
+/// each kind were swallowed and how many passed. Nothing about the events
+/// themselves is kept.
+struct TapTally: Equatable {
+    /// `defaults write tech.erenium.dirtymac tapDiagnostics -bool true`
+    /// switches the log on. Off unless asked for.
+    static let defaultsKey = "tapDiagnostics"
+
+    private var counts: [String: Int] = [:]
+
+    var isEmpty: Bool { counts.isEmpty }
+
+    mutating func record(_ kind: String, swallowed: Bool) {
+        counts["\(kind) \(swallowed ? "blocked" : "passed")", default: 0] += 1
+    }
+
+    /// "scroll blocked 12, down passed 1", sorted, or nil when nothing was
+    /// seen. Starts a new count.
+    mutating func flush() -> String? {
+        guard !counts.isEmpty else { return nil }
+        let text = counts.sorted { $0.key < $1.key }.map { "\($0.key) \($0.value)" }.joined(separator: ", ")
+        counts.removeAll()
+        return text
+    }
+
+    static func kind(of type: CGEventType) -> String {
+        switch type {
+        case .scrollWheel: return "scroll"
+        case .leftMouseDown, .rightMouseDown, .otherMouseDown: return "down"
+        case .leftMouseUp, .rightMouseUp, .otherMouseUp: return "up"
+        case .leftMouseDragged, .rightMouseDragged, .otherMouseDragged: return "drag"
+        case .mouseMoved: return "moved"
+        case .keyDown, .keyUp: return "key"
+        case .flagsChanged: return "modifier"
+        case .tapDisabledByTimeout, .tapDisabledByUserInput: return "tap-disabled"
+        default:
+            switch type.rawValue {
+            case EventMask.gestureEventType: return "gesture"
+            case kCGEventSystemDefined: return "system"
+            default: return "other-\(type.rawValue)"
+            }
+        }
     }
 }

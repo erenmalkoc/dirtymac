@@ -225,3 +225,54 @@ final class PointerGuardTests: XCTestCase {
         XCTAssertEqual(installed(LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: 60, guardPointer: true)), false)
     }
 }
+
+/// The diagnostics tally and the split of the mask between the session tap
+/// and the HID tap.
+final class TapTallyTests: XCTestCase {
+    func testTheHIDTapGetsEveryPointerTypeButNoGesture() {
+        XCTAssertEqual(EventMask.pointerMask & EventMask.gestureBit, 0)
+        for type in EventMask.pointerTypes {
+            XCTAssertNotEqual(EventMask.pointerMask & EventMask.bit(type), 0, "event type \(type.rawValue)")
+        }
+        XCTAssertEqual(EventMask.pointerMask & (EventMask.bit(.keyDown) | EventMask.bit(.keyUp) | EventMask.bit(.flagsChanged)), 0)
+    }
+
+    func testTheKeyboardMaskLeavesNothingForTheHIDTap() {
+        let keyboardOnly = EventMask.build(for: LockConfiguration(guardPointer: false).effective)
+        XCTAssertEqual(keyboardOnly & EventMask.pointerMask, 0)
+        XCTAssertNotEqual(EventMask.build(for: LockConfiguration().effective) & EventMask.pointerMask, 0)
+    }
+
+    func testItCountsByKindAndOutcomeAndStartsOverAfterAFlush() {
+        var tally = TapTally()
+        XCTAssertTrue(tally.isEmpty)
+        XCTAssertNil(tally.flush())
+        tally.record("scroll", swallowed: true)
+        tally.record("scroll", swallowed: true)
+        tally.record("down", swallowed: false)
+        tally.record("scroll", swallowed: false)
+        XCTAssertFalse(tally.isEmpty)
+        XCTAssertEqual(tally.flush(), "down passed 1, scroll blocked 2, scroll passed 1")
+        XCTAssertTrue(tally.isEmpty)
+        XCTAssertNil(tally.flush())
+    }
+
+    func testEveryEventTypeHasAName() throws {
+        XCTAssertEqual(TapTally.kind(of: .scrollWheel), "scroll")
+        XCTAssertEqual(TapTally.kind(of: .leftMouseDown), "down")
+        XCTAssertEqual(TapTally.kind(of: .otherMouseUp), "up")
+        XCTAssertEqual(TapTally.kind(of: .rightMouseDragged), "drag")
+        XCTAssertEqual(TapTally.kind(of: .mouseMoved), "moved")
+        XCTAssertEqual(TapTally.kind(of: .keyUp), "key")
+        XCTAssertEqual(TapTally.kind(of: .flagsChanged), "modifier")
+        XCTAssertEqual(TapTally.kind(of: .tapDisabledByTimeout), "tap-disabled")
+        XCTAssertEqual(TapTally.kind(of: try XCTUnwrap(CGEventType(rawValue: 29))), "gesture")
+        XCTAssertEqual(TapTally.kind(of: try XCTUnwrap(CGEventType(rawValue: kCGEventSystemDefined))), "system")
+        XCTAssertEqual(TapTally.kind(of: try XCTUnwrap(CGEventType(rawValue: 21))), "other-21")
+    }
+
+    func testTheLogIsOffUnlessAskedFor() {
+        XCTAssertEqual(TapTally.defaultsKey, "tapDiagnostics")
+        XCTAssertFalse(UserDefaults(suiteName: "tapdiag-\(UUID().uuidString)")!.bool(forKey: TapTally.defaultsKey))
+    }
+}
