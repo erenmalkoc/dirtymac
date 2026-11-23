@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.4] - 2026-11-24
+
+### Added
+- **A nearly invisible shield over the screens while the keyboard is locked.** On macOS 27 the event log showed trackpad scrolling reaching apps without passing any event tap (neither the session tap nor the HID tap saw a single scroll event), so no tap could stop it. A scroll goes to the window under the cursor, so during a lock dirtymac now puts a window of its own over every screen, below the menu bar and above the Dock and all apps. Scrolling and clicks land on it and it does nothing with them. The menu bar icon and the panel sit above it and stay usable, Esc still unlocks, and the shield goes away with the lock, on every way a lock can end, and with the app if it ever dies. It follows screens that are plugged in or removed during a lock. It is used whenever **Ignore scrolling and clicks** is on, and with the mouse frozen. It cannot stop the three and four finger swipes that switch Spaces or open Mission Control, which macOS handles out of reach of any app. Not tried on a real scroll yet.
+- The optional event log (`tapDiagnostics`) now names the kind of system-defined event it counted, such as `system-1` for the power button, so a press that gets through can be traced.
+
 ## [1.4.3] - 2026-11-24
 
 ### Added
@@ -170,7 +176,8 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.4.3...HEAD
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.4.4...HEAD
+[1.4.4]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.4
 [1.4.3]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.3
 [1.4.2]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.2
 [1.4.1]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.1
