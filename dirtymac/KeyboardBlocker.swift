@@ -5,6 +5,24 @@ import AppKit
 // What the tap blocks and how it treats each event lives in LockCore.swift;
 // the tap, the permission check and the timers in LockPlatform.swift.
 
+/// What the hold-Esc exit is doing, for the panel and the menu bar to show.
+enum EscHoldState: Equatable {
+    /// Esc is not being held.
+    case idle
+    /// Esc is held: whole seconds still to go (3, 2, 1) and 0...1 progress.
+    case holding(remaining: Int, progress: Double)
+    /// Held long enough: the unlock finishes when Esc comes up.
+    case letGo
+
+    /// The whole seconds shown while holding: 3 at the start, 1 for the
+    /// last stretch, never 0 (0 is the "let go" state). `held` is how long
+    /// Esc has been down.
+    static func remainingSeconds(held: TimeInterval, total: TimeInterval) -> Int {
+        let left = Int((total - held).rounded(.up))
+        return min(Int(total.rounded(.up)), max(1, left))
+    }
+}
+
 /// Why a lock ended.
 enum UnlockReason: Equatable {
     /// The power button in the panel.
@@ -42,6 +60,9 @@ final class KeyboardBlocker: ObservableObject {
     /// Set while another app holds Secure Event Input, so keys get past
     /// the tap; nil otherwise. See SecureInput.swift.
     @Published private(set) var secureInput: SecureInputStatus?
+    /// The hold-Esc exit as it runs: a countdown the panel and the menu
+    /// bar show, so nobody has to count the three seconds themselves.
+    @Published private(set) var escHold: EscHoldState = .idle
 
     /// How long Esc has to be held to force an unlock.
     static let escHoldDuration: TimeInterval = 3.0
@@ -65,6 +86,12 @@ final class KeyboardBlocker: ObservableObject {
     private var escReleaseTimer: LockTimer?
     /// The ticks heard while Esc is held.
     private var escTickTimers: [LockTimer] = []
+    /// When the current Esc hold began, and the timer that refreshes the
+    /// countdown while it runs.
+    private var escHoldStartedAt: TimeInterval?
+    private var escCountdownTimer: LockTimer?
+    /// How often the countdown refreshes while Esc is held.
+    static let escCountdownInterval: TimeInterval = 0.1
     /// Whether the running lock includes the mouse and trackpad.
     private var mouseLocked = false
     /// Consecutive ticks with secure input on.
@@ -187,6 +214,7 @@ final class KeyboardBlocker: ObservableObject {
         escReleaseTimer?.cancel()
         escReleaseTimer = nil
         cancelEscTicks()
+        endEscCountdown(to: .idle)
         startedAt = nil
         elapsed = 0
         autoUnlockTotal = 0
@@ -262,6 +290,29 @@ final class KeyboardBlocker: ObservableObject {
                 self?.sounds.play(.tick)
             }
         }
+        escHoldStartedAt = scheduler.now
+        publishEscCountdown()
+        escCountdownTimer = scheduler.schedule(after: Self.escCountdownInterval, repeats: true) { [weak self] in
+            self?.publishEscCountdown()
+        }
+    }
+
+    private func publishEscCountdown() {
+        guard let escHoldStartedAt else { return }
+        let held = max(0, scheduler.now - escHoldStartedAt)
+        let next = EscHoldState.holding(
+            remaining: EscHoldState.remainingSeconds(held: held, total: Self.escHoldDuration),
+            progress: min(1, held / Self.escHoldDuration)
+        )
+        if next != escHold { escHold = next }
+    }
+
+    /// Stops refreshing the countdown and leaves `state` showing.
+    private func endEscCountdown(to state: EscHoldState) {
+        escCountdownTimer?.cancel()
+        escCountdownTimer = nil
+        escHoldStartedAt = nil
+        if escHold != state { escHold = state }
     }
 
     private func cancelEscTicks() {
@@ -273,6 +324,7 @@ final class KeyboardBlocker: ObservableObject {
         escHoldTimer = nil
         cancelEscTicks()
         guard isActive else { return }
+        endEscCountdown(to: .letGo)
         // The chime is the cue to let go; the unlock finishes on release.
         sounds.play(.unlocked)
         // Keep swallowing Esc until it comes up; never wait longer than
@@ -295,6 +347,7 @@ final class KeyboardBlocker: ObservableObject {
         escHoldTimer?.cancel()
         escHoldTimer = nil
         cancelEscTicks()
+        endEscCountdown(to: .idle)
     }
 
     // MARK: Display helpers
