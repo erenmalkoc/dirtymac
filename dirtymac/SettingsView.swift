@@ -262,6 +262,7 @@ struct SettingsView: View {
     @AppStorage(LockConfiguration.Key.autoUnlockSeconds) private var autoUnlockSeconds = 0
     @AppStorage(SystemSounds.enabledKey) private var playSounds = true
     @AppStorage(LockConfiguration.Key.keepDisplayAwake) private var keepDisplayAwake = true
+    @AppStorage(LockConfiguration.Key.startDelaySeconds) private var startDelaySeconds = 0
     @Binding var isPresented: Bool
     /// The in-app language (set by the popover), for the duration labels.
     @Environment(\.locale) private var locale
@@ -351,6 +352,26 @@ struct SettingsView: View {
                         .padding(.top, 4)
                         .transition(.opacity.combined(with: .move(edge: .top)))
                 }
+            }
+
+            section("Before locking") {
+                HStack {
+                    Text("Start delay")
+                        .font(.callout)
+                    Spacer()
+                    Picker("Start delay", selection: $startDelaySeconds) {
+                        ForEach(LockConfiguration.startDelayChoices, id: \.self) { seconds in
+                            startDelayLabel(seconds).tag(seconds)
+                        }
+                    }
+                    .pickerStyle(.menu)
+                    .labelsHidden()
+                    .fixedSize()
+                }
+                Text("Waits a few seconds after you click Lock, so you can take your hands off the keyboard. Cancel stops it.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
             }
 
             section("While locked") {
@@ -578,6 +599,15 @@ struct SettingsView: View {
     /// offered — the lock would silently override them anyway.
     private var offeredUnlockChoices: [Int] {
         LockConfiguration.offeredChoices(mouseLocked: blockMouseAndTrackpad)
+    }
+
+    @ViewBuilder
+    private func startDelayLabel(_ seconds: Int) -> some View {
+        if seconds == 0 {
+            Text("Off")
+        } else {
+            Text(LockConfiguration.unlockChoiceTitle(seconds, locale: locale))
+        }
     }
 
     @ViewBuilder

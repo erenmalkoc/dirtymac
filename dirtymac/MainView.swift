@@ -132,46 +132,70 @@ struct MainView: View {
                 handlePowerTap()
             }
 
-            VStack(spacing: 5) {
-                Text(blocker.isActive ? "Cleaning Mode Active" : "Click to Lock Keyboard")
-                    .font(.headline)
-
-                if blocker.isActive {
-                    if blocker.hasAutoUnlock {
-                        Label("Unlocks in \(blocker.autoUnlockRemainingDisplay)",
-                              systemImage: "timer")
-                            .font(.title3.weight(.medium))
-                            .monospacedDigit()
-                            .foregroundStyle(.secondary)
-                            .contentTransition(.numericText())
-                    }
-                    if blocker.secureInput != nil {
-                        // Esc can't reach the tap either; don't promise it.
-                        secureInputWarning
-                    } else {
-                        escHoldHint
-                    }
-                } else {
-                    Text(idleCaption)
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-
-                    secureInputWarning
-                        .padding(.top, 4)
-
-                    if let explanation = blocker.lastUnlockReason?.explanation {
-                        Label(explanation, systemImage: "info.circle")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .multilineTextAlignment(.center)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .padding(.top, 4)
+            if blocker.isActive {
+                activeStatus
+            } else {
+                // Both the ready text and the countdown are laid out and one
+                // of them is hidden, so the panel is as tall as the larger
+                // of the two in every language and does not jump when the
+                // wait starts or is cancelled.
+                ZStack(alignment: .top) {
+                    idleStatus
+                        .opacity(blocker.lockCountdown == nil ? 1 : 0)
+                        .accessibilityHidden(blocker.lockCountdown != nil)
+                    if let countdown = blocker.lockCountdown {
+                        waitingToLock(countdown)
                     }
                 }
             }
         }
         .frame(maxWidth: .infinity)
+    }
+
+    private var activeStatus: some View {
+        VStack(spacing: 5) {
+            Text("Cleaning Mode Active")
+                .font(.headline)
+
+            if blocker.hasAutoUnlock {
+                Label("Unlocks in \(blocker.autoUnlockRemainingDisplay)",
+                      systemImage: "timer")
+                    .font(.title3.weight(.medium))
+                    .monospacedDigit()
+                    .foregroundStyle(.secondary)
+                    .contentTransition(.numericText())
+            }
+            if blocker.secureInput != nil {
+                // Esc can't reach the tap either; don't promise it.
+                secureInputWarning
+            } else {
+                escHoldHint
+            }
+        }
+    }
+
+    private var idleStatus: some View {
+        VStack(spacing: 5) {
+            Text("Click to Lock Keyboard")
+                .font(.headline)
+
+            Text(idleCaption)
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+
+            secureInputWarning
+                .padding(.top, 4)
+
+            if let explanation = blocker.lastUnlockReason?.explanation {
+                Label(explanation, systemImage: "info.circle")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.top, 4)
+            }
+        }
     }
 
     /// The way out, and while Esc is held how long is left. The space is
@@ -343,14 +367,45 @@ struct MainView: View {
         secureInputOn || (requiresEscCheck && !escPassed)
     }
 
+    /// What a click on the power button does.
+    enum PowerTapAction: Equatable {
+        case stop, cancelWait, confirmLockdown, beginLock
+    }
+
+    /// A click while a lock runs unlocks it, a click while the start delay
+    /// counts down cancels it, otherwise it starts a lock (after the
+    /// confirmation when the mouse would be frozen).
+    static func powerTapAction(isActive: Bool, isWaiting: Bool, mouseLocked: Bool) -> PowerTapAction {
+        if isActive { return .stop }
+        if isWaiting { return .cancelWait }
+        return mouseLocked ? .confirmLockdown : .beginLock
+    }
+
     private func handlePowerTap() {
-        if blocker.isActive {
-            blocker.stop(reason: .clicked)
-        } else if lockConfiguration.blockMouseAndTrackpad {
-            confirmLockdown = true
-        } else {
-            blocker.beginLock(lockConfiguration)
+        switch Self.powerTapAction(
+            isActive: blocker.isActive,
+            isWaiting: blocker.lockCountdown != nil,
+            mouseLocked: lockConfiguration.blockMouseAndTrackpad
+        ) {
+        case .stop: blocker.stop(reason: .clicked)
+        case .cancelWait: blocker.cancelPendingLock()
+        case .confirmLockdown: confirmLockdown = true
+        case .beginLock: blocker.beginLock(lockConfiguration)
         }
+    }
+
+    /// While the start delay runs: the seconds, and the way to call it off.
+    private func waitingToLock(_ seconds: Int) -> some View {
+        VStack(spacing: 6) {
+            Text("Locking in \(seconds)…")
+                .font(.headline)
+                .monospacedDigit()
+                .contentTransition(.numericText())
+            Button("Cancel") { blocker.cancelPendingLock() }
+                .buttonStyle(.bordered)
+                .controlSize(.mini)
+        }
+        .accessibilityElement(children: .contain)
     }
 
     private var permissionPrompt: some View {

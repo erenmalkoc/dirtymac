@@ -138,7 +138,9 @@ final class LockdownConfirmTests: XCTestCase {
             ).frame.height
         }
         let roomy = try basicHeight(max: 10_000)
-        XCTAssertLessThan(roomy, 800, "Basic mode fits without scrolling")
+        // Basic mode is tall now (delay, screen, updates). A small screen scrolls it,
+        // which the limit in the other tests covers: here it only must not run away.
+        XCTAssertLessThan(roomy, 1100, "Basic mode does not grow without bound")
         XCTAssertGreaterThan(roomy, 400, "and is not collapsed to nothing")
         XCTAssertEqual(try basicHeight(max: roomy + 500), roomy, "extra room is not filled")
     }

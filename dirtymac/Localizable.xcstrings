@@ -1156,6 +1156,83 @@
         }
       }
     },
+    "Before locking": {
+      "comment": "Settings section title for the delay between the click on Lock and the lock.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Vor dem Sperren"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Before locking"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antes de bloquear"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avant le verrouillage"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Prima del blocco"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ロック前"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "잠금 전"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Antes de bloquear"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Перед блокировкой"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kilitlemeden önce"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "锁定之前"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鎖定之前"
+          }
+        }
+      }
+    },
     "Block media & brightness keys": {
       "comment": "Advanced toggle — F-key media/brightness/volume controls.",
       "localizations": {
@@ -4933,6 +5010,83 @@
         }
       }
     },
+    "Locking in %lld…": {
+      "comment": "Shown in the panel and beside the menu bar icon while the start delay counts down. %lld is the seconds left.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Sperrung in %lld …"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Locking in %lld…"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloqueando en %lld…"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Verrouillage dans %lld…"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Blocco tra %lld…"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 秒でロック…"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld초 후 잠금…"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bloqueando em %lld…"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Блокировка через %lld…"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld sn sonra kilitleniyor…"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 秒后锁定…"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld 秒後鎖定…"
+          }
+        }
+      }
+    },
     "Locks the keyboard so you can clean it. Hold Esc for 3 seconds to unlock.": {
       "comment": "App Intent description.",
       "localizations": {
@@ -7320,6 +7474,83 @@
         }
       }
     },
+    "Start delay": {
+      "comment": "Settings picker label: how many seconds to wait after the click on Lock before the keyboard locks.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Startverzögerung"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Start delay"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Retraso de inicio"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Délai de démarrage"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ritardo di avvio"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始までの待ち時間"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "시작 지연"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Atraso para iniciar"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Задержка начала"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Başlangıç gecikmesi"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "开始延迟"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "開始延遲"
+          }
+        }
+      }
+    },
     "Stops the screen from dimming or going to sleep while the keyboard is locked, so the screen saver or a screen lock does not end the lock.": {
       "comment": "Caption under Keep the screen awake. A screen lock or sleep ends the keyboard lock.",
       "localizations": {
@@ -8702,6 +8933,83 @@
           "stringUnit": {
             "state": "translated",
             "value": "查看發佈"
+          }
+        }
+      }
+    },
+    "Waits a few seconds after you click Lock, so you can take your hands off the keyboard. Cancel stops it.": {
+      "comment": "Caption under the Start delay picker.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wartet nach dem Klick auf Sperren ein paar Sekunden, damit du die Hände von der Tastatur nehmen kannst. Mit Abbrechen stoppst du den Vorgang."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Waits a few seconds after you click Lock, so you can take your hands off the keyboard. Cancel stops it."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espera unos segundos tras pulsar Bloquear, para que puedas apartar las manos del teclado. Cancelar lo detiene."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attend quelques secondes après le clic sur Verrouiller, pour que vous puissiez retirer vos mains du clavier. Annuler l'interrompt."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Attende qualche secondo dopo il clic su Blocca, così puoi togliere le mani dalla tastiera. Annulla lo interrompe."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ロックをクリックしてから数秒待つので、その間にキーボードから手を離せます。キャンセルで中止できます。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "잠금을 누른 뒤 몇 초 기다리므로 그 사이 키보드에서 손을 뗄 수 있습니다. 취소하면 중단됩니다."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Espera alguns segundos depois de clicar em Bloquear, para que você possa tirar as mãos do teclado. Cancelar interrompe."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "После нажатия кнопки блокировки подождёт несколько секунд, чтобы вы успели убрать руки с клавиатуры. Отмена останавливает отсчёт."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Kilitle düğmesine tıkladıktan sonra birkaç saniye bekler, böylece ellerinizi klavyeden çekebilirsiniz. İptal bunu durdurur."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "点按“锁定”后会等待几秒，让您有时间把手从键盘上移开。点按“取消”即可停止。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "點按「鎖定」後會等待幾秒，讓您有時間把手從鍵盤上移開。點按「取消」即可停止。"
           }
         }
       }

@@ -398,14 +398,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     /// the publishers hand over, not from reading the blocker: a @Published
     /// property still holds its old value when its subscribers run.
     private func observeLockTitle() {
-        lockTitleObserver = Publishers.CombineLatest4(
-            blocker.$isActive, blocker.$elapsed, blocker.$escHold, blocker.$autoUnlockTotal
+        lockTitleObserver = Publishers.CombineLatest(
+            Publishers.CombineLatest4(
+                blocker.$isActive, blocker.$elapsed, blocker.$escHold, blocker.$autoUnlockTotal
+            ),
+            blocker.$lockCountdown
         )
         .receive(on: RunLoop.main)
-        .sink { [weak self] active, elapsed, escHold, total in
+        .sink { [weak self] state, countdown in
             guard let button = self?.statusItem?.button else { return }
+            let (active, elapsed, escHold, total) = state
+            let pending = countdown.map {
+                String(localized: "Locking in \($0)…", bundle: LanguagePreference.current.bundle)
+            }
             LockStatusTitle.apply(
-                LockStatusTitle.text(isActive: active, escHold: escHold, autoUnlockTotal: total, elapsed: elapsed),
+                LockStatusTitle.text(
+                    isActive: active, escHold: escHold, autoUnlockTotal: total,
+                    elapsed: elapsed, pendingLockText: pending
+                ),
                 to: button
             )
         }

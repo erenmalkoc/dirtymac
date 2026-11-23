@@ -15,9 +15,12 @@ nonisolated enum LockStatusTitle {
         isActive: Bool,
         escHold: EscHoldState,
         autoUnlockTotal: Int,
-        elapsed: TimeInterval
+        elapsed: TimeInterval,
+        pendingLockText: String? = nil
     ) -> String? {
-        guard isActive else { return nil }
+        // The start delay is counting down: nothing is locked yet, and
+        // this is the moment the user looks at the menu bar to see it.
+        guard isActive else { return pendingLockText }
         switch escHold {
         case .holding(let remaining, _):
             return "\(escLabel) \(remaining)"
