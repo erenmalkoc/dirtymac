@@ -348,7 +348,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             NSApp.activate(ignoringOtherApps: true)
             return
         }
-        popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
+        popover.show(relativeTo: StatusItemAnchor.rect(for: button), of: button, preferredEdge: .minY)
         NSApp.activate(ignoringOtherApps: true)
     }
 

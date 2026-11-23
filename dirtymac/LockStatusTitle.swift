@@ -1,5 +1,26 @@
 import AppKit
 
+/// Where the panel's arrow points. The panel centres its arrow on the
+/// rectangle it is shown from, and the whole menu bar button is wider than
+/// the icon whenever text sits beside it (or the width is reserved for it),
+/// so pointing at the button put the arrow beside the icon. This is the
+/// icon's own span, at the full height of the button.
+nonisolated enum StatusItemAnchor {
+    /// `imageRect` is where the button draws its image. Without a usable
+    /// one (empty, or outside the button) the whole button is the target.
+    static func rect(buttonBounds bounds: NSRect, imageRect: NSRect) -> NSRect {
+        guard !imageRect.isEmpty, imageRect.width.isFinite,
+              imageRect.minX >= bounds.minX - 0.5, imageRect.maxX <= bounds.maxX + 0.5
+        else { return bounds }
+        return NSRect(x: imageRect.minX, y: bounds.minY, width: imageRect.width, height: bounds.height)
+    }
+
+    @MainActor
+    static func rect(for button: NSButton) -> NSRect {
+        rect(buttonBounds: button.bounds, imageRect: button.cell?.imageRect(forBounds: button.bounds) ?? .zero)
+    }
+}
+
 /// What the menu bar shows beside the icon while the keyboard is locked.
 ///
 /// With the mouse frozen the panel cannot be opened, and the menu bar is

@@ -77,3 +77,44 @@ final class StatusItemWidthTests: XCTestCase {
         XCTAssertLessThanOrEqual(widths.count, 1, "the item moved: \(widths)")
     }
 }
+
+/// The panel's arrow points at the icon, not at the middle of a button
+/// that is wider than the icon.
+@MainActor
+final class StatusItemAnchorTests: XCTestCase {
+    func testTheAnchorIsTheIconsOwnSpanAtTheFullHeight() {
+        let bounds = NSRect(x: 0, y: 0, width: 120, height: 24)
+        let image = NSRect(x: 6, y: 4, width: 18, height: 16)
+        XCTAssertEqual(StatusItemAnchor.rect(buttonBounds: bounds, imageRect: image), NSRect(x: 6, y: 0, width: 18, height: 24))
+    }
+
+    func testWithoutAUsableImageRectTheWholeButtonIsTheTarget() {
+        let bounds = NSRect(x: 0, y: 0, width: 40, height: 24)
+        XCTAssertEqual(StatusItemAnchor.rect(buttonBounds: bounds, imageRect: .zero), bounds)
+        XCTAssertEqual(StatusItemAnchor.rect(buttonBounds: bounds, imageRect: NSRect(x: 100, y: 0, width: 18, height: 16)), bounds)
+        XCTAssertEqual(StatusItemAnchor.rect(buttonBounds: bounds, imageRect: NSRect(x: -30, y: 0, width: 18, height: 16)), bounds)
+    }
+
+    func testAWideButtonWithTextPointsAtTheIconNotTheMiddle() {
+        let b = NSButton(frame: .zero)
+        b.isBordered = false
+        b.image = NSImage(systemSymbolName: "lock.fill", accessibilityDescription: nil)
+        let texts = LockStatusTitle.widestTexts(autoUnlockTotal: 300) { "Locking in \($0)…" }
+        let width = LockStatusTitle.reservedWidth(for: b, texts: texts)
+        b.frame = NSRect(x: 0, y: 0, width: width, height: 24)
+        LockStatusTitle.apply("04:59", to: b)
+        let anchor = StatusItemAnchor.rect(for: b)
+        XCTAssertLessThan(anchor.midX, b.bounds.midX - 10, "the arrow must not sit in the middle of the wide button")
+        XCTAssertEqual(anchor.height, 24)
+        XCTAssertLessThan(anchor.width, 40)
+    }
+
+    func testAnIconOnlyButtonPointsAtTheMiddleAsBefore() {
+        let b = NSButton(frame: NSRect(x: 0, y: 0, width: 30, height: 24))
+        b.isBordered = false
+        b.image = NSImage(systemSymbolName: "lock.fill", accessibilityDescription: nil)
+        b.imagePosition = .imageOnly
+        let anchor = StatusItemAnchor.rect(for: b)
+        XCTAssertEqual(anchor.midX, b.bounds.midX, accuracy: 1.5)
+    }
+}
