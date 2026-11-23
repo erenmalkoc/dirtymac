@@ -252,19 +252,34 @@ struct SettingsView: View {
     @EnvironmentObject private var updates: UpdateChecker
     @State private var updateChecksOn: Bool
 
+    /// How tall the settings may grow before they scroll.
+    private let maxContentHeight: CGFloat
+
+    /// The panel hangs from the menu bar and must fit under it: the visible
+    /// screen height less room for the header, the footer and the popover's
+    /// own margin. A small MacBook screen ends up near 700 points.
+    static var defaultMaxContentHeight: CGFloat {
+        max(360, (NSScreen.main?.visibleFrame.height ?? 800) - 190)
+    }
+
     init(
         isPresented: Binding<Bool>,
-        updateChecksOn: Bool = UserDefaults.standard.bool(forKey: UpdateCheck.Key.enabled)
+        updateChecksOn: Bool = UserDefaults.standard.bool(forKey: UpdateCheck.Key.enabled),
+        maxContentHeight: CGFloat = SettingsView.defaultMaxContentHeight
     ) {
         _isPresented = isPresented
         _updateChecksOn = State(initialValue: updateChecksOn)
+        self.maxContentHeight = maxContentHeight
     }
 
     var body: some View {
         VStack(spacing: 0) {
             header
             Divider()
-            content
+            // Taller than the screen allows, the settings scroll instead
+            // of running off its bottom edge.
+            ScrollView { content }
+                .frame(maxHeight: maxContentHeight)
             Divider()
             footer
         }
@@ -411,6 +426,11 @@ struct SettingsView: View {
                       systemImage: "exclamationmark.triangle.fill")
                     .font(.caption)
                     .foregroundStyle(.orange)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text("With the mouse frozen, the lock lasts at most \(LockConfiguration.unlockChoiceTitle(LockConfiguration.maxMouseLockSeconds, locale: locale)). Above \(LockConfiguration.unlockChoiceTitle(LockConfiguration.escCheckAboveSeconds, locale: locale)), dirtymac asks you to hold Esc first to check your way out.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
             }
         }

@@ -185,34 +185,12 @@ final class UpdateInterfaceTests: XCTestCase {
 
     // MARK: Fit
 
-    /// Hosts a view the way the panel does: a fixed width, the window
-    /// background behind it and a chosen appearance. Without those the
-    /// picture would be transparent text on nothing.
     private func host<V: View>(_ view: V, width: CGFloat = 300, dark: Bool = false) -> NSHostingView<some View> {
-        let framed = view
-            .frame(width: width)
-            .background(Color(nsColor: .windowBackgroundColor))
-            .preferredColorScheme(dark ? .dark : .light)
-        let hosting = NSHostingView(rootView: framed)
-        hosting.frame = NSRect(x: 0, y: 0, width: width, height: 10)
-        let window = NSWindow(contentRect: hosting.frame, styleMask: [.borderless], backing: .buffered, defer: false)
-        window.appearance = NSAppearance(named: dark ? .darkAqua : .aqua)
-        window.contentView = hosting
-        hosting.layoutSubtreeIfNeeded()
-        hosting.frame.size = hosting.fittingSize
-        hosting.layoutSubtreeIfNeeded()
-        return hosting
+        ViewHost.host(view, width: width, dark: dark)
     }
 
-    /// Writes a picture when asked (TEST_RUNNER_DIRTYMAC_SNAPSHOT_DIR), so
-    /// the layouts can be looked at and not only measured.
     private func snapshot(_ view: NSView, named name: String) {
-        guard let dir = ProcessInfo.processInfo.environment["DIRTYMAC_SNAPSHOT_DIR"], !dir.isEmpty else { return }
-        try? FileManager.default.createDirectory(atPath: dir, withIntermediateDirectories: true)
-        guard let rep = view.bitmapImageRepForCachingDisplay(in: view.bounds) else { return }
-        view.cacheDisplay(in: view.bounds, to: rep)
-        guard let png = rep.representation(using: .png, properties: [:]) else { return }
-        try? png.write(to: URL(fileURLWithPath: dir).appendingPathComponent("\(name).png"))
+        ViewHost.snapshot(view, named: name)
     }
 
     private func checker(found: String? = nil, reminderAfter days: Int? = nil) throws -> UpdateChecker {

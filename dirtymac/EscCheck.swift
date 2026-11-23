@@ -66,10 +66,26 @@ final class EscCheckModel: ObservableObject {
     /// Whether the Esc press being followed is still down.
     private var escIsDown = false
     private let now: () -> TimeInterval
-    private var monitor: Any?
-    private var timer: Timer?
+    // Plain handles, read from deinit too, which is not isolated.
+    nonisolated(unsafe) private var monitor: Any?
+    nonisolated(unsafe) private var timer: Timer?
+
+    /// How many Esc monitors exist right now, across all models. Zero
+    /// whenever no confirmation is being checked: a leaked monitor would
+    /// keep swallowing Esc. Counted so a test can see a leak.
+    nonisolated(unsafe) private(set) static var activeMonitors = 0
 
     var isListening: Bool { monitor != nil }
+
+    /// A model dropped while listening (its view went away without a
+    /// stop) must not leave Esc swallowed for the rest of the session.
+    deinit {
+        if let monitor {
+            NSEvent.removeMonitor(monitor)
+            Self.activeMonitors -= 1
+        }
+        timer?.invalidate()
+    }
 
     init(
         holdDuration: TimeInterval = EscCheck.defaultHoldDuration,
@@ -85,6 +101,7 @@ final class EscCheckModel: ObservableObject {
         check.reset()
         escIsDown = false
         publish()
+        Self.activeMonitors += 1
         monitor = NSEvent.addLocalMonitorForEvents(matching: [.keyDown, .keyUp]) { [weak self] event in
             // Local monitors run on the main thread.
             let swallowed = MainActor.assumeIsolated {
@@ -102,7 +119,10 @@ final class EscCheckModel: ObservableObject {
 
     /// Lets go of the keyboard events. Safe to call at any time, repeatedly.
     func stop() {
-        if let monitor { NSEvent.removeMonitor(monitor) }
+        if let monitor {
+            NSEvent.removeMonitor(monitor)
+            Self.activeMonitors -= 1
+        }
         monitor = nil
         timer?.invalidate()
         timer = nil

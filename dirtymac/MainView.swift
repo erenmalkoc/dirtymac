@@ -9,7 +9,22 @@ struct MainView: View {
     @EnvironmentObject private var blocker: KeyboardBlocker
     @EnvironmentObject private var updates: UpdateChecker
     @Binding var showingSettings: Bool
-    @State private var confirmLockdown = false
+    @State private var confirmLockdown: Bool
+    /// The proof that Esc works, asked for before a long frozen-mouse lock.
+    @StateObject private var escCheck = EscCheckModel()
+    @Environment(\.locale) private var locale
+    private let configurationOverride: LockConfiguration?
+
+    /// `confirming` and `configuration` exist so the confirmation can be
+    /// built in a test. The app uses the defaults: not confirming, and the
+    /// stored settings.
+    init(showingSettings: Binding<Bool>, confirming: Bool = false, configuration: LockConfiguration? = nil) {
+        _showingSettings = showingSettings
+        _confirmLockdown = State(initialValue: confirming)
+        configurationOverride = configuration
+    }
+
+    private var lockConfiguration: LockConfiguration { configurationOverride ?? .current }
 
     // Secure input comes and goes with other apps, so re-check it every
     // second while the panel is open. During a lock the blocker does.
@@ -45,7 +60,17 @@ struct MainView: View {
                 blocker.refreshPermission()
                 if !blocker.isActive { blocker.refreshSecureInput() }
             }
+            syncEscCheck()
         }
+        .onChange(of: confirmLockdown) { _, _ in syncEscCheck() }
+        // Closing the panel ends a confirmation that was left open: it must
+        // not wait there, with a stale pass, for the next click.
+        .onReceive(NotificationCenter.default.publisher(for: .panelDidClose)) { _ in
+            confirmLockdown = false
+            escCheck.stop()
+            escCheck.reset()
+        }
+        .onDisappear { escCheck.stop() }
         .onReceive(secureInputPoll) { _ in
             if !blocker.isActive { blocker.refreshSecureInput() }
         }
@@ -157,7 +182,8 @@ struct MainView: View {
     // close, tearing the dialog down before its action runs. Keeping the
     // confirmation inside the popover avoids the focus loss entirely.
     private var lockdownConfirm: some View {
-        VStack(spacing: 14) {
+        let effective = lockConfiguration.effective
+        return VStack(spacing: 14) {
             Image(systemName: "exclamationmark.triangle.fill")
                 .font(.system(size: 36))
                 .foregroundStyle(.orange)
@@ -170,6 +196,15 @@ struct MainView: View {
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
+                // How long, spelled out, so nobody locks for an hour by accident.
+                Text("The keyboard stays locked for \(LockConfiguration.unlockChoiceTitle(effective.autoUnlockSeconds, locale: locale)) unless you unlock it sooner.")
+                    .font(.subheadline.weight(.medium))
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            if effective.requiresEscCheck {
+                escCheckRow
             }
 
             // Full lockdown can't start while secure input is on: hold-Esc
@@ -182,15 +217,43 @@ struct MainView: View {
 
                 Button("Lock Keyboard", role: .destructive) {
                     confirmLockdown = false
-                    blocker.start()
+                    // Passed along, not assumed: the blocker refuses a long
+                    // frozen-mouse lock that was not checked.
+                    blocker.start(escVerified: escCheck.passed)
                 }
                 .buttonStyle(.borderedProminent)
-                .disabled(blocker.secureInput != nil)
+                .disabled(Self.lockButtonDisabled(
+                    secureInputOn: blocker.secureInput != nil,
+                    requiresEscCheck: effective.requiresEscCheck,
+                    escPassed: escCheck.passed
+                ))
             }
             .padding(.top, 2)
         }
         .frame(maxWidth: .infinity)
         .transition(.opacity)
+    }
+
+    /// The bar fills while Esc is held, then says it works.
+    @ViewBuilder
+    private var escCheckRow: some View {
+        VStack(spacing: 6) {
+            if escCheck.passed {
+                Label("Esc works. You can lock now.", systemImage: "checkmark.circle.fill")
+                    .font(.subheadline)
+                    .foregroundStyle(.green)
+            } else {
+                ProgressView(value: escCheck.progress)
+                    .progressViewStyle(.linear)
+                    .accessibilityLabel("Hold Esc for 3 seconds to check that your way out works.")
+                Text("Hold Esc for 3 seconds to check that your way out works.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(.horizontal, 6)
     }
 
     /// Keys get past the tap while another app holds secure input.
@@ -217,15 +280,35 @@ struct MainView: View {
     }
 
     private var idleCaption: LocalizedStringKey {
-        LockConfiguration.current.blockMouseAndTrackpad
+        lockConfiguration.blockMouseAndTrackpad
             ? "Mouse and trackpad will be frozen too."
             : "Mouse and trackpad stay enabled."
+    }
+
+    /// The check listens while, and only while, a long lock is being confirmed.
+    private func syncEscCheck() {
+        if Self.escCheckShouldListen(confirming: confirmLockdown, configuration: lockConfiguration) {
+            if !escCheck.isListening { escCheck.start() }
+        } else {
+            escCheck.stop()
+            escCheck.reset()
+        }
+    }
+
+    static func escCheckShouldListen(confirming: Bool, configuration: LockConfiguration) -> Bool {
+        confirming && configuration.effective.requiresEscCheck
+    }
+
+    /// The Lock button waits for the secure-input warning to clear and, for
+    /// a long frozen-mouse lock, for the Esc check.
+    static func lockButtonDisabled(secureInputOn: Bool, requiresEscCheck: Bool, escPassed: Bool) -> Bool {
+        secureInputOn || (requiresEscCheck && !escPassed)
     }
 
     private func handlePowerTap() {
         if blocker.isActive {
             blocker.stop(reason: .clicked)
-        } else if LockConfiguration.current.blockMouseAndTrackpad {
+        } else if lockConfiguration.blockMouseAndTrackpad {
             confirmLockdown = true
         } else {
             blocker.start()

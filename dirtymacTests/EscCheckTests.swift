@@ -215,6 +215,7 @@ final class EscCheckModelTests: XCTestCase {
     }
 
     func testStartingTwiceLeavesOneListenerAndStartsOver() {
+        let before = EscCheckModel.activeMonitors
         let model = make()
         model.start()
         hold(model, for: 3)
@@ -222,8 +223,36 @@ final class EscCheckModelTests: XCTestCase {
         model.start()
         XCTAssertFalse(model.passed, "a new start is a new check")
         XCTAssertEqual(model.progress, 0)
+        XCTAssertEqual(EscCheckModel.activeMonitors, before + 1, "a second start must not add a second monitor")
         model.stop()
-        XCTAssertFalse(model.isListening, "one stop ends it: there was only one monitor")
+        XCTAssertFalse(model.isListening)
+        XCTAssertEqual(EscCheckModel.activeMonitors, before, "one stop ends it: nothing is left swallowing Esc")
+    }
+
+    func testNoMonitorSurvivesItsModel() {
+        let before = EscCheckModel.activeMonitors
+        var model: EscCheckModel? = make()
+        model?.start()
+        XCTAssertEqual(EscCheckModel.activeMonitors, before + 1)
+        model = nil
+        XCTAssertEqual(EscCheckModel.activeMonitors, before, "a model dropped while listening removes its monitor")
+    }
+
+    func testStoppingAStoppedModelDoesNotUnderflowTheCount() {
+        let before = EscCheckModel.activeMonitors
+        let model = make()
+        model.stop()
+        model.stop()
+        XCTAssertEqual(EscCheckModel.activeMonitors, before)
+    }
+
+    func testEveryStartIsBalancedByAStop() {
+        let before = EscCheckModel.activeMonitors
+        let models = (0..<5).map { _ in make() }
+        models.forEach { $0.start() }
+        XCTAssertEqual(EscCheckModel.activeMonitors, before + 5)
+        models.forEach { $0.stop() }
+        XCTAssertEqual(EscCheckModel.activeMonitors, before)
     }
 
     func testARealEscEventReachesTheCheckAndIsTaken() throws {

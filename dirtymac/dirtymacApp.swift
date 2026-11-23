@@ -255,6 +255,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         )
         hosting.sizingOptions = .preferredContentSize
         popover.behavior = .transient
+        popover.delegate = self
         popover.animates = true
         popover.contentViewController = hosting
     }
@@ -529,6 +530,13 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 }
 
+extension AppDelegate: NSPopoverDelegate {
+    /// Lets the panel drop a confirmation that was left open.
+    func popoverDidClose(_ notification: Notification) {
+        NotificationCenter.default.post(name: .panelDidClose, object: nil)
+    }
+}
+
 extension AppDelegate: NSWindowDelegate {
     func windowWillClose(_ notification: Notification) {
         guard let window = notification.object as? NSWindow else { return }
@@ -559,4 +567,5 @@ extension AppDelegate: NSWindowDelegate {
 extension Notification.Name {
     static let showOnboarding = Notification.Name("dirtymac.showOnboarding")
     static let showWhatsNew = Notification.Name("dirtymac.showWhatsNew")
+    static let panelDidClose = Notification.Name("dirtymac.panelDidClose")
 }
