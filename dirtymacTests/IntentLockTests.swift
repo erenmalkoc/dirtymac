@@ -23,17 +23,19 @@ final class IntentLockTests: XCTestCase {
         XCTAssertEqual(IntentLockPlan.seconds(forMinutes: 1), 60)
         XCTAssertEqual(IntentLockPlan.seconds(forMinutes: 5), 300)
         XCTAssertEqual(IntentLockPlan.seconds(forMinutes: 60), 3600)
+        XCTAssertEqual(IntentLockPlan.seconds(forMinutes: 480), 28_800)
+        XCTAssertEqual(IntentLockPlan.seconds(forMinutes: 1440), 86_400, "a whole day")
         for tooSmall in [0, -1, -600, Int.min] {
             XCTAssertEqual(IntentLockPlan.seconds(forMinutes: tooSmall), 60, "\(tooSmall)")
         }
-        for tooBig in [61, 100, 100_000, Int.max] {
-            XCTAssertEqual(IntentLockPlan.seconds(forMinutes: tooBig), 3600, "\(tooBig)")
+        for tooBig in [1441, 100_000, Int.max] {
+            XCTAssertEqual(IntentLockPlan.seconds(forMinutes: tooBig), 86_400, "\(tooBig)")
         }
     }
 
-    func testTheRangeIsWhatTheQuickLockMenuTopsOutAt() {
-        XCTAssertEqual(IntentLockPlan.maxMinutes * 60, QuickLock.durations.last)
+    func testTheRangeStartsWhereTheQuickLockMenuDoesAndEndsAtTheDay() {
         XCTAssertEqual(IntentLockPlan.minMinutes * 60, QuickLock.durations.first)
+        XCTAssertEqual(IntentLockPlan.maxMinutes * 60, LockConfiguration.maxAutoUnlockSeconds)
     }
 
     // MARK: Without a length: exactly as before
@@ -70,7 +72,7 @@ final class IntentLockTests: XCTestCase {
             return XCTFail("should lock")
         }
         XCTAssertEqual(tiny.autoUnlockSeconds, 60)
-        XCTAssertEqual(huge.autoUnlockSeconds, 3600)
+        XCTAssertEqual(huge.autoUnlockSeconds, 86_400)
         XCTAssertFalse(huge.requiresEscCheck)
     }
 
@@ -123,7 +125,7 @@ final class IntentLockTests: XCTestCase {
     func testRunningWithAnOutOfRangeLengthStillLocksWithinTheRange() {
         let rig = BlockerRig()
         run(rig, minutes: 99_999, stored: basic)
-        XCTAssertEqual(rig.blocker.autoUnlockTotal, 3600)
+        XCTAssertEqual(rig.blocker.autoUnlockTotal, 86_400)
     }
 
     func testRunningWithoutPermissionOpensThePanelAndLocksNothing() {

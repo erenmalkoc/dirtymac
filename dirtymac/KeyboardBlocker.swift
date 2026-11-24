@@ -436,8 +436,7 @@ final class KeyboardBlocker: ObservableObject {
     // MARK: Display helpers
 
     var elapsedDisplay: String {
-        let total = Int(elapsed)
-        return String(format: "%02d:%02d", total / 60, total % 60)
+        LockStatusTitle.clock(Int(elapsed))
     }
 
     var hasAutoUnlock: Bool { autoUnlockTotal > 0 }
@@ -449,7 +448,6 @@ final class KeyboardBlocker: ObservableObject {
     }
 
     var autoUnlockRemainingDisplay: String {
-        let r = autoUnlockRemaining
-        return String(format: "%02d:%02d", r / 60, r % 60)
+        LockStatusTitle.clock(autoUnlockRemaining)
     }
 }

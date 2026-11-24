@@ -147,6 +147,10 @@ struct LockConfiguration: Equatable {
         static let startDelaySeconds = "lockStartDelaySeconds"
         static let guardPointer = "guardPointerWhileLocked"
         static let suppressGestures = "suppressGesturesWhileLocked"
+        /// Minutes after midnight the lock ends at, -1 for none ("Until 17:30").
+        static let autoUnlockAtMinutes = "autoUnlockAtMinutes"
+        /// Whether the timer is entered by hand ("Custom…") and not one of the offered lengths.
+        static let autoUnlockCustom = "autoUnlockCustom"
     }
 
     var mode: LockMode = .basic
@@ -170,6 +174,11 @@ struct LockConfiguration: Equatable {
     /// Spaces, App Exposé...) are switched off and put back afterwards.
     /// Applies to every lock, Basic included.
     var suppressGestures = true
+    /// "Until 17:30": a time of day the lock ends at, in minutes after midnight, instead of a
+    /// length. Worked out when the lock starts, so it is always the next 17:30. nil = a length.
+    var autoUnlockAtMinutes: Int?
+    /// The timer was entered by hand rather than picked from the list. Only the entry box cares.
+    var autoUnlockCustom = false
 
     /// What the Settings picker offers.
     static let startDelayChoices = [0, 3, 5, 10]
@@ -195,12 +204,46 @@ struct LockConfiguration: Equatable {
     static let escCheckAboveSeconds = 5 * 60
 
     /// Selectable auto-unlock durations, in seconds. 0 = off.
-    static let unlockChoices = [0, 30, 60, 120, 300, 600, 900, 1800, 3600]
+    static let unlockChoices = [0, 30, 60, 120, 300, 600, 900, 1800, 3600, 7200, 14400, 28800, 43200, 86400]
+
+    /// The longest a lock can last: a day.
+    static let maxAutoUnlockSeconds = 24 * 60 * 60
+
+    /// A lock longer than this asks for a confirmation first, which says when it ends and what
+    /// can end it early. With the mouse frozen the lock is never this long.
+    static let longLockAboveSeconds = 60 * 60
 
     /// Basic mode keeps the mouse free, so a timer is always safe there:
-    /// only a value the picker offers counts, anything else means no timer.
+    /// none, or anything from 30 seconds to a day. Anything else means no timer.
     static func sanitizedAutoUnlock(_ seconds: Int) -> Int {
-        unlockChoices.contains(seconds) ? seconds : 0
+        seconds == 0 || (30...maxAutoUnlockSeconds).contains(seconds) ? seconds : 0
+    }
+
+    /// Seconds from `now` to the next time the clock reads `minutesOfDay` (minutes after
+    /// midnight). A time that already passed today means tomorrow's. Never under 30 seconds
+    /// and never over a day.
+    static func secondsUntil(minutesOfDay: Int, from now: Date, calendar: Calendar = .current) -> Int {
+        let minutes = min(max(minutesOfDay, 0), 24 * 60 - 1)
+        guard let today = calendar.date(bySettingHour: minutes / 60, minute: minutes % 60, second: 0, of: now) else {
+            return minMouseLockSeconds
+        }
+        var target = today
+        if target <= now {
+            target = calendar.date(byAdding: .day, value: 1, to: today) ?? today.addingTimeInterval(24 * 60 * 60)
+        }
+        let seconds = Int(target.timeIntervalSince(now).rounded(.up))
+        return min(max(seconds, minMouseLockSeconds), maxAutoUnlockSeconds)
+    }
+
+    /// The moment a lock that starts at `now` and lasts `seconds` ends.
+    static func unlockDate(from now: Date, seconds: Int) -> Date {
+        now.addingTimeInterval(TimeInterval(seconds))
+    }
+
+    /// The offered length closest to `seconds`, for a frozen mouse that only offers a few.
+    static func nearestOffered(_ seconds: Int, mouseLocked: Bool) -> Int {
+        let offered = offeredChoices(mouseLocked: mouseLocked)
+        return offered.min { abs($0 - seconds) < abs($1 - seconds) } ?? seconds
     }
 
     /// The auto-unlock the lock really uses for a stored value: once the
@@ -229,24 +272,49 @@ struct LockConfiguration: Equatable {
         unlockChoices.filter { clampedSeconds($0, mouseLocked: mouseLocked) == $0 }
     }
 
-    var effective: LockConfiguration {
+    var effective: LockConfiguration { effective(now: Date()) }
+
+    /// The configuration the lock really uses, with the clock time worked out as of `now`.
+    /// It keeps `autoUnlockAtMinutes`, so a lock that starts a few seconds later (after the
+    /// start delay) works the length out again and still ends at the time that was asked for.
+    func effective(now: Date, calendar: Calendar = .current) -> LockConfiguration {
+        var seconds = autoUnlockSeconds
+        if let at = autoUnlockAtMinutes {
+            seconds = Self.secondsUntil(minutesOfDay: at, from: now, calendar: calendar)
+        }
         guard mode == .advanced else {
             return LockConfiguration(
                 mode: .basic,
                 blockModifierKeys: true,
                 blockMediaKeys: true,
                 blockMouseAndTrackpad: false,
-                autoUnlockSeconds: Self.sanitizedAutoUnlock(autoUnlockSeconds),
+                autoUnlockSeconds: Self.sanitizedAutoUnlock(seconds),
                 keepDisplayAwake: keepDisplayAwake,
                 startDelaySeconds: Self.sanitizedStartDelay(startDelaySeconds),
                 guardPointer: guardPointer,
-                suppressGestures: suppressGestures
+                suppressGestures: suppressGestures,
+                autoUnlockAtMinutes: autoUnlockAtMinutes,
+                autoUnlockCustom: autoUnlockCustom
             )
         }
         var c = self
         c.startDelaySeconds = Self.sanitizedStartDelay(c.startDelaySeconds)
-        c.autoUnlockSeconds = Self.clampedSeconds(c.autoUnlockSeconds, mouseLocked: c.blockMouseAndTrackpad)
+        if c.blockMouseAndTrackpad {
+            // A length or time entered by hand may not be one the frozen mouse offers (it offers a
+            // few lengths only): the lock then uses the closest one, which is what Settings shows.
+            let clamped = Self.clampedSeconds(seconds, mouseLocked: true)
+            let enteredByHand = autoUnlockCustom || autoUnlockAtMinutes != nil
+            c.autoUnlockSeconds = enteredByHand ? Self.nearestOffered(clamped, mouseLocked: true) : clamped
+        } else {
+            c.autoUnlockSeconds = min(max(seconds, 0), Self.maxAutoUnlockSeconds)
+        }
         return c
+    }
+
+    /// Whether starting this lock first asks for a confirmation that says when it ends. `self`
+    /// should be an `effective` configuration.
+    var requiresLongLockConfirm: Bool {
+        !blockMouseAndTrackpad && autoUnlockSeconds > Self.longLockAboveSeconds
     }
 
     static var current: LockConfiguration { load(from: .standard) }
@@ -265,7 +333,13 @@ struct LockConfiguration: Equatable {
             keepDisplayAwake: boolOr(Key.keepDisplayAwake, true),
             startDelaySeconds: d.integer(forKey: Key.startDelaySeconds),
             guardPointer: boolOr(Key.guardPointer, true),
-            suppressGestures: boolOr(Key.suppressGestures, true)
+            suppressGestures: boolOr(Key.suppressGestures, true),
+            autoUnlockAtMinutes: {
+                guard d.object(forKey: Key.autoUnlockAtMinutes) != nil else { return nil }
+                let minutes = d.integer(forKey: Key.autoUnlockAtMinutes)
+                return (0..<24 * 60).contains(minutes) ? minutes : nil
+            }(),
+            autoUnlockCustom: boolOr(Key.autoUnlockCustom, false)
         )
         return cfg.effective
     }
@@ -550,19 +624,7 @@ struct SettingsView: View {
     /// Advanced without the freeze) any length is safe, so nothing is
     /// held back.
     private var autoUnlockRow: some View {
-        HStack {
-            Text("Auto-unlock")
-                .font(.callout)
-            Spacer()
-            Picker("Auto-unlock", selection: $autoUnlockSeconds) {
-                ForEach(offeredUnlockChoices, id: \.self) { s in
-                    autoUnlockLabel(s)
-                        .tag(s)
-                }
-            }
-            .pickerStyle(.menu)
-            .labelsHidden()
-            .fixedSize()
+        AutoUnlockControl(style: .settings, mouseFrozen: mouseFrozen)
             .onChange(of: autoUnlockSeconds) { _, seconds in
                 // LockConfiguration.effective clamps this anyway, so
                 // without the clamp here the picker would keep showing
@@ -570,7 +632,6 @@ struct SettingsView: View {
                 let clamped = LockConfiguration.clampedSeconds(seconds, mouseLocked: mouseFrozen)
                 if clamped != seconds { autoUnlockSeconds = clamped }
             }
-        }
     }
 
     /// Whether the lock will freeze the mouse: only Advanced can.

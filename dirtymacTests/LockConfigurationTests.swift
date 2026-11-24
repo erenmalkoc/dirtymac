@@ -21,11 +21,14 @@ final class LockConfigurationTests: XCTestCase {
         for seconds in LockConfiguration.unlockChoices {
             XCTAssertEqual(LockConfiguration(mode: .basic, autoUnlockSeconds: seconds).effective.autoUnlockSeconds, seconds)
         }
-        for odd in [-5, 7, 45, 4000, 999_999] {
+        for odd in [-5, 7, 29, 86_401, 999_999] {
             XCTAssertEqual(LockConfiguration(mode: .basic, autoUnlockSeconds: odd).effective.autoUnlockSeconds, 0, "\(odd) s")
         }
-        XCTAssertEqual(LockConfiguration.sanitizedAutoUnlock(3600), 3600)
-        XCTAssertEqual(LockConfiguration.sanitizedAutoUnlock(61), 0)
+        // A length entered by hand is any whole number of seconds from 30 to a day.
+        for entered in [30, 45, 61, 4000, 5400, 86_400] {
+            XCTAssertEqual(LockConfiguration.sanitizedAutoUnlock(entered), entered, "\(entered) s")
+        }
+        XCTAssertEqual(LockConfiguration.sanitizedAutoUnlock(86_401), 0)
     }
 
     func testABasicTimerIsLoadedFromStorageAndNeverNeedsTheEscCheck() throws {
@@ -137,7 +140,11 @@ final class LockConfigurationTests: XCTestCase {
         let choices = LockConfiguration.unlockChoices
         XCTAssertEqual(choices.first, 0)
         XCTAssertEqual(choices, Array(Set(choices)).sorted())
-        XCTAssertEqual(choices.last, 3600, "a keyboard-only lock can last an hour")
+        XCTAssertEqual(choices.last, 86_400, "a keyboard-only lock can last a day")
+        XCTAssertEqual(choices.last, LockConfiguration.maxAutoUnlockSeconds)
+        for choice in [3600, 7200, 14_400, 28_800, 43_200] {
+            XCTAssertTrue(choices.contains(choice), "\(choice) s is offered")
+        }
         for choice in [30, 60, 120, 300] {
             XCTAssertTrue(choices.contains(choice), "\(choice) s stays on offer")
         }
@@ -164,7 +171,7 @@ final class LockConfigurationTests: XCTestCase {
         let offered = LockConfiguration.offeredChoices(mouseLocked: true)
         XCTAssertEqual(offered.max(), 900)
         XCTAssertEqual(offered, [30, 60, 120, 300, 600, 900])
-        XCTAssertEqual(LockConfiguration.offeredChoices(mouseLocked: false).max(), 3600)
+        XCTAssertEqual(LockConfiguration.offeredChoices(mouseLocked: false).max(), 86_400)
     }
 
     func testTurningTheMouseFreezeOnPullsALongTimerDownToTheCap() {

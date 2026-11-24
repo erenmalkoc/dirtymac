@@ -41,6 +41,22 @@ nonisolated struct GestureSetting: Equatable {
         "TrackpadFiveFingerPinchGesture",
         "TrackpadTwoFingerFromRightEdgeSwipeGesture",
     ]
+    /// The gestures that change what is on screen without moving to another one: zoom,
+    /// rotate, smart zoom (two-finger double tap) and look up (three-finger tap). Their
+    /// events are swallowed by the taps too, so this is for the Macs where they are not.
+    static let trackpadContentKeys = [
+        "TrackpadPinch",
+        "TrackpadRotate",
+        "TrackpadTwoFingerDoubleTapGesture",
+        "TrackpadThreeFingerTapGesture",
+    ]
+    /// "Swipe between pages" with two fingers (back and forward in browsers and Finder) is
+    /// a setting of every app at once, not of the trackpad.
+    static let swipeNavigation = GestureSetting(
+        domain: kCFPreferencesAnyApplication as String,
+        key: "AppleEnableSwipeNavigateWithScrolls",
+        isBoolean: true
+    )
     static let dockKeys = [
         "showMissionControlGestureEnabled",
         "showAppExposeGestureEnabled",
@@ -49,12 +65,13 @@ nonisolated struct GestureSetting: Equatable {
     ]
 
     /// Every setting that is turned off: the trackpad's own for the built-in
-    /// and the Bluetooth trackpad, and the Dock's.
+    /// and the Bluetooth trackpad, the Dock's, and swipe between pages.
     static let all: [GestureSetting] =
         trackpadDomains.flatMap { domain in
-            trackpadKeys.map { GestureSetting(domain: domain, key: $0, isBoolean: false) }
+            (trackpadKeys + trackpadContentKeys).map { GestureSetting(domain: domain, key: $0, isBoolean: false) }
         }
         + dockKeys.map { GestureSetting(domain: "com.apple.dock", key: $0, isBoolean: true) }
+        + [swipeNavigation]
 }
 
 /// Reads and writes other apps' preferences.

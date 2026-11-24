@@ -16,9 +16,9 @@ enum QuickLockDecision: Equatable {
 /// bar's right-click menu or from Shortcuts. The length replaces the
 /// stored auto-unlock timer for this one lock, nothing else changes.
 enum QuickLock {
-    /// 1 min, 5 min, 15 min, 30 min, 1 hour: every one a keyboard-only
-    /// lock, which the menu bar icon can always end with a click.
-    static let durations = [60, 300, 900, 1800, 3600]
+    /// 1 min up to 8 hours: every one a keyboard-only lock, which the menu bar icon can
+    /// always end with a click. Choosing a length from the menu is the confirmation.
+    static let durations = [60, 300, 900, 1800, 3600, 7200, 14400, 28800]
 
     /// Offered only while the stored settings leave the mouse free. A
     /// frozen mouse goes through the panel's confirmation instead.
@@ -43,6 +43,9 @@ enum QuickLock {
         var configuration = storedConfiguration.effective
         configuration.mode = .advanced
         configuration.autoUnlockSeconds = seconds
+        // A length was asked for: a stored "until 17:30" does not apply to this one lock.
+        configuration.autoUnlockAtMinutes = nil
+        configuration.autoUnlockCustom = false
         return configuration.effective
     }
 }

@@ -134,13 +134,26 @@ final class SystemGesturesTests: XCTestCase {
 
     func testTheListCoversBothTrackpadsAndTheDock() {
         let all = GestureSetting.all
-        XCTAssertEqual(all.count, GestureSetting.trackpadDomains.count * GestureSetting.trackpadKeys.count + GestureSetting.dockKeys.count)
+        XCTAssertEqual(
+            all.count,
+            GestureSetting.trackpadDomains.count * (GestureSetting.trackpadKeys.count + GestureSetting.trackpadContentKeys.count)
+                + GestureSetting.dockKeys.count + 1
+        )
+        for key in ["TrackpadPinch", "TrackpadRotate", "TrackpadTwoFingerDoubleTapGesture", "TrackpadThreeFingerTapGesture"] {
+            XCTAssertTrue(all.contains(GestureSetting(domain: "com.apple.AppleMultitouchTrackpad", key: key, isBoolean: false)), key)
+            XCTAssertTrue(all.contains(GestureSetting(domain: "com.apple.driver.AppleBluetoothMultitouch.trackpad", key: key, isBoolean: false)), key)
+        }
+        let swipe = GestureSetting.swipeNavigation
+        XCTAssertTrue(all.contains(swipe))
+        XCTAssertEqual(swipe.key, "AppleEnableSwipeNavigateWithScrolls")
+        XCTAssertTrue(swipe.isBoolean)
+        XCTAssertEqual(swipe.domain, kCFPreferencesAnyApplication as String, "an app-wide setting, not a trackpad one")
         XCTAssertTrue(all.contains(GestureSetting(domain: "com.apple.AppleMultitouchTrackpad", key: "TrackpadFourFingerVertSwipeGesture", isBoolean: false)))
         XCTAssertTrue(all.contains(GestureSetting(domain: "com.apple.driver.AppleBluetoothMultitouch.trackpad", key: "TrackpadThreeFingerHorizSwipeGesture", isBoolean: false)))
         XCTAssertTrue(all.contains(GestureSetting(domain: "com.apple.dock", key: "showMissionControlGestureEnabled", isBoolean: true)))
         XCTAssertEqual(Set(all.map { "\($0.domain)/\($0.key)" }).count, all.count, "no setting twice")
         XCTAssertTrue(all.filter { $0.domain == "com.apple.dock" }.allSatisfy(\.isBoolean))
-        XCTAssertTrue(all.filter { $0.domain != "com.apple.dock" }.allSatisfy { !$0.isBoolean })
+        XCTAssertTrue(all.filter { $0.domain != "com.apple.dock" && $0 != swipe }.allSatisfy { !$0.isBoolean })
     }
 
     func testTheOffValueMatchesTheKind() {

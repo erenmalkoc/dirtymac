@@ -82,7 +82,7 @@ enum IntentLockPlan: Equatable {
     /// The lengths the action accepts, in minutes. Shortcuts can pass any
     /// number from a variable, so anything else is pulled into this range.
     static let minMinutes = 1
-    static let maxMinutes = 60
+    static let maxMinutes = 24 * 60
 
     static func seconds(forMinutes minutes: Int) -> Int {
         min(max(minutes, minMinutes), maxMinutes) * 60
@@ -109,7 +109,10 @@ enum IntentLockPlan: Equatable {
         case .openPanel:
             return .openPanel
         case .lock:
-            guard let minutes else { return .lock(nil) }
+            guard let minutes else {
+                // The stored timer may be a long one, which the panel confirms.
+                return storedConfiguration.effective.requiresLongLockConfirm ? .openPanel : .lock(nil)
+            }
             return .lock(QuickLock.configuration(
                 seconds: seconds(forMinutes: minutes),
                 storedConfiguration: storedConfiguration

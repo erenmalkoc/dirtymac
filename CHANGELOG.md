@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.6] - 2026-11-24
+
+### Added
+- **Auto-unlock up to 24 hours, with a length or a time of your own.** The timer stopped at one hour. The list now goes 30 seconds, 1, 2, 5, 10, 15, 30 minutes, 1, 2, 4, 8, 12 and 24 hours, and **Custom…** opens a box with two choices: **For** (any number of hours and minutes, up to a day) and **Until** (a time of day, such as 23:30, which means the next 23:30). A line under it says when the lock will end ("Unlocks at 23:30", with the weekday when it is not today). It is the same setting in the panel and in Settings, Basic mode included. With the mouse frozen nothing changes: only 30 seconds to 15 minutes are offered, there is no box, and a length or time entered earlier is brought to the closest of them.
+- **A confirmation before a lock longer than an hour.** It says how long the keyboard stays locked and the time it ends, how to unlock sooner (the menu bar icon or Esc held for 3 seconds), and warns that the lock ends early if the Mac goes to sleep or the screen locks, and that the screen stays on the whole time (and uses power) while Keep the screen awake is on. A Shortcut that locks without a length asks the same by opening the panel when the stored timer is over an hour. A length chosen from the **Lock for** menu or passed to Shortcuts is already the person's choice and starts at once.
+- **The Lock for menu goes up to 8 hours** (2, 4 and 8 hours added), and the Shortcuts **Minutes** value up to 1440, a day.
+- **Hours on the counters.** From an hour on the clock reads 1:15:10 instead of 75:10, in the panel, the status pill and beside the menu bar icon, whose reserved width follows.
+- 11 new texts in all 17 languages.
+
+### Changed
+- **More trackpad gestures are switched off during a lock,** after users reported the screen still moving with some gestures: pinch, rotate, smart zoom (two-finger double tap), look up (three-finger tap) and swipe between pages (the app-wide setting), next to the swipes and pinches of 1.4.5. They are put back the same way, exactly as they were. Which gesture moved the screen was not reported, so this covers the ones left that can: if one still gets through, please say which.
+
 ## [1.4.5] - 2026-11-24
 
 ### Added
@@ -185,7 +197,8 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.4.5...HEAD
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.4.6...HEAD
+[1.4.6]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.6
 [1.4.5]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.5
 [1.4.4]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.4
 [1.4.3]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.3

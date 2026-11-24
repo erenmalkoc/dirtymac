@@ -23,7 +23,12 @@ final class StatusItemWidthTests: XCTestCase {
         let withTimer = LockStatusTitle.widestTexts(autoUnlockTotal: 300) { "wait \($0)" }
         XCTAssertEqual(withTimer, ["wait 10", "88:88", "Esc 3"])
         let counting = LockStatusTitle.widestTexts(autoUnlockTotal: 0) { "wait \($0)" }
-        XCTAssertEqual(counting, ["wait 10", "888:88", "Esc 3"], "counting up can pass 99 minutes")
+        XCTAssertEqual(counting, ["wait 10", "88:88:88", "Esc 3"], "counting up has no end")
+        let hours = LockStatusTitle.widestTexts(autoUnlockTotal: 3600) { "wait \($0)" }
+        XCTAssertEqual(hours[1], "8:88:88", "from an hour on the clock shows hours")
+        let longer = LockStatusTitle.widestTexts(autoUnlockTotal: 36_000) { "wait \($0)" }
+        XCTAssertEqual(longer[1], "88:88:88", "ten hours and more need two digits of hours")
+        XCTAssertEqual(LockStatusTitle.widestTexts(autoUnlockTotal: 3599) { "wait \($0)" }[1], "88:88")
     }
 
     func testTheTitleIsPackedToTheLeft() {
@@ -35,14 +40,16 @@ final class StatusItemWidthTests: XCTestCase {
 
     func testNoTitleThatCanOccurIsWiderThanTheReservedWidth() {
         for language in languages {
-            for total in [0, 60, 3600] {
+            for total in [0, 60, 3600, 36_000, 86_400] {
                 let b = button()
                 let reserved = LockStatusTitle.reservedWidth(
                     for: b,
                     texts: LockStatusTitle.widestTexts(autoUnlockTotal: total) { self.pendingText($0, language) }
                 )
                 var shown = (1...10).map { pendingText($0, language) }
-                shown += ["00:00", "04:59", total > 0 ? "59:59" : "99:59", "Esc 3", "Esc 2", "Esc 1", "Esc 0"]
+                shown += ["00:00", "04:59", total > 0 && total < 3600 ? "59:59" : "99:59", "Esc 3", "Esc 2", "Esc 1", "Esc 0"]
+                if total >= 3600 { shown += ["1:00:00", "8:59:59"] }
+                if total >= 36_000 || total == 0 { shown += ["23:59:59", "24:00:00"] }
                 for text in shown {
                     LockStatusTitle.apply(text, to: b)
                     XCTAssertLessThanOrEqual(b.fittingSize.width, reserved + 0.5, "\(language) \(total) s \"\(text)\"")

@@ -33,7 +33,7 @@ final class QuickLockTests: XCTestCase {
         XCTAssertEqual(lengths, lengths.sorted())
         XCTAssertEqual(Set(lengths).count, lengths.count)
         XCTAssertEqual(lengths.first, 60)
-        XCTAssertEqual(lengths.last, 3600)
+        XCTAssertEqual(lengths.last, 28_800, "up to eight hours")
         for seconds in lengths {
             XCTAssertTrue(LockConfiguration.unlockChoices.contains(seconds), "\(seconds) s is a choice in Settings too")
         }
@@ -202,7 +202,7 @@ final class QuickLockTests: XCTestCase {
         XCTAssertEqual(item.title, "Lock for")
         let submenu = try XCTUnwrap(item.submenu)
         XCTAssertEqual(submenu.items.map(\.tag), QuickLock.durations)
-        XCTAssertEqual(submenu.items.map(\.title), ["1 min", "5 min", "15 min", "30 min", "1 hr"])
+        XCTAssertEqual(submenu.items.map(\.title), ["1 min", "5 min", "15 min", "30 min", "1 hr", "2 hr", "4 hr", "8 hr"])
         for entry in submenu.items {
             XCTAssertTrue(entry.target === quick)
             XCTAssertNotNil(entry.action)

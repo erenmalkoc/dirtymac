@@ -55,10 +55,10 @@ nonisolated enum LockStatusTitle {
         }
     }
 
-    /// 05:07. Past an hour the minutes keep counting (75:10) so the width
-    /// only ever grows by a digit.
+    /// 05:07, and 1:15:10 once it reaches an hour, so a lock of many hours stays readable.
     static func clock(_ seconds: Int) -> String {
         let s = max(0, seconds)
+        if s >= 3600 { return String(format: "%d:%02d:%02d", s / 3600, (s % 3600) / 60, s % 60) }
         return String(format: "%02d:%02d", s / 60, s % 60)
     }
 
@@ -77,7 +77,8 @@ nonisolated enum LockStatusTitle {
     static func widestTexts(autoUnlockTotal: Int, pendingText: (Int) -> String) -> [String] {
         [
             pendingText(10),
-            autoUnlockTotal > 0 ? "88:88" : "888:88",
+            // Counting up has no end, so it gets the widest form.
+            autoUnlockTotal <= 0 || autoUnlockTotal >= 36_000 ? "88:88:88" : autoUnlockTotal >= 3600 ? "8:88:88" : "88:88",
             "\(escLabel) 3",
         ]
     }

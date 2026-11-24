@@ -15,7 +15,7 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 - One-click keyboard lock from the menu bar
 - Blocks every keyboard input: regular keys, modifiers, **and** brightness / volume / media / F-key controls (see [Troubleshooting](#troubleshooting) for the one case macOS does not allow)
 - **Basic mode**: the cursor stays live and so does the menu bar icon — click it to release. Scrolling, gestures and clicks elsewhere are ignored (Settings → While locked → Ignore scrolling and clicks)
-- **Advanced mode**: optionally freeze the mouse & trackpad too, choose which key classes to block, and set an auto-unlock timer (30 seconds to 1 hour, at most 15 minutes while the mouse is frozen)
+- **Advanced mode**: optionally freeze the mouse & trackpad too, choose which key classes to block, and set an auto-unlock timer (30 seconds up to 24 hours, any length you type or a time of day to unlock at, at most 15 minutes while the mouse is frozen). A lock over an hour first asks for a confirmation that says when it ends
 - Universal hold-Esc emergency exit (3 seconds) — works even in full lockdown, and finishes when you let go so no stray Esc reaches your app
 - Warns when another app holds Secure Input (password fields, Terminal's Secure Keyboard Entry) and keys get past the lock
 - The lock ends by itself when the Mac sleeps, the screen locks or users switch. To keep that from happening in the middle of a cleaning, the screen is kept awake while the keyboard is locked (Settings → While locked, on by default)
@@ -27,7 +27,7 @@ Wiping crumbs out of a MacBook keyboard usually means dragging a Finder window f
 - Optional open at login, offered during onboarding
 - One-time What's New window after each update
 - Guided first-launch onboarding with live Accessibility-permission status
-- Status item: single-click opens the popover, right-click shows an Open / Lock for (1 min to 1 hour) / Quit menu
+- Status item: single-click opens the popover, right-click shows an Open / Lock for (1 min to 8 hours) / Quit menu
 - Live elapsed-time display and auto-unlock countdown while locked, in the panel and beside the menu bar icon, and a 3-2-1 countdown while you hold Esc to unlock
 - Auto re-enables the event tap if macOS times it out
 - Settings with light / dark override and 17-language UI (runtime switching, no relaunch)

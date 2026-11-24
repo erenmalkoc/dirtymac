@@ -29,7 +29,9 @@ final class LockStatusTests: XCTestCase {
         XCTAssertEqual(title(total: 300, elapsed: 0), "05:00")
         XCTAssertEqual(title(total: 300, elapsed: 10.5), "04:50")
         XCTAssertEqual(title(total: 300, elapsed: 299), "00:01")
-        XCTAssertEqual(title(total: 3600, elapsed: 0), "60:00")
+        XCTAssertEqual(title(total: 3599, elapsed: 0), "59:59")
+        XCTAssertEqual(title(total: 3600, elapsed: 0), "1:00:00")
+        XCTAssertEqual(title(total: 86_400, elapsed: 0), "24:00:00")
         XCTAssertEqual(title(total: 30, elapsed: 0), "00:30")
     }
 
@@ -41,7 +43,7 @@ final class LockStatusTests: XCTestCase {
     func testWithoutATimerItShowsHowLongTheKeyboardHasBeenLocked() {
         XCTAssertEqual(title(total: 0, elapsed: 0), "00:00")
         XCTAssertEqual(title(total: 0, elapsed: 125.7), "02:05")
-        XCTAssertEqual(title(total: 0, elapsed: 4510), "75:10")
+        XCTAssertEqual(title(total: 0, elapsed: 4510), "1:15:10")
     }
 
     func testHoldingEscOutranksTheTimerAndCountsDown() {
@@ -60,7 +62,11 @@ final class LockStatusTests: XCTestCase {
         XCTAssertEqual(LockStatusTitle.clock(59), "00:59")
         XCTAssertEqual(LockStatusTitle.clock(60), "01:00")
         XCTAssertEqual(LockStatusTitle.clock(-7), "00:00")
-        XCTAssertEqual(LockStatusTitle.clock(4510), "75:10")
+        XCTAssertEqual(LockStatusTitle.clock(3599), "59:59")
+        XCTAssertEqual(LockStatusTitle.clock(3600), "1:00:00")
+        XCTAssertEqual(LockStatusTitle.clock(4510), "1:15:10")
+        XCTAssertEqual(LockStatusTitle.clock(86_399), "23:59:59")
+        XCTAssertEqual(LockStatusTitle.clock(86_400), "24:00:00")
     }
 
     func testTheTitleNeedsNoTranslation() {

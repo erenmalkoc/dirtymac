@@ -11,19 +11,20 @@ struct MainView: View {
     @EnvironmentObject private var updates: UpdateChecker
     @Binding var showingSettings: Bool
     @State private var confirmLockdown: Bool
+    /// The confirmation before a lock longer than an hour (the mouse stays free).
+    @State private var confirmLongLock: Bool
     /// The proof that Esc works, asked for before a long frozen-mouse lock.
     @StateObject private var escCheck = EscCheckModel()
     @Environment(\.locale) private var locale
-    /// The auto-unlock chosen on the panel and in Settings: one setting.
-    @AppStorage(LockConfiguration.Key.autoUnlockSeconds) private var storedAutoUnlock = 0
     private let configurationOverride: LockConfiguration?
 
     /// `confirming` and `configuration` exist so the confirmation can be
     /// built in a test. The app uses the defaults: not confirming, and the
     /// stored settings.
-    init(showingSettings: Binding<Bool>, confirming: Bool = false, configuration: LockConfiguration? = nil) {
+    init(showingSettings: Binding<Bool>, confirming: Bool = false, confirmingLong: Bool = false, configuration: LockConfiguration? = nil) {
         _showingSettings = showingSettings
         _confirmLockdown = State(initialValue: confirming)
+        _confirmLongLock = State(initialValue: confirmingLong)
         configurationOverride = configuration
     }
 
@@ -70,6 +71,7 @@ struct MainView: View {
         // not wait there, with a stale pass, for the next click.
         .onReceive(NotificationCenter.default.publisher(for: .panelDidClose)) { _ in
             confirmLockdown = false
+            confirmLongLock = false
             escCheck.stop()
             escCheck.reset()
         }
@@ -124,6 +126,8 @@ struct MainView: View {
     private var mainControl: some View {
         if confirmLockdown {
             lockdownConfirm
+        } else if confirmLongLock {
+            longLockConfirm
         } else {
             lockControl
         }
@@ -187,7 +191,8 @@ struct MainView: View {
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
 
-            autoUnlockRow
+            // How long the lock will last, chosen before locking: the same setting as in Settings.
+            AutoUnlockControl(style: .panel, mouseFrozen: lockConfiguration.effective.blockMouseAndTrackpad)
                 .padding(.top, 6)
 
             secureInputWarning
@@ -201,38 +206,6 @@ struct MainView: View {
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(.top, 4)
             }
-        }
-    }
-
-    /// How long the lock will last, chosen before locking and shown as
-    /// what the lock will really use: while the mouse is frozen "Off" and
-    /// anything short or long is not offered.
-    private var autoUnlockRow: some View {
-        let mouseLocked = lockConfiguration.effective.blockMouseAndTrackpad
-        let selection = Binding<Int>(
-            get: { lockConfiguration.effective.autoUnlockSeconds },
-            set: { storedAutoUnlock = $0 }
-        )
-        return HStack(spacing: 6) {
-            Label("Auto-unlock", systemImage: "timer")
-                .font(.caption)
-                .foregroundStyle(.secondary)
-            Picker("Auto-unlock", selection: selection) {
-                ForEach(LockConfiguration.offeredChoices(mouseLocked: mouseLocked), id: \.self) { seconds in
-                    Group {
-                        if seconds == 0 {
-                            Text("Off")
-                        } else {
-                            Text(LockConfiguration.unlockChoiceTitle(seconds, locale: locale))
-                        }
-                    }
-                    .tag(seconds)
-                }
-            }
-            .pickerStyle(.menu)
-            .labelsHidden()
-            .fixedSize()
-            .controlSize(.small)
         }
     }
 
@@ -334,6 +307,59 @@ struct MainView: View {
         .transition(.opacity)
     }
 
+    /// A lock of many hours says so, when it ends and what can end it sooner, before it starts.
+    private var longLockConfirm: some View {
+        let effective = lockConfiguration.effective
+        let now = Date()
+        let end = LockConfiguration.unlockDate(from: now, seconds: effective.autoUnlockSeconds)
+        return VStack(spacing: 14) {
+            Image(systemName: "clock.badge.exclamationmark")
+                .font(.system(size: 36))
+                .symbolRenderingMode(.multicolor)
+                .foregroundStyle(.orange)
+
+            VStack(spacing: 6) {
+                Text("Long Lock")
+                    .font(.headline)
+                Text("The keyboard stays locked for \(LockConfiguration.unlockChoiceTitle(effective.autoUnlockSeconds, locale: locale)), until \(AutoUnlockEntry.endTitle(end, now: now, locale: locale)), unless you unlock it sooner.")
+                    .font(.subheadline.weight(.medium))
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                Text("To unlock sooner, click the menu bar icon or hold Esc for 3 seconds.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                Label("The lock ends early if the Mac goes to sleep or the screen locks.", systemImage: "moon.zzz")
+                if effective.keepDisplayAwake {
+                    Label("The screen stays on the whole time, which uses power.", systemImage: "bolt")
+                }
+            }
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .fixedSize(horizontal: false, vertical: true)
+
+            secureInputWarning
+
+            HStack(spacing: 8) {
+                Button("Cancel") { confirmLongLock = false }
+                    .buttonStyle(.bordered)
+
+                Button("Lock Keyboard") {
+                    confirmLongLock = false
+                    blocker.beginLock(lockConfiguration)
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            .padding(.top, 2)
+        }
+        .frame(maxWidth: .infinity)
+        .transition(.opacity)
+    }
+
     /// The bar fills while Esc is held, then says it works.
     @ViewBuilder
     private var escCheckRow: some View {
@@ -407,27 +433,30 @@ struct MainView: View {
 
     /// What a click on the power button does.
     enum PowerTapAction: Equatable {
-        case stop, cancelWait, confirmLockdown, beginLock
+        case stop, cancelWait, confirmLockdown, confirmLongLock, beginLock
     }
 
     /// A click while a lock runs unlocks it, a click while the start delay
     /// counts down cancels it, otherwise it starts a lock (after the
     /// confirmation when the mouse would be frozen).
-    static func powerTapAction(isActive: Bool, isWaiting: Bool, mouseLocked: Bool) -> PowerTapAction {
+    static func powerTapAction(isActive: Bool, isWaiting: Bool, mouseLocked: Bool, longLock: Bool = false) -> PowerTapAction {
         if isActive { return .stop }
         if isWaiting { return .cancelWait }
-        return mouseLocked ? .confirmLockdown : .beginLock
+        if mouseLocked { return .confirmLockdown }
+        return longLock ? .confirmLongLock : .beginLock
     }
 
     private func handlePowerTap() {
         switch Self.powerTapAction(
             isActive: blocker.isActive,
             isWaiting: blocker.lockCountdown != nil,
-            mouseLocked: lockConfiguration.blockMouseAndTrackpad
+            mouseLocked: lockConfiguration.blockMouseAndTrackpad,
+            longLock: lockConfiguration.effective.requiresLongLockConfirm
         ) {
         case .stop: blocker.stop(reason: .clicked)
         case .cancelWait: blocker.cancelPendingLock()
         case .confirmLockdown: confirmLockdown = true
+        case .confirmLongLock: confirmLongLock = true
         case .beginLock: blocker.beginLock(lockConfiguration)
         }
     }
