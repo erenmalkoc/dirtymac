@@ -158,6 +158,23 @@ final class FakeShield: PointerShielding {
     }
 }
 
+/// Counts how often the gestures are turned off and back on.
+final class FakeGestures: GestureSuppressing {
+    private(set) var suppressCalls = 0
+    private(set) var restoreCalls = 0
+    private(set) var isSuppressed = false
+
+    func suppress() {
+        suppressCalls += 1
+        isSuppressed = true
+    }
+
+    func restore() {
+        restoreCalls += 1
+        isSuppressed = false
+    }
+}
+
 /// A blocker wired to fakes.
 final class BlockerRig {
     let tap = FakeEventTap()
@@ -167,6 +184,7 @@ final class BlockerRig {
     let sounds = FakeSounds()
     let displayWake = FakeDisplayWake()
     let shield = FakeShield()
+    let gestures = FakeGestures()
     lazy var blocker = KeyboardBlocker(
         tap: tap,
         permission: permission,
@@ -174,6 +192,7 @@ final class BlockerRig {
         secureInput: secureInput,
         sounds: sounds,
         displayWake: displayWake,
-        shield: shield
+        shield: shield,
+        gestures: gestures
     )
 }

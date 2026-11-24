@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.5] - 2026-11-24
+
+### Added
+- **Three and four finger swipes are turned off while the keyboard is locked.** Mission Control, Spaces and App Exposé gestures are handled by macOS out of reach of every event tap (the event log shows them never arriving as events an app can stop), so a palm on the trackpad could still switch screens. The one lever an app has is the settings that turn them off. During a lock dirtymac switches off the trackpad gesture settings (for the built-in and a Bluetooth trackpad) and the Dock's gesture switches, and puts every value back exactly as it was when the lock ends, whichever way it ends. The values are written down before anything is changed, so if the app is killed or crashes mid-lock, the next launch puts them back. A setting that was not set before is removed again, not left at zero. The Dock restarts briefly at each end. Settings → While locked → **Turn off trackpad gestures**, on by default.
+- **The Auto-unlock choice is in Settings in Basic mode too.** It sat under Advanced only, so Basic mode's own Settings had nowhere to say when the lock ends, although the panel already offered it. Switching to Advanced with the mouse freeze on pulls a length the freeze does not allow down to what it does.
+
+### Changed
+- The README and the changelog said the power (Touch ID) button is caught during a lock. The event log of a lock on macOS 27 shows that a press of it never reaches an app as an event: only other system events were counted, never the power button (type 1) or the sleep event (type 11). It is handled below anything an app can stop, so it cannot be blocked. The code still swallows those two event types if a Mac does deliver them.
+
 ## [1.4.4] - 2026-11-24
 
 ### Added
@@ -176,7 +185,8 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.4.4...HEAD
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.4.5...HEAD
+[1.4.5]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.5
 [1.4.4]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.4
 [1.4.3]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.3
 [1.4.2]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.2

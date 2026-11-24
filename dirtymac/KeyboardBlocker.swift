@@ -81,6 +81,7 @@ final class KeyboardBlocker: ObservableObject {
     private let sounds: SoundPlaying
     private let displayWake: DisplayWakeHolding
     private let shield: PointerShielding
+    private let gestures: GestureSuppressing
 
     private var startedAt: TimeInterval?
     private var ticker: LockTimer?
@@ -110,7 +111,8 @@ final class KeyboardBlocker: ObservableObject {
         secureInput: SecureInputDetecting = SystemSecureInput(),
         sounds: SoundPlaying = SystemSounds(),
         displayWake: DisplayWakeHolding = SystemDisplayWake(),
-        shield: PointerShielding = ScreenShield()
+        shield: PointerShielding = ScreenShield(),
+        gestures: GestureSuppressing = GestureSuppressor()
     ) {
         self.tap = tap
         self.permission = permission
@@ -119,6 +121,7 @@ final class KeyboardBlocker: ObservableObject {
         self.sounds = sounds
         self.displayWake = displayWake
         self.shield = shield
+        self.gestures = gestures
         refreshPermission()
     }
 
@@ -186,6 +189,9 @@ final class KeyboardBlocker: ObservableObject {
         // The pointer is covered whenever it is guarded, or frozen: on
         // macOS 27 scrolling never passes the taps, a window takes it.
         if config.guardPointer || config.blockMouseAndTrackpad { shield.show() }
+        // Three and four finger swipes cannot be stopped by any tap, so
+        // their settings are turned off for the length of the lock.
+        if config.suppressGestures { gestures.suppress() }
 
         startedAt = scheduler.now
         elapsed = 0
@@ -281,6 +287,7 @@ final class KeyboardBlocker: ObservableObject {
         tap.uninstall()
         displayWake.release()
         shield.hide()
+        gestures.restore()
         ticker?.cancel()
         ticker = nil
         autoUnlockTimer?.cancel()

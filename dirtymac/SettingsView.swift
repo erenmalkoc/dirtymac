@@ -146,6 +146,7 @@ struct LockConfiguration: Equatable {
         static let keepDisplayAwake = "keepDisplayAwakeWhileLocked"
         static let startDelaySeconds = "lockStartDelaySeconds"
         static let guardPointer = "guardPointerWhileLocked"
+        static let suppressGestures = "suppressGesturesWhileLocked"
     }
 
     var mode: LockMode = .basic
@@ -165,6 +166,10 @@ struct LockConfiguration: Equatable {
     /// nothing. Moving the cursor stays free. Applies to every lock, Basic
     /// included. The full mouse lockdown covers it anyway.
     var guardPointer = true
+    /// While locked, the trackpad's system gestures (Mission Control,
+    /// Spaces, App Exposé...) are switched off and put back afterwards.
+    /// Applies to every lock, Basic included.
+    var suppressGestures = true
 
     /// What the Settings picker offers.
     static let startDelayChoices = [0, 3, 5, 10]
@@ -234,7 +239,8 @@ struct LockConfiguration: Equatable {
                 autoUnlockSeconds: Self.sanitizedAutoUnlock(autoUnlockSeconds),
                 keepDisplayAwake: keepDisplayAwake,
                 startDelaySeconds: Self.sanitizedStartDelay(startDelaySeconds),
-                guardPointer: guardPointer
+                guardPointer: guardPointer,
+                suppressGestures: suppressGestures
             )
         }
         var c = self
@@ -258,7 +264,8 @@ struct LockConfiguration: Equatable {
             autoUnlockSeconds: d.integer(forKey: Key.autoUnlockSeconds),
             keepDisplayAwake: boolOr(Key.keepDisplayAwake, true),
             startDelaySeconds: d.integer(forKey: Key.startDelaySeconds),
-            guardPointer: boolOr(Key.guardPointer, true)
+            guardPointer: boolOr(Key.guardPointer, true),
+            suppressGestures: boolOr(Key.suppressGestures, true)
         )
         return cfg.effective
     }
@@ -289,6 +296,7 @@ struct SettingsView: View {
     @AppStorage(LockConfiguration.Key.keepDisplayAwake) private var keepDisplayAwake = true
     @AppStorage(LockConfiguration.Key.startDelaySeconds) private var startDelaySeconds = 0
     @AppStorage(LockConfiguration.Key.guardPointer) private var guardPointer = true
+    @AppStorage(LockConfiguration.Key.suppressGestures) private var suppressGestures = true
     @Binding var isPresented: Bool
     /// The in-app language (set by the popover), for the duration labels.
     @Environment(\.locale) private var locale
@@ -379,6 +387,13 @@ struct SettingsView: View {
                 .pickerStyle(.segmented)
                 .labelsHidden()
 
+                if lockMode == .basic {
+                    autoUnlockRow
+                        .font(.callout)
+                        .controlSize(.small)
+                        .padding(.top, 4)
+                }
+
                 if lockMode == .advanced {
                     advancedControls
                         .padding(.top, 4)
@@ -421,6 +436,15 @@ struct SettingsView: View {
                     .toggleStyle(.switch)
                     .controlSize(.small)
                 Text("While the keyboard is locked, scrolling, gestures and clicks do nothing, so a palm on the trackpad changes nothing. The dirtymac icon and panel still respond, and the cursor still moves.")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Toggle("Turn off trackpad gestures", isOn: $suppressGestures)
+                    .font(.callout)
+                    .toggleStyle(.switch)
+                    .controlSize(.small)
+                Text("Swipes with three or four fingers, which switch screens or open Mission Control, are turned off while the keyboard is locked and come back when it unlocks. The Dock restarts briefly each time. If dirtymac quits unexpectedly, they come back the next time it opens.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -481,6 +505,12 @@ struct SettingsView: View {
         }
         .padding(18)
         .animation(MotionPolicy.animation(.easeInOut(duration: 0.2), reduceMotion: reduceMotion), value: lockMode)
+        .onChange(of: lockMode) { _, _ in
+            // Switching to Advanced with the freeze on can leave a length
+            // the freeze does not allow.
+            let clamped = LockConfiguration.clampedSeconds(autoUnlockSeconds, mouseLocked: mouseFrozen)
+            if clamped != autoUnlockSeconds { autoUnlockSeconds = clamped }
+        }
         .animation(MotionPolicy.animation(.easeInOut(duration: 0.2), reduceMotion: reduceMotion), value: blockMouseAndTrackpad)
     }
 
@@ -496,27 +526,7 @@ struct SettingsView: View {
                     if clamped != autoUnlockSeconds { autoUnlockSeconds = clamped }
                 }
 
-            HStack {
-                Text("Auto-unlock")
-                    .font(.callout)
-                Spacer()
-                Picker("Auto-unlock", selection: $autoUnlockSeconds) {
-                    ForEach(offeredUnlockChoices, id: \.self) { s in
-                        autoUnlockLabel(s)
-                            .tag(s)
-                    }
-                }
-                .pickerStyle(.menu)
-                .labelsHidden()
-                .fixedSize()
-                .onChange(of: autoUnlockSeconds) { _, seconds in
-                    // LockConfiguration.effective clamps this anyway, so
-                    // without the clamp here the picker would keep showing
-                    // a duration the lock is not going to use.
-                    let clamped = LockConfiguration.clampedSeconds(seconds, mouseLocked: blockMouseAndTrackpad)
-                    if clamped != seconds { autoUnlockSeconds = clamped }
-                }
-            }
+            autoUnlockRow
 
             if blockMouseAndTrackpad {
                 Label("Mouse will be frozen. Hold Esc for 3s to force unlock.",
@@ -534,6 +544,38 @@ struct SettingsView: View {
         .font(.callout)
         .toggleStyle(.switch)
         .controlSize(.small)
+    }
+
+    /// The same picker in both modes. With the mouse free (Basic, or
+    /// Advanced without the freeze) any length is safe, so nothing is
+    /// held back.
+    private var autoUnlockRow: some View {
+        HStack {
+            Text("Auto-unlock")
+                .font(.callout)
+            Spacer()
+            Picker("Auto-unlock", selection: $autoUnlockSeconds) {
+                ForEach(offeredUnlockChoices, id: \.self) { s in
+                    autoUnlockLabel(s)
+                        .tag(s)
+                }
+            }
+            .pickerStyle(.menu)
+            .labelsHidden()
+            .fixedSize()
+            .onChange(of: autoUnlockSeconds) { _, seconds in
+                // LockConfiguration.effective clamps this anyway, so
+                // without the clamp here the picker would keep showing
+                // a duration the lock is not going to use.
+                let clamped = LockConfiguration.clampedSeconds(seconds, mouseLocked: mouseFrozen)
+                if clamped != seconds { autoUnlockSeconds = clamped }
+            }
+        }
+    }
+
+    /// Whether the lock will freeze the mouse: only Advanced can.
+    private var mouseFrozen: Bool {
+        lockMode == .advanced && blockMouseAndTrackpad
     }
 
     private var startupControls: some View {
@@ -639,7 +681,7 @@ struct SettingsView: View {
     /// be clicked, so "Off" and anything under the minimum are not
     /// offered — the lock would silently override them anyway.
     private var offeredUnlockChoices: [Int] {
-        LockConfiguration.offeredChoices(mouseLocked: blockMouseAndTrackpad)
+        LockConfiguration.offeredChoices(mouseLocked: mouseFrozen)
     }
 
     @ViewBuilder

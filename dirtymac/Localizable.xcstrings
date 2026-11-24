@@ -10919,6 +10919,220 @@
         }
       }
     },
+    "Turn off trackpad gestures": {
+      "comment": "Settings toggle: while locked, system gestures with three or four fingers are switched off.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trackpad-Gesten ausschalten"
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Turn off trackpad gestures"
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desactivar los gestos del trackpad"
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Désactiver les gestes du trackpad"
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Matikan gestur trackpad"
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Disattiva i gesti del trackpad"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トラックパッドのジェスチャを無効にする"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "트랙패드 제스처 끄기"
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Trackpadgebaren uitschakelen"
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wyłącz gesty gładzika"
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Desativar os gestos do trackpad"
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Отключить жесты трекпада"
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "İzleme dörtgeni hareketlerini kapat"
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Вимкнути жести трекпада"
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Tắt cử chỉ trackpad"
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "关闭触控板手势"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "關閉觸控式軌跡板手勢"
+          }
+        }
+      }
+    },
+    "Swipes with three or four fingers, which switch screens or open Mission Control, are turned off while the keyboard is locked and come back when it unlocks. The Dock restarts briefly each time. If dirtymac quits unexpectedly, they come back the next time it opens.": {
+      "comment": "Caption under Turn off trackpad gestures.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Wischgesten mit drei oder vier Fingern, die den Bildschirm wechseln oder Mission Control öffnen, sind bei gesperrter Tastatur ausgeschaltet und kehren beim Entsperren zurück. Das Dock startet dabei jedes Mal kurz neu. Wird dirtymac unerwartet beendet, kehren sie beim nächsten Öffnen zurück."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Swipes with three or four fingers, which switch screens or open Mission Control, are turned off while the keyboard is locked and come back when it unlocks. The Dock restarts briefly each time. If dirtymac quits unexpectedly, they come back the next time it opens."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los deslizamientos con tres o cuatro dedos, que cambian de pantalla o abren Mission Control, se desactivan mientras el teclado está bloqueado y vuelven al desbloquear. El Dock se reinicia brevemente cada vez. Si dirtymac se cierra de forma inesperada, vuelven la próxima vez que se abra."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les balayages à trois ou quatre doigts, qui changent d'écran ou ouvrent Mission Control, sont désactivés pendant le verrouillage du clavier et reviennent au déverrouillage. Le Dock redémarre brièvement à chaque fois. Si dirtymac se ferme de façon inattendue, ils reviennent à sa prochaine ouverture."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Usapan tiga atau empat jari yang berpindah layar atau membuka Mission Control dimatikan saat keyboard terkunci dan kembali saat dibuka. Dock dimulai ulang sebentar setiap kali. Jika dirtymac tertutup tak terduga, gestur kembali saat aplikasi dibuka berikutnya."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Gli scorrimenti con tre o quattro dita, che cambiano schermata o aprono Mission Control, sono disattivati mentre la tastiera è bloccata e tornano allo sblocco. Il Dock si riavvia brevemente ogni volta. Se dirtymac si chiude in modo imprevisto, tornano alla successiva apertura."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画面を切り替えたりMission Controlを開いたりする3本指と4本指のスワイプは、キーボードのロック中は無効になり、ロックを解除すると元に戻ります。そのたびにDockが一瞬再起動します。dirtymacが予期せず終了した場合は、次に開いたときに元に戻ります。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "화면을 전환하거나 Mission Control을 여는 세 손가락, 네 손가락 쓸기는 키보드가 잠겨 있는 동안 꺼지고 잠금을 풀면 다시 켜집니다. 그때마다 Dock이 잠시 다시 시작됩니다. dirtymac이 예기치 않게 종료되면 다음에 열 때 다시 켜집니다."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Veegbewegingen met drie of vier vingers, waarmee je van scherm wisselt of Mission Control opent, staan uit zolang het toetsenbord is vergrendeld en komen terug bij het ontgrendelen. Het Dock start daarbij telkens kort opnieuw op. Als dirtymac onverwacht stopt, komen ze terug bij de volgende keer openen."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przesunięcia trzema lub czterema palcami, które przełączają ekrany albo otwierają Mission Control, są wyłączone, gdy klawiatura jest zablokowana, i wracają po odblokowaniu. Dock za każdym razem na chwilę uruchamia się ponownie. Jeśli dirtymac zamknie się niespodziewanie, gesty wrócą przy jego następnym uruchomieniu."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Os gestos de deslizar com três ou quatro dedos, que trocam de tela ou abrem o Mission Control, ficam desativados enquanto o teclado está bloqueado e voltam ao desbloquear. O Dock reinicia rapidamente a cada vez. Se o dirtymac fechar de forma inesperada, eles voltam na próxima vez que ele abrir."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Смахивания тремя или четырьмя пальцами, которые переключают экраны или открывают Mission Control, отключены, пока клавиатура заблокирована, и возвращаются при разблокировке. Dock каждый раз ненадолго перезапускается. Если dirtymac неожиданно закроется, жесты вернутся при его следующем запуске."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Ekranları değiştiren ya da Mission Control'ü açan üç veya dört parmakla kaydırmalar, klavye kilitliyken kapatılır ve kilit açılınca geri gelir. Dock her seferinde kısa süre yeniden başlar. dirtymac beklenmedik biçimde kapanırsa, hareketler bir sonraki açılışında geri gelir."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Змахування трьома або чотирма пальцями, які перемикають екрани або відкривають Mission Control, вимкнені, поки клавіатуру заблоковано, і повертаються після розблокування. Dock щоразу ненадовго перезапускається. Якщо dirtymac несподівано закриється, жести повернуться під час його наступного запуску."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Các thao tác vuốt ba hoặc bốn ngón để chuyển màn hình hoặc mở Mission Control bị tắt khi bàn phím bị khóa và trở lại khi mở khóa. Dock khởi động lại ngắn mỗi lần. Nếu dirtymac thoát bất ngờ, chúng sẽ trở lại ở lần mở tiếp theo."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用三指或四指轻扫来切换屏幕或打开调度中心的手势，会在键盘锁定期间关闭，并在解锁后恢复。每次都会短暂重启程序坞。如果 dirtymac 意外退出，这些手势会在下次打开时恢复。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "用三指或四指滑動來切換螢幕或開啟 Mission Control 的手勢，會在鍵盤鎖定期間關閉，並在解鎖後恢復。每次都會短暫重新啟動 Dock。如果 dirtymac 意外結束，這些手勢會在下次開啟時恢復。"
+          }
+        }
+      }
+    },
     "System": {
       "comment": "Picker option meaning 'follow the macOS-wide setting' for both Appearance and Language.",
       "localizations": {
