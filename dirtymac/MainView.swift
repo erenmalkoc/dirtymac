@@ -276,6 +276,17 @@ struct MainView: View {
                     .fixedSize(horizontal: false, vertical: true)
             }
 
+            // The way out that needs no keyboard, and for a lock of hours what it will cost.
+            VStack(alignment: .leading, spacing: 4) {
+                Label("Closing the lid or pressing the power button also ends the lock.", systemImage: "moon.zzz")
+                if effective.autoUnlockSeconds > LockConfiguration.longLockAboveSeconds, effective.keepDisplayAwake {
+                    Label("The screen stays on the whole time, which uses power.", systemImage: "bolt")
+                }
+            }
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .fixedSize(horizontal: false, vertical: true)
+
             if effective.requiresEscCheck {
                 escCheckRow
             }

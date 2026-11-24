@@ -19,14 +19,12 @@ nonisolated struct AutoUnlockEntry: Equatable {
 
     var isClock: Bool { atMinutes != nil }
 
-    /// What the picker shows. A frozen mouse offers a few lengths only and has no entry box,
-    /// so it shows the one the lock will use.
+    /// What the picker shows. A frozen mouse has no "Off" and no length under 30 seconds, so what
+    /// the lock will use is what is shown.
     func selection(mouseFrozen: Bool) -> Int {
-        if mouseFrozen {
-            return LockConfiguration.nearestOffered(LockConfiguration.clampedSeconds(seconds, mouseLocked: true), mouseLocked: true)
-        }
-        if custom || isClock || !LockConfiguration.unlockChoices.contains(seconds) { return Self.customTag }
-        return seconds
+        let used = mouseFrozen ? LockConfiguration.clampedSeconds(seconds, mouseLocked: true) : seconds
+        if custom || isClock || !LockConfiguration.unlockChoices.contains(used) { return Self.customTag }
+        return used
     }
 
     /// The entry after the picker was moved to `tag`.
@@ -108,7 +106,7 @@ struct AutoUnlockControl: View {
     enum Style { case panel, settings }
 
     let style: Style
-    /// The lock will freeze the mouse: only a few lengths are offered and there is no entry box.
+    /// The lock will freeze the mouse: no "Off" is offered, because the menu bar icon cannot be clicked.
     let mouseFrozen: Bool
 
     @AppStorage(LockConfiguration.Key.autoUnlockSeconds) private var seconds = 0
@@ -133,7 +131,7 @@ struct AutoUnlockControl: View {
     }
 
     private var showsEntryBox: Bool {
-        !mouseFrozen && entry.selection(mouseFrozen: false) == AutoUnlockEntry.customTag
+        entry.selection(mouseFrozen: mouseFrozen) == AutoUnlockEntry.customTag
     }
 
     var body: some View {
@@ -166,10 +164,8 @@ struct AutoUnlockControl: View {
             ForEach(LockConfiguration.offeredChoices(mouseLocked: mouseFrozen), id: \.self) { s in
                 title(for: s).tag(s)
             }
-            if !mouseFrozen {
-                Divider()
-                Text("Custom…").tag(AutoUnlockEntry.customTag)
-            }
+            Divider()
+            Text("Custom…").tag(AutoUnlockEntry.customTag)
         }
         .pickerStyle(.menu)
         .labelsHidden()

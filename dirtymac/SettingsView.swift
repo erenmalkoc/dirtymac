@@ -193,11 +193,12 @@ struct LockConfiguration: Equatable {
     /// is part of the lockdown — the menu bar can no longer be clicked.
     static let minMouseLockSeconds = 30
 
-    /// ...and at most this long. With the mouse frozen the only ways out
-    /// are hold-Esc and the timer, so the time someone could be stuck
-    /// behind a key that does not work is bounded. With the mouse free,
-    /// clicking the menu bar icon always ends the lock, so no bound.
-    static let maxMouseLockSeconds = 15 * 60
+    /// ...and, like every lock, at most a day. Until 1.4.7 a frozen mouse capped the lock at 15
+    /// minutes, a number chosen to bound the time someone could be stuck behind a key that does not
+    /// work. It stopped people who need a long lock (a cat on the keyboard) and was never the only
+    /// safeguard: the timer is mandatory, a lock over 5 minutes first has the Esc key checked, and
+    /// closing the lid or pressing the power button ends any lock.
+    static let maxMouseLockSeconds = maxAutoUnlockSeconds
 
     /// A frozen-mouse lock longer than this first asks the user to hold
     /// Esc, to prove that the way out works on this keyboard.
@@ -238,12 +239,6 @@ struct LockConfiguration: Equatable {
     /// The moment a lock that starts at `now` and lasts `seconds` ends.
     static func unlockDate(from now: Date, seconds: Int) -> Date {
         now.addingTimeInterval(TimeInterval(seconds))
-    }
-
-    /// The offered length closest to `seconds`, for a frozen mouse that only offers a few.
-    static func nearestOffered(_ seconds: Int, mouseLocked: Bool) -> Int {
-        let offered = offeredChoices(mouseLocked: mouseLocked)
-        return offered.min { abs($0 - seconds) < abs($1 - seconds) } ?? seconds
     }
 
     /// The auto-unlock the lock really uses for a stored value: once the
@@ -300,11 +295,8 @@ struct LockConfiguration: Equatable {
         var c = self
         c.startDelaySeconds = Self.sanitizedStartDelay(c.startDelaySeconds)
         if c.blockMouseAndTrackpad {
-            // A length or time entered by hand may not be one the frozen mouse offers (it offers a
-            // few lengths only): the lock then uses the closest one, which is what Settings shows.
-            let clamped = Self.clampedSeconds(seconds, mouseLocked: true)
-            let enteredByHand = autoUnlockCustom || autoUnlockAtMinutes != nil
-            c.autoUnlockSeconds = enteredByHand ? Self.nearestOffered(clamped, mouseLocked: true) : clamped
+            // Never off and never under the minimum: the menu bar icon cannot be clicked.
+            c.autoUnlockSeconds = Self.clampedSeconds(seconds, mouseLocked: true)
         } else {
             c.autoUnlockSeconds = min(max(seconds, 0), Self.maxAutoUnlockSeconds)
         }
@@ -609,7 +601,7 @@ struct SettingsView: View {
                     .foregroundStyle(.orange)
                     .fixedSize(horizontal: false, vertical: true)
 
-                Text("With the mouse frozen, the lock lasts at most \(LockConfiguration.unlockChoiceTitle(LockConfiguration.maxMouseLockSeconds, locale: locale)). Above \(LockConfiguration.unlockChoiceTitle(LockConfiguration.escCheckAboveSeconds, locale: locale)), dirtymac asks you to hold Esc first to check your way out.")
+                Text("With the mouse frozen, the lock always ends by itself. Above \(LockConfiguration.unlockChoiceTitle(LockConfiguration.escCheckAboveSeconds, locale: locale)), dirtymac asks you to hold Esc first to check your way out.")
                     .font(.caption)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)

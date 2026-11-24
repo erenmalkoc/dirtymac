@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.7] - 2026-11-24
+
+### Changed
+- **The 15-minute limit on a lock that freezes the mouse is gone.** It was a number chosen in 1.4.0 to bound how long someone could be stuck behind an Esc key that does not work, and it was not based on anything else. It kept people from locking for hours, for instance against a cat on the keyboard. A frozen-mouse lock can now last up to 24 hours, with the same entry as any other timer, **Custom…** included (For a length, or Until a time of day). The safeguards that were never the cap stay: the timer is mandatory (never off, at least 30 seconds), a lock over 5 minutes first has you hold Esc to check that your way out works, the confirmation says so, secure input still stops a frozen lock from starting, and closing the lid or pressing the power button ends any lock because the Mac goes to sleep.
+- **The confirmation for a frozen-mouse lock now says that closing the lid or pressing the power button also ends the lock,** and, over an hour, that the screen stays on the whole time and uses power. The Settings note under the timer no longer names a limit.
+- A keyboard-only lock needs none of this: with the mouse free the menu bar icon ends the lock at any moment, and scrolling and clicks are ignored without freezing the cursor. Freezing the mouse is only for people who also want the cursor to stay put.
+
 ## [1.4.6] - 2026-11-24
 
 ### Added
@@ -197,7 +204,8 @@ Initial release.
 - Accessibility permission flow with deep-link to System Settings.
 - Menu bar icon swaps `keyboard.fill` ↔ `lock.fill` with a pulsing red tint while locked.
 
-[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.4.6...HEAD
+[Unreleased]: https://github.com/erenmalkoc/dirtymac/compare/v1.4.7...HEAD
+[1.4.7]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.7
 [1.4.6]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.6
 [1.4.5]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.5
 [1.4.4]: https://github.com/erenmalkoc/dirtymac/releases/tag/v1.4.4

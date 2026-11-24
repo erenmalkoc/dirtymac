@@ -56,10 +56,11 @@ final class LongTimerUITests: XCTestCase {
         XCTAssertGreaterThan(forLength.frame.height, 0)
     }
 
-    func testAFrozenMouseHasNoEntryBox() throws {
+    func testAFrozenMouseHasTheEntryBoxToo() throws {
         let frozen = try panel(seconds: 420, custom: true, mode: .advanced, mouse: true)
         let plain = try panel(seconds: 300, mode: .advanced, mouse: true)
-        XCTAssertEqual(frozen.frame.height, plain.frame.height, accuracy: 0.5, "no box, whatever was entered before")
+        XCTAssertGreaterThan(frozen.frame.height, plain.frame.height + 20, "Custom… works with the mouse frozen as well")
+        ViewHost.snapshot(frozen, named: "timer-panel-frozen-custom")
     }
 
     func testTheLongLockConfirmationFitsInEveryLanguage() throws {
@@ -120,12 +121,14 @@ final class AutoUnlockEntryTests: XCTestCase {
         XCTAssertEqual(AutoUnlockEntry(seconds: 5400, atMinutes: nil, custom: false).selection(mouseFrozen: false), AutoUnlockEntry.customTag)
     }
 
-    func testAFrozenMouseSelectsTheLengthTheLockWillUse() {
-        let offered = LockConfiguration.offeredChoices(mouseLocked: true)
-        for seconds in [0, 10, 420, 3600, 86_400] {
-            let tag = AutoUnlockEntry(seconds: seconds, atMinutes: nil, custom: true).selection(mouseFrozen: true)
-            XCTAssertTrue(offered.contains(tag), "\(seconds) s → \(tag)")
-        }
+    func testAFrozenMouseShowsWhatTheLockWillUse() {
+        // Off and anything under 30 seconds become 30, a picked length stays.
+        XCTAssertEqual(AutoUnlockEntry(seconds: 0, atMinutes: nil, custom: false).selection(mouseFrozen: true), 30)
+        XCTAssertEqual(AutoUnlockEntry(seconds: 10, atMinutes: nil, custom: false).selection(mouseFrozen: true), 30)
+        XCTAssertEqual(AutoUnlockEntry(seconds: 3600, atMinutes: nil, custom: false).selection(mouseFrozen: true), 3600)
+        XCTAssertEqual(AutoUnlockEntry(seconds: 86_400, atMinutes: nil, custom: false).selection(mouseFrozen: true), 86_400)
+        // A length entered by hand is still a custom one.
+        XCTAssertEqual(AutoUnlockEntry(seconds: 420, atMinutes: nil, custom: true).selection(mouseFrozen: true), AutoUnlockEntry.customTag)
     }
 
     func testPickingALengthEndsAnyEntry() {

@@ -40,12 +40,12 @@ final class KeyboardBlockerTests: XCTestCase {
         XCTAssertEqual(rig.blocker.autoUnlockTotal, 600)
     }
 
-    func testTheTimerAboveTheCapIsClampedBeforeTheCheckIsJudged() {
+    func testALongFrozenLockKeepsItsLengthAndNeedsTheCheck() {
         let rig = BlockerRig()
-        // 1 h is cut to 15 min, still above 5 min: needs the check.
+        // 1 h is no longer cut to 15 min, and it is above 5 min: it needs the check.
         XCTAssertFalse(rig.blocker.start(fullLockdown(3600)))
         XCTAssertTrue(rig.blocker.start(fullLockdown(3600), escVerified: true))
-        XCTAssertEqual(rig.blocker.autoUnlockTotal, 900)
+        XCTAssertEqual(rig.blocker.autoUnlockTotal, 3600)
     }
 
     func testLocksThatNeverNeededTheCheckStartWithoutIt() {

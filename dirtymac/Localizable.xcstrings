@@ -14557,109 +14557,216 @@
         }
       }
     },
-    "With the mouse frozen, the lock lasts at most %@. Above %@, dirtymac asks you to hold Esc first to check your way out.": {
-      "comment": "Settings note under Auto-unlock while Block mouse & trackpad is on. First %@ is the longest lock (15 min), second %@ the length above which the Esc check is asked (5 min).",
+    "Closing the lid or pressing the power button also ends the lock.": {
+      "comment": "Line in the confirmation shown before a lock that freezes the mouse. It tells the person there is always a way out that needs no keyboard.",
       "localizations": {
         "de": {
           "stringUnit": {
             "state": "translated",
-            "value": "Bei eingefrorener Maus dauert die Sperre höchstens %@. Ab mehr als %@ bittet dich dirtymac vorher, Esc zu halten, um deinen Ausweg zu prüfen."
+            "value": "Auch das Schließen des Deckels oder das Drücken des Ein-/Aus-Knopfs beendet die Sperre."
           }
         },
         "en": {
           "stringUnit": {
             "state": "translated",
-            "value": "With the mouse frozen, the lock lasts at most %@. Above %@, dirtymac asks you to hold Esc first to check your way out."
+            "value": "Closing the lid or pressing the power button also ends the lock."
           }
         },
         "es": {
           "stringUnit": {
             "state": "translated",
-            "value": "Con el ratón congelado, el bloqueo dura como máximo %@. Por encima de %@, dirtymac te pide antes mantener Esc para comprobar tu salida."
+            "value": "Cerrar la tapa o pulsar el botón de encendido también termina el bloqueo."
           }
         },
         "fr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Avec la souris figée, le verrouillage dure au plus %@. Au-delà de %@, dirtymac vous demande d'abord de maintenir Échap pour vérifier votre issue de secours."
+            "value": "Fermer l'écran ou appuyer sur le bouton d'alimentation met aussi fin au verrouillage."
           }
         },
         "id": {
           "stringUnit": {
             "state": "translated",
-            "value": "Saat mouse dibekukan, penguncian berlangsung paling lama %@. Di atas %@, dirtymac meminta Anda menahan Esc dulu untuk memeriksa jalan keluar."
+            "value": "Menutup layar atau menekan tombol daya juga mengakhiri penguncian."
           }
         },
         "it": {
           "stringUnit": {
             "state": "translated",
-            "value": "Con il mouse bloccato, il blocco dura al massimo %@. Oltre %@, dirtymac ti chiede prima di tenere premuto Esc per verificare la via d'uscita."
+            "value": "Anche chiudere il coperchio o premere il pulsante di accensione termina il blocco."
           }
         },
         "ja": {
           "stringUnit": {
             "state": "translated",
-            "value": "マウスを固定している間、ロックは最長 %@ です。%@ を超える場合は、先に Esc を長押しして解除方法を確認します。"
+            "value": "蓋を閉じるか電源ボタンを押しても、ロックは終了します。"
           }
         },
         "ko": {
           "stringUnit": {
             "state": "translated",
-            "value": "마우스를 고정하면 잠금은 최대 %@ 동안 유지됩니다. %@보다 길면 먼저 Esc를 길게 눌러 해제 방법을 확인합니다."
+            "value": "덮개를 닫거나 전원 버튼을 눌러도 잠금이 끝납니다."
           }
         },
         "nl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Met een bevroren muis duurt de vergrendeling maximaal %@. Boven %@ vraagt dirtymac eerst om Esc ingedrukt te houden om je uitweg te controleren."
+            "value": "Ook als je het deksel sluit of op de aan/uit-knop drukt, eindigt de vergrendeling."
           }
         },
         "pl": {
           "stringUnit": {
             "state": "translated",
-            "value": "Przy zablokowanej myszy blokada trwa najwyżej %@. Powyżej %@ dirtymac najpierw prosi o przytrzymanie Esc, aby sprawdzić drogę wyjścia."
+            "value": "Zamknięcie pokrywy lub naciśnięcie przycisku zasilania również kończy blokadę."
           }
         },
         "pt-BR": {
           "stringUnit": {
             "state": "translated",
-            "value": "Com o mouse congelado, o bloqueio dura no máximo %@. Acima de %@, o dirtymac pede antes que você segure Esc para conferir a saída."
+            "value": "Fechar a tampa ou pressionar o botão de força também encerra o bloqueio."
           }
         },
         "ru": {
           "stringUnit": {
             "state": "translated",
-            "value": "Пока мышь заморожена, блокировка длится не дольше %@. Если дольше %@, dirtymac сначала попросит удержать Esc, чтобы проверить выход."
+            "value": "Блокировка также снимается, если закрыть крышку или нажать кнопку питания."
           }
         },
         "tr": {
           "stringUnit": {
             "state": "translated",
-            "value": "Fare donukken kilit en fazla %@ sürer. %@ süresini aşarsa dirtymac önce çıkış yolunuzu denetlemek için Esc'e basılı tutmanızı ister."
+            "value": "Kapağı kapatmak ya da güç düğmesine basmak da kilidi sona erdirir."
           }
         },
         "uk": {
           "stringUnit": {
             "state": "translated",
-            "value": "Коли мишу заморожено, блокування триває щонайбільше %@. Якщо довше за %@, dirtymac спершу попросить утримати Esc, щоб перевірити вихід."
+            "value": "Блокування також завершується, якщо закрити кришку або натиснути кнопку живлення."
           }
         },
         "vi": {
           "stringUnit": {
             "state": "translated",
-            "value": "Khi chuột bị đóng băng, khóa kéo dài tối đa %@. Trên %@, dirtymac sẽ yêu cầu bạn giữ Esc trước để kiểm tra lối thoát."
+            "value": "Đóng nắp hoặc nhấn nút nguồn cũng sẽ kết thúc khóa."
           }
         },
         "zh-Hans": {
           "stringUnit": {
             "state": "translated",
-            "value": "鼠标冻结时，锁定最长持续 %@。超过 %@ 时，dirtymac 会先请您长按 Esc，确认退出方式可用。"
+            "value": "合上屏幕或按下电源按钮，也会结束锁定。"
           }
         },
         "zh-Hant": {
           "stringUnit": {
             "state": "translated",
-            "value": "滑鼠凍結時，鎖定最長持續 %@。超過 %@ 時，dirtymac 會先請您長按 Esc，確認退出方式可用。"
+            "value": "闔上螢幕或按下電源按鈕，也會結束鎖定。"
+          }
+        }
+      }
+    },
+    "With the mouse frozen, the lock always ends by itself. Above %@, dirtymac asks you to hold Esc first to check your way out.": {
+      "comment": "Caption in Settings under the auto-unlock timer while Block mouse & trackpad is on. %@ is a length such as '5 min'.",
+      "localizations": {
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Bei eingefrorener Maus endet die Sperre immer von selbst. Ab mehr als %@ bittet dich dirtymac vorher, Esc zu halten, um deinen Ausweg zu prüfen."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "With the mouse frozen, the lock always ends by itself. Above %@, dirtymac asks you to hold Esc first to check your way out."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con el ratón congelado, el bloqueo siempre termina por sí solo. Por encima de %@, dirtymac te pide antes mantener Esc para comprobar tu salida."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Avec la souris figée, le verrouillage se termine toujours de lui-même. Au-delà de %@, dirtymac vous demande d'abord de maintenir Échap pour vérifier votre issue de secours."
+          }
+        },
+        "id": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Saat mouse dibekukan, penguncian selalu berakhir dengan sendirinya. Di atas %@, dirtymac meminta Anda menahan Esc dulu untuk memeriksa jalan keluar."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Con il mouse bloccato, il blocco termina sempre da solo. Oltre %@, dirtymac ti chiede prima di tenere premuto Esc per verificare la via d'uscita."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マウスを固定している間、ロックは必ず自動で終了します。%@ を超える場合は、先に Esc を長押しして解除方法を確認します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "마우스를 고정하면 잠금은 항상 저절로 끝납니다. %@보다 길면 먼저 Esc를 길게 눌러 해제 방법을 확인합니다."
+          }
+        },
+        "nl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Met een bevroren muis eindigt de vergrendeling altijd vanzelf. Boven %@ vraagt dirtymac eerst om Esc ingedrukt te houden om je uitweg te controleren."
+          }
+        },
+        "pl": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Przy zablokowanej myszy blokada zawsze kończy się sama. Powyżej %@ dirtymac najpierw prosi o przytrzymanie Esc, aby sprawdzić drogę wyjścia."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Com o mouse congelado, o bloqueio sempre termina sozinho. Acima de %@, o dirtymac pede antes que você segure Esc para conferir a saída."
+          }
+        },
+        "ru": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Пока мышь заморожена, блокировка всегда снимается сама. Если дольше %@, dirtymac сначала попросит удержать Esc, чтобы проверить выход."
+          }
+        },
+        "tr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Fare donukken kilit her zaman kendiliğinden sona erer. %@ süresini aşarsa dirtymac önce çıkış yolunuzu denetlemek için Esc'e basılı tutmanızı ister."
+          }
+        },
+        "uk": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Коли мишу заморожено, блокування завжди завершується саме. Якщо довше за %@, dirtymac спершу попросить утримати Esc, щоб перевірити вихід."
+          }
+        },
+        "vi": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Khi chuột bị đóng băng, khóa luôn tự kết thúc. Trên %@, dirtymac sẽ yêu cầu bạn giữ Esc trước để kiểm tra lối thoát."
+          }
+        },
+        "zh-Hans": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "鼠标冻结时，锁定总会自行结束。超过 %@ 时，dirtymac 会先请您长按 Esc，确认退出方式可用。"
+          }
+        },
+        "zh-Hant": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "滑鼠凍結時，鎖定一律會自行結束。超過 %@ 時，dirtymac 會先請您長按 Esc，確認退出方式可用。"
           }
         }
       }

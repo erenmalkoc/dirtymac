@@ -107,31 +107,31 @@ final class LongTimerTests: XCTestCase {
 
     // MARK: The frozen mouse
 
-    func testAFrozenMouseStillTopsOutAtFifteenMinutesWhateverWasEntered() {
+    func testAFrozenMouseNowAllowsUpToADayAndStillNeedsATimer() {
         let now = date("2026-11-24T10:00:00Z")
         let clock = LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockAtMinutes: 23 * 60)
-        XCTAssertEqual(clock.effective(now: now, calendar: calendar).autoUnlockSeconds, 900)
+        XCTAssertEqual(clock.effective(now: now, calendar: calendar).autoUnlockSeconds, 13 * 3600, "no 15 minute cap any more")
         let length = LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: 28_800, autoUnlockCustom: true)
-        XCTAssertEqual(length.effective.autoUnlockSeconds, 900)
-        XCTAssertTrue(length.effective.requiresEscCheck, "unchanged: a long frozen lock needs the Esc check")
+        XCTAssertEqual(length.effective.autoUnlockSeconds, 28_800)
+        XCTAssertEqual(LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: 999_999).effective.autoUnlockSeconds, 86_400)
+        // The timer is still mandatory: never off, never under 30 seconds.
+        XCTAssertEqual(LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: 0).effective.autoUnlockSeconds, 30)
+        XCTAssertEqual(LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: 10).effective.autoUnlockSeconds, 30)
+        XCTAssertEqual(LockConfiguration.maxMouseLockSeconds, LockConfiguration.maxAutoUnlockSeconds)
     }
 
-    func testALengthEnteredByHandSnapsToWhatAFrozenMouseOffers() {
-        let seven = LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: 420, autoUnlockCustom: true)
-        XCTAssertEqual(seven.effective.autoUnlockSeconds, 300, "7 min is closer to 5 than to 10")
-        let nine = LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: 540, autoUnlockCustom: true)
-        XCTAssertEqual(nine.effective.autoUnlockSeconds, 600)
-        XCTAssertTrue(LockConfiguration.offeredChoices(mouseLocked: true).contains(seven.effective.autoUnlockSeconds))
-        // A picked length is only clamped, as before.
-        let picked = LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: 301)
-        XCTAssertEqual(picked.effective.autoUnlockSeconds, 301)
+    func testALongFrozenLockStillNeedsTheEscCheckAndNeverTheLongLockOne() {
+        let long = LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: 28_800).effective
+        XCTAssertTrue(long.requiresEscCheck, "the way out is checked before any lock over five minutes")
+        XCTAssertFalse(long.requiresLongLockConfirm, "a frozen mouse has its own, stronger confirmation")
+        XCTAssertFalse(LockConfiguration(mode: .advanced, blockMouseAndTrackpad: true, autoUnlockSeconds: 300).effective.requiresEscCheck)
     }
 
-    func testNearestOfferedPicksTheCloserNeighbour() {
-        XCTAssertEqual(LockConfiguration.nearestOffered(100, mouseLocked: true), 120)
-        XCTAssertEqual(LockConfiguration.nearestOffered(40, mouseLocked: true), 30)
-        XCTAssertEqual(LockConfiguration.nearestOffered(5000, mouseLocked: true), 900)
-        XCTAssertEqual(LockConfiguration.nearestOffered(5000, mouseLocked: false), 3600)
+    func testTheFrozenMouseOffersEveryLengthButOff() {
+        let offered = LockConfiguration.offeredChoices(mouseLocked: true)
+        XCTAssertEqual(offered, LockConfiguration.unlockChoices.filter { $0 != 0 })
+        XCTAssertEqual(offered.first, 30)
+        XCTAssertEqual(offered.last, 86_400)
     }
 
     // MARK: The confirmation for long locks
